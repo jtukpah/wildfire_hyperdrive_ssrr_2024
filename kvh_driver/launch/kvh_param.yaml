@@ -1,0 +1,1 @@
+{device_address: /dev/tty0, filtering: true, output_topic: kvh/imu, update_frequency: 100}
