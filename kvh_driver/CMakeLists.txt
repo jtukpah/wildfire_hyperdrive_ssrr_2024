@@ -7,7 +7,7 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 #  Release        : w/o debug symbols, w/ optimization
 #  RelWithDebInfo : w/ debug symbols, w/ optimization
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-#set(ROS_BUILD_TYPE RelWithDebInfo)
+set(ROS_BUILD_TYPE RelWithDebInfo)
 
 rosbuild_init()
 
@@ -32,5 +32,4 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #add dynamic reconfigure api
 find_package(catkin REQUIRED dynamic_reconfigure)
 generate_dynamic_reconfigure_options(cfg/kvh_driver.cfg)
-rosbuild_add_executable(kvh_driver src/nodes/kvh_driver_node.cpp src/helpers/imufilter.cpp)
-rosbuild_link_boost(${PROJECT_NAME} thread)
+rosbuild_add_executable(kvh_driver_node src/nodes/kvh_driver_node.cpp)

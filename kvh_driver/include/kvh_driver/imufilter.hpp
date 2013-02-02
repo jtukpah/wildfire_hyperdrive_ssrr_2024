@@ -20,7 +20,7 @@
 #include <model/linearanalyticsystemmodel_gaussianuncertainty.h>
 #include <model/linearanalyticmeasurementmodel_gaussianuncertainty.h>
 //******************* LOCAL DEPENDANCIES ****************//
-
+#include<kvh_driver/constants.h>
 //*********************** NAMESPACES ********************//
 namespace kvh_driver
 {

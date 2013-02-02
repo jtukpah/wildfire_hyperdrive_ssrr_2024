@@ -54,7 +54,7 @@ IMUFilter::IMUFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sy
 	//Build System PDF/Model
 	Gaussian system_uncertainty(sys_noise_mu, sys_noise_cov);
 	this->sys_pdf_   = new LinearAnalyticConditionalGaussian(this->AB_, system_uncertainty);
-	this->sys_model_ = new LinearAnalyticMeasurementModelGaussianUncertainty(this->sys_pdf_);
+	this->sys_model_ = new LinearAnalyticSystemModelGaussianUncertainty(this->sys_pdf_);
 
 	//Build H Matrix
 	Matrix H(12,3);
