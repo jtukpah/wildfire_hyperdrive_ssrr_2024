@@ -1,0 +1,336 @@
+\section{kvh\-\_\-driver\-:\-:\-K\-V\-H\-Params\-Config \-Class \-Reference}
+\label{classkvh__driver_1_1KVHParamsConfig}\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+
+
+{\ttfamily \#include $<$\-K\-V\-H\-Params\-Config.\-h$>$}
+
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf \-Abstract\-Group\-Description}
+\item 
+class {\bf \-Abstract\-Param\-Description}
+\item 
+class {\bf \-D\-E\-F\-A\-U\-L\-T}
+\item 
+class {\bf \-Group\-Description}
+\item 
+class {\bf \-Param\-Description}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef boost\-::shared\-\_\-ptr\*
+$<$ const \*
+{\bf \-Abstract\-Group\-Description} $>$ {\bf \-Abstract\-Group\-Description\-Const\-Ptr}
+\item 
+typedef boost\-::shared\-\_\-ptr\*
+$<$ {\bf \-Abstract\-Group\-Description} $>$ {\bf \-Abstract\-Group\-Description\-Ptr}
+\item 
+typedef boost\-::shared\-\_\-ptr\*
+$<$ const \*
+{\bf \-Abstract\-Param\-Description} $>$ {\bf \-Abstract\-Param\-Description\-Const\-Ptr}
+\item 
+typedef boost\-::shared\-\_\-ptr\*
+$<$ {\bf \-Abstract\-Param\-Description} $>$ {\bf \-Abstract\-Param\-Description\-Ptr}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf \-\_\-\-\_\-clamp\-\_\-\-\_\-} ()
+\item 
+bool {\bf \-\_\-\-\_\-from\-Message\-\_\-\-\_\-} (dynamic\-\_\-reconfigure\-::\-Config \&msg)
+\item 
+void {\bf \-\_\-\-\_\-from\-Server\-\_\-\-\_\-} (const ros\-::\-Node\-Handle \&nh)
+\item 
+uint32\-\_\-t {\bf \-\_\-\-\_\-level\-\_\-\-\_\-} (const {\bf \-K\-V\-H\-Params\-Config} \&config) const 
+\item 
+void {\bf \-\_\-\-\_\-to\-Message\-\_\-\-\_\-} (dynamic\-\_\-reconfigure\-::\-Config \&msg, const std\-::vector$<$ {\bf \-Abstract\-Param\-Description\-Const\-Ptr} $>$ \&\-\_\-\-\_\-param\-\_\-descriptions\-\_\-\-\_\-, const std\-::vector$<$ {\bf \-Abstract\-Group\-Description\-Const\-Ptr} $>$ \&\-\_\-\-\_\-group\-\_\-descriptions\-\_\-\-\_\-) const 
+\item 
+void {\bf \-\_\-\-\_\-to\-Message\-\_\-\-\_\-} (dynamic\-\_\-reconfigure\-::\-Config \&msg) const 
+\item 
+void {\bf \-\_\-\-\_\-to\-Server\-\_\-\-\_\-} (const ros\-::\-Node\-Handle \&nh) const 
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const {\bf \-K\-V\-H\-Params\-Config} \& {\bf \-\_\-\-\_\-get\-Default\-\_\-\-\_\-} ()
+\item 
+static const \*
+dynamic\-\_\-reconfigure\-::\-Config\-Description \& {\bf \-\_\-\-\_\-get\-Description\-Message\-\_\-\-\_\-} ()
+\item 
+static const std\-::vector\*
+$<$ {\bf \-Abstract\-Group\-Description\-Const\-Ptr} $>$ \& {\bf \-\_\-\-\_\-get\-Group\-Descriptions\-\_\-\-\_\-} ()
+\item 
+static const {\bf \-K\-V\-H\-Params\-Config} \& {\bf \-\_\-\-\_\-get\-Max\-\_\-\-\_\-} ()
+\item 
+static const {\bf \-K\-V\-H\-Params\-Config} \& {\bf \-\_\-\-\_\-get\-Min\-\_\-\-\_\-} ()
+\item 
+static const std\-::vector\*
+$<$ {\bf \-Abstract\-Param\-Description\-Const\-Ptr} $>$ \& {\bf \-\_\-\-\_\-get\-Param\-Descriptions\-\_\-\-\_\-} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::string {\bf device\-\_\-address}
+\item 
+bool {\bf filter}
+\item 
+class \*
+{\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-D\-E\-F\-A\-U\-L\-T} {\bf groups}
+\item 
+std\-::string {\bf output\-\_\-topic}
+\item 
+int {\bf poll\-\_\-rate}
+\item 
+int {\bf update\-\_\-frequency}
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const \*
+{\bf \-K\-V\-H\-Params\-Config\-Statics} $\ast$ {\bf \-\_\-\-\_\-get\-\_\-statics\-\_\-\-\_\-} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 63 of file \-K\-V\-H\-Params\-Config.\-h.
+
+
+
+\subsection{\-Member \-Typedef \-Documentation}
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-Abstract\-Group\-Description\-Const\-Ptr@{\-Abstract\-Group\-Description\-Const\-Ptr}}
+\index{\-Abstract\-Group\-Description\-Const\-Ptr@{\-Abstract\-Group\-Description\-Const\-Ptr}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-Abstract\-Group\-Description\-Const\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\-::shared\-\_\-ptr$<$const {\bf \-Abstract\-Group\-Description}$>$ {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-Const\-Ptr}}\label{classkvh__driver_1_1KVHParamsConfig_a724498cfb3c20d6b635010531871a216}
+
+
+\-Definition at line 175 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-Abstract\-Group\-Description\-Ptr@{\-Abstract\-Group\-Description\-Ptr}}
+\index{\-Abstract\-Group\-Description\-Ptr@{\-Abstract\-Group\-Description\-Ptr}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-Abstract\-Group\-Description\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\-::shared\-\_\-ptr$<${\bf \-Abstract\-Group\-Description}$>$ {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-Ptr}}\label{classkvh__driver_1_1KVHParamsConfig_a2fc2e9e075cc69a2bfc98b4693110ebd}
+
+
+\-Definition at line 174 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-Abstract\-Param\-Description\-Const\-Ptr@{\-Abstract\-Param\-Description\-Const\-Ptr}}
+\index{\-Abstract\-Param\-Description\-Const\-Ptr@{\-Abstract\-Param\-Description\-Const\-Ptr}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-Abstract\-Param\-Description\-Const\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\-::shared\-\_\-ptr$<$const {\bf \-Abstract\-Param\-Description}$>$ {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Param\-Description\-Const\-Ptr}}\label{classkvh__driver_1_1KVHParamsConfig_ab1da73a02b19ffe0cd86227a1225498c}
+
+
+\-Definition at line 89 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-Abstract\-Param\-Description\-Ptr@{\-Abstract\-Param\-Description\-Ptr}}
+\index{\-Abstract\-Param\-Description\-Ptr@{\-Abstract\-Param\-Description\-Ptr}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-Abstract\-Param\-Description\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}typedef boost\-::shared\-\_\-ptr$<${\bf \-Abstract\-Param\-Description}$>$ {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Param\-Description\-Ptr}}\label{classkvh__driver_1_1KVHParamsConfig_a378dd4ffd4223b6ec4bea6453690c64f}
+
+
+\-Definition at line 88 of file \-K\-V\-H\-Params\-Config.\-h.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-clamp\-\_\-\-\_\-@{\-\_\-\-\_\-clamp\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-clamp\-\_\-\-\_\-@{\-\_\-\-\_\-clamp\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-clamp\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-clamp\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classkvh__driver_1_1KVHParamsConfig_a0b1c8455a8ae3d9904ea0d357a188538}
+
+
+\-Definition at line 391 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-from\-Message\-\_\-\-\_\-@{\-\_\-\-\_\-from\-Message\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-from\-Message\-\_\-\-\_\-@{\-\_\-\-\_\-from\-Message\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-from\-Message\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-from\-Message\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{dynamic\-\_\-reconfigure\-::\-Config \&}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classkvh__driver_1_1KVHParamsConfig_a23e1e6a06b4a67fe64416bc943a564a3}
+
+
+\-Definition at line 300 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-from\-Server\-\_\-\-\_\-@{\-\_\-\-\_\-from\-Server\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-from\-Server\-\_\-\-\_\-@{\-\_\-\-\_\-from\-Server\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-from\-Server\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-from\-Server\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{const ros\-::\-Node\-Handle \&}]{nh}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classkvh__driver_1_1KVHParamsConfig_ad7d7551e3ef8514f4271701780baa087}
+
+
+\-Definition at line 373 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-get\-\_\-statics\-\_\-\-\_\-@{\-\_\-\-\_\-get\-\_\-statics\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-get\-\_\-statics\-\_\-\-\_\-@{\-\_\-\-\_\-get\-\_\-statics\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-get\-\_\-statics\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-K\-V\-H\-Params\-Config\-Statics} $\ast$ {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-get\-\_\-statics\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, static, private]}}\label{classkvh__driver_1_1KVHParamsConfig_a6228307aad27b69c9b34ce75d640a7f0}
+
+
+\-Definition at line 545 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-get\-Default\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Default\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-get\-Default\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Default\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-get\-Default\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-K\-V\-H\-Params\-Config} \& {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-get\-Default\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, static]}}\label{classkvh__driver_1_1KVHParamsConfig_ab5ad43f920a0c07f1fd01e1630429864}
+
+
+\-Definition at line 520 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-get\-Description\-Message\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Description\-Message\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-get\-Description\-Message\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Description\-Message\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-get\-Description\-Message\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const dynamic\-\_\-reconfigure\-::\-Config\-Description \& {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-get\-Description\-Message\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, static]}}\label{classkvh__driver_1_1KVHParamsConfig_aec299126e5c5d69d916f79052c03904a}
+
+
+\-Definition at line 515 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-get\-Group\-Descriptions\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Group\-Descriptions\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-get\-Group\-Descriptions\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Group\-Descriptions\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-get\-Group\-Descriptions\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::vector$<$ {\bf \-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-Const\-Ptr} $>$ \& {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-get\-Group\-Descriptions\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, static]}}\label{classkvh__driver_1_1KVHParamsConfig_a23c244310ffa1eea19f1e601156a0fed}
+
+
+\-Definition at line 540 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-get\-Max\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Max\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-get\-Max\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Max\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-get\-Max\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-K\-V\-H\-Params\-Config} \& {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-get\-Max\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, static]}}\label{classkvh__driver_1_1KVHParamsConfig_a374e55445b0010e93e8686d520a2e58f}
+
+
+\-Definition at line 525 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-get\-Min\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Min\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-get\-Min\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Min\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-get\-Min\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf \-K\-V\-H\-Params\-Config} \& {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-get\-Min\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, static]}}\label{classkvh__driver_1_1KVHParamsConfig_a66716df25faa3a97cec8203023cb2187}
+
+
+\-Definition at line 530 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-get\-Param\-Descriptions\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Param\-Descriptions\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-get\-Param\-Descriptions\-\_\-\-\_\-@{\-\_\-\-\_\-get\-Param\-Descriptions\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-get\-Param\-Descriptions\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::vector$<$ {\bf \-K\-V\-H\-Params\-Config\-::\-Abstract\-Param\-Description\-Const\-Ptr} $>$ \& {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-get\-Param\-Descriptions\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, static]}}\label{classkvh__driver_1_1KVHParamsConfig_a51cdc18123ff9ad4f59304dee1e054ae}
+
+
+\-Definition at line 535 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-level\-\_\-\-\_\-@{\-\_\-\-\_\-level\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-level\-\_\-\-\_\-@{\-\_\-\-\_\-level\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-level\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}uint32\-\_\-t {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-level\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-K\-V\-H\-Params\-Config} \&}]{config}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classkvh__driver_1_1KVHParamsConfig_ad15a9aa8d2db61b06e9f082083124f43}
+
+
+\-Definition at line 400 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-to\-Message\-\_\-\-\_\-@{\-\_\-\-\_\-to\-Message\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-to\-Message\-\_\-\-\_\-@{\-\_\-\-\_\-to\-Message\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-to\-Message\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-to\-Message\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{dynamic\-\_\-reconfigure\-::\-Config \&}]{msg, }
+\item[{const std\-::vector$<$ {\bf \-Abstract\-Param\-Description\-Const\-Ptr} $>$ \&}]{\-\_\-\-\_\-param\-\_\-descriptions\-\_\-\-\_\-, }
+\item[{const std\-::vector$<$ {\bf \-Abstract\-Group\-Description\-Const\-Ptr} $>$ \&}]{\-\_\-\-\_\-group\-\_\-descriptions\-\_\-\-\_\-}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classkvh__driver_1_1KVHParamsConfig_aa91c6872ad2b867352b6be3014436ffd}
+
+
+\-Definition at line 344 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-to\-Message\-\_\-\-\_\-@{\-\_\-\-\_\-to\-Message\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-to\-Message\-\_\-\-\_\-@{\-\_\-\-\_\-to\-Message\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-to\-Message\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-to\-Message\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{dynamic\-\_\-reconfigure\-::\-Config \&}]{msg}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classkvh__driver_1_1KVHParamsConfig_ae3f13b32aacea9e7aae2a6b4f48d3e09}
+
+
+\-Definition at line 359 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!\-\_\-\-\_\-to\-Server\-\_\-\-\_\-@{\-\_\-\-\_\-to\-Server\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-to\-Server\-\_\-\-\_\-@{\-\_\-\-\_\-to\-Server\-\_\-\-\_\-}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{\-\_\-\-\_\-to\-Server\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-\_\-\-\_\-to\-Server\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{const ros\-::\-Node\-Handle \&}]{nh}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classkvh__driver_1_1KVHParamsConfig_a29025ad81baf870bafeeb8fc26532c23}
+
+
+\-Definition at line 366 of file \-K\-V\-H\-Params\-Config.\-h.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!device\-\_\-address@{device\-\_\-address}}
+\index{device\-\_\-address@{device\-\_\-address}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{device\-\_\-address}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::device\-\_\-address}}\label{classkvh__driver_1_1KVHParamsConfig_a4601d38e2f9753b47f347c724bd889b0}
+
+
+\-Definition at line 295 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!filter@{filter}}
+\index{filter@{filter}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{filter}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::filter}}\label{classkvh__driver_1_1KVHParamsConfig_a8982ab1dd074d285d717613ef3c7a21b}
+
+
+\-Definition at line 293 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!groups@{groups}}
+\index{groups@{groups}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{groups}]{\setlength{\rightskip}{0pt plus 5cm}class {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-D\-E\-F\-A\-U\-L\-T} {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::groups}}\label{classkvh__driver_1_1KVHParamsConfig_a023f9cb85e8b91a8ff9f077ff0ae80c3}
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!output\-\_\-topic@{output\-\_\-topic}}
+\index{output\-\_\-topic@{output\-\_\-topic}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{output\-\_\-topic}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::output\-\_\-topic}}\label{classkvh__driver_1_1KVHParamsConfig_aa0fb99bf2fbc1f8a3b13004f7e4402e5}
+
+
+\-Definition at line 289 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!poll\-\_\-rate@{poll\-\_\-rate}}
+\index{poll\-\_\-rate@{poll\-\_\-rate}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{poll\-\_\-rate}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::poll\-\_\-rate}}\label{classkvh__driver_1_1KVHParamsConfig_a756dccf7a2d815ebd6e502f2b8ef2068}
+
+
+\-Definition at line 297 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}!update\-\_\-frequency@{update\-\_\-frequency}}
+\index{update\-\_\-frequency@{update\-\_\-frequency}!kvh_driver::KVHParamsConfig@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config}}
+\subsubsection[{update\-\_\-frequency}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::update\-\_\-frequency}}\label{classkvh__driver_1_1KVHParamsConfig_a1223b39cd4741f3c55359fd09bca3b2e}
+
+
+\-Definition at line 291 of file \-K\-V\-H\-Params\-Config.\-h.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+{\bf \-K\-V\-H\-Params\-Config.\-h}\end{DoxyCompactItemize}

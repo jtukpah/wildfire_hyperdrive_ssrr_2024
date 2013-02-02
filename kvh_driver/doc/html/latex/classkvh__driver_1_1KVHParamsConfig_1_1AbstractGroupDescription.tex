@@ -1,0 +1,146 @@
+\section{kvh\-\_\-driver\-:\-:\-K\-V\-H\-Params\-Config\-:\-:\-Abstract\-Group\-Description \-Class \-Reference}
+\label{classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription}\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}}
+
+
+{\ttfamily \#include $<$\-K\-V\-H\-Params\-Config.\-h$>$}
+
+
+
+\-Inheritance diagram for kvh\-\_\-driver\-:\-:\-K\-V\-H\-Params\-Config\-:\-:\-Abstract\-Group\-Description\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Abstract\-Group\-Description} (std\-::string n, std\-::string t, int p, int i, bool s)
+\item 
+void {\bf convert\-Params} ()
+\item 
+virtual bool {\bf from\-Message} (const dynamic\-\_\-reconfigure\-::\-Config \&msg, boost\-::any \&config) const =0
+\item 
+virtual void {\bf set\-Initial\-State} (boost\-::any \&cfg) const =0
+\item 
+virtual void {\bf to\-Message} (dynamic\-\_\-reconfigure\-::\-Config \&msg, const boost\-::any \&config) const =0
+\item 
+virtual void {\bf update\-Params} (boost\-::any \&cfg, {\bf \-K\-V\-H\-Params\-Config} \&top) const =0
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::vector\*
+$<$ {\bf \-Abstract\-Param\-Description\-Const\-Ptr} $>$ {\bf abstract\-\_\-parameters}
+\item 
+bool {\bf state}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 144 of file \-K\-V\-H\-Params\-Config.\-h.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}!\-Abstract\-Group\-Description@{\-Abstract\-Group\-Description}}
+\index{\-Abstract\-Group\-Description@{\-Abstract\-Group\-Description}!kvh_driver::KVHParamsConfig::AbstractGroupDescription@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}}
+\subsubsection[{\-Abstract\-Group\-Description}]{\setlength{\rightskip}{0pt plus 5cm}{\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-::\-Abstract\-Group\-Description} (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{n, }
+\item[{std\-::string}]{t, }
+\item[{int}]{p, }
+\item[{int}]{i, }
+\item[{bool}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription_a417b72b7d6c22a774b6f0a79ccfb3fc2}
+
+
+\-Definition at line 147 of file \-K\-V\-H\-Params\-Config.\-h.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}!convert\-Params@{convert\-Params}}
+\index{convert\-Params@{convert\-Params}!kvh_driver::KVHParamsConfig::AbstractGroupDescription@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}}
+\subsubsection[{convert\-Params}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-::convert\-Params} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription_a8abf9f05a3faa3791f073d0de9d01e15}
+
+
+\-Definition at line 165 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}!from\-Message@{from\-Message}}
+\index{from\-Message@{from\-Message}!kvh_driver::KVHParamsConfig::AbstractGroupDescription@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}}
+\subsubsection[{from\-Message}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-::from\-Message} (
+\begin{DoxyParamCaption}
+\item[{const dynamic\-\_\-reconfigure\-::\-Config \&}]{msg, }
+\item[{boost\-::any \&}]{config}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription_a0f8608eb8e93f5090299c4ebd18d4465}
+
+
+\-Implemented in {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Group\-Description$<$ T, P\-T $>$} \doxyref{}{p.}{classkvh__driver_1_1KVHParamsConfig_1_1GroupDescription_ab16e5d92cb6adc6fa09522414b37e34e}.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}!set\-Initial\-State@{set\-Initial\-State}}
+\index{set\-Initial\-State@{set\-Initial\-State}!kvh_driver::KVHParamsConfig::AbstractGroupDescription@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}}
+\subsubsection[{set\-Initial\-State}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-::set\-Initial\-State} (
+\begin{DoxyParamCaption}
+\item[{boost\-::any \&}]{cfg}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription_a2da2ea89469184cddaa769c6b6fed8c0}
+
+
+\-Implemented in {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Group\-Description$<$ T, P\-T $>$} \doxyref{}{p.}{classkvh__driver_1_1KVHParamsConfig_1_1GroupDescription_a35b2d2517b2df26724cb388f1dd5ccda}.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}!to\-Message@{to\-Message}}
+\index{to\-Message@{to\-Message}!kvh_driver::KVHParamsConfig::AbstractGroupDescription@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}}
+\subsubsection[{to\-Message}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-::to\-Message} (
+\begin{DoxyParamCaption}
+\item[{dynamic\-\_\-reconfigure\-::\-Config \&}]{msg, }
+\item[{const boost\-::any \&}]{config}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription_a9e8bd793ad31022802aed298542c0219}
+
+
+\-Implemented in {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Group\-Description$<$ T, P\-T $>$} \doxyref{}{p.}{classkvh__driver_1_1KVHParamsConfig_1_1GroupDescription_a5aec48ec271f6d12723e86643c78e353}.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}!update\-Params@{update\-Params}}
+\index{update\-Params@{update\-Params}!kvh_driver::KVHParamsConfig::AbstractGroupDescription@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}}
+\subsubsection[{update\-Params}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-::update\-Params} (
+\begin{DoxyParamCaption}
+\item[{boost\-::any \&}]{cfg, }
+\item[{{\bf \-K\-V\-H\-Params\-Config} \&}]{top}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription_a87f57226f33b24876db79f9f4b5fe9c6}
+
+
+\-Implemented in {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Group\-Description$<$ T, P\-T $>$} \doxyref{}{p.}{classkvh__driver_1_1KVHParamsConfig_1_1GroupDescription_a2575d5240a7a99b68dacffa56576ef4d}.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}!abstract\-\_\-parameters@{abstract\-\_\-parameters}}
+\index{abstract\-\_\-parameters@{abstract\-\_\-parameters}!kvh_driver::KVHParamsConfig::AbstractGroupDescription@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}}
+\subsubsection[{abstract\-\_\-parameters}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf \-Abstract\-Param\-Description\-Const\-Ptr}$>$ {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-::abstract\-\_\-parameters}}\label{classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription_a4b1c494a902ea79954ae5d1c384b69ca}
+
+
+\-Definition at line 156 of file \-K\-V\-H\-Params\-Config.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}!state@{state}}
+\index{state@{state}!kvh_driver::KVHParamsConfig::AbstractGroupDescription@{kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Params\-Config\-::\-Abstract\-Group\-Description\-::state}}\label{classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription_a1587c048a672720395fd4ae19450686f}
+
+
+\-Definition at line 157 of file \-K\-V\-H\-Params\-Config.\-h.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+{\bf \-K\-V\-H\-Params\-Config.\-h}\end{DoxyCompactItemize}

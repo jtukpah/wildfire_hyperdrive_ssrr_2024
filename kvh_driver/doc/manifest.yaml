@@ -1,0 +1,17 @@
+authors: Adam Panzica
+brief: kvh_driver
+depends:
+- nav_msgs
+- dynamic_reconfigure
+- roscpp
+- sensor_msgs
+- std_msgs
+- bfl
+- rospy
+description: "\n\n     ROS Driver for KVH industries fiber-optic Gryos/IMU's.\n\n\
+  \  "
+license: BSD
+msgs: []
+package_type: package
+srvs: []
+url: http://robot.wpi.edu/wiki/kvh_driver
