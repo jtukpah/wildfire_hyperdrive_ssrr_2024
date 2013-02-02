@@ -171,7 +171,7 @@ private:
 	 */
 	ExtendedKalmanFilter*                              filter_;
 	/**
-	 * The latest system state estimates (or the initial state estimate if no update has been performed)
+	 * The current state estimate as of the last filter update, or the initial state estimate if no update has been performed
 	 */
 	Gaussian*                                          prior_;
 };
