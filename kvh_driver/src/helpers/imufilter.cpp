@@ -14,7 +14,6 @@
 //*********************** NAMESPACES ********************//
 
 using namespace kvh_driver;
-using kvh_driver::constants;
 
 IMUFilter::IMUFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov):
 								sys_model_(NULL),
