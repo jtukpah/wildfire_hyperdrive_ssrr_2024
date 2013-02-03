@@ -147,6 +147,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
 <li>AB_
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#a47f298cffece4e20fe0eced3e7410fda">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#abfba134dc61d48a78c239c4edf01f848">kvh_driver::OdometryFilter</a>
 </li>
 <li>abstract_parameters
 : <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription.html#a4b1c494a902ea79954ae5d1c384b69ca">kvh_driver::KVHParamsConfig::AbstractGroupDescription</a>
@@ -178,11 +179,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a048dc3ac81431b0a0e1678396ad07e98">kvh_driver::KVHParamsConfig::ParamDescription&lt; T &gt;</a>
 </li>
 <li>clamp()
-: <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a609363b7d65d75cc6d60f63c9008b839">kvh_driver::KVHParamsConfig::ParamDescription&lt; T &gt;</a>
+: <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a5968892dae7200c3564bc06f579dd5ff">kvh_driver::KVHParamsConfig::ParamDescription&lt; T &gt;</a>
 , <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#aab2c3cfbf04aba7afe07edea4b0b94e6">kvh_driver::KVHParamsConfig::AbstractParamDescription</a>
 </li>
 <li>convertParams()
 : <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription.html#a8abf9f05a3faa3791f073d0de9d01e15">kvh_driver::KVHParamsConfig::AbstractGroupDescription</a>
+</li>
+<li>covarIndexCalc()
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#ab57a0e2726b8124400da1ca6c7d22c36">kvh_driver::KVHDriverNode</a>
 </li>
 </ul>
 
@@ -209,19 +213,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>filter_
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#a3c522c49f5761dec1144b2a77e686d3a">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#ab662023a2d7c5b1e8b4bf6c4720a609e">kvh_driver::OdometryFilter</a>
 </li>
 <li>filter_init_
-: <a class="el" href="classkvh__driver_1_1IMUFilter.html#af8e1eaff2bb879410b1b67badee08e75">kvh_driver::IMUFilter</a>
+: <a class="el" href="classkvh__driver_1_1OdometryFilter.html#a6899c6f8a334e4a07540914b570472e5">kvh_driver::OdometryFilter</a>
+, <a class="el" href="classkvh__driver_1_1IMUFilter.html#af8e1eaff2bb879410b1b67badee08e75">kvh_driver::IMUFilter</a>
 </li>
 <li>fromMessage()
-: <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription.html#a0f8608eb8e93f5090299c4ebd18d4465">kvh_driver::KVHParamsConfig::AbstractGroupDescription</a>
+: <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#a0fc3ab41ca90a234fcaaad183d36a951">kvh_driver::KVHParamsConfig::AbstractParamDescription</a>
+, <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription.html#a0f8608eb8e93f5090299c4ebd18d4465">kvh_driver::KVHParamsConfig::AbstractGroupDescription</a>
 , <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a0bcb05e9e7c43749d53356d45208f9ce">kvh_driver::KVHParamsConfig::ParamDescription&lt; T &gt;</a>
 , <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1GroupDescription.html#ab16e5d92cb6adc6fa09522414b37e34e">kvh_driver::KVHParamsConfig::GroupDescription&lt; T, PT &gt;</a>
-, <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#a0fc3ab41ca90a234fcaaad183d36a951">kvh_driver::KVHParamsConfig::AbstractParamDescription</a>
 </li>
 <li>fromServer()
-: <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a91bcce9a07c283b38f211642581734f1">kvh_driver::KVHParamsConfig::ParamDescription&lt; T &gt;</a>
-, <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#a20a7bef541e4b7fca78560dbeff236f2">kvh_driver::KVHParamsConfig::AbstractParamDescription</a>
+: <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#a20a7bef541e4b7fca78560dbeff236f2">kvh_driver::KVHParamsConfig::AbstractParamDescription</a>
+, <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a91bcce9a07c283b38f211642581734f1">kvh_driver::KVHParamsConfig::ParamDescription&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -232,13 +238,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>getEstimate()
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#aff90eec29f374b50ad1853c77874ee22">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#a59a827b46d9b72712e932874ed35b312">kvh_driver::OdometryFilter</a>
 </li>
 <li>getValue()
-: <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#ac2d7f61ca5466810b04cf2260a9ec61e">kvh_driver::KVHParamsConfig::ParamDescription&lt; T &gt;</a>
-, <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#a0a7bf9914c4863ead2ce0f294e1d24e4">kvh_driver::KVHParamsConfig::AbstractParamDescription</a>
+: <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#a0a7bf9914c4863ead2ce0f294e1d24e4">kvh_driver::KVHParamsConfig::AbstractParamDescription</a>
+, <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#ac2d7f61ca5466810b04cf2260a9ec61e">kvh_driver::KVHParamsConfig::ParamDescription&lt; T &gt;</a>
 </li>
 <li>GroupDescription()
-: <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1GroupDescription.html#a0c3ba9b5fe5d8d296dc6250ce7501744">kvh_driver::KVHParamsConfig::GroupDescription&lt; T, PT &gt;</a>
+: <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1GroupDescription.html#ae8db147cb1563cb1959c28c4d3a1912e">kvh_driver::KVHParamsConfig::GroupDescription&lt; T, PT &gt;</a>
 </li>
 <li>groups
 : <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html#a023f9cb85e8b91a8ff9f077ff0ae80c3">kvh_driver::KVHParamsConfig</a>
@@ -250,24 +257,60 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_h"></a>- h -</h3><ul>
 <li>H_
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#ad7b470b96bc0d3f817e5e0915ae8f4f0">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#a5df6900ff282d0dbea47144a96e81a8c">kvh_driver::OdometryFilter</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>imu_filter_
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#ad3a224735ff51b01274daa0ff6a29696">kvh_driver::KVHDriverNode</a>
+</li>
+<li>imu_pub_
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#ae863e7d5ffd48d603fbdabd7dd38a785">kvh_driver::KVHDriverNode</a>
+</li>
+<li>IMU_RX_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a01a4ab749774a4ab14567181dfef902e">kvh_driver::constants</a>
+</li>
+<li>IMU_RY_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a0e275405901e0733a6ac6674fdf869fa">kvh_driver::constants</a>
+</li>
+<li>IMU_RZ_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a26d1dc1cd5875de9f66e00ae6cc756b5">kvh_driver::constants</a>
+</li>
+<li>IMU_STATE_SIZE()
+: <a class="el" href="classkvh__driver_1_1constants.html#acd06d3ff9725237176c0b926019898c5">kvh_driver::constants</a>
+</li>
+<li>IMU_X_DOT_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a085387ef817f7a3ab42b207265d1e766">kvh_driver::constants</a>
+</li>
+<li>IMU_Y_DOT_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a4e2c08fe8a7bd7ac53cdbe9fe70ba3ad">kvh_driver::constants</a>
+</li>
+<li>IMU_Z_DOT_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a3a541a5cf83ddffd37610ff3495a0a8d">kvh_driver::constants</a>
+</li>
 <li>IMUFilter()
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#a4dcb6570d63cadd3d19a3f2cf1ebd3cb">kvh_driver::IMUFilter</a>
 </li>
 <li>init()
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#ae25fb3707744de06747b5ab143aae355">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#aab3521e244a69c7dfc93252f7fe3f978">kvh_driver::OdometryFilter</a>
 </li>
 <li>INPUT_SIZE()
 : <a class="el" href="classkvh__driver_1_1constants.html#a741a500c42bb931ef5184d38bebbab63">kvh_driver::constants</a>
+</li>
+<li>isInitialized()
+: <a class="el" href="classkvh__driver_1_1OdometryFilter.html#ac8b46da7fda38636041f34f4cc7cf1dd">kvh_driver::OdometryFilter</a>
+, <a class="el" href="classkvh__driver_1_1IMUFilter.html#a0aad069c4c0df8b8d6b1235aa28cfba5">kvh_driver::IMUFilter</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_k"></a>- k -</h3><ul>
+<li>KVHDriverNode()
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#aa1237f5ac6865c88b69f4d49bd5ec024">kvh_driver::KVHDriverNode</a>
+</li>
 <li>KVHParamsConfig
 : <a class="el" href="classkvh__driver_1_1KVHParamsConfigStatics.html#a3afea8c83f8548a79a4ed06b28b1246c">kvh_driver::KVHParamsConfigStatics</a>
 </li>
@@ -283,9 +326,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>mes_model_
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#a5dee2c82d998f87a2f7a65461e1a5ac3">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#a2815f052ad8c56444ec1b55cab57db91">kvh_driver::OdometryFilter</a>
 </li>
 <li>mes_pdf_
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#a20887e6c8867c9ecb7896c3c04cb2330">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#a2de4a388096a811ef7a10cb1c612ffdf">kvh_driver::OdometryFilter</a>
 </li>
 </ul>
 
@@ -294,10 +339,61 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>name
 : <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1DEFAULT.html#ad4b446163673587d171590cd56178c3b">kvh_driver::KVHParamsConfig::DEFAULT</a>
 </li>
+<li>nh_
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#a32b6d62552cbaf9b58711080b5cffc87">kvh_driver::KVHDriverNode</a>
+</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
+<li>odo_filter_
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#a92545a2056881b360f02485cc1d3d999">kvh_driver::KVHDriverNode</a>
+</li>
+<li>odo_pub_
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#aa966af9b9f45637f0f1cb65c07c99305">kvh_driver::KVHDriverNode</a>
+</li>
+<li>ODOM_RX_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a99c3cb631ed131a2cc6ca2af6d6147c0">kvh_driver::constants</a>
+</li>
+<li>ODOM_RX_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a5f91f740f72ce5bd4f7d9089a65c29ad">kvh_driver::constants</a>
+</li>
+<li>ODOM_RY_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a905dfb3364762ff614132ca6080d3f09">kvh_driver::constants</a>
+</li>
+<li>ODOM_RY_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a81bb3bdb1afedb033719c3a9f5db6831">kvh_driver::constants</a>
+</li>
+<li>ODOM_RZ_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a47ae99f6412fba6a5a49c1e048c7b06b">kvh_driver::constants</a>
+</li>
+<li>ODOM_RZ_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a371a675f8cd858da2ff8c414b0096c00">kvh_driver::constants</a>
+</li>
+<li>ODOM_STATE_SIZE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a6986535f1ff71373202e9329ad966ce2">kvh_driver::constants</a>
+</li>
+<li>ODOM_X_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a8248f0fb23665b300238a7b35f1075dc">kvh_driver::constants</a>
+</li>
+<li>ODOM_X_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#ad455a4ce57dea8601ad2867caf30697a">kvh_driver::constants</a>
+</li>
+<li>ODOM_Y_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#a12217933cc0d459130b448338d169e99">kvh_driver::constants</a>
+</li>
+<li>ODOM_Y_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#afdafb2c05d105585bd18c4c159de3aa5">kvh_driver::constants</a>
+</li>
+<li>ODOM_Z_DOT_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#abd27feb75056dd458556c5f7bdeaa0f2">kvh_driver::constants</a>
+</li>
+<li>ODOM_Z_STATE()
+: <a class="el" href="classkvh__driver_1_1constants.html#acb4de2dcad1d155e4dce9f24e30bae22">kvh_driver::constants</a>
+</li>
+<li>OdometryFilter()
+: <a class="el" href="classkvh__driver_1_1OdometryFilter.html#a05c542b65a99c1680a5e94e99131ce07">kvh_driver::OdometryFilter</a>
+</li>
 <li>output_topic
 : <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1DEFAULT.html#a2a961ec00265a79c147814bce30ae757">kvh_driver::KVHParamsConfig::DEFAULT</a>
 , <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html#aa0fb99bf2fbc1f8a3b13004f7e4402e5">kvh_driver::KVHParamsConfig</a>
@@ -315,6 +411,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>prior_
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#a86d7af469718ba5c84744efc0518b945">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#aaadbd028d5b127fddb26e8e908bbfbef">kvh_driver::OdometryFilter</a>
 </li>
 </ul>
 
@@ -323,29 +420,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>RX_DOT_MEASUREMENT()
 : <a class="el" href="classkvh__driver_1_1constants.html#a86f4167b4a2e8adb53deb7493080f9ac">kvh_driver::constants</a>
 </li>
-<li>RX_DOT_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#a87e73db7ee25c05a9ff1e9e8e7c308af">kvh_driver::constants</a>
-</li>
-<li>RX_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#ad170480ab6f85093b5b9da6eaf90db3c">kvh_driver::constants</a>
-</li>
 <li>RY_DOT_MEASUREMENT()
 : <a class="el" href="classkvh__driver_1_1constants.html#aa5841eaf81893418a78d5a918b77f4c6">kvh_driver::constants</a>
 </li>
-<li>RY_DOT_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#a61793eaf0a77bb31700fa5b6dffc5166">kvh_driver::constants</a>
-</li>
-<li>RY_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#a10ebccb86d0c4e1aa37a5b8ed6f21d2d">kvh_driver::constants</a>
-</li>
 <li>RZ_DOT_MEASUREMENT()
 : <a class="el" href="classkvh__driver_1_1constants.html#a83843e3ac5098cb79953a400f3840bf9">kvh_driver::constants</a>
-</li>
-<li>RZ_DOT_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#ae03b21e262e6e56245b4aee6fb11867b">kvh_driver::constants</a>
-</li>
-<li>RZ_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#ae246a62bc8a16fc721135dca58c0bab2">kvh_driver::constants</a>
 </li>
 </ul>
 
@@ -362,14 +441,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription.html#a1587c048a672720395fd4ae19450686f">kvh_driver::KVHParamsConfig::AbstractGroupDescription</a>
 , <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1DEFAULT.html#a978335913f7697ddec791939dc64df42">kvh_driver::KVHParamsConfig::DEFAULT</a>
 </li>
-<li>STATE_SIZE()
-: <a class="el" href="classkvh__driver_1_1constants.html#a1ccdab076c0663088b17edc99872d985">kvh_driver::constants</a>
+<li>stateToImu()
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#aeb1fc161a8b7c6c2953b6ae8762da24b">kvh_driver::KVHDriverNode</a>
 </li>
 <li>sys_model_
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#a86cee9be8d1bb33032b0e9cf4d039e0b">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#a6b869994fe88d84229ce510d07335dde">kvh_driver::OdometryFilter</a>
 </li>
 <li>sys_pdf_
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#a3f96ad360e36d278fb482dfc03cf0266">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#a964c1c93e6fcffef80c8198e085f560e">kvh_driver::OdometryFilter</a>
 </li>
 </ul>
 
@@ -391,10 +472,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
 <li>update()
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#abb31807874cc07f73b70d93a1980b3a4">kvh_driver::IMUFilter</a>
+, <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#ad1ff4c080574ac985439e5063715368b">kvh_driver::KVHDriverNode</a>
+, <a class="el" href="classkvh__driver_1_1OdometryFilter.html#aff82108744685eeb45ea326ee568f1c1">kvh_driver::OdometryFilter</a>
 </li>
 <li>update_frequency
 : <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1DEFAULT.html#a6d0835a827090212bd9abf95da7a247c">kvh_driver::KVHParamsConfig::DEFAULT</a>
 , <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html#a1223b39cd4741f3c55359fd09bca3b2e">kvh_driver::KVHParamsConfig</a>
+</li>
+<li>update_frequency_
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#a0e518ab9f446d6850c9305602e36cfde">kvh_driver::KVHDriverNode</a>
+</li>
+<li>update_timer_
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#ade628598424122057bfac93a30011bea">kvh_driver::KVHDriverNode</a>
 </li>
 <li>updateParams()
 : <a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription.html#a87f57226f33b24876db79f9f4b5fe9c6">kvh_driver::KVHParamsConfig::AbstractGroupDescription</a>
@@ -407,24 +496,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>X_DOT_DOT_INPUT()
 : <a class="el" href="classkvh__driver_1_1constants.html#a7b10efb8f7692bc938b3981de2e615c7">kvh_driver::constants</a>
 </li>
-<li>X_DOT_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#a402d701ea006a8a21821be91f46a0f93">kvh_driver::constants</a>
-</li>
-<li>X_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#a3b38da133854c6ed59852b05b031cf7a">kvh_driver::constants</a>
-</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_y"></a>- y -</h3><ul>
 <li>Y_DOT_DOT_INPUT()
 : <a class="el" href="classkvh__driver_1_1constants.html#adaed7f28ad1c0d47434e6ef0b3e5381c">kvh_driver::constants</a>
-</li>
-<li>Y_DOT_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#a094c64059b80639cf6634cd0e25d3cfb">kvh_driver::constants</a>
-</li>
-<li>Y_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#a8b9bfcdf7b1bd39a3fd018d394697ba3">kvh_driver::constants</a>
 </li>
 </ul>
 
@@ -433,18 +510,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Z_DOT_DOT_INPUT()
 : <a class="el" href="classkvh__driver_1_1constants.html#acf039a5b377b2ffd9c92923f5cc69354">kvh_driver::constants</a>
 </li>
-<li>Z_DOT_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#a050d7951b991394d3b66ea4407a1d5a8">kvh_driver::constants</a>
-</li>
-<li>Z_STATE()
-: <a class="el" href="classkvh__driver_1_1constants.html#a016cf5f457305afc65d03ccd210a2f7a">kvh_driver::constants</a>
-</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_0x7e"></a>- ~ -</h3><ul>
 <li>~IMUFilter()
 : <a class="el" href="classkvh__driver_1_1IMUFilter.html#a86d395f5a863cae746ab2bc30e371132">kvh_driver::IMUFilter</a>
+</li>
+<li>~KVHDriverNode()
+: <a class="el" href="classkvh__driver_1_1KVHDriverNode.html#ad06a278d61fffb92784943fa98130fb6">kvh_driver::KVHDriverNode</a>
+</li>
+<li>~OdometryFilter()
+: <a class="el" href="classkvh__driver_1_1OdometryFilter.html#a6232dff1617f519dc713e2553c5d5820">kvh_driver::OdometryFilter</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -467,7 +544,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <hr size="1"><div style="align: right;">
 <a href="http://ros.org/wiki/kvh_driver">kvh_driver</a><br />
 Author(s): Adam Panzica</br />
-<small>autogenerated on Sat Feb 2 2013 14:25:39</small>
+<small>autogenerated on Sun Feb 3 2013 17:03:25</small>
 </div>
 </body>
 </html>

@@ -32,5 +32,6 @@ var searchData=
   ['constants',['constants',['../classkvh__driver_1_1constants.html',1,'kvh_driver']]],
   ['constants_2eh',['constants.h',['../constants_8h.html',1,'']]],
   ['convertparams',['convertParams',['../classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription.html#a8abf9f05a3faa3791f073d0de9d01e15',1,'kvh_driver::KVHParamsConfig::AbstractGroupDescription']]],
+  ['covarindexcalc',['covarIndexCalc',['../classkvh__driver_1_1KVHDriverNode.html#ab57a0e2726b8124400da1ca6c7d22c36',1,'kvh_driver::KVHDriverNode']]],
   ['current_5fworkspace',['CURRENT_WORKSPACE',['../namespace__setup__util.html#adc1d3f8a260ac546e927ab07cc92f266',1,'_setup_util']]]
 ];

@@ -75,7 +75,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="kvh_driver::IMUFilter" -->
-<p><code>#include &lt;<a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>&gt;</code></p>
 
 <p><a href="classkvh__driver_1_1IMUFilter-members.html">List of all members.</a></p>
 <table class="memberdecls">
@@ -87,6 +87,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new IMU filter given an expected system noise and covariance and measurement noise and covariance.  <a href="#a4dcb6570d63cadd3d19a3f2cf1ebd3cb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1IMUFilter.html#ae25fb3707744de06747b5ab143aae355">init</a> (const ColumnVector &amp;initial_state, const SymmetricMatrix &amp;initial_covar)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the filter to an initial state estimate and covariance.  <a href="#ae25fb3707744de06747b5ab143aae355"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1IMUFilter.html#a0aad069c4c0df8b8d6b1235aa28cfba5">isInitialized</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1IMUFilter.html#abb31807874cc07f73b70d93a1980b3a4">update</a> (const ColumnVector &amp;input, const ColumnVector &amp;measurement)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the filter given new system input and measurement.  <a href="#abb31807874cc07f73b70d93a1980b3a4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1IMUFilter.html#a86d395f5a863cae746ab2bc30e371132">~IMUFilter</a> ()</td></tr>
@@ -103,33 +104,8 @@ Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">LinearAnalyticConditionalGaussian *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1IMUFilter.html#a3f96ad360e36d278fb482dfc03cf0266">sys_pdf_</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><dl class="author"><dt><b>Author:</b></dt><dd>Adam Panzica Simple Extended Kalman Filter implementation based on BFL's filtering library. It is hard-coded to assume the following system dynamics:</dd></dl>
-<p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \textbf{X} = \f{bmatrix}{ x \\ y \\ z \\ rx \\ ry \\ rz \\ \dot{x} \\ \dot{y} \\ \dot{z} \\ \dot{rx} \\ \dot{ry} \\ \dot{rz} \end" src="form_3.png"/>
-</p>
-<p> ] </p>
-<p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \textbf{A} = \f{bmatrix}{ 1 0 0 0 0 0 1 0 0 0 0 0\\ 0 1 0 0 0 0 0 1 0 0 0 0\\ 0 0 1 0 0 0 0 0 1 0 0 0\\ 0 0 0 1 0 0 0 0 0 1 0 0\\ 0 0 0 0 1 0 0 0 0 0 1 0\\ 0 0 0 0 0 1 0 0 0 0 0 1\\ 0 0 0 0 0 0 1 0 0 0 0 0\\ 0 0 0 0 0 0 0 1 0 0 0 0\\ 0 0 0 0 0 0 0 0 1 0 0 0\\ 0 0 0 0 0 0 0 0 0 1 0 0\\ 0 0 0 0 0 0 0 0 0 0 1 0\\ 0 0 0 0 0 0 0 0 0 0 0 1\end" src="form_4.png"/>
-</p>
-<p> ] </p>
-<p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \textbf{B} = \f{bmatrix}{ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 1 0 0 \\ 0 1 0 \\ 0 0 1 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \end" src="form_5.png"/>
-</p>
-<p> ] {u} = </p>
-<p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{bmatrix} \ddot{x}\\ \ddot{y}\\ \ddot{z}\end{bmatrix}" src="form_6.png"/>
-</p>
-<p> ] {H} = </p>
-<p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{bmatrix} 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 1 0 0 \\ 0 1 0 \\ 0 0 1 \end{bmatrix}" src="form_7.png"/>
-</p>
-<p> ] {z} = </p>
-<p class="formulaDsp">
-<img class="formulaDsp" alt="\begin{bmatrix} \dot{rx}\\ \dot{ry}\\ \dot{rz}\end{bmatrix}" src="form_8.png"/>
-</p>
-<p> ] </p>
-
-<p>Definition at line <a class="el" href="imufilter_8hpp_source.html#l00090">90</a> of file <a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>.</p>
+<div class="textblock">
+<p>Definition at line <a class="el" href="imu__filter_8h_source.html#l00030">30</a> of file <a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a4dcb6570d63cadd3d19a3f2cf1ebd3cb"></a><!-- doxytag: member="kvh_driver::IMUFilter::IMUFilter" ref="a4dcb6570d63cadd3d19a3f2cf1ebd3cb" args="(const ColumnVector &amp;sys_noise_mu, const SymmetricMatrix &amp;sys_noise_cov, const ColumnVector &amp;measurement_noise_mu, const SymmetricMatrix &amp;measurement_noise_cov)" -->
 <div class="memitem">
@@ -180,7 +156,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="imufilter_8cpp_source.html#l00019">19</a> of file <a class="el" href="imufilter_8cpp_source.html">imufilter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8cpp_source.html#l00019">19</a> of file <a class="el" href="imu__filter_8cpp_source.html">imu_filter.cpp</a>.</p>
 
 </div>
 </div>
@@ -198,7 +174,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="imufilter_8cpp_source.html#l00073">73</a> of file <a class="el" href="imufilter_8cpp_source.html">imufilter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8cpp_source.html#l00065">65</a> of file <a class="el" href="imu__filter_8cpp_source.html">imu_filter.cpp</a>.</p>
 
 </div>
 </div>
@@ -240,7 +216,7 @@ Private Attributes</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if the estimate was sucessfully retrieved, else false</dd></dl>
 <p>Note that the init method must have been called prior to getting estimates </p>
 
-<p>Definition at line <a class="el" href="imufilter_8cpp_source.html#l00125">125</a> of file <a class="el" href="imufilter_8cpp_source.html">imufilter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8cpp_source.html#l00117">117</a> of file <a class="el" href="imu__filter_8cpp_source.html">imu_filter.cpp</a>.</p>
 
 </div>
 </div>
@@ -281,7 +257,27 @@ Private Attributes</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if sucessfully intialized, else false</dd></dl>
 <p>Note that the size of the state vector and covariance matrix must match the size defined by the constant SYSTEM_STATE_SIZE </p>
 
-<p>Definition at line <a class="el" href="imufilter_8cpp_source.html#l00084">84</a> of file <a class="el" href="imufilter_8cpp_source.html">imufilter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8cpp_source.html#l00076">76</a> of file <a class="el" href="imu__filter_8cpp_source.html">imu_filter.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0aad069c4c0df8b8d6b1235aa28cfba5"></a><!-- doxytag: member="kvh_driver::IMUFilter::isInitialized" ref="a0aad069c4c0df8b8d6b1235aa28cfba5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classkvh__driver_1_1IMUFilter.html#a0aad069c4c0df8b8d6b1235aa28cfba5">IMUFilter::isInitialized</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="author"><dt><b>Author:</b></dt><dd>Adam Panzica </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if the filter is intialized, else false </dd></dl>
+
+<p>Definition at line <a class="el" href="imu__filter_8cpp_source.html#l00132">132</a> of file <a class="el" href="imu__filter_8cpp_source.html">imu_filter.cpp</a>.</p>
 
 </div>
 </div>
@@ -322,7 +318,7 @@ Private Attributes</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if succesfully updated, else false Note that the init method must be called before performing filter updates.</dd></dl>
 <p>Note that the size of the input and measurement vectors must match the size defined by the constants INPUT_SIZE and MEASUREMENT_SIZE </p>
 
-<p>Definition at line <a class="el" href="imufilter_8cpp_source.html#l00101">101</a> of file <a class="el" href="imufilter_8cpp_source.html">imufilter.cpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8cpp_source.html#l00093">93</a> of file <a class="el" href="imu__filter_8cpp_source.html">imu_filter.cpp</a>.</p>
 
 </div>
 </div>
@@ -339,7 +335,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <p>The combined system evolution dynamics </p>
 
-<p>Definition at line <a class="el" href="imufilter_8hpp_source.html#l00143">143</a> of file <a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8h_source.html#l00090">90</a> of file <a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>.</p>
 
 </div>
 </div>
@@ -355,7 +351,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <p>The actual BFL ExtendedKalmanFilter for the system </p>
 
-<p>Definition at line <a class="el" href="imufilter_8hpp_source.html#l00172">172</a> of file <a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8h_source.html#l00119">119</a> of file <a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>.</p>
 
 </div>
 </div>
@@ -371,7 +367,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <p>Flag for signalling an initialized filter </p>
 
-<p>Definition at line <a class="el" href="imufilter_8hpp_source.html#l00168">168</a> of file <a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8h_source.html#l00115">115</a> of file <a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>.</p>
 
 </div>
 </div>
@@ -387,7 +383,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <p>The measurement transform Matrix </p>
 
-<p>Definition at line <a class="el" href="imufilter_8hpp_source.html#l00147">147</a> of file <a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8h_source.html#l00094">94</a> of file <a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>.</p>
 
 </div>
 </div>
@@ -403,7 +399,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <p>The measurement uncertanty model </p>
 
-<p>Definition at line <a class="el" href="imufilter_8hpp_source.html#l00163">163</a> of file <a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8h_source.html#l00110">110</a> of file <a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>.</p>
 
 </div>
 </div>
@@ -419,7 +415,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <p>The measurement Gaussian PDF </p>
 
-<p>Definition at line <a class="el" href="imufilter_8hpp_source.html#l00159">159</a> of file <a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8h_source.html#l00106">106</a> of file <a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>.</p>
 
 </div>
 </div>
@@ -435,7 +431,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <p>The current state estimate as of the last filter update, or the initial state estimate if no update has been performed </p>
 
-<p>Definition at line <a class="el" href="imufilter_8hpp_source.html#l00176">176</a> of file <a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8h_source.html#l00123">123</a> of file <a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>.</p>
 
 </div>
 </div>
@@ -451,7 +447,7 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <p>The system uncertanty model </p>
 
-<p>Definition at line <a class="el" href="imufilter_8hpp_source.html#l00155">155</a> of file <a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8h_source.html#l00102">102</a> of file <a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>.</p>
 
 </div>
 </div>
@@ -467,13 +463,13 @@ Private Attributes</h2></td></tr>
 <div class="memdoc">
 <p>The system Gaussian PDF </p>
 
-<p>Definition at line <a class="el" href="imufilter_8hpp_source.html#l00151">151</a> of file <a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a>.</p>
+<p>Definition at line <a class="el" href="imu__filter_8h_source.html#l00098">98</a> of file <a class="el" href="imu__filter_8h_source.html">imu_filter.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="imufilter_8hpp_source.html">imufilter.hpp</a></li>
-<li><a class="el" href="imufilter_8cpp_source.html">imufilter.cpp</a></li>
+<li><a class="el" href="imu__filter_8h_source.html">imu_filter.h</a></li>
+<li><a class="el" href="imu__filter_8cpp_source.html">imu_filter.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- window showing the filter options -->
@@ -495,7 +491,7 @@ Private Attributes</h2></td></tr>
 <hr size="1"><div style="align: right;">
 <a href="http://ros.org/wiki/kvh_driver">kvh_driver</a><br />
 Author(s): Adam Panzica</br />
-<small>autogenerated on Sat Feb 2 2013 14:25:39</small>
+<small>autogenerated on Sun Feb 3 2013 17:03:25</small>
 </div>
 </body>
 </html>
