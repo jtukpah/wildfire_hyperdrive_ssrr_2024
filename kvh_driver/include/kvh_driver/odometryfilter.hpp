@@ -136,6 +136,13 @@ public:
 	 * Note that the init method must have been called prior to getting estimates
 	 */
 	bool getEstimate(ColumnVector& estimate, SymmetricMatrix& covar) const;
+
+	/**
+	 * @author Adam Panzica
+	 * @return true if the filter is intialized, else false
+	 */
+	bool isInitialized();
+
 private:
 	/**
 	 * The combined system evolution dynamics

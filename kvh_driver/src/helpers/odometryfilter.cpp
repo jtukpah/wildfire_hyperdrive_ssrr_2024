@@ -135,3 +135,8 @@ bool OdometryFilter::getEstimate(ColumnVector& state_estimate, SymmetricMatrix& 
 		return false;
 	}
 }
+
+bool OdometryFilter::isInitialized()
+{
+	return this->filter_init_;
+}

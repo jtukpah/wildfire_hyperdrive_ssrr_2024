@@ -129,4 +129,9 @@ bool IMUFilter::getEstimate(ColumnVector& state_estimate, SymmetricMatrix& covar
 	}
 }
 
+bool IMUFilter::isInitialized()
+{
+	return this->filter_init_;
+}
+
 
