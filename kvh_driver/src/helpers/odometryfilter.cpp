@@ -29,23 +29,23 @@ OdometryFilter::OdometryFilter(const ColumnVector& sys_noise_mu, const Symmetric
 	//Build System Matrix
 	Matrix A(12,12);
 	A = 0;
-	for (int r = 0; r < constants::STATE_SIZE(); ++r)
+	for (int r = 0; r < constants::ODOM_STATE_SIZE(); ++r)
 	{
 		A(r,r) = 1;
 	}
-	A(constants::X_STATE(),  constants::X_DOT_STATE())  = 1;
-	A(constants::Y_STATE(),  constants::Y_DOT_STATE())  = 1;
-	A(constants::Z_STATE(),  constants::Z_DOT_STATE())  = 1;
-	A(constants::RX_STATE(), constants::RX_DOT_STATE()) = 1;
-	A(constants::RY_STATE(), constants::RY_DOT_STATE()) = 1;
-	A(constants::RZ_STATE(), constants::RZ_DOT_STATE()) = 1;
+	A(constants::ODOM_X_STATE(),  constants::ODOM_X_DOT_STATE())  = 1;
+	A(constants::ODOM_Y_STATE(),  constants::ODOM_Y_DOT_STATE())  = 1;
+	A(constants::ODOM_Z_STATE(),  constants::ODOM_Z_DOT_STATE())  = 1;
+	A(constants::ODOM_RX_STATE(), constants::ODOM_RX_DOT_STATE()) = 1;
+	A(constants::ODOM_RY_STATE(), constants::ODOM_RY_DOT_STATE()) = 1;
+	A(constants::ODOM_RZ_STATE(), constants::ODOM_RZ_DOT_STATE()) = 1;
 
 	//Build Input Matrix
 	Matrix B(12,3);
 	B = 0;
-	B(constants::X_DOT_STATE(), constants::X_DOT_DOT_INPUT()) = 1;
-	B(constants::Y_DOT_STATE(), constants::Y_DOT_DOT_INPUT()) = 1;
-	B(constants::Z_DOT_STATE(), constants::Z_DOT_DOT_INPUT()) = 1;
+	B(constants::ODOM_X_DOT_STATE(), constants::X_DOT_DOT_INPUT()) = 1;
+	B(constants::ODOM_Y_DOT_STATE(), constants::Y_DOT_DOT_INPUT()) = 1;
+	B(constants::ODOM_Z_DOT_STATE(), constants::Z_DOT_DOT_INPUT()) = 1;
 
 	//Build System Evolution Matrix
 	this->AB_[0]   = A;
@@ -59,9 +59,9 @@ OdometryFilter::OdometryFilter(const ColumnVector& sys_noise_mu, const Symmetric
 	//Build H Matrix
 	Matrix H(12,3);
 	H = 0;
-	H(constants::RX_DOT_STATE(), constants::RX_DOT_MEASUREMENT()) = 1;
-	H(constants::RY_DOT_STATE(), constants::RY_DOT_MEASUREMENT()) = 1;
-	H(constants::RZ_DOT_STATE(), constants::RZ_DOT_MEASUREMENT()) = 1;
+	H(constants::ODOM_RX_DOT_STATE(), constants::RX_DOT_MEASUREMENT()) = 1;
+	H(constants::ODOM_RY_DOT_STATE(), constants::RY_DOT_MEASUREMENT()) = 1;
+	H(constants::ODOM_RZ_DOT_STATE(), constants::RZ_DOT_MEASUREMENT()) = 1;
 
 	//Build Measurement PDF/Model
 	Gaussian measurement_uncertainty(measurement_noise_mu, measurement_noise_cov);
@@ -83,7 +83,7 @@ OdometryFilter::~OdometryFilter()
 bool OdometryFilter::init(const ColumnVector& initial_state, const SymmetricMatrix& initial_covar)
 {
 	//Check to make sure sizes match up
-	if(initial_state.size() == constants::STATE_SIZE() && initial_covar.size1()==constants::STATE_SIZE())
+	if(initial_state.size() == constants::ODOM_STATE_SIZE() && initial_covar.size1()==constants::ODOM_STATE_SIZE())
 	{
 		this->prior_       = new Gaussian(initial_state, initial_covar);
 		this->filter_      = new ExtendedKalmanFilter(this->prior_);
@@ -92,7 +92,7 @@ bool OdometryFilter::init(const ColumnVector& initial_state, const SymmetricMatr
 	}
 	else
 	{
-		ROS_ERROR("Cannot Initialize IMU Filter with State/Covar size %d/%d, Expecting Size %d/%d", initial_state.size(), initial_covar.size1(), constants::STATE_SIZE(), constants::STATE_SIZE());
+		ROS_ERROR("Cannot Initialize IMU Filter with State/Covar size %d/%d, Expecting Size %d/%d", initial_state.size(), initial_covar.size1(), constants::ODOM_STATE_SIZE(), constants::ODOM_STATE_SIZE());
 		return false;
 	}
 }
