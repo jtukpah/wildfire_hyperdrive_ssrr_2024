@@ -34,4 +34,4 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #generate_dynamic_reconfigure_options(cfg/KVHDriver.cfg)
 
 #Build Nodes
-rosbuild_add_executable(kvh_driver_node src/nodes/kvh_driver_node.cpp src/helpers/imufilter.cpp)
+rosbuild_add_executable(kvh_driver_node src/nodes/kvh_driver_node.cpp src/helpers/imu_filter.cpp src/helpers/odometryfilter.cpp)
