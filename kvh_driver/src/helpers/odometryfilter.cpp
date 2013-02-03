@@ -10,12 +10,12 @@
  */
 //******************* SYSTEM DEPENDANCIES ****************//
 //******************* LOCAL DEPENDANCIES ****************//
-#include<kvh_driver/imufilter.hpp>
+#include<kvh_driver/odometryfilter.hpp>
 //*********************** NAMESPACES ********************//
 
 using namespace kvh_driver;
 
-IMUFilter::IMUFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov):
+OdometryFilter::OdometryFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov):
 								sys_model_(NULL),
 								sys_pdf_(NULL),
 								mes_model_(NULL),
@@ -69,7 +69,7 @@ IMUFilter::IMUFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sy
 	this->mes_model_ = new LinearAnalyticMeasurementModelGaussianUncertainty(this->mes_pdf_);
 }
 
-IMUFilter::~IMUFilter()
+OdometryFilter::~OdometryFilter()
 {
 	if(this->sys_model_!= NULL) delete this->sys_model_;
 	if(this->sys_pdf_  != NULL) delete this->sys_pdf_;
@@ -80,7 +80,7 @@ IMUFilter::~IMUFilter()
 	if(this->prior_    != NULL) delete this->prior_;
 }
 
-bool IMUFilter::init(const ColumnVector& initial_state, const SymmetricMatrix& initial_covar)
+bool OdometryFilter::init(const ColumnVector& initial_state, const SymmetricMatrix& initial_covar)
 {
 	//Check to make sure sizes match up
 	if(initial_state.size() == constants::STATE_SIZE() && initial_covar.size1()==constants::STATE_SIZE())
@@ -97,7 +97,7 @@ bool IMUFilter::init(const ColumnVector& initial_state, const SymmetricMatrix& i
 	}
 }
 
-bool IMUFilter::update(const ColumnVector& input, const ColumnVector& measurement)
+bool OdometryFilter::update(const ColumnVector& input, const ColumnVector& measurement)
 {
 	if(this->filter_init_)
 	{
@@ -121,7 +121,7 @@ bool IMUFilter::update(const ColumnVector& input, const ColumnVector& measuremen
 	}
 }
 
-bool IMUFilter::getEstimate(ColumnVector& state_estimate, SymmetricMatrix& covar) const
+bool OdometryFilter::getEstimate(ColumnVector& state_estimate, SymmetricMatrix& covar) const
 {
 	if(this->filter_init_)
 	{

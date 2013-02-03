@@ -87,7 +87,7 @@ using namespace BFL;
  *                           \dot{rz}\f}
  * \f]
  */
-class IMUFilter
+class OdometryFilter
 {
 public:
 	/**
@@ -98,8 +98,8 @@ public:
 	 * @param [in] measurement_noise_mu The expected measurement noise
 	 * @param [in] measurement_noise_cov The expected measurement covariance
 	 */
-	IMUFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov);
-	virtual ~IMUFilter();
+	OdometryFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov);
+	virtual ~OdometryFilter();
 
 	/**
 	 * @author Adam Panzica
