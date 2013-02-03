@@ -14,18 +14,26 @@
 //*********************** NAMESPACES ********************//
 using namespace kvh_driver;
 
-void testCallback(kvh_driver::KVHParamsConfig& config, unsigned int levels)
+/*
+void testCallback(kvh_driver::KVHDriverConfig& config, uint32_t levels)
 {
 	ROS_INFO_STREAM("Reconfigure Request: "<<config.device_address<<config.filter<<config.output_topic<<config.poll_rate<<config.update_frequency);
 }
+*/
+
 int main(int argc, char **argv) {
-	ros::init(argc, argv, "kvh_driver");
+	ros::init(argc, argv, "kvh_driver_node");
 	ros::NodeHandle nh;
-	dynamic_reconfigure::Server<kvh_driver::KVHParamsConfig> dr_server;
-	dynamic_reconfigure::Server<kvh_driver::KVHParamsConfig>::CallbackType cb;
+
+	/*
+	dynamic_reconfigure::Server<kvh_driver::KVHDriverConfig> dr_server;
+	dynamic_reconfigure::Server<kvh_driver::KVHDriverConfig>::CallbackType cb;
 	cb = boost::bind(&testCallback, _1, _2);
 	dr_server.setCallback(cb);
-	ROS_INFO("kvh_driver <%s> up and running", nh.getNamespace().c_str());
+	ROS_INFO("Dynamic Reconfigure Bindings Active");
+	*/
+
+	ROS_INFO("kvh_driver_node <%s> up and running", nh.getNamespace().c_str());
 	ros::spin();
 	return 1;
 }

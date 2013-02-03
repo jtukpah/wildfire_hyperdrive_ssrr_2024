@@ -16,8 +16,8 @@
 #include<ros/ros.h>
 #include<dynamic_reconfigure/server.h>
 //******************* LOCAL DEPENDANCIES ****************//
-#include<kvh_driver/KVHParamsConfig.h>
-#include<kvh_driver/imufilter.hpp>
+//#include<kvh_driver/KVHDriverConfig.h>
+//#include<kvh_driver/imufilter.hpp>
 //*********************** NAMESPACES ********************//
 namespace kvh_driver
 {

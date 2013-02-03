@@ -30,6 +30,8 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #target_link_libraries(example ${PROJECT_NAME})
 
 #add dynamic reconfigure api
-find_package(catkin REQUIRED dynamic_reconfigure)
-generate_dynamic_reconfigure_options(cfg/kvh_driver.cfg)
-rosbuild_add_executable(kvh_driver_node src/nodes/kvh_driver_node.cpp)
+#find_package(catkin REQUIRED dynamic_reconfigure)
+#generate_dynamic_reconfigure_options(cfg/KVHDriver.cfg)
+
+#Build Nodes
+rosbuild_add_executable(kvh_driver_node src/nodes/kvh_driver_node.cpp src/helpers/imufilter.cpp)
