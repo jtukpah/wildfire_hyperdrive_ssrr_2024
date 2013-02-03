@@ -1,5 +1,5 @@
 /**
- * @file	imufilter.hpp
+ * @file	odometryfilter.hpp
  * @date	Feb 2, 2013
  * @author	Adam Panzica
  * @brief	EKF filter definitions for filtering KVH IMU data

@@ -1,5 +1,5 @@
 /**
- * @file	imufilter.cpp
+ * @file	odometryfilter.cpp
  * @date	Feb 2, 2013
  * @author	Adam Panzica
  * @brief	Implementaiton of the IMUFilter class
