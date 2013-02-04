@@ -16,18 +16,15 @@
 using namespace kvh_driver;
 
 OdometryFilter::OdometryFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov):
-								sys_model_(NULL),
-								sys_pdf_(NULL),
-								mes_model_(NULL),
-								mes_pdf_(NULL),
-								AB_(2),
-								H_(NULL),
-								filter_init_(false),
-								filter_(NULL),
-								prior_(NULL)
+		LinearFilter(constants::ODOM_STATE_SIZE(), constants::INPUT_SIZE(), constants::MEASUREMENT_SIZE(), sys_noise_mu, sys_noise_cov, measurement_noise_mu, measurement_noise_cov)
+{
+
+}
+
+void OdometryFilter::buildAB()
 {
 	//Build System Matrix
-	Matrix A(12,12);
+	Matrix A(constants::ODOM_STATE_SIZE(),constants::ODOM_STATE_SIZE());
 	A = 0;
 	for (int r = 0; r < constants::ODOM_STATE_SIZE(); ++r)
 	{
@@ -50,93 +47,16 @@ OdometryFilter::OdometryFilter(const ColumnVector& sys_noise_mu, const Symmetric
 	//Build System Evolution Matrix
 	this->AB_[0]   = A;
 	this->AB_[1]   = B;
+}
 
-	//Build System PDF/Model
-	Gaussian system_uncertainty(sys_noise_mu, sys_noise_cov);
-	this->sys_pdf_   = new LinearAnalyticConditionalGaussian(this->AB_, system_uncertainty);
-	this->sys_model_ = new LinearAnalyticSystemModelGaussianUncertainty(this->sys_pdf_);
+void OdometryFilter::buildH()
+{
 
 	//Build H Matrix
-	Matrix H(12,3);
-	H = 0;
-	H(constants::ODOM_RX_DOT_STATE(), constants::RX_DOT_MEASUREMENT()) = 1;
-	H(constants::ODOM_RY_DOT_STATE(), constants::RY_DOT_MEASUREMENT()) = 1;
-	H(constants::ODOM_RZ_DOT_STATE(), constants::RZ_DOT_MEASUREMENT()) = 1;
+	this->H_ = new Matrix(constants::ODOM_STATE_SIZE(),constants::MEASUREMENT_SIZE());
+	*this->H_ = 0;
+	(*this->H_)(constants::ODOM_RX_DOT_STATE(), constants::RX_DOT_MEASUREMENT()) = 1;
+	(*this->H_)(constants::ODOM_RY_DOT_STATE(), constants::RY_DOT_MEASUREMENT()) = 1;
+	(*this->H_)(constants::ODOM_RZ_DOT_STATE(), constants::RZ_DOT_MEASUREMENT()) = 1;
 
-	//Build Measurement PDF/Model
-	Gaussian measurement_uncertainty(measurement_noise_mu, measurement_noise_cov);
-	this->mes_pdf_   = new LinearAnalyticConditionalGaussian(H, measurement_uncertainty);
-	this->mes_model_ = new LinearAnalyticMeasurementModelGaussianUncertainty(this->mes_pdf_);
-}
-
-OdometryFilter::~OdometryFilter()
-{
-	if(this->sys_model_!= NULL) delete this->sys_model_;
-	if(this->sys_pdf_  != NULL) delete this->sys_pdf_;
-	if(this->mes_model_!= NULL) delete this->mes_model_;
-	if(this->mes_pdf_  != NULL) delete this->mes_pdf_;
-	if(this->H_        != NULL) delete this->H_;
-	if(this->filter_   != NULL) delete this->filter_;
-	if(this->prior_    != NULL) delete this->prior_;
-}
-
-bool OdometryFilter::init(const ColumnVector& initial_state, const SymmetricMatrix& initial_covar)
-{
-	//Check to make sure sizes match up
-	if(initial_state.size() == constants::ODOM_STATE_SIZE() && initial_covar.size1()==constants::ODOM_STATE_SIZE())
-	{
-		this->prior_       = new Gaussian(initial_state, initial_covar);
-		this->filter_      = new ExtendedKalmanFilter(this->prior_);
-		this->filter_init_ = true;
-		return true;
-	}
-	else
-	{
-		ROS_ERROR("Cannot Initialize IMU Filter with State/Covar size %d/%d, Expecting Size %d/%d", initial_state.size(), initial_covar.size1(), constants::ODOM_STATE_SIZE(), constants::ODOM_STATE_SIZE());
-		return false;
-	}
-}
-
-bool OdometryFilter::update(const ColumnVector& input, const ColumnVector& measurement)
-{
-	if(this->filter_init_)
-	{
-		//Check to make sure sizes match up
-		if(input.size() == constants::INPUT_SIZE() && measurement.size()==constants::MEASUREMENT_SIZE())
-		{
-			this->filter_->Update(this->sys_model_, input, this->mes_model_, measurement);
-			this->prior_ = this->filter_->PostGet();
-			return true;
-		}
-		else
-		{
-			ROS_ERROR("Cannot update IMU filter with input size %d and measurement size %d, expecting %d, %d", input.size(), measurement.size(), constants::INPUT_SIZE(), constants::MEASUREMENT_SIZE());
-			return false;
-		}
-	}
-	else
-	{
-		ROS_ERROR("Cannot perform IMU Filter update on uninitialized filter!!");
-		return false;
-	}
-}
-
-bool OdometryFilter::getEstimate(ColumnVector& state_estimate, SymmetricMatrix& covar) const
-{
-	if(this->filter_init_)
-	{
-		state_estimate = this->prior_->ExpectedValueGet();
-		covar          = this->prior_->CovarianceGet();
-		return true;
-	}
-	else
-	{
-		ROS_ERROR("Cannot get estimate on uninitialized filter!!");
-		return false;
-	}
-}
-
-bool OdometryFilter::isInitialized()
-{
-	return this->filter_init_;
 }
