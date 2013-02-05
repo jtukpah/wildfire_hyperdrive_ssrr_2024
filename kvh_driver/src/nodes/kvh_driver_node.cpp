@@ -44,7 +44,7 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 	measurement_sigma_noise = 0;
 	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
 	{
-		system_sigma_noise(r,r) = 0,1;
+		system_sigma_noise(r,r) = 0.1;
 	}
 
 	ROS_INFO("IMU Filter noise matrices built...");
@@ -91,7 +91,7 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 	//TODO alternate what happens based on if IMU, Odom or both/none are being filtered
 	if(this->imu_filter_->isInitialized())
 	{
-		ColumnVector input(constants::IMU_STATE_SIZE());
+		ColumnVector input(0);
 		input       = 0;
 		ColumnVector measurement(constants::IMU_STATE_SIZE());
 		measurement = 0;

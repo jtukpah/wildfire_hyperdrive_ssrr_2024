@@ -32,6 +32,8 @@ LinearFilter::LinearFilter(int state_size, int input_size, int measurment_size, 
 	this->AB_[0]   = A;
 	this->AB_[1]   = B;
 
+	ROS_INFO_STREAM("Got System Matrix:\n"<<A<<"\n And Input Matrix:\n"<<B<<"\n And Measurement Matrix:\n"<<H);
+
 
 	//Build System PDF/Model
 	Gaussian system_uncertainty(sys_noise_mu, sys_noise_cov);
@@ -62,6 +64,7 @@ bool LinearFilter::init(const ColumnVector& initial_state, const SymmetricMatrix
 		this->prior_       = new Gaussian(initial_state, initial_covar);
 		this->filter_      = new ExtendedKalmanFilter(this->prior_);
 		this->filter_init_ = true;
+		ROS_INFO_STREAM("Filter Initialized with initial estimate:\n"<<this->prior_->ExpectedValueGet());
 		return true;
 	}
 	else
@@ -82,18 +85,22 @@ bool LinearFilter::update(const ColumnVector& input, const ColumnVector& measure
 			//Perform filter update based on the type of input/measurement available
 			if(this->input_size_!=0 && this->measurement_size_!=0)
 			{
+				ROS_INFO("I'm Performing a Full Filter Update (u+z)");
 				this->filter_->Update(this->sys_model_, input, this->mes_model_, measurement);
 			}
 			else if(this->input_size_==0&&this->measurement_size_!=0)
 			{
+				ROS_INFO("I'm Performing a Partial Filter Update (z)");
 				this->filter_->Update(this->sys_model_, this->mes_model_, measurement);
 			}
 			else if(this->input_size_!=0 && this->measurement_size_==0)
 			{
+				ROS_INFO("I'm Performing a Partial Filter Update (z)");
 				this->filter_->Update(this->sys_model_, input);
 			}
 			else if(this->input_size_==0 && this->measurement_size_ ==0)
 			{
+				ROS_INFO("I'm Performing a Partial Filter Update (none)");
 				this->filter_->Update(this->sys_model_);
 			}
 			ROS_INFO("Getting New Prior...");
