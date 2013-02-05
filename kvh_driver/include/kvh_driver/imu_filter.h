@@ -36,15 +36,13 @@ public:
 	 */
 	IMUFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov);
 	virtual ~IMUFilter();
-protected:
 
-	/**
-	 * @author Adam Panzica
-	 * @brief Builds the AB system evolution vector
-	 */
-	virtual void buildAB();
+private:
 
-	virtual void buildH();
+	const Matrix buildA();
+	const Matrix buildB();
+	const Matrix buildH();
+
 };
 
 }; /* END KVH_DRIVER */

@@ -17,38 +17,47 @@
 using namespace kvh_driver;
 
 IMUFilter::IMUFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov):
-		LinearFilter(constants::IMU_STATE_SIZE(), 0, constants::IMU_STATE_SIZE(), sys_noise_mu, sys_noise_cov, measurement_noise_mu, measurement_noise_cov)
+				LinearFilter(constants::IMU_STATE_SIZE(), 0, constants::IMU_STATE_SIZE(), sys_noise_mu, sys_noise_cov, buildA(), buildB(), measurement_noise_mu, measurement_noise_cov, buildH())
 {
 
 }
 
-void IMUFilter::buildAB()
+IMUFilter::~IMUFilter()
+{
+
+}
+
+const Matrix IMUFilter::buildA()
 {
 	//Build System Matrix
-		Matrix A(constants::IMU_STATE_SIZE(),constants::IMU_STATE_SIZE());
-		A = 0;
-		for (int r = 0; r < constants::ODOM_STATE_SIZE(); ++r)
-		{
-			A(r,r) = 1;
-		}
+	Matrix A(constants::IMU_STATE_SIZE(),constants::IMU_STATE_SIZE());
+	A = 0;
+	for (int r = 0; r < constants::ODOM_STATE_SIZE(); ++r)
+	{
+		A(r,r) = 1;
+	}
 
-		//Build Input Matrix
-		Matrix B(constants::IMU_STATE_SIZE(),1);
-		B = 0;
-
-		//Build System Evolution Matrix
-		this->AB_[0]   = A;
-		this->AB_[1]   = B;
+	return A;
 }
 
-void IMUFilter::buildH()
+const Matrix IMUFilter::buildB()
+{
+	//Build Input Matrix
+	Matrix B(constants::IMU_STATE_SIZE(),1);
+	B = 0;
+
+	return B;
+}
+
+const Matrix IMUFilter::buildH()
 {
 	//Build H Matrix
-	this->H_  = new Matrix(constants::IMU_STATE_SIZE(),constants::IMU_STATE_SIZE());
-	*this->H_ = 0;
+	Matrix H(constants::IMU_STATE_SIZE(),constants::IMU_STATE_SIZE());
+	H = 0;
 	for (int r = 0; r < constants::IMU_STATE_SIZE(); ++r)
 	{
-		(*this->H_)(r,r) = 1;
+		H(r,r) = 1;
 	}
+	return H;
 }
 

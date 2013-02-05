@@ -15,22 +15,22 @@
 
 using namespace kvh_driver;
 
-LinearFilter::LinearFilter(int state_size, int input_size, int measurement_size, const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov):
-								sys_model_(NULL),
-								sys_pdf_(NULL),
-								mes_model_(NULL),
-								mes_pdf_(NULL),
-								AB_(2),
-								H_(NULL),
-								filter_init_(false),
-								filter_(NULL),
-								prior_(NULL),
-								state_size_(state_size),
-								input_size_(input_size),
-								measurement_size_(measurement_size)
+LinearFilter::LinearFilter(int state_size, int input_size, int measurment_size, const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const Matrix& A, const Matrix& B, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov, const Matrix& H):
+														state_size_(state_size),
+														input_size_(input_size),
+														measurement_size_(measurment_size),
+														AB_(2),
+														sys_pdf_(NULL),
+														sys_model_(NULL),
+														mes_pdf_(NULL),
+														mes_model_(NULL),
+														filter_init_(false),
+														filter_(NULL),
+														prior_(NULL)
 {
 	//Build System Evolution Vector
-	this->buildAB();
+	this->AB_[0]   = A;
+	this->AB_[1]   = B;
 
 
 	//Build System PDF/Model
@@ -38,12 +38,9 @@ LinearFilter::LinearFilter(int state_size, int input_size, int measurement_size,
 	this->sys_pdf_   = new LinearAnalyticConditionalGaussian(this->AB_, system_uncertainty);
 	this->sys_model_ = new LinearAnalyticSystemModelGaussianUncertainty(this->sys_pdf_);
 
-	//Build Measurement Transform
-	this->buildH();
-
 	//Build Measurement PDF/Model
 	Gaussian measurement_uncertainty(measurement_noise_mu, measurement_noise_cov);
-	this->mes_pdf_   = new LinearAnalyticConditionalGaussian(*this->H_, measurement_uncertainty);
+	this->mes_pdf_   = new LinearAnalyticConditionalGaussian(H, measurement_uncertainty);
 	this->mes_model_ = new LinearAnalyticMeasurementModelGaussianUncertainty(this->mes_pdf_);
 }
 
@@ -53,7 +50,6 @@ LinearFilter::~LinearFilter()
 	if(this->sys_pdf_  != NULL) delete this->sys_pdf_;
 	if(this->mes_model_!= NULL) delete this->mes_model_;
 	if(this->mes_pdf_  != NULL) delete this->mes_pdf_;
-	if(this->H_        != NULL) delete this->H_;
 	if(this->filter_   != NULL) delete this->filter_;
 	if(this->prior_    != NULL) delete this->prior_;
 }
@@ -117,36 +113,5 @@ bool LinearFilter::getEstimate(ColumnVector& state_estimate, SymmetricMatrix& co
 bool LinearFilter::isInitialized()
 {
 	return this->filter_init_;
-}
-
-void LinearFilter::buildAB()
-{
-	//Build System Matrix
-	Matrix A(this->state_size_,this->state_size_);
-	A = 0;
-	for (int r = 0; r < this->state_size_; ++r)
-	{
-		A(r,r) = 1;
-	}
-
-	//Build Input Matrix
-	Matrix B(this->state_size_,1);
-	B = 0;
-
-	//Build System Evolution Matrix
-	this->AB_[0]   = A;
-	this->AB_[1]   = B;
-}
-
-void LinearFilter::buildH()
-{
-	//Build H Matrix
-	this->H_ = new Matrix(this->state_size_,this->measurement_size_);
-	*this->H_ = 0;
-	for (int r = 0; r < constants::ODOM_STATE_SIZE(); ++r)
-	{
-		(*this->H_)(r,r) = 1;
-	}
-
 }
 

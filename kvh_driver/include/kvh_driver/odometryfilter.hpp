@@ -96,10 +96,12 @@ public:
 	OdometryFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov);
 	virtual ~OdometryFilter();
 
-protected:
-	virtual void buildAB();
+private:
+	const Matrix buildA();
 
-	virtual void buildH();
+	const Matrix buildB();
+
+	const Matrix buildH();
 };
 
 } /*END NAMESPACE KVH_DRIVER */

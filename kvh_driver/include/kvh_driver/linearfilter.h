@@ -44,7 +44,7 @@ public:
 	 * @param [in] measurement_noise_mu The expected measurement noise
 	 * @param [in] measurement_noise_cov The expected measurement covariance
 	 */
-	LinearFilter(int state_size, int input_size, int measurment_size, const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov);
+	LinearFilter(int state_size, int input_size, int measurment_size, const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const Matrix& A, const Matrix& B, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov, const Matrix& H);
 	virtual ~LinearFilter();
 
 	/**
@@ -92,22 +92,6 @@ public:
 protected:
 
 	/**
-	 * @author Adam Panzica
-	 * @brief Builds the AB system evolution vector
-	 *
-	 * Should be overridden in sub-classes to properly define the A and B system matricies
-	 */
-	virtual void buildAB();
-
-	/**
-	 * @author Adam Panzica
-	 * @brief Builds the H transform matrix
-	 *
-	 * Should be overridden in sub-classes to properly define the H transform
-	 */
-	virtual void buildH();
-
-	/**
 	 * Number of states in the filter
 	 */
 	int state_size_;
@@ -125,10 +109,6 @@ protected:
 	 * The combined system evolution dynamics
 	 */
 	std::vector<Matrix>                                AB_;
-	/**
-	 * The measurement transform Matrix
-	 */
-	Matrix*										       H_;
 	/**
 	 * The system Gaussian PDF
 	 */
