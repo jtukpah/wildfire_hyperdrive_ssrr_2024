@@ -16,7 +16,7 @@
 using namespace kvh_driver;
 
 OdometryFilter::OdometryFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov):
-		LinearFilter(constants::IMU_STATE_SIZE(), 0, constants::IMU_STATE_SIZE(), sys_noise_mu, sys_noise_cov, buildA(), buildB(), measurement_noise_mu, measurement_noise_cov, buildH())
+		LinearFilter(constants::ODOM_STATE_SIZE(), constants::INPUT_SIZE(), constants::MEASUREMENT_SIZE(), sys_noise_mu, sys_noise_cov, buildA(), buildB(), measurement_noise_mu, measurement_noise_cov, buildH())
 {
 
 }
@@ -31,7 +31,7 @@ const Matrix OdometryFilter::buildA()
 	//Build System Matrix
 	Matrix A(constants::ODOM_STATE_SIZE(),constants::ODOM_STATE_SIZE());
 	A = 0;
-	for (int r = 0; r < constants::ODOM_STATE_SIZE(); ++r)
+	for (int r = 1; r <= constants::ODOM_STATE_SIZE(); ++r)
 	{
 		A(r,r) = 1;
 	}

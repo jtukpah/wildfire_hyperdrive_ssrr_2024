@@ -27,13 +27,13 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 				nh_(nh)
 {
 	//Build the filters
-	ROS_DEBUG("Building Filters....");
+	ROS_INFO("Building Filters....");
 	//TODO actually get the system/measurement noise/covar from nh_
 	ColumnVector system_noise(constants::IMU_STATE_SIZE());
 	system_noise   = 0;
 	SymmetricMatrix system_sigma_noise(constants::IMU_STATE_SIZE());
 	system_sigma_noise = 0;
-	for (int r = 0; r < constants::IMU_STATE_SIZE(); ++r)
+	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
 	{
 		system_sigma_noise(r,r) = 100;
 	}
@@ -42,10 +42,12 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 	measurement_noise   = 0;
 	SymmetricMatrix measurement_sigma_noise(constants::IMU_STATE_SIZE());
 	measurement_sigma_noise = 0;
-	for (int r = 0; r < constants::IMU_STATE_SIZE(); ++r)
+	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
 	{
 		system_sigma_noise(r,r) = 0,1;
 	}
+
+	ROS_INFO("IMU Filter noise matrices built...");
 
 	this->imu_filter_ = new IMUFilter(system_noise, system_sigma_noise, measurement_noise, measurement_sigma_noise);
 
@@ -54,7 +56,7 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 	initial_state_estimate   = 0;
 	SymmetricMatrix initial_state_covariance(constants::IMU_STATE_SIZE());
 	initial_state_covariance = 0;
-	for (int r = 0; r < constants::IMU_STATE_SIZE(); ++r)
+	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
 	{
 		initial_state_covariance(r,r) = 1;
 	}
@@ -64,13 +66,13 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 	//TODO Build the odo_filter if that is requested
 
 
-	ROS_DEBUG("Setting up Publishers....");
+	ROS_INFO("Setting up Publishers....");
 	//Set up the publisher
 	//TODO actually get the output topic from nh_
 	std::string imu_topic("kvh/imu");
 	this->imu_pub_ = this->nh_.advertise<sensor_msgs::Imu>(imu_topic, 2);
 
-	ROS_DEBUG("Registering Update Timer....");
+	ROS_INFO("Registering Update Timer....");
 	//Set up the update timer
 	this->update_frequency_ = ros::Duration(1.0/100.0); //TODO actually get this parameter from nh_
 	this->update_timer_ = this->nh_.createTimer(this->update_frequency_, &KVHDriverNode::update, this);
@@ -85,7 +87,7 @@ KVHDriverNode::~KVHDriverNode()
 
 void KVHDriverNode::update(const ros::TimerEvent& event)
 {
-	ROS_DEBUG("I'm Performing a Update!");
+	ROS_INFO("I'm Performing a Update!");
 	//TODO alternate what happens based on if IMU, Odom or both/none are being filtered
 	if(this->imu_filter_->isInitialized())
 	{
@@ -159,6 +161,8 @@ int main(int argc, char **argv) {
 	dr_server.setCallback(cb);
 	ROS_INFO("Dynamic Reconfigure Bindings Active");
 	 */
+
+	ROS_INFO("Setting up the driver...");
 
 	KVHDriverNode node(nh);
 
