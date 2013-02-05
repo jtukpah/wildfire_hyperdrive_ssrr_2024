@@ -16,17 +16,17 @@
 using namespace kvh_driver;
 
 LinearFilter::LinearFilter(int state_size, int input_size, int measurment_size, const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const Matrix& A, const Matrix& B, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov, const Matrix& H):
-														state_size_(state_size),
-														input_size_(input_size),
-														measurement_size_(measurment_size),
-														AB_(2),
-														sys_pdf_(NULL),
-														sys_model_(NULL),
-														mes_pdf_(NULL),
-														mes_model_(NULL),
-														filter_init_(false),
-														filter_(NULL),
-														prior_(NULL)
+																state_size_(state_size),
+																input_size_(input_size),
+																measurement_size_(measurment_size),
+																AB_(2),
+																sys_pdf_(NULL),
+																sys_model_(NULL),
+																mes_pdf_(NULL),
+																mes_model_(NULL),
+																filter_init_(false),
+																filter_(NULL),
+																prior_(NULL)
 {
 	//Build System Evolution Vector
 	this->AB_[0]   = A;
@@ -78,13 +78,31 @@ bool LinearFilter::update(const ColumnVector& input, const ColumnVector& measure
 		//Check to make sure sizes match up
 		if(input.size() == this->input_size_ && measurement.size()==this->measurement_size_)
 		{
-			this->filter_->Update(this->sys_model_, input, this->mes_model_, measurement);
+			ROS_INFO("Performing Filter Update with input size %d,%d measurement size %d,%d...", input.size(), this->input_size_, measurement.size(), this->measurement_size_);;
+			//Perform filter update based on the type of input/measurement available
+			if(this->input_size_!=0 && this->measurement_size_!=0)
+			{
+				this->filter_->Update(this->sys_model_, input, this->mes_model_, measurement);
+			}
+			else if(this->input_size_==0&&this->measurement_size_!=0)
+			{
+				this->filter_->Update(this->sys_model_, this->mes_model_, measurement);
+			}
+			else if(this->input_size_!=0 && this->measurement_size_==0)
+			{
+				this->filter_->Update(this->sys_model_, input);
+			}
+			else if(this->input_size_==0 && this->measurement_size_ ==0)
+			{
+				this->filter_->Update(this->sys_model_);
+			}
+			ROS_INFO("Getting New Prior...");
 			this->prior_ = this->filter_->PostGet();
 			return true;
 		}
 		else
 		{
-			ROS_ERROR("Cannot update filter with input size %d and measurement size %d, expecting %d, %d", input.size(), measurement.size(), constants::INPUT_SIZE(), constants::MEASUREMENT_SIZE());
+			ROS_ERROR("Cannot update filter with input size %d and measurement size %d, expecting %d, %d", input.size(), measurement.size(), this->input_size_, this->measurement_size_);
 			return false;
 		}
 	}
