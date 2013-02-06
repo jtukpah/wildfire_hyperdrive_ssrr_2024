@@ -32,6 +32,9 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #add dynamic reconfigure api
 #find_package(catkin REQUIRED dynamic_reconfigure)
 #generate_dynamic_reconfigure_options(cfg/KVHDriver.cfg)
+rosbuild_find_ros_package(dynamic_reconfigure)
+include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
+gencfg()
 
 #Build Nodes
 rosbuild_add_executable(kvh_driver_node src/nodes/kvh_driver_node.cpp src/helpers/linearfilter.cpp src/helpers/imu_filter.cpp src/helpers/odometryfilter.cpp)
