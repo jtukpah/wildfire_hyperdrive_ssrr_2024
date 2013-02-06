@@ -38,3 +38,4 @@ gencfg()
 
 #Build Nodes
 rosbuild_add_executable(kvh_driver_node src/nodes/kvh_driver_node.cpp src/helpers/linearfilter.cpp src/helpers/imu_filter.cpp src/helpers/odometryfilter.cpp)
+rosbuild_add_executable(kvh_test_node src/nodes/kvh_test_node.cpp)
