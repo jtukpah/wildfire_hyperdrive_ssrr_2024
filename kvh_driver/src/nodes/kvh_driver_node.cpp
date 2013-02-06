@@ -26,6 +26,12 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 				odo_filter_(NULL),
 				nh_(nh)
 {
+
+	//Register the Dynamic Reconfigure Server
+	dynamic_reconfigure::Server<KVHDriverConfig>::CallbackType cb;
+	cb = boost::bind(&KVHDriverNode::dynamic_reconfigureCB, this, _1, _2);
+	this->dr_server_.setCallback(cb);
+
 	//Build the filters
 	ROS_INFO("Building Filters....");
 	//TODO actually get the system/measurement noise/covar from nh_
@@ -148,6 +154,16 @@ bool KVHDriverNode::stateToImu(const ColumnVector& state, const SymmetricMatrix&
 int KVHDriverNode::covarIndexCalc(int r, int c)
 {
 	return 1;
+}
+
+void KVHDriverNode::dynamic_reconfigureCB(const KVHDriverConfig& config)
+{
+	ROS_INFO_STREAM("\nGot a Dynamic Reconfigure Request:"
+			      <<"\nDevice Address: "<<config.device_address
+			      <<"\nFilter: "        <<config.filter
+			      <<"\nOutput Topic:"   <<config.output_topic
+			      <<"\nPoll Rate"       <<config.poll_rate
+			      <<"\nUpdate Frequency"<<config.update_frequency);
 }
 
 int main(int argc, char **argv) {

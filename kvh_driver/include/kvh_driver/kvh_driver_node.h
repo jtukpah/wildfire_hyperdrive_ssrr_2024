@@ -16,8 +16,7 @@
 #include<ros/ros.h>
 #include<dynamic_reconfigure/server.h>
 //******************* LOCAL DEPENDANCIES ****************//
-//#include<kvh_driver/KVHDriverConfig.h>
-//#include<kvh_driver/imufilter.hpp>
+#include<kvh_driver/KVHDriverConfig.h>
 #include<kvh_driver/imu_filter.h>
 #include<kvh_driver/odometryfilter.hpp>
 //*********************** NAMESPACES ********************//
@@ -38,6 +37,8 @@ private:
 
 	int covarIndexCalc(int r, int c);
 
+	void dynamic_reconfigureCB(const KVHDriverConfig& config);
+
 	IMUFilter*       imu_filter_;
 	OdometryFilter*  odo_filter_;
 	ros::NodeHandle  nh_;
@@ -46,6 +47,8 @@ private:
 
 	ros::Duration    update_frequency_;
 	ros::Timer       update_timer_;
+
+	dynamic_reconfigure::Server<KVHDriverConfig> dr_server_;
 };
 
 } /* END KVH_DRIVER */
