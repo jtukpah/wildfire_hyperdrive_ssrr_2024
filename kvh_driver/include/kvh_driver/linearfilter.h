@@ -105,6 +105,7 @@ protected:
 	 * Number of measurements in the filter
 	 */
 	int measurement_size_;
+
 	/**
 	 * The combined system evolution dynamics
 	 */

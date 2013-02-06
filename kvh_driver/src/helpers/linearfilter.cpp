@@ -16,21 +16,27 @@
 using namespace kvh_driver;
 
 LinearFilter::LinearFilter(int state_size, int input_size, int measurment_size, const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const Matrix& A, const Matrix& B, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov, const Matrix& H):
-																state_size_(state_size),
-																input_size_(input_size),
-																measurement_size_(measurment_size),
-																AB_(2),
-																sys_pdf_(NULL),
-																sys_model_(NULL),
-																mes_pdf_(NULL),
-																mes_model_(NULL),
-																filter_init_(false),
-																filter_(NULL),
-																prior_(NULL)
+																		state_size_(state_size),
+																		input_size_(input_size),
+																		measurement_size_(measurment_size),
+																		AB_(((state_size>0)?(1):(0))+((input_size>0)?(1):(0))),
+																		sys_pdf_(NULL),
+																		sys_model_(NULL),
+																		mes_pdf_(NULL),
+																		mes_model_(NULL),
+																		filter_init_(false),
+																		filter_(NULL),
+																		prior_(NULL)
 {
 	//Build System Evolution Vector
-	this->AB_[0]   = A;
-	this->AB_[1]   = B;
+	if(this->state_size_!=0)
+	{
+		this->AB_[0]   = A;
+	}
+	if(this->input_size_!=0)
+	{
+		this->AB_[1]   = B;
+	}
 
 	ROS_INFO_STREAM("Got System Matrix:\n"<<A<<"\n And Input Matrix:\n"<<B<<"\n And Measurement Matrix:\n"<<H);
 

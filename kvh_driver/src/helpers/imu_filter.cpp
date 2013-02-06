@@ -43,7 +43,7 @@ const Matrix IMUFilter::buildA()
 const Matrix IMUFilter::buildB()
 {
 	//Build Input Matrix
-	Matrix B(constants::IMU_STATE_SIZE(),1);
+	Matrix B(0,0);
 	B = 0;
 
 	return B;
