@@ -74,6 +74,16 @@ public:
 
 	/**
 	 * @author Adam Panzica
+	 * @brief Updates the filter based purely on the system model
+	 * @return True if the filter successfully is updated
+	 *
+	 * This is intended to be used if the sensor missed an update cycle before time ran out. It moves the filter along based
+	 * purely on the system model
+	 */
+	bool update();
+
+	/**
+	 * @author Adam Panzica
 	 * @brief Gets the latest state estimate from the filter
 	 * @param [out] estimate Vector to write the state estimate to
 	 * @param [out] covar Matrix to write the state estimate covariance to

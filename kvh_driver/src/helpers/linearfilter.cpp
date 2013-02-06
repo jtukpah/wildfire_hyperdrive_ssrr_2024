@@ -126,6 +126,21 @@ bool LinearFilter::update(const ColumnVector& input, const ColumnVector& measure
 	}
 }
 
+bool LinearFilter::update()
+{
+	if(this->isInitialized())
+	{
+		this->filter_->Update(this->sys_model_);
+		this->prior_ = this->filter_->PostGet();
+		return true;
+	}
+	else
+	{
+		ROS_ERROR("Cannot perform Filter update on uninitialized filter!!");
+		return false;
+	}
+}
+
 bool LinearFilter::getEstimate(ColumnVector& state_estimate, SymmetricMatrix& covar) const
 {
 	if(this->filter_init_)
