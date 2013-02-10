@@ -82,7 +82,7 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 	//Set up the update timer
 	this->update_frequency_ = ros::Duration(1.0/100.0); //TODO actually get this parameter from nh_
 	this->update_timer_ = this->nh_.createTimer(this->update_frequency_, &KVHDriverNode::update, this);
-
+	
 }
 
 KVHDriverNode::~KVHDriverNode()
@@ -232,7 +232,7 @@ int main(int argc, char **argv) {
 	KVHDriverNode node(nh);
 
 	ROS_INFO("kvh_driver_node <%s> up and running", nh.getNamespace().c_str());
-	ros::spin();
+	//ros::spin();
 	return 1;
 }
 

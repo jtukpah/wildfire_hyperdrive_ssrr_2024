@@ -17,6 +17,7 @@
 #include<dynamic_reconfigure/server.h>
 //******************* LOCAL DEPENDANCIES ****************//
 #include<kvh_driver/KVHDriverConfig.h>
+#include<kvh_driver/configurations.h>
 #include<kvh_driver/imu_filter.h>
 #include<kvh_driver/odometryfilter.hpp>
 //*********************** NAMESPACES ********************//
@@ -55,6 +56,8 @@ private:
 	ros::Timer       update_timer_;
 
 	dynamic_reconfigure::Server<KVHDriverConfig> dr_server_;
+
+	ConfigurationManager configurationManager;
 };
 
 } /* END KVH_DRIVER */

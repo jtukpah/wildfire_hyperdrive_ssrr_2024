@@ -1,0 +1,34 @@
+<devices>
+  <DeviceA>
+    <configuration>
+      <serial>
+	<baud_rate>115200</baud_rate>
+	<parity>none</parity>
+	<data_bits>8</data_bits>
+	<stop_bits>1</stop_bits>
+	<flow_control>none</flow_control>
+      </serial>
+    </configuration>
+    <calibration>
+      <sensor_noise>
+	<x>10</x>
+      </sensor_noise>
+    </calibration>
+  </DeviceA>
+  <DeviceB>
+    <configuration>
+      <serial>
+	<baud_rate>9600</baud_rate>
+	<parity>odd</parity>
+	<data_bits>7</data_bits>
+	<stop_bits>1</stop_bits>
+	<flow_control>enabled</flow_control>
+      </serial>
+    </configuration>
+    <calibration>
+      <sensor_noise>
+	<x>11</x>
+      </sensor_noise>
+    </calibration>
+  </DeviceB>
+</devices>
