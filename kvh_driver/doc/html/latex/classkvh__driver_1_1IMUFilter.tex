@@ -4,48 +4,38 @@
 
 {\ttfamily \#include $<$imu\-\_\-filter.\-h$>$}
 
+
+
+\-Inheritance diagram for kvh\-\_\-driver\-:\-:\-I\-M\-U\-Filter\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{classkvh__driver_1_1IMUFilter__inherit__graph}
+\end{center}
+\end{figure}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool {\bf get\-Estimate} (\-Column\-Vector \&estimate, \-Symmetric\-Matrix \&covar) const 
-\begin{DoxyCompactList}\small\item\em \-Gets the latest state estimate from the filter. \end{DoxyCompactList}\item 
 {\bf \-I\-M\-U\-Filter} (const \-Column\-Vector \&sys\-\_\-noise\-\_\-mu, const \-Symmetric\-Matrix \&sys\-\_\-noise\-\_\-cov, const \-Column\-Vector \&measurement\-\_\-noise\-\_\-mu, const \-Symmetric\-Matrix \&measurement\-\_\-noise\-\_\-cov)
 \begin{DoxyCompactList}\small\item\em \-Constructs a new \-I\-M\-U filter given an expected system noise and covariance and measurement noise and covariance. \end{DoxyCompactList}\item 
-bool {\bf init} (const \-Column\-Vector \&initial\-\_\-state, const \-Symmetric\-Matrix \&initial\-\_\-covar)
-\begin{DoxyCompactList}\small\item\em \-Initializes the filter to an initial state estimate and covariance. \end{DoxyCompactList}\item 
-bool {\bf is\-Initialized} ()
-\item 
-bool {\bf update} (const \-Column\-Vector \&input, const \-Column\-Vector \&measurement)
-\begin{DoxyCompactList}\small\item\em \-Updates the filter given new system input and measurement. \end{DoxyCompactList}\item 
 virtual {\bf $\sim$\-I\-M\-U\-Filter} ()
 \end{DoxyCompactItemize}
-\subsection*{\-Private \-Attributes}
+\subsection*{\-Private \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\-::vector$<$ \-Matrix $>$ {\bf \-A\-B\-\_\-}
+const \-Matrix {\bf build\-A} ()
 \item 
-\-Extended\-Kalman\-Filter $\ast$ {\bf filter\-\_\-}
+const \-Matrix {\bf build\-B} ()
 \item 
-bool {\bf filter\-\_\-init\-\_\-}
-\item 
-\-Matrix $\ast$ {\bf \-H\-\_\-}
-\item 
-\-Linear\-Analytic\-Measurement\-Model\-Gaussian\-Uncertainty $\ast$ {\bf mes\-\_\-model\-\_\-}
-\item 
-\-Linear\-Analytic\-Conditional\-Gaussian $\ast$ {\bf mes\-\_\-pdf\-\_\-}
-\item 
-\-Gaussian $\ast$ {\bf prior\-\_\-}
-\item 
-\-Linear\-Analytic\-System\-Model\-Gaussian\-Uncertainty $\ast$ {\bf sys\-\_\-model\-\_\-}
-\item 
-\-Linear\-Analytic\-Conditional\-Gaussian $\ast$ {\bf sys\-\_\-pdf\-\_\-}
+const \-Matrix {\bf build\-H} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
 
 
-\-Definition at line 30 of file imu\-\_\-filter.\-h.
+\-Definition at line 26 of file imu\-\_\-filter.\-h.
 
 
 
@@ -91,180 +81,43 @@ bool {\bf filter\-\_\-init\-\_\-}
 )\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classkvh__driver_1_1IMUFilter_a86d395f5a863cae746ab2bc30e371132}
 
 
-\-Definition at line 65 of file imu\-\_\-filter.\-cpp.
+\-Definition at line 25 of file imu\-\_\-filter.\-cpp.
 
 
 
 \subsection{\-Member \-Function \-Documentation}
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!get\-Estimate@{get\-Estimate}}
-\index{get\-Estimate@{get\-Estimate}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{get\-Estimate}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-I\-M\-U\-Filter\-::get\-Estimate} (
-\begin{DoxyParamCaption}
-\item[{\-Column\-Vector \&}]{estimate, }
-\item[{\-Symmetric\-Matrix \&}]{covar}
-\end{DoxyParamCaption}
-) const}\label{classkvh__driver_1_1IMUFilter_aff90eec29f374b50ad1853c77874ee22}
-
-
-\-Gets the latest state estimate from the filter. 
-
-\begin{DoxyAuthor}{\-Author}
-\-Adam \-Panzica 
-\end{DoxyAuthor}
-
-\begin{DoxyParams}[1]{\-Parameters}
-\mbox{\tt out}  & {\em estimate} & \-Vector to write the state estimate to \\
-\hline
-\mbox{\tt out}  & {\em covar} & \-Matrix to write the state estimate covariance to \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-True if the estimate was sucessfully retrieved, else false
-\end{DoxyReturn}
-\-Note that the init method must have been called prior to getting estimates 
-
-\-Definition at line 117 of file imu\-\_\-filter.\-cpp.
-
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!init@{init}}
-\index{init@{init}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-I\-M\-U\-Filter\-::init} (
-\begin{DoxyParamCaption}
-\item[{const \-Column\-Vector \&}]{initial\-\_\-state, }
-\item[{const \-Symmetric\-Matrix \&}]{initial\-\_\-covar}
-\end{DoxyParamCaption}
-)}\label{classkvh__driver_1_1IMUFilter_ae25fb3707744de06747b5ab143aae355}
-
-
-\-Initializes the filter to an initial state estimate and covariance. 
-
-\begin{DoxyAuthor}{\-Author}
-\-Adam \-Panzica 
-\end{DoxyAuthor}
-
-\begin{DoxyParams}[1]{\-Parameters}
-\mbox{\tt in}  & {\em initial\-\_\-state} & \-The initial state estimate \\
-\hline
-\mbox{\tt in}  & {\em initial\-\_\-covar} & \-The initial state estimate covariance \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-True if sucessfully intialized, else false
-\end{DoxyReturn}
-\-Note that the size of the state vector and covariance matrix must match the size defined by the constant \-S\-Y\-S\-T\-E\-M\-\_\-\-S\-T\-A\-T\-E\-\_\-\-S\-I\-Z\-E 
-
-\-Definition at line 76 of file imu\-\_\-filter.\-cpp.
-
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!is\-Initialized@{is\-Initialized}}
-\index{is\-Initialized@{is\-Initialized}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{is\-Initialized}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-I\-M\-U\-Filter\-::is\-Initialized} (
+\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!build\-A@{build\-A}}
+\index{build\-A@{build\-A}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
+\subsubsection[{build\-A}]{\setlength{\rightskip}{0pt plus 5cm}const \-Matrix {\bf \-I\-M\-U\-Filter\-::build\-A} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\label{classkvh__driver_1_1IMUFilter_a0aad069c4c0df8b8d6b1235aa28cfba5}
-\begin{DoxyAuthor}{\-Author}
-\-Adam \-Panzica 
-\end{DoxyAuthor}
-\begin{DoxyReturn}{\-Returns}
-true if the filter is intialized, else false 
-\end{DoxyReturn}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_a0c89a53b9767e3330e095b3f93d5b340}
 
 
-\-Definition at line 132 of file imu\-\_\-filter.\-cpp.
+\-Definition at line 30 of file imu\-\_\-filter.\-cpp.
 
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!update@{update}}
-\index{update@{update}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-I\-M\-U\-Filter\-::update} (
+\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!build\-B@{build\-B}}
+\index{build\-B@{build\-B}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
+\subsubsection[{build\-B}]{\setlength{\rightskip}{0pt plus 5cm}const \-Matrix {\bf \-I\-M\-U\-Filter\-::build\-B} (
 \begin{DoxyParamCaption}
-\item[{const \-Column\-Vector \&}]{input, }
-\item[{const \-Column\-Vector \&}]{measurement}
+{}
 \end{DoxyParamCaption}
-)}\label{classkvh__driver_1_1IMUFilter_abb31807874cc07f73b70d93a1980b3a4}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_ab81ad8505463eb33d54f6a31ed40577b}
 
 
-\-Updates the filter given new system input and measurement. 
+\-Definition at line 43 of file imu\-\_\-filter.\-cpp.
 
-\begin{DoxyAuthor}{\-Author}
-\-Adam \-Panzica 
-\end{DoxyAuthor}
-
-\begin{DoxyParams}[1]{\-Parameters}
-\mbox{\tt in}  & {\em input} & \-The new system input \\
-\hline
-\mbox{\tt in}  & {\em measurement} & \-The new state measurement \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-True if succesfully updated, else false \-Note that the init method must be called before performing filter updates.
-\end{DoxyReturn}
-\-Note that the size of the input and measurement vectors must match the size defined by the constants \-I\-N\-P\-U\-T\-\_\-\-S\-I\-Z\-E and \-M\-E\-A\-S\-U\-R\-E\-M\-E\-N\-T\-\_\-\-S\-I\-Z\-E 
-
-\-Definition at line 93 of file imu\-\_\-filter.\-cpp.
+\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!build\-H@{build\-H}}
+\index{build\-H@{build\-H}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
+\subsubsection[{build\-H}]{\setlength{\rightskip}{0pt plus 5cm}const \-Matrix {\bf \-I\-M\-U\-Filter\-::build\-H} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_ac497d8776ac1047ba72beb4ec5bd10f4}
 
 
-
-\subsection{\-Member \-Data \-Documentation}
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!\-A\-B\-\_\-@{\-A\-B\-\_\-}}
-\index{\-A\-B\-\_\-@{\-A\-B\-\_\-}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{\-A\-B\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$\-Matrix$>$ {\bf kvh\-\_\-driver\-::\-I\-M\-U\-Filter\-::\-A\-B\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_a47f298cffece4e20fe0eced3e7410fda}
-\-The combined system evolution dynamics 
-
-\-Definition at line 90 of file imu\-\_\-filter.\-h.
-
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!filter\-\_\-@{filter\-\_\-}}
-\index{filter\-\_\-@{filter\-\_\-}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{filter\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Extended\-Kalman\-Filter$\ast$ {\bf kvh\-\_\-driver\-::\-I\-M\-U\-Filter\-::filter\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_a3c522c49f5761dec1144b2a77e686d3a}
-\-The actual \-B\-F\-L \-Extended\-Kalman\-Filter for the system 
-
-\-Definition at line 119 of file imu\-\_\-filter.\-h.
-
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!filter\-\_\-init\-\_\-@{filter\-\_\-init\-\_\-}}
-\index{filter\-\_\-init\-\_\-@{filter\-\_\-init\-\_\-}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{filter\-\_\-init\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf kvh\-\_\-driver\-::\-I\-M\-U\-Filter\-::filter\-\_\-init\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_af8e1eaff2bb879410b1b67badee08e75}
-\-Flag for signalling an initialized filter 
-
-\-Definition at line 115 of file imu\-\_\-filter.\-h.
-
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!\-H\-\_\-@{\-H\-\_\-}}
-\index{\-H\-\_\-@{\-H\-\_\-}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{\-H\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Matrix$\ast$ {\bf kvh\-\_\-driver\-::\-I\-M\-U\-Filter\-::\-H\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_ad7b470b96bc0d3f817e5e0915ae8f4f0}
-\-The measurement transform \-Matrix 
-
-\-Definition at line 94 of file imu\-\_\-filter.\-h.
-
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!mes\-\_\-model\-\_\-@{mes\-\_\-model\-\_\-}}
-\index{mes\-\_\-model\-\_\-@{mes\-\_\-model\-\_\-}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{mes\-\_\-model\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Linear\-Analytic\-Measurement\-Model\-Gaussian\-Uncertainty$\ast$ {\bf kvh\-\_\-driver\-::\-I\-M\-U\-Filter\-::mes\-\_\-model\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_a5dee2c82d998f87a2f7a65461e1a5ac3}
-\-The measurement uncertanty model 
-
-\-Definition at line 110 of file imu\-\_\-filter.\-h.
-
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!mes\-\_\-pdf\-\_\-@{mes\-\_\-pdf\-\_\-}}
-\index{mes\-\_\-pdf\-\_\-@{mes\-\_\-pdf\-\_\-}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{mes\-\_\-pdf\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Linear\-Analytic\-Conditional\-Gaussian$\ast$ {\bf kvh\-\_\-driver\-::\-I\-M\-U\-Filter\-::mes\-\_\-pdf\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_a20887e6c8867c9ecb7896c3c04cb2330}
-\-The measurement \-Gaussian \-P\-D\-F 
-
-\-Definition at line 106 of file imu\-\_\-filter.\-h.
-
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!prior\-\_\-@{prior\-\_\-}}
-\index{prior\-\_\-@{prior\-\_\-}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{prior\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Gaussian$\ast$ {\bf kvh\-\_\-driver\-::\-I\-M\-U\-Filter\-::prior\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_a86d7af469718ba5c84744efc0518b945}
-\-The current state estimate as of the last filter update, or the initial state estimate if no update has been performed 
-
-\-Definition at line 123 of file imu\-\_\-filter.\-h.
-
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!sys\-\_\-model\-\_\-@{sys\-\_\-model\-\_\-}}
-\index{sys\-\_\-model\-\_\-@{sys\-\_\-model\-\_\-}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{sys\-\_\-model\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Linear\-Analytic\-System\-Model\-Gaussian\-Uncertainty$\ast$ {\bf kvh\-\_\-driver\-::\-I\-M\-U\-Filter\-::sys\-\_\-model\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_a86cee9be8d1bb33032b0e9cf4d039e0b}
-\-The system uncertanty model 
-
-\-Definition at line 102 of file imu\-\_\-filter.\-h.
-
-\index{kvh\-\_\-driver\-::\-I\-M\-U\-Filter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}!sys\-\_\-pdf\-\_\-@{sys\-\_\-pdf\-\_\-}}
-\index{sys\-\_\-pdf\-\_\-@{sys\-\_\-pdf\-\_\-}!kvh_driver::IMUFilter@{kvh\-\_\-driver\-::\-I\-M\-U\-Filter}}
-\subsubsection[{sys\-\_\-pdf\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Linear\-Analytic\-Conditional\-Gaussian$\ast$ {\bf kvh\-\_\-driver\-::\-I\-M\-U\-Filter\-::sys\-\_\-pdf\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1IMUFilter_a3f96ad360e36d278fb482dfc03cf0266}
-\-The system \-Gaussian \-P\-D\-F 
-
-\-Definition at line 98 of file imu\-\_\-filter.\-h.
+\-Definition at line 52 of file imu\-\_\-filter.\-cpp.
 
 
 

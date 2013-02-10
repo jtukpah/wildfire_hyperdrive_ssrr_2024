@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['abstractgroupdescriptionconstptr',['AbstractGroupDescriptionConstPtr',['../classkvh__driver_1_1KVHParamsConfig.html#a724498cfb3c20d6b635010531871a216',1,'kvh_driver::KVHParamsConfig']]],
-  ['abstractgroupdescriptionptr',['AbstractGroupDescriptionPtr',['../classkvh__driver_1_1KVHParamsConfig.html#a2fc2e9e075cc69a2bfc98b4693110ebd',1,'kvh_driver::KVHParamsConfig']]],
-  ['abstractparamdescriptionconstptr',['AbstractParamDescriptionConstPtr',['../classkvh__driver_1_1KVHParamsConfig.html#ab1da73a02b19ffe0cd86227a1225498c',1,'kvh_driver::KVHParamsConfig']]],
-  ['abstractparamdescriptionptr',['AbstractParamDescriptionPtr',['../classkvh__driver_1_1KVHParamsConfig.html#a378dd4ffd4223b6ec4bea6453690c64f',1,'kvh_driver::KVHParamsConfig']]]
+  ['abstractgroupdescriptionconstptr',['AbstractGroupDescriptionConstPtr',['../classkvh__driver_1_1KVHDriverConfig.html#ad2313fbd530b3746e2c6d8435d619803',1,'kvh_driver::KVHDriverConfig::AbstractGroupDescriptionConstPtr()'],['../classkvh__driver_1_1KVHParamsConfig.html#a724498cfb3c20d6b635010531871a216',1,'kvh_driver::KVHParamsConfig::AbstractGroupDescriptionConstPtr()']]],
+  ['abstractgroupdescriptionptr',['AbstractGroupDescriptionPtr',['../classkvh__driver_1_1KVHDriverConfig.html#af15dccf2e0509596a1e027116641f11d',1,'kvh_driver::KVHDriverConfig::AbstractGroupDescriptionPtr()'],['../classkvh__driver_1_1KVHParamsConfig.html#a2fc2e9e075cc69a2bfc98b4693110ebd',1,'kvh_driver::KVHParamsConfig::AbstractGroupDescriptionPtr()']]],
+  ['abstractparamdescriptionconstptr',['AbstractParamDescriptionConstPtr',['../classkvh__driver_1_1KVHDriverConfig.html#a13d1e259166230a2ce23c600ba89aaa6',1,'kvh_driver::KVHDriverConfig::AbstractParamDescriptionConstPtr()'],['../classkvh__driver_1_1KVHParamsConfig.html#ab1da73a02b19ffe0cd86227a1225498c',1,'kvh_driver::KVHParamsConfig::AbstractParamDescriptionConstPtr()']]],
+  ['abstractparamdescriptionptr',['AbstractParamDescriptionPtr',['../classkvh__driver_1_1KVHDriverConfig.html#a965f069bb42844b4a428eab1f0c0215b',1,'kvh_driver::KVHDriverConfig::AbstractParamDescriptionPtr()'],['../classkvh__driver_1_1KVHParamsConfig.html#a378dd4ffd4223b6ec4bea6453690c64f',1,'kvh_driver::KVHParamsConfig::AbstractParamDescriptionPtr()']]]
 ];

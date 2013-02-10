@@ -17,6 +17,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -90,9 +91,9 @@ Inheritance diagram for kvh_driver::KVHParamsConfig::ParamDescription&lt; T &gt;
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a048dc3ac81431b0a0e1678396ad07e98">calcLevel</a> (uint32_t &amp;comb_level, const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config1, const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config2) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a5968892dae7200c3564bc06f579dd5ff">clamp</a> (<a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="el" href="KVHParamsConfig_8dox.html#a55c9de72d9f3630abdf51bfe39c191dd">max</a>, const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;min) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a5968892dae7200c3564bc06f579dd5ff">clamp</a> (<a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="el" href="KVHDriverConfig_8dox.html#a55c9de72d9f3630abdf51bfe39c191dd">max</a>, const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;min) const </td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a609363b7d65d75cc6d60f63c9008b839">clamp</a> (<a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="el" href="KVHParamsConfig_8dox.html#a55c9de72d9f3630abdf51bfe39c191dd">max</a>, const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;min) const</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a609363b7d65d75cc6d60f63c9008b839">clamp</a> (<a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="el" href="KVHDriverConfig_8dox.html#a55c9de72d9f3630abdf51bfe39c191dd">max</a>, const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;min) const</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a0bcb05e9e7c43749d53356d45208f9ce">fromMessage</a> (const dynamic_reconfigure::Config &amp;msg, <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a91bcce9a07c283b38f211642581734f1">fromServer</a> (const ros::NodeHandle &amp;nh, <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#ac2d7f61ca5466810b04cf2260a9ec61e">getValue</a> (const <a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, boost::any &amp;val) const </td></tr>
@@ -489,7 +490,7 @@ template&lt;class T &gt; </div>
 <hr size="1"><div style="align: right;">
 <a href="http://ros.org/wiki/kvh_driver">kvh_driver</a><br />
 Author(s): Adam Panzica</br />
-<small>autogenerated on Sun Feb 3 2013 17:03:25</small>
+<small>autogenerated on Sun Feb 10 2013 18:53:13</small>
 </div>
 </body>
 </html>

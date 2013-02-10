@@ -17,6 +17,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -62,14 +63,24 @@ Namespaces</h2></td></tr>
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1constants.html">constants</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1IMUFilter.html">IMUFilter</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHDriverConfig.html">KVHDriverConfig</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHDriverConfigStatics.html">KVHDriverConfigStatics</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHDriverNode.html">KVHDriverNode</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1KVHParamsConfigStatics.html">KVHParamsConfigStatics</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1LinearFilter.html">LinearFilter</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classkvh__driver_1_1OdometryFilter.html">OdometryFilter</a></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const int KVHParams_1750&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekvh__driver.html#a0fd5a58a43bdfb53060a96905f42b535">IMU</a> = 1000</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const int KVHParams_CNS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekvh__driver.html#a890ee9041645a980e5f8a5c93d32af52">INS</a> = 100</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekvh__driver.html#a849ca325ea69f2124a47a48ea634fa9c">KVHDriver_1750_IMU</a> = 1000</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekvh__driver.html#afcf5792aa6e1573525f2221c64d9bc58">KVHDriver_CG_5100_IMU</a> = 100</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekvh__driver.html#a47190ee0e1b0d7ae0ceee220b976954a">KVHDriver_CNS_5000_INS</a> = 100</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekvh__driver.html#a5352b06988a0d5a76fa4716d8ede7f34">KVHDriver_DSP_1750</a> = 1000</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekvh__driver.html#a9f21403a9008c8d51e24912e9c921835">KVHDriver_DSP_3000</a> = 100</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekvh__driver.html#ab553abbfd31269d5d89add4288bfcfe6">KVHDriver_DSP_3100</a> = 100</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekvh__driver.html#ae37138db369c9f07a5b09a67bd659103">KVHDriver_DSP_4000</a> = 100</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacekvh__driver.html#ac5ad0c8de97fdbeae86fa7b7294479b5">KVHParams_DSP</a> = 1000</td></tr>
 </table>
 <hr/><h2>Variable Documentation</h2>
@@ -100,6 +111,111 @@ Variables</h2></td></tr>
 <div class="memdoc">
 
 <p>Definition at line <a class="el" href="KVHParamsConfig_8h_source.html#l00575">575</a> of file <a class="el" href="KVHParamsConfig_8h_source.html">KVHParamsConfig.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a849ca325ea69f2124a47a48ea634fa9c"></a><!-- doxytag: member="kvh_driver::KVHDriver_1750_IMU" ref="a849ca325ea69f2124a47a48ea634fa9c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int <a class="el" href="namespacekvh__driver.html#a849ca325ea69f2124a47a48ea634fa9c">kvh_driver::KVHDriver_1750_IMU</a> = 1000</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="KVHDriverConfig_8h_source.html#l00571">571</a> of file <a class="el" href="KVHDriverConfig_8h_source.html">KVHDriverConfig.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afcf5792aa6e1573525f2221c64d9bc58"></a><!-- doxytag: member="kvh_driver::KVHDriver_CG_5100_IMU" ref="afcf5792aa6e1573525f2221c64d9bc58" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int <a class="el" href="namespacekvh__driver.html#afcf5792aa6e1573525f2221c64d9bc58">kvh_driver::KVHDriver_CG_5100_IMU</a> = 100</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="KVHDriverConfig_8h_source.html#l00573">573</a> of file <a class="el" href="KVHDriverConfig_8h_source.html">KVHDriverConfig.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a47190ee0e1b0d7ae0ceee220b976954a"></a><!-- doxytag: member="kvh_driver::KVHDriver_CNS_5000_INS" ref="a47190ee0e1b0d7ae0ceee220b976954a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int <a class="el" href="namespacekvh__driver.html#a47190ee0e1b0d7ae0ceee220b976954a">kvh_driver::KVHDriver_CNS_5000_INS</a> = 100</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="KVHDriverConfig_8h_source.html#l00575">575</a> of file <a class="el" href="KVHDriverConfig_8h_source.html">KVHDriverConfig.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5352b06988a0d5a76fa4716d8ede7f34"></a><!-- doxytag: member="kvh_driver::KVHDriver_DSP_1750" ref="a5352b06988a0d5a76fa4716d8ede7f34" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int <a class="el" href="namespacekvh__driver.html#a5352b06988a0d5a76fa4716d8ede7f34">kvh_driver::KVHDriver_DSP_1750</a> = 1000</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="KVHDriverConfig_8h_source.html#l00563">563</a> of file <a class="el" href="KVHDriverConfig_8h_source.html">KVHDriverConfig.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9f21403a9008c8d51e24912e9c921835"></a><!-- doxytag: member="kvh_driver::KVHDriver_DSP_3000" ref="a9f21403a9008c8d51e24912e9c921835" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int <a class="el" href="namespacekvh__driver.html#a9f21403a9008c8d51e24912e9c921835">kvh_driver::KVHDriver_DSP_3000</a> = 100</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="KVHDriverConfig_8h_source.html#l00565">565</a> of file <a class="el" href="KVHDriverConfig_8h_source.html">KVHDriverConfig.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab553abbfd31269d5d89add4288bfcfe6"></a><!-- doxytag: member="kvh_driver::KVHDriver_DSP_3100" ref="ab553abbfd31269d5d89add4288bfcfe6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int <a class="el" href="namespacekvh__driver.html#ab553abbfd31269d5d89add4288bfcfe6">kvh_driver::KVHDriver_DSP_3100</a> = 100</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="KVHDriverConfig_8h_source.html#l00567">567</a> of file <a class="el" href="KVHDriverConfig_8h_source.html">KVHDriverConfig.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae37138db369c9f07a5b09a67bd659103"></a><!-- doxytag: member="kvh_driver::KVHDriver_DSP_4000" ref="ae37138db369c9f07a5b09a67bd659103" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int <a class="el" href="namespacekvh__driver.html#ae37138db369c9f07a5b09a67bd659103">kvh_driver::KVHDriver_DSP_4000</a> = 100</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="KVHDriverConfig_8h_source.html#l00569">569</a> of file <a class="el" href="KVHDriverConfig_8h_source.html">KVHDriverConfig.h</a>.</p>
 
 </div>
 </div>
@@ -138,7 +254,7 @@ Variables</h2></td></tr>
 <hr size="1"><div style="align: right;">
 <a href="http://ros.org/wiki/kvh_driver">kvh_driver</a><br />
 Author(s): Adam Panzica</br />
-<small>autogenerated on Sun Feb 3 2013 17:03:25</small>
+<small>autogenerated on Sun Feb 10 2013 18:53:13</small>
 </div>
 </body>
 </html>

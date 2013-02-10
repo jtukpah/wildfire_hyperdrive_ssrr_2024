@@ -1,0 +1,130 @@
+\section{kvh\-\_\-driver\-:\-:\-Odometry\-Filter \-Class \-Reference}
+\label{classkvh__driver_1_1OdometryFilter}\index{kvh\-\_\-driver\-::\-Odometry\-Filter@{kvh\-\_\-driver\-::\-Odometry\-Filter}}
+
+
+{\ttfamily \#include $<$odometryfilter.\-hpp$>$}
+
+
+
+\-Inheritance diagram for kvh\-\_\-driver\-:\-:\-Odometry\-Filter\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=176pt]{classkvh__driver_1_1OdometryFilter__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Odometry\-Filter} (const \-Column\-Vector \&sys\-\_\-noise\-\_\-mu, const \-Symmetric\-Matrix \&sys\-\_\-noise\-\_\-cov, const \-Column\-Vector \&measurement\-\_\-noise\-\_\-mu, const \-Symmetric\-Matrix \&measurement\-\_\-noise\-\_\-cov)
+\begin{DoxyCompactList}\small\item\em \-Constructs a new \-I\-M\-U filter given an expected system noise and covariance and measurement noise and covariance. \end{DoxyCompactList}\item 
+virtual {\bf $\sim$\-Odometry\-Filter} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+const \-Matrix {\bf build\-A} ()
+\item 
+const \-Matrix {\bf build\-B} ()
+\item 
+const \-Matrix {\bf build\-H} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyAuthor}{\-Author}
+\-Adam \-Panzica \-Simple \-Extended \-Kalman \-Filter implementation based on \-B\-F\-L's filtering library. \-It is hard-\/coded to assume the following system dynamics\-:
+\end{DoxyAuthor}
+\[ \textbf{X} = \f{bmatrix}{ x \\ y \\ z \\ rx \\ ry \\ rz \\ \dot{x} \\ \dot{y} \\ \dot{z} \\ \dot{rx} \\ \dot{ry} \\ \dot{rz} \end ] \[ \textbf{A} = \f{bmatrix}{ 1 0 0 0 0 0 1 0 0 0 0 0\\ 0 1 0 0 0 0 0 1 0 0 0 0\\ 0 0 1 0 0 0 0 0 1 0 0 0\\ 0 0 0 1 0 0 0 0 0 1 0 0\\ 0 0 0 0 1 0 0 0 0 0 1 0\\ 0 0 0 0 0 1 0 0 0 0 0 1\\ 0 0 0 0 0 0 1 0 0 0 0 0\\ 0 0 0 0 0 0 0 1 0 0 0 0\\ 0 0 0 0 0 0 0 0 1 0 0 0\\ 0 0 0 0 0 0 0 0 0 1 0 0\\ 0 0 0 0 0 0 0 0 0 0 1 0\\ 0 0 0 0 0 0 0 0 0 0 0 1\end ] \[ \textbf{B} = \f{bmatrix}{ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 1 0 0 \\ 0 1 0 \\ 0 0 1 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \end ] \{u\} = \begin{bmatrix} \ddot{x}\\ \ddot{y}\\ \ddot{z}\end{bmatrix} ] \{\-H\} = \begin{bmatrix} 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 0 0 0 \\ 1 0 0 \\ 0 1 0 \\ 0 0 1 \end{bmatrix} ] \{z\} = \begin{bmatrix} \dot{rx}\\ \dot{ry}\\ \dot{rz}\end{bmatrix} ] 
+
+\-Definition at line 85 of file odometryfilter.\-hpp.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{kvh\-\_\-driver\-::\-Odometry\-Filter@{kvh\-\_\-driver\-::\-Odometry\-Filter}!\-Odometry\-Filter@{\-Odometry\-Filter}}
+\index{\-Odometry\-Filter@{\-Odometry\-Filter}!kvh_driver::OdometryFilter@{kvh\-\_\-driver\-::\-Odometry\-Filter}}
+\subsubsection[{\-Odometry\-Filter}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Odometry\-Filter\-::\-Odometry\-Filter} (
+\begin{DoxyParamCaption}
+\item[{const \-Column\-Vector \&}]{sys\-\_\-noise\-\_\-mu, }
+\item[{const \-Symmetric\-Matrix \&}]{sys\-\_\-noise\-\_\-cov, }
+\item[{const \-Column\-Vector \&}]{measurement\-\_\-noise\-\_\-mu, }
+\item[{const \-Symmetric\-Matrix \&}]{measurement\-\_\-noise\-\_\-cov}
+\end{DoxyParamCaption}
+)}\label{classkvh__driver_1_1OdometryFilter_a05c542b65a99c1680a5e94e99131ce07}
+
+
+\-Constructs a new \-I\-M\-U filter given an expected system noise and covariance and measurement noise and covariance. 
+
+\begin{DoxyAuthor}{\-Author}
+\-Adam \-Panzica 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em sys\-\_\-noise\-\_\-mu} & \-The expected system noise \\
+\hline
+\mbox{\tt in}  & {\em sys\-\_\-noise\-\_\-cov} & \-The expected system covariance \\
+\hline
+\mbox{\tt in}  & {\em measurement\-\_\-noise\-\_\-mu} & \-The expected measurement noise \\
+\hline
+\mbox{\tt in}  & {\em measurement\-\_\-noise\-\_\-cov} & \-The expected measurement covariance \\
+\hline
+\end{DoxyParams}
+
+
+\-Definition at line 18 of file odometryfilter.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-Odometry\-Filter@{kvh\-\_\-driver\-::\-Odometry\-Filter}!$\sim$\-Odometry\-Filter@{$\sim$\-Odometry\-Filter}}
+\index{$\sim$\-Odometry\-Filter@{$\sim$\-Odometry\-Filter}!kvh_driver::OdometryFilter@{kvh\-\_\-driver\-::\-Odometry\-Filter}}
+\subsubsection[{$\sim$\-Odometry\-Filter}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Odometry\-Filter\-::$\sim$\-Odometry\-Filter} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classkvh__driver_1_1OdometryFilter_a6232dff1617f519dc713e2553c5d5820}
+
+
+\-Definition at line 24 of file odometryfilter.\-cpp.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{kvh\-\_\-driver\-::\-Odometry\-Filter@{kvh\-\_\-driver\-::\-Odometry\-Filter}!build\-A@{build\-A}}
+\index{build\-A@{build\-A}!kvh_driver::OdometryFilter@{kvh\-\_\-driver\-::\-Odometry\-Filter}}
+\subsubsection[{build\-A}]{\setlength{\rightskip}{0pt plus 5cm}const \-Matrix {\bf \-Odometry\-Filter\-::build\-A} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1OdometryFilter_a5b1e1f91c7f96bc30c6bb27fd12baa7f}
+
+
+\-Definition at line 29 of file odometryfilter.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-Odometry\-Filter@{kvh\-\_\-driver\-::\-Odometry\-Filter}!build\-B@{build\-B}}
+\index{build\-B@{build\-B}!kvh_driver::OdometryFilter@{kvh\-\_\-driver\-::\-Odometry\-Filter}}
+\subsubsection[{build\-B}]{\setlength{\rightskip}{0pt plus 5cm}const \-Matrix {\bf \-Odometry\-Filter\-::build\-B} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1OdometryFilter_a39748bca56e690eda8df2ace436169b2}
+
+
+\-Definition at line 47 of file odometryfilter.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-Odometry\-Filter@{kvh\-\_\-driver\-::\-Odometry\-Filter}!build\-H@{build\-H}}
+\index{build\-H@{build\-H}!kvh_driver::OdometryFilter@{kvh\-\_\-driver\-::\-Odometry\-Filter}}
+\subsubsection[{build\-H}]{\setlength{\rightskip}{0pt plus 5cm}const \-Matrix {\bf \-Odometry\-Filter\-::build\-H} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1OdometryFilter_ab9b608f8fa34d9ac5a22f5782a2b75e1}
+
+
+\-Definition at line 59 of file odometryfilter.\-cpp.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+{\bf odometryfilter.\-hpp}\item 
+{\bf odometryfilter.\-cpp}\end{DoxyCompactItemize}

@@ -17,6 +17,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -108,9 +109,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00056"></a>00056 <span class="preprocessor">#include &lt;dynamic_reconfigure/config_init_mutex.h&gt;</span>
 <a name="l00057"></a>00057 <span class="preprocessor">#include &lt;boost/any.hpp&gt;</span>
 <a name="l00058"></a>00058 
-<a name="l00059"></a><a class="code" href="namespacekvh__driver.html">00059</a> <span class="keyword">namespace </span>kvh_driver
+<a name="l00059"></a>00059 <span class="keyword">namespace </span>kvh_driver
 <a name="l00060"></a>00060 {
-<a name="l00061"></a>00061   <span class="keyword">class </span><a class="code" href="classkvh__driver_1_1KVHParamsConfigStatics.html">KVHParamsConfigStatics</a>;
+<a name="l00061"></a>00061   <span class="keyword">class </span>KVHParamsConfigStatics;
 <a name="l00062"></a>00062   
 <a name="l00063"></a><a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">00063</a>   <span class="keyword">class </span><a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a>
 <a name="l00064"></a>00064   {
@@ -128,7 +129,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00076"></a>00076         edit_method = e;
 <a name="l00077"></a>00077       }
 <a name="l00078"></a>00078       
-<a name="l00079"></a>00079       <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#aab2c3cfbf04aba7afe07edea4b0b94e6">clamp</a>(<a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="KVHParamsConfig_8dox.html#a55c9de72d9f3630abdf51bfe39c191dd">max</a>, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#aeae5ca045aff2ebeeb7734307ab31f75">min</a>) <span class="keyword">const</span> = 0;
+<a name="l00079"></a>00079       <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#aab2c3cfbf04aba7afe07edea4b0b94e6">clamp</a>(<a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#a312660c4b9e6b495f81f4209b83c4697">max</a>, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#aeae5ca045aff2ebeeb7734307ab31f75">min</a>) <span class="keyword">const</span> = 0;
 <a name="l00080"></a>00080       <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#aed61099efc79176947816a67f06a6db5">calcLevel</a>(uint32_t &amp;<a class="code" href="namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#a7ede073d17b319d2e6c9b972f38745df">level</a>, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config1, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config2) <span class="keyword">const</span> = 0;
 <a name="l00081"></a>00081       <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#a20a7bef541e4b7fca78560dbeff236f2">fromServer</a>(<span class="keyword">const</span> ros::NodeHandle &amp;nh, <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config) <span class="keyword">const</span> = 0;
 <a name="l00082"></a>00082       <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1AbstractParamDescription.html#a42c174ee4a67a949e97d05a1753be12b">toServer</a>(<span class="keyword">const</span> ros::NodeHandle &amp;nh, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config) <span class="keyword">const</span> = 0;
@@ -152,7 +153,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00100"></a>00100 
 <a name="l00101"></a><a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a96966959f4bf8fcf1a18d8d02901b150">00101</a>       T (<a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a>::* <a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a96966959f4bf8fcf1a18d8d02901b150">field</a>);
 <a name="l00102"></a>00102 
-<a name="l00103"></a><a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a5968892dae7200c3564bc06f579dd5ff">00103</a>       <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a5968892dae7200c3564bc06f579dd5ff">clamp</a>(<a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="KVHParamsConfig_8dox.html#a55c9de72d9f3630abdf51bfe39c191dd">max</a>, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#aeae5ca045aff2ebeeb7734307ab31f75">min</a>)<span class="keyword"> const</span>
+<a name="l00103"></a><a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a5968892dae7200c3564bc06f579dd5ff">00103</a>       <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a5968892dae7200c3564bc06f579dd5ff">clamp</a>(<a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#a312660c4b9e6b495f81f4209b83c4697">max</a>, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#aeae5ca045aff2ebeeb7734307ab31f75">min</a>)<span class="keyword"> const</span>
 <a name="l00104"></a>00104 <span class="keyword">      </span>{
 <a name="l00105"></a>00105         <span class="keywordflow">if</span> (config.*<a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a96966959f4bf8fcf1a18d8d02901b150">field</a> &gt; max.*<a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a96966959f4bf8fcf1a18d8d02901b150">field</a>)
 <a name="l00106"></a>00106           config.*<a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a96966959f4bf8fcf1a18d8d02901b150">field</a> = max.*<a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a96966959f4bf8fcf1a18d8d02901b150">field</a>;
@@ -470,7 +471,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00418"></a>00418   };
 <a name="l00419"></a>00419   
 <a name="l00420"></a>00420   <span class="keyword">template</span> &lt;&gt; <span class="comment">// Max and min are ignored for strings.</span>
-<a name="l00421"></a><a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a609363b7d65d75cc6d60f63c9008b839">00421</a>   <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a5968892dae7200c3564bc06f579dd5ff">KVHParamsConfig::ParamDescription&lt;std::string&gt;::clamp</a>(<a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="KVHParamsConfig_8dox.html#a55c9de72d9f3630abdf51bfe39c191dd">max</a>, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#aeae5ca045aff2ebeeb7734307ab31f75">min</a>)<span class="keyword"> const</span>
+<a name="l00421"></a><a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a609363b7d65d75cc6d60f63c9008b839">00421</a>   <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig_1_1ParamDescription.html#a5968892dae7200c3564bc06f579dd5ff">KVHParamsConfig::ParamDescription&lt;std::string&gt;::clamp</a>(<a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;config, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#a312660c4b9e6b495f81f4209b83c4697">max</a>, <span class="keyword">const</span> <a class="code" href="classkvh__driver_1_1KVHParamsConfig.html">KVHParamsConfig</a> &amp;<a class="code" href="namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#aeae5ca045aff2ebeeb7734307ab31f75">min</a>)<span class="keyword"> const</span>
 <a name="l00422"></a>00422 <span class="keyword">  </span>{
 <a name="l00423"></a>00423     <span class="keywordflow">return</span>;
 <a name="l00424"></a>00424   }
@@ -648,7 +649,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <hr size="1"><div style="align: right;">
 <a href="http://ros.org/wiki/kvh_driver">kvh_driver</a><br />
 Author(s): Adam Panzica</br />
-<small>autogenerated on Sun Feb 3 2013 17:03:25</small>
+<small>autogenerated on Sun Feb 10 2013 18:53:12</small>
 </div>
 </body>
 </html>

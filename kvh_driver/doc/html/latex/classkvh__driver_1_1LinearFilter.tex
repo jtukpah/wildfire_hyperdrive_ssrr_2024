@@ -1,0 +1,337 @@
+\section{kvh\-\_\-driver\-:\-:\-Linear\-Filter \-Class \-Reference}
+\label{classkvh__driver_1_1LinearFilter}\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+
+
+{\ttfamily \#include $<$linearfilter.\-h$>$}
+
+
+
+\-Inheritance diagram for kvh\-\_\-driver\-:\-:\-Linear\-Filter\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{classkvh__driver_1_1LinearFilter__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf get\-Estimate} (\-Column\-Vector \&estimate, \-Symmetric\-Matrix \&covar) const 
+\begin{DoxyCompactList}\small\item\em \-Gets the latest state estimate from the filter. \end{DoxyCompactList}\item 
+bool {\bf init} (const \-Column\-Vector \&initial\-\_\-state, const \-Symmetric\-Matrix \&initial\-\_\-covar)
+\begin{DoxyCompactList}\small\item\em \-Initializes the filter to an initial state estimate and covariance. \end{DoxyCompactList}\item 
+bool {\bf is\-Initialized} ()
+\item 
+{\bf \-Linear\-Filter} (int state\-\_\-size, int input\-\_\-size, int measurment\-\_\-size, const \-Column\-Vector \&sys\-\_\-noise\-\_\-mu, const \-Symmetric\-Matrix \&sys\-\_\-noise\-\_\-cov, const \-Matrix \&\-A, const \-Matrix \&\-B, const \-Column\-Vector \&measurement\-\_\-noise\-\_\-mu, const \-Symmetric\-Matrix \&measurement\-\_\-noise\-\_\-cov, const \-Matrix \&\-H)
+\begin{DoxyCompactList}\small\item\em \-Constructs a new \-I\-M\-U filter given an expected system noise and covariance and measurement noise and covariance. \end{DoxyCompactList}\item 
+bool {\bf update} (const \-Column\-Vector \&input, const \-Column\-Vector \&measurement)
+\begin{DoxyCompactList}\small\item\em \-Updates the filter given new system input and measurement. \end{DoxyCompactList}\item 
+bool {\bf update} ()
+\begin{DoxyCompactList}\small\item\em \-Updates the filter based purely on the system model. \end{DoxyCompactList}\item 
+virtual {\bf $\sim$\-Linear\-Filter} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Protected \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::vector$<$ \-Matrix $>$ {\bf \-A\-B\-\_\-}
+\item 
+\-Extended\-Kalman\-Filter $\ast$ {\bf filter\-\_\-}
+\item 
+bool {\bf filter\-\_\-init\-\_\-}
+\item 
+int {\bf input\-\_\-size\-\_\-}
+\item 
+int {\bf measurement\-\_\-size\-\_\-}
+\item 
+\-Linear\-Analytic\-Measurement\-Model\-Gaussian\-Uncertainty $\ast$ {\bf mes\-\_\-model\-\_\-}
+\item 
+\-Linear\-Analytic\-Conditional\-Gaussian $\ast$ {\bf mes\-\_\-pdf\-\_\-}
+\item 
+\-Gaussian $\ast$ {\bf prior\-\_\-}
+\item 
+int {\bf state\-\_\-size\-\_\-}
+\item 
+\-Linear\-Analytic\-System\-Model\-Gaussian\-Uncertainty $\ast$ {\bf sys\-\_\-model\-\_\-}
+\item 
+\-Linear\-Analytic\-Conditional\-Gaussian $\ast$ {\bf sys\-\_\-pdf\-\_\-}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 33 of file linearfilter.\-h.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!\-Linear\-Filter@{\-Linear\-Filter}}
+\index{\-Linear\-Filter@{\-Linear\-Filter}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{\-Linear\-Filter}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Linear\-Filter\-::\-Linear\-Filter} (
+\begin{DoxyParamCaption}
+\item[{int}]{state\-\_\-size, }
+\item[{int}]{input\-\_\-size, }
+\item[{int}]{measurment\-\_\-size, }
+\item[{const \-Column\-Vector \&}]{sys\-\_\-noise\-\_\-mu, }
+\item[{const \-Symmetric\-Matrix \&}]{sys\-\_\-noise\-\_\-cov, }
+\item[{const \-Matrix \&}]{\-A, }
+\item[{const \-Matrix \&}]{\-B, }
+\item[{const \-Column\-Vector \&}]{measurement\-\_\-noise\-\_\-mu, }
+\item[{const \-Symmetric\-Matrix \&}]{measurement\-\_\-noise\-\_\-cov, }
+\item[{const \-Matrix \&}]{\-H}
+\end{DoxyParamCaption}
+)}\label{classkvh__driver_1_1LinearFilter_a3b11e90b5f608a1f707c22f5b45a33b3}
+
+
+\-Constructs a new \-I\-M\-U filter given an expected system noise and covariance and measurement noise and covariance. 
+
+\begin{DoxyAuthor}{\-Author}
+\-Adam \-Panzica 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em state\-\_\-size} & \-The number of states in the system vector \\
+\hline
+\mbox{\tt in}  & {\em input\-\_\-size} & \-The number of inputs in the u vector \\
+\hline
+\mbox{\tt in}  & {\em measurement\-\_\-size} & \-The number of states in the measurement vector \\
+\hline
+\mbox{\tt in}  & {\em sys\-\_\-noise\-\_\-mu} & \-The expected system noise \\
+\hline
+\mbox{\tt in}  & {\em sys\-\_\-noise\-\_\-cov} & \-The expected system covariance \\
+\hline
+\mbox{\tt in}  & {\em measurement\-\_\-noise\-\_\-mu} & \-The expected measurement noise \\
+\hline
+\mbox{\tt in}  & {\em measurement\-\_\-noise\-\_\-cov} & \-The expected measurement covariance \\
+\hline
+\end{DoxyParams}
+
+
+\-Definition at line 18 of file linearfilter.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!$\sim$\-Linear\-Filter@{$\sim$\-Linear\-Filter}}
+\index{$\sim$\-Linear\-Filter@{$\sim$\-Linear\-Filter}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{$\sim$\-Linear\-Filter}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Linear\-Filter\-::$\sim$\-Linear\-Filter} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classkvh__driver_1_1LinearFilter_a9228f5a60fd6ff7d2c220dc21f815a5d}
+
+
+\-Definition at line 55 of file linearfilter.\-cpp.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!get\-Estimate@{get\-Estimate}}
+\index{get\-Estimate@{get\-Estimate}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{get\-Estimate}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Linear\-Filter\-::get\-Estimate} (
+\begin{DoxyParamCaption}
+\item[{\-Column\-Vector \&}]{estimate, }
+\item[{\-Symmetric\-Matrix \&}]{covar}
+\end{DoxyParamCaption}
+) const}\label{classkvh__driver_1_1LinearFilter_aed5c638a63245e074e2490241796b4d7}
+
+
+\-Gets the latest state estimate from the filter. 
+
+\begin{DoxyAuthor}{\-Author}
+\-Adam \-Panzica 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt out}  & {\em estimate} & \-Vector to write the state estimate to \\
+\hline
+\mbox{\tt out}  & {\em covar} & \-Matrix to write the state estimate covariance to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-True if the estimate was sucessfully retrieved, else false
+\end{DoxyReturn}
+\-Note that the init method must have been called prior to getting estimates 
+
+\-Definition at line 144 of file linearfilter.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!init@{init}}
+\index{init@{init}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Linear\-Filter\-::init} (
+\begin{DoxyParamCaption}
+\item[{const \-Column\-Vector \&}]{initial\-\_\-state, }
+\item[{const \-Symmetric\-Matrix \&}]{initial\-\_\-covar}
+\end{DoxyParamCaption}
+)}\label{classkvh__driver_1_1LinearFilter_a5ab8cff7005b7507c6589822c3424bc0}
+
+
+\-Initializes the filter to an initial state estimate and covariance. 
+
+\begin{DoxyAuthor}{\-Author}
+\-Adam \-Panzica 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em initial\-\_\-state} & \-The initial state estimate \\
+\hline
+\mbox{\tt in}  & {\em initial\-\_\-covar} & \-The initial state estimate covariance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-True if sucessfully intialized, else false
+\end{DoxyReturn}
+\-Note that the size of the state vector and covariance matrix must match the size defined by the constant \-S\-Y\-S\-T\-E\-M\-\_\-\-S\-T\-A\-T\-E\-\_\-\-S\-I\-Z\-E 
+
+\-Definition at line 65 of file linearfilter.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!is\-Initialized@{is\-Initialized}}
+\index{is\-Initialized@{is\-Initialized}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{is\-Initialized}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Linear\-Filter\-::is\-Initialized} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classkvh__driver_1_1LinearFilter_ab2ae4613ac40a83d1149ca60e47c9157}
+\begin{DoxyAuthor}{\-Author}
+\-Adam \-Panzica 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{\-Returns}
+true if the filter is intialized, else false 
+\end{DoxyReturn}
+
+
+\-Definition at line 159 of file linearfilter.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!update@{update}}
+\index{update@{update}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Linear\-Filter\-::update} (
+\begin{DoxyParamCaption}
+\item[{const \-Column\-Vector \&}]{input, }
+\item[{const \-Column\-Vector \&}]{measurement}
+\end{DoxyParamCaption}
+)}\label{classkvh__driver_1_1LinearFilter_a48a760b19a8da9dadf5bbb9a3775a1ef}
+
+
+\-Updates the filter given new system input and measurement. 
+
+\begin{DoxyAuthor}{\-Author}
+\-Adam \-Panzica 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em input} & \-The new system input \\
+\hline
+\mbox{\tt in}  & {\em measurement} & \-The new state measurement \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-True if succesfully updated, else false \-Note that the init method must be called before performing filter updates.
+\end{DoxyReturn}
+\-Note that the size of the input and measurement vectors must match the size defined by the constants \-I\-N\-P\-U\-T\-\_\-\-S\-I\-Z\-E and \-M\-E\-A\-S\-U\-R\-E\-M\-E\-N\-T\-\_\-\-S\-I\-Z\-E 
+
+\-Definition at line 83 of file linearfilter.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!update@{update}}
+\index{update@{update}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Linear\-Filter\-::update} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classkvh__driver_1_1LinearFilter_a9218613e4ca3c552998deb591ba62559}
+
+
+\-Updates the filter based purely on the system model. 
+
+\begin{DoxyAuthor}{\-Author}
+\-Adam \-Panzica 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{\-Returns}
+\-True if the filter successfully is updated
+\end{DoxyReturn}
+\-This is intended to be used if the sensor missed an update cycle before time ran out. \-It moves the filter along based purely on the system model 
+
+\-Definition at line 129 of file linearfilter.\-cpp.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!\-A\-B\-\_\-@{\-A\-B\-\_\-}}
+\index{\-A\-B\-\_\-@{\-A\-B\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{\-A\-B\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$\-Matrix$>$ {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::\-A\-B\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_adae42ec27ffc1a875ac73043436bc0c8}
+\-The combined system evolution dynamics 
+
+\-Definition at line 122 of file linearfilter.\-h.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!filter\-\_\-@{filter\-\_\-}}
+\index{filter\-\_\-@{filter\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{filter\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Extended\-Kalman\-Filter$\ast$ {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::filter\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_a40e94bfc20d6cd1a0cae43795af98d3f}
+\-The actual \-B\-F\-L \-Extended\-Kalman\-Filter for the system 
+
+\-Definition at line 147 of file linearfilter.\-h.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!filter\-\_\-init\-\_\-@{filter\-\_\-init\-\_\-}}
+\index{filter\-\_\-init\-\_\-@{filter\-\_\-init\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{filter\-\_\-init\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::filter\-\_\-init\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_a915b31690fad27ef476d4c9bff6ae0a1}
+\-Flag for signalling an initialized filter 
+
+\-Definition at line 143 of file linearfilter.\-h.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!input\-\_\-size\-\_\-@{input\-\_\-size\-\_\-}}
+\index{input\-\_\-size\-\_\-@{input\-\_\-size\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{input\-\_\-size\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::input\-\_\-size\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_a9cd89e1945083515c90befa643b68bbd}
+\-Number of inputs in the filter 
+
+\-Definition at line 112 of file linearfilter.\-h.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!measurement\-\_\-size\-\_\-@{measurement\-\_\-size\-\_\-}}
+\index{measurement\-\_\-size\-\_\-@{measurement\-\_\-size\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{measurement\-\_\-size\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::measurement\-\_\-size\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_a29b4fafad72e1a6bc0acc7c22f7bce80}
+\-Number of measurements in the filter 
+
+\-Definition at line 117 of file linearfilter.\-h.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!mes\-\_\-model\-\_\-@{mes\-\_\-model\-\_\-}}
+\index{mes\-\_\-model\-\_\-@{mes\-\_\-model\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{mes\-\_\-model\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Linear\-Analytic\-Measurement\-Model\-Gaussian\-Uncertainty$\ast$ {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::mes\-\_\-model\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_ab8fa55248628d448aff192958c761db7}
+\-The measurement uncertanty model 
+
+\-Definition at line 138 of file linearfilter.\-h.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!mes\-\_\-pdf\-\_\-@{mes\-\_\-pdf\-\_\-}}
+\index{mes\-\_\-pdf\-\_\-@{mes\-\_\-pdf\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{mes\-\_\-pdf\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Linear\-Analytic\-Conditional\-Gaussian$\ast$ {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::mes\-\_\-pdf\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_a04843282023c646a6a3e1ff08a4fd73b}
+\-The measurement \-Gaussian \-P\-D\-F 
+
+\-Definition at line 134 of file linearfilter.\-h.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!prior\-\_\-@{prior\-\_\-}}
+\index{prior\-\_\-@{prior\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{prior\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Gaussian$\ast$ {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::prior\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_a87f9038b608e7ccfa21aad0c85b49040}
+\-The current state estimate as of the last filter update, or the initial state estimate if no update has been performed 
+
+\-Definition at line 151 of file linearfilter.\-h.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!state\-\_\-size\-\_\-@{state\-\_\-size\-\_\-}}
+\index{state\-\_\-size\-\_\-@{state\-\_\-size\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{state\-\_\-size\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::state\-\_\-size\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_ae8b218002fbc40aee0ff5aed79952d2c}
+\-Number of states in the filter 
+
+\-Definition at line 107 of file linearfilter.\-h.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!sys\-\_\-model\-\_\-@{sys\-\_\-model\-\_\-}}
+\index{sys\-\_\-model\-\_\-@{sys\-\_\-model\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{sys\-\_\-model\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Linear\-Analytic\-System\-Model\-Gaussian\-Uncertainty$\ast$ {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::sys\-\_\-model\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_a0fe6a7f2d41a6e89456c3d9044d3ce75}
+\-The system uncertanty model 
+
+\-Definition at line 130 of file linearfilter.\-h.
+
+\index{kvh\-\_\-driver\-::\-Linear\-Filter@{kvh\-\_\-driver\-::\-Linear\-Filter}!sys\-\_\-pdf\-\_\-@{sys\-\_\-pdf\-\_\-}}
+\index{sys\-\_\-pdf\-\_\-@{sys\-\_\-pdf\-\_\-}!kvh_driver::LinearFilter@{kvh\-\_\-driver\-::\-Linear\-Filter}}
+\subsubsection[{sys\-\_\-pdf\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\-Linear\-Analytic\-Conditional\-Gaussian$\ast$ {\bf kvh\-\_\-driver\-::\-Linear\-Filter\-::sys\-\_\-pdf\-\_\-}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classkvh__driver_1_1LinearFilter_a2c83779a70759426a11293ff8b7ccf91}
+\-The system \-Gaussian \-P\-D\-F 
+
+\-Definition at line 126 of file linearfilter.\-h.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+{\bf linearfilter.\-h}\item 
+{\bf linearfilter.\-cpp}\end{DoxyCompactItemize}

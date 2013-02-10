@@ -17,6 +17,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -58,21 +59,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 This is the complete list of members for <a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a47f298cffece4e20fe0eced3e7410fda">AB_</a></td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a3c522c49f5761dec1144b2a77e686d3a">filter_</a></td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#af8e1eaff2bb879410b1b67badee08e75">filter_init_</a></td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#aff90eec29f374b50ad1853c77874ee22">getEstimate</a>(ColumnVector &amp;estimate, SymmetricMatrix &amp;covar) const </td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#ad7b470b96bc0d3f817e5e0915ae8f4f0">H_</a></td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#adae42ec27ffc1a875ac73043436bc0c8">AB_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a0c89a53b9767e3330e095b3f93d5b340">buildA</a>()</td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#ab81ad8505463eb33d54f6a31ed40577b">buildB</a>()</td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#ac497d8776ac1047ba72beb4ec5bd10f4">buildH</a>()</td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a40e94bfc20d6cd1a0cae43795af98d3f">filter_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a915b31690fad27ef476d4c9bff6ae0a1">filter_init_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#aed5c638a63245e074e2490241796b4d7">getEstimate</a>(ColumnVector &amp;estimate, SymmetricMatrix &amp;covar) const </td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a4dcb6570d63cadd3d19a3f2cf1ebd3cb">IMUFilter</a>(const ColumnVector &amp;sys_noise_mu, const SymmetricMatrix &amp;sys_noise_cov, const ColumnVector &amp;measurement_noise_mu, const SymmetricMatrix &amp;measurement_noise_cov)</td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#ae25fb3707744de06747b5ab143aae355">init</a>(const ColumnVector &amp;initial_state, const SymmetricMatrix &amp;initial_covar)</td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a0aad069c4c0df8b8d6b1235aa28cfba5">isInitialized</a>()</td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a5dee2c82d998f87a2f7a65461e1a5ac3">mes_model_</a></td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a20887e6c8867c9ecb7896c3c04cb2330">mes_pdf_</a></td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a86d7af469718ba5c84744efc0518b945">prior_</a></td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a86cee9be8d1bb33032b0e9cf4d039e0b">sys_model_</a></td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a3f96ad360e36d278fb482dfc03cf0266">sys_pdf_</a></td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [private]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#abb31807874cc07f73b70d93a1980b3a4">update</a>(const ColumnVector &amp;input, const ColumnVector &amp;measurement)</td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a5ab8cff7005b7507c6589822c3424bc0">init</a>(const ColumnVector &amp;initial_state, const SymmetricMatrix &amp;initial_covar)</td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a9cd89e1945083515c90befa643b68bbd">input_size_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#ab2ae4613ac40a83d1149ca60e47c9157">isInitialized</a>()</td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a3b11e90b5f608a1f707c22f5b45a33b3">LinearFilter</a>(int state_size, int input_size, int measurment_size, const ColumnVector &amp;sys_noise_mu, const SymmetricMatrix &amp;sys_noise_cov, const Matrix &amp;A, const Matrix &amp;B, const ColumnVector &amp;measurement_noise_mu, const SymmetricMatrix &amp;measurement_noise_cov, const Matrix &amp;H)</td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a29b4fafad72e1a6bc0acc7c22f7bce80">measurement_size_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#ab8fa55248628d448aff192958c761db7">mes_model_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a04843282023c646a6a3e1ff08a4fd73b">mes_pdf_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a87f9038b608e7ccfa21aad0c85b49040">prior_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#ae8b218002fbc40aee0ff5aed79952d2c">state_size_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a0fe6a7f2d41a6e89456c3d9044d3ce75">sys_model_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a2c83779a70759426a11293ff8b7ccf91">sys_pdf_</a></td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a48a760b19a8da9dadf5bbb9a3775a1ef">update</a>(const ColumnVector &amp;input, const ColumnVector &amp;measurement)</td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a9218613e4ca3c552998deb591ba62559">update</a>()</td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1IMUFilter.html#a86d395f5a863cae746ab2bc30e371132">~IMUFilter</a>()</td><td><a class="el" href="classkvh__driver_1_1IMUFilter.html">kvh_driver::IMUFilter</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classkvh__driver_1_1LinearFilter.html#a9228f5a60fd6ff7d2c220dc21f815a5d">~LinearFilter</a>()</td><td><a class="el" href="classkvh__driver_1_1LinearFilter.html">kvh_driver::LinearFilter</a></td><td><code> [virtual]</code></td></tr>
 </table></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -93,7 +102,7 @@ This is the complete list of members for <a class="el" href="classkvh__driver_1_
 <hr size="1"><div style="align: right;">
 <a href="http://ros.org/wiki/kvh_driver">kvh_driver</a><br />
 Author(s): Adam Panzica</br />
-<small>autogenerated on Sun Feb 3 2013 17:03:25</small>
+<small>autogenerated on Sun Feb 10 2013 18:53:13</small>
 </div>
 </body>
 </html>

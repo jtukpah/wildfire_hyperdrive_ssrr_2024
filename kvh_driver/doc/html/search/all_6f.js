@@ -20,5 +20,5 @@ var searchData=
   ['odometryfilter_2ecpp',['odometryfilter.cpp',['../odometryfilter_8cpp.html',1,'']]],
   ['odometryfilter_2ehpp',['odometryfilter.hpp',['../odometryfilter_8hpp.html',1,'']]],
   ['output_5ffilename',['output_filename',['../namespacegenerate__cached__setup.html#ab8af5b5c03c4c054bff5d246d632a5d8',1,'generate_cached_setup']]],
-  ['output_5ftopic',['output_topic',['../classkvh__driver_1_1KVHParamsConfig_1_1DEFAULT.html#a2a961ec00265a79c147814bce30ae757',1,'kvh_driver::KVHParamsConfig::DEFAULT::output_topic()'],['../classkvh__driver_1_1KVHParamsConfig.html#aa0fb99bf2fbc1f8a3b13004f7e4402e5',1,'kvh_driver::KVHParamsConfig::output_topic()']]]
+  ['output_5ftopic',['output_topic',['../classkvh__driver_1_1KVHDriverConfig_1_1DEFAULT.html#a3eebc0fd4b9b88342874cc2e833cd672',1,'kvh_driver::KVHDriverConfig::DEFAULT::output_topic()'],['../classkvh__driver_1_1KVHDriverConfig.html#ab1df720114413f9c51e16534255d57ff',1,'kvh_driver::KVHDriverConfig::output_topic()'],['../classkvh__driver_1_1KVHParamsConfig_1_1DEFAULT.html#a2a961ec00265a79c147814bce30ae757',1,'kvh_driver::KVHParamsConfig::DEFAULT::output_topic()'],['../classkvh__driver_1_1KVHParamsConfig.html#aa0fb99bf2fbc1f8a3b13004f7e4402e5',1,'kvh_driver::KVHParamsConfig::output_topic()']]]
 ];

@@ -23,6 +23,6 @@ var searchData=
   ['cmake_5fprefix_5fpath',['CMAKE_PREFIX_PATH',['../namespace__setup__util.html#a44bed5f85daa4641b3c144edb9e8c1c1',1,'_setup_util']]],
   ['cmake_5fsource_5fdir',['CMAKE_SOURCE_DIR',['../namespace05.html#a64a69e49f8bb64d03b726848381e589a',1,'05']]],
   ['code',['code',['../namespacegenerate__cached__setup.html#addcec96a295a686731bd38e0d17c22fa',1,'generate_cached_setup']]],
-  ['config_5fdescription',['config_description',['../namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#a5de10cb08e448c58c29167c94998b337',1,'kvh_driver::cfg::KVHParamsConfig']]],
+  ['config_5fdescription',['config_description',['../namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#a5de10cb08e448c58c29167c94998b337',1,'kvh_driver::cfg::KVHParamsConfig.config_description()'],['../namespacekvh__driver_1_1cfg_1_1KVHDriverConfig.html#a3acad50754218e242daac2892ea20883',1,'kvh_driver::cfg::KVHDriverConfig.config_description()']]],
   ['current_5fworkspace',['CURRENT_WORKSPACE',['../namespace__setup__util.html#adc1d3f8a260ac546e927ab07cc92f266',1,'_setup_util']]]
 ];

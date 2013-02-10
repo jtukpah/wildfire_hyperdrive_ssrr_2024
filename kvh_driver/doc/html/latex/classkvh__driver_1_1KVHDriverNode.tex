@@ -1,0 +1,192 @@
+\section{kvh\-\_\-driver\-:\-:\-K\-V\-H\-Driver\-Node \-Class \-Reference}
+\label{classkvh__driver_1_1KVHDriverNode}\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+
+
+{\ttfamily \#include $<$kvh\-\_\-driver\-\_\-node.\-h$>$}
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-K\-V\-H\-Driver\-Node} (ros\-::\-Node\-Handle \&nh)
+\item 
+virtual {\bf $\sim$\-K\-V\-H\-Driver\-Node} ()
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf covar\-Index\-Calc} (int r, int c)
+\item 
+void {\bf dynamic\-\_\-reconfigure\-C\-B} (const {\bf \-K\-V\-H\-Driver\-Config} \&config, uint32\-\_\-t level)
+\item 
+bool {\bf state\-To\-Imu} (const \-Column\-Vector \&state, const \-Symmetric\-Matrix \&covar, sensor\-\_\-msgs\-::\-Imu message) const 
+\item 
+void {\bf update} (const ros\-::\-Timer\-Event \&event)
+\end{DoxyCompactItemize}
+\subsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+dynamic\-\_\-reconfigure\-::\-Server\*
+$<$ {\bf \-K\-V\-H\-Driver\-Config} $>$ {\bf dr\-\_\-server\-\_\-}
+\item 
+{\bf \-I\-M\-U\-Filter} $\ast$ {\bf imu\-\_\-filter\-\_\-}
+\item 
+ros\-::\-Publisher {\bf imu\-\_\-pub\-\_\-}
+\item 
+ros\-::\-Node\-Handle {\bf nh\-\_\-}
+\item 
+{\bf \-Odometry\-Filter} $\ast$ {\bf odo\-\_\-filter\-\_\-}
+\item 
+ros\-::\-Publisher {\bf odo\-\_\-pub\-\_\-}
+\item 
+ros\-::\-Duration {\bf update\-\_\-frequency\-\_\-}
+\item 
+ros\-::\-Timer {\bf update\-\_\-timer\-\_\-}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 26 of file kvh\-\_\-driver\-\_\-node.\-h.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!\-K\-V\-H\-Driver\-Node@{\-K\-V\-H\-Driver\-Node}}
+\index{\-K\-V\-H\-Driver\-Node@{\-K\-V\-H\-Driver\-Node}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{\-K\-V\-H\-Driver\-Node}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-K\-V\-H\-Driver\-Node\-::\-K\-V\-H\-Driver\-Node} (
+\begin{DoxyParamCaption}
+\item[{ros\-::\-Node\-Handle \&}]{nh}
+\end{DoxyParamCaption}
+)}\label{classkvh__driver_1_1KVHDriverNode_aa1237f5ac6865c88b69f4d49bd5ec024}
+
+
+\-Definition at line 24 of file kvh\-\_\-driver\-\_\-node.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!$\sim$\-K\-V\-H\-Driver\-Node@{$\sim$\-K\-V\-H\-Driver\-Node}}
+\index{$\sim$\-K\-V\-H\-Driver\-Node@{$\sim$\-K\-V\-H\-Driver\-Node}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{$\sim$\-K\-V\-H\-Driver\-Node}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-K\-V\-H\-Driver\-Node\-::$\sim$\-K\-V\-H\-Driver\-Node} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classkvh__driver_1_1KVHDriverNode_ad06a278d61fffb92784943fa98130fb6}
+
+
+\-Definition at line 88 of file kvh\-\_\-driver\-\_\-node.\-cpp.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!covar\-Index\-Calc@{covar\-Index\-Calc}}
+\index{covar\-Index\-Calc@{covar\-Index\-Calc}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{covar\-Index\-Calc}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-K\-V\-H\-Driver\-Node\-::covar\-Index\-Calc} (
+\begin{DoxyParamCaption}
+\item[{int}]{r, }
+\item[{int}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_ab57a0e2726b8124400da1ca6c7d22c36}
+
+
+\-Definition at line 154 of file kvh\-\_\-driver\-\_\-node.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!dynamic\-\_\-reconfigure\-C\-B@{dynamic\-\_\-reconfigure\-C\-B}}
+\index{dynamic\-\_\-reconfigure\-C\-B@{dynamic\-\_\-reconfigure\-C\-B}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{dynamic\-\_\-reconfigure\-C\-B}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-K\-V\-H\-Driver\-Node\-::dynamic\-\_\-reconfigure\-C\-B} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-K\-V\-H\-Driver\-Config} \&}]{config, }
+\item[{uint32\-\_\-t}]{level}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_ab63dcc2f2cc2e5f2116e9009f4aabdde}
+
+
+\-Definition at line 159 of file kvh\-\_\-driver\-\_\-node.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!state\-To\-Imu@{state\-To\-Imu}}
+\index{state\-To\-Imu@{state\-To\-Imu}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{state\-To\-Imu}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-K\-V\-H\-Driver\-Node\-::state\-To\-Imu} (
+\begin{DoxyParamCaption}
+\item[{const \-Column\-Vector \&}]{state, }
+\item[{const \-Symmetric\-Matrix \&}]{covar, }
+\item[{sensor\-\_\-msgs\-::\-Imu}]{message}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_aeb1fc161a8b7c6c2953b6ae8762da24b}
+
+
+\-Definition at line 121 of file kvh\-\_\-driver\-\_\-node.\-cpp.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!update@{update}}
+\index{update@{update}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-K\-V\-H\-Driver\-Node\-::update} (
+\begin{DoxyParamCaption}
+\item[{const ros\-::\-Timer\-Event \&}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_ad1ff4c080574ac985439e5063715368b}
+
+
+\-Definition at line 94 of file kvh\-\_\-driver\-\_\-node.\-cpp.
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!dr\-\_\-server\-\_\-@{dr\-\_\-server\-\_\-}}
+\index{dr\-\_\-server\-\_\-@{dr\-\_\-server\-\_\-}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{dr\-\_\-server\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}dynamic\-\_\-reconfigure\-::\-Server$<${\bf \-K\-V\-H\-Driver\-Config}$>$ {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node\-::dr\-\_\-server\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_af3d5caf127d2491d59ac17c3bdc93f27}
+
+
+\-Definition at line 51 of file kvh\-\_\-driver\-\_\-node.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!imu\-\_\-filter\-\_\-@{imu\-\_\-filter\-\_\-}}
+\index{imu\-\_\-filter\-\_\-@{imu\-\_\-filter\-\_\-}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{imu\-\_\-filter\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-I\-M\-U\-Filter}$\ast$ {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node\-::imu\-\_\-filter\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_ad3a224735ff51b01274daa0ff6a29696}
+
+
+\-Definition at line 42 of file kvh\-\_\-driver\-\_\-node.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!imu\-\_\-pub\-\_\-@{imu\-\_\-pub\-\_\-}}
+\index{imu\-\_\-pub\-\_\-@{imu\-\_\-pub\-\_\-}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{imu\-\_\-pub\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}ros\-::\-Publisher {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node\-::imu\-\_\-pub\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_ae863e7d5ffd48d603fbdabd7dd38a785}
+
+
+\-Definition at line 46 of file kvh\-\_\-driver\-\_\-node.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!nh\-\_\-@{nh\-\_\-}}
+\index{nh\-\_\-@{nh\-\_\-}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{nh\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}ros\-::\-Node\-Handle {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node\-::nh\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_a32b6d62552cbaf9b58711080b5cffc87}
+
+
+\-Definition at line 44 of file kvh\-\_\-driver\-\_\-node.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!odo\-\_\-filter\-\_\-@{odo\-\_\-filter\-\_\-}}
+\index{odo\-\_\-filter\-\_\-@{odo\-\_\-filter\-\_\-}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{odo\-\_\-filter\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Odometry\-Filter}$\ast$ {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node\-::odo\-\_\-filter\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_a92545a2056881b360f02485cc1d3d999}
+
+
+\-Definition at line 43 of file kvh\-\_\-driver\-\_\-node.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!odo\-\_\-pub\-\_\-@{odo\-\_\-pub\-\_\-}}
+\index{odo\-\_\-pub\-\_\-@{odo\-\_\-pub\-\_\-}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{odo\-\_\-pub\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}ros\-::\-Publisher {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node\-::odo\-\_\-pub\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_aa966af9b9f45637f0f1cb65c07c99305}
+
+
+\-Definition at line 45 of file kvh\-\_\-driver\-\_\-node.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!update\-\_\-frequency\-\_\-@{update\-\_\-frequency\-\_\-}}
+\index{update\-\_\-frequency\-\_\-@{update\-\_\-frequency\-\_\-}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{update\-\_\-frequency\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}ros\-::\-Duration {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node\-::update\-\_\-frequency\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_a0e518ab9f446d6850c9305602e36cfde}
+
+
+\-Definition at line 48 of file kvh\-\_\-driver\-\_\-node.\-h.
+
+\index{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}!update\-\_\-timer\-\_\-@{update\-\_\-timer\-\_\-}}
+\index{update\-\_\-timer\-\_\-@{update\-\_\-timer\-\_\-}!kvh_driver::KVHDriverNode@{kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node}}
+\subsubsection[{update\-\_\-timer\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}ros\-::\-Timer {\bf kvh\-\_\-driver\-::\-K\-V\-H\-Driver\-Node\-::update\-\_\-timer\-\_\-}\hspace{0.3cm}{\ttfamily  [private]}}\label{classkvh__driver_1_1KVHDriverNode_ade628598424122057bfac93a30011bea}
+
+
+\-Definition at line 49 of file kvh\-\_\-driver\-\_\-node.\-h.
+
+
+
+\-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+{\bf kvh\-\_\-driver\-\_\-node.\-h}\item 
+{\bf kvh\-\_\-driver\-\_\-node.\-cpp}\end{DoxyCompactItemize}

@@ -12,16 +12,18 @@ var searchData=
   ['imu_5fx_5fdot_5fdot_5fstate',['IMU_X_DOT_DOT_STATE',['../classkvh__driver_1_1constants.html#a085387ef817f7a3ab42b207265d1e766',1,'kvh_driver::constants']]],
   ['imu_5fy_5fdot_5fdot_5fstate',['IMU_Y_DOT_DOT_STATE',['../classkvh__driver_1_1constants.html#a4e2c08fe8a7bd7ac53cdbe9fe70ba3ad',1,'kvh_driver::constants']]],
   ['imu_5fz_5fdot_5fdot_5fstate',['IMU_Z_DOT_DOT_STATE',['../classkvh__driver_1_1constants.html#a3a541a5cf83ddffd37610ff3495a0a8d',1,'kvh_driver::constants']]],
+  ['imucb',['imuCB',['../kvh__test__node_8cpp.html#a74575a4e7ae67ccd175d0b79c1872cb6',1,'kvh_test_node.cpp']]],
   ['imufilter',['IMUFilter',['../classkvh__driver_1_1IMUFilter.html',1,'kvh_driver']]],
   ['imufilter',['IMUFilter',['../classkvh__driver_1_1IMUFilter.html#a4dcb6570d63cadd3d19a3f2cf1ebd3cb',1,'kvh_driver::IMUFilter']]],
-  ['inf',['inf',['../namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#ae85810da91ab63589b77b73ef6363db2',1,'kvh_driver::cfg::KVHParamsConfig']]],
-  ['init',['init',['../classkvh__driver_1_1IMUFilter.html#ae25fb3707744de06747b5ab143aae355',1,'kvh_driver::IMUFilter::init()'],['../classkvh__driver_1_1OdometryFilter.html#aab3521e244a69c7dfc93252f7fe3f978',1,'kvh_driver::OdometryFilter::init()']]],
+  ['inf',['inf',['../namespacekvh__driver_1_1cfg_1_1KVHParamsConfig.html#ae85810da91ab63589b77b73ef6363db2',1,'kvh_driver::cfg::KVHParamsConfig.inf()'],['../namespacekvh__driver_1_1cfg_1_1KVHDriverConfig.html#a68d25215886f6feff17d55823a5b6d13',1,'kvh_driver::cfg::KVHDriverConfig.inf()']]],
+  ['init',['init',['../classkvh__driver_1_1LinearFilter.html#a5ab8cff7005b7507c6589822c3424bc0',1,'kvh_driver::LinearFilter']]],
   ['input_5fsize',['INPUT_SIZE',['../classkvh__driver_1_1constants.html#a741a500c42bb931ef5184d38bebbab63',1,'kvh_driver::constants']]],
+  ['input_5fsize_5f',['input_size_',['../classkvh__driver_1_1LinearFilter.html#a9cd89e1945083515c90befa643b68bbd',1,'kvh_driver::LinearFilter']]],
   ['ins',['INS',['../namespacekvh__driver.html#a890ee9041645a980e5f8a5c93d32af52',1,'kvh_driver']]],
   ['installspace',['INSTALLSPACE',['../namespace05.html#af59f8eaff3efa39540011feb5adfd63b',1,'05']]],
   ['interrogate_5fsetup_5fdot_5fpy',['interrogate_setup_dot_py',['../namespaceinterrogate__setup__dot__py.html',1,'']]],
   ['interrogate_5fsetup_5fdot_5fpy_2epy',['interrogate_setup_dot_py.py',['../interrogate__setup__dot__py_8py.html',1,'']]],
   ['is_5fdarwin',['IS_DARWIN',['../namespace__setup__util.html#aecbb100ce6f94bb3c7e16d58fde05f96',1,'_setup_util']]],
   ['is_5fwindows',['IS_WINDOWS',['../namespace__setup__util.html#a6fe69c2dbd92959b6651a28cbb846e6e',1,'_setup_util']]],
-  ['isinitialized',['isInitialized',['../classkvh__driver_1_1IMUFilter.html#a0aad069c4c0df8b8d6b1235aa28cfba5',1,'kvh_driver::IMUFilter::isInitialized()'],['../classkvh__driver_1_1OdometryFilter.html#ac8b46da7fda38636041f34f4cc7cf1dd',1,'kvh_driver::OdometryFilter::isInitialized()']]]
+  ['isinitialized',['isInitialized',['../classkvh__driver_1_1LinearFilter.html#ab2ae4613ac40a83d1149ca60e47c9157',1,'kvh_driver::LinearFilter']]]
 ];

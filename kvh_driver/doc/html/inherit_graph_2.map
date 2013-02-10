@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classkvh__driver_1_1KVHDriverNode.html" title="kvh_driver::KVHDriverNode" alt="" coords="5,5,189,35"/>
+<area shape="rect" id="node1" href="$classkvh__driver_1_1KVHDriverConfig_1_1AbstractGroupDescription.html" title="kvh_driver::KVHDriverConfig::AbstractGroupDescription" alt="" coords="5,5,355,35"/>
+<area shape="rect" id="node3" href="$classkvh__driver_1_1KVHDriverConfig_1_1GroupDescription.html" title="kvh_driver::KVHDriverConfig::GroupDescription\&lt; T, PT \&gt;" alt="" coords="403,5,760,35"/>
 </map>
