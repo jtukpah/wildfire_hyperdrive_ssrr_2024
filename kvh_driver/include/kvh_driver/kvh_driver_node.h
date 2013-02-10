@@ -37,7 +37,7 @@ private:
 
 	int covarIndexCalc(int r, int c);
 
-	void dynamic_reconfigureCB(const KVHDriverConfig& config);
+	void dynamic_reconfigureCB(const KVHDriverConfig& config, uint32_t level);
 
 	IMUFilter*       imu_filter_;
 	OdometryFilter*  odo_filter_;
