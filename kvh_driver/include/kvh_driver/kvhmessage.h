@@ -6,8 +6,11 @@
  * @brief \todo
  */
 
+<<<<<<< HEAD
 #ifndef KVHMESSAGE_H_
 #define KVHMESSAGE_H_
+=======
+>>>>>>> a2b40aa9b67f013b715d09cf1ad546793c1d036f
 //License File
 
 //****************SYSTEM DEPENDANCIES**************************//
@@ -15,6 +18,13 @@
 //*****************LOCAL DEPENDANCIES**************************//
 
 //**********************NAMESPACES*****************************//
+<<<<<<< HEAD
+=======
+
+#ifndef KVHMESSAGE_H_
+#define KVHMESSAGE_H_
+
+>>>>>>> a2b40aa9b67f013b715d09cf1ad546793c1d036f
 /**
  * @author Adam Panzica
  * @brief A container for holding the standard KVH messages returned by devices
@@ -63,6 +73,5 @@ typedef union KVHStatusByte_t
 	};
 	uint8_t      byte_;       ///Raw status byte
 }KVHStatusByte;
-
 
 #endif /* KVHMESSAGE_H_ */
