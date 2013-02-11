@@ -31,9 +31,11 @@ public:
 
 private:
 
+	void testCB(sensor_msgs::ImuConstPtr message);
+
 	void update(const ros::TimerEvent& event);
 
-	bool stateToImu(const ColumnVector& state, const SymmetricMatrix& covar, sensor_msgs::Imu message) const;
+	bool stateToImu(const ColumnVector& state, const SymmetricMatrix& covar, sensor_msgs::Imu& message) const;
 
 	int covarIndexCalc(int r, int c);
 
@@ -45,11 +47,13 @@ private:
 	void drDevAdrCB(const std::string& device_address);
 	void drPollRateCB(int poll_rate);
 
+
 	IMUFilter*       imu_filter_;
 	OdometryFilter*  odo_filter_;
 	ros::NodeHandle  nh_;
 	ros::Publisher   odo_pub_;
 	ros::Publisher   imu_pub_;
+	ros::Subscriber  test_sub_;
 
 	ros::Duration    update_frequency_;
 	ros::Timer       update_timer_;
