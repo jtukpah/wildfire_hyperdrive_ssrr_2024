@@ -82,11 +82,37 @@ public:
 class DeviceCalibration
 {
 private:
-	double sensor_noise_x_;
+	double linear_noise_x_;
+	double linear_noise_y_;
+	double linear_noise_z_;
+	double linear_covar_x_;
+	double linear_covar_y_;
+	double linear_covar_z_;
+	double angular_noise_x_;
+	double angular_noise_y_;
+	double angular_noise_z_;
+	double angular_covar_x_;
+	double angular_covar_y_;
+	double angular_covar_z_;
 public:
 	DeviceCalibration();
-	DeviceCalibration(double sensor_noise_x);
-	double sensor_noise_x();
+	DeviceCalibration(
+			  double linear_noise_x, double linear_noise_y, double linear_noise_z,
+			  double linear_covar_x, double linear_covar_y, double linear_covar_z,
+			  double angular_noise_x, double angular_noise_y, double angular_noise_z,
+			  double angular_covar_x, double angular_covar_y, double angular_covar_z);
+	double linear_noise_x();
+	double linear_noise_y();
+	double linear_noise_z();
+	double linear_covar_x();
+	double linear_covar_y();
+	double linear_covar_z();
+	double angular_noise_x();
+	double angular_noise_y();
+	double angular_noise_z();
+	double angular_covar_x();
+	double angular_covar_y();
+	double angular_covar_z();
 };
 
 

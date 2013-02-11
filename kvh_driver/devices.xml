@@ -10,9 +10,30 @@
       </serial>
     </configuration>
     <calibration>
-      <sensor_noise>
-	<x>10</x>
-      </sensor_noise>
+      <linear>
+	<noise>
+	  <x>0.1</x>
+	  <y>0.1</y>
+	  <z>0.1</z>
+	</noise>
+	<covar>
+	  <x>0.1</x>
+	  <y>0.1</y>
+	  <z>0.1</z>
+	</covar>
+      </linear>
+      <angular>
+	<noise>
+	  <x>0.1</x>
+	  <y>0.1</y>
+	  <z>0.1</z>
+	</noise>
+	<covar>
+	  <x>0.1</x>
+	  <y>0.1</y>
+	  <z>0.1</z>
+	</covar>
+      </angular>
     </calibration>
   </CG-5100>
   <DSP-1750>
@@ -26,9 +47,30 @@
       </serial>
     </configuration>
     <calibration>
-      <sensor_noise>
-	<x>11</x>
-      </sensor_noise>
+      <linear>
+	<noise>
+	  <x>0.1</x>
+	  <y>0.1</y>
+	  <z>0.1</z>
+	</noise>
+	<covar>
+	  <x>0.1</x>
+	  <y>0.1</y>
+	  <z>0.1</z>
+	</covar>
+      </linear>
+      <angular>
+	<noise>
+	  <x>0.1</x>
+	  <y>0.1</y>
+	  <z>0.1</z>
+	</noise>
+	<covar>
+	  <x>0.1</x>
+	  <y>0.1</y>
+	  <z>0.1</z>
+	</covar>
+      </angular>
     </calibration>
   </DSP-1750>
 </devices>

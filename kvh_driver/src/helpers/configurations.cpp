@@ -64,14 +64,57 @@ bool DeviceConfiguration::serial_flow_control(){
  * kvh_driver::DeviceCalibration
  */
 DeviceCalibration::DeviceCalibration():
-	sensor_noise_x_(0){
+	linear_noise_x_(0), linear_noise_y_(0), linear_noise_z_(0),
+	linear_covar_x_(0), linear_covar_y_(0), linear_covar_z_(0),
+	angular_noise_x_(0), angular_noise_y_(0), angular_noise_z_(0),
+	angular_covar_x_(0), angular_covar_y_(0), angular_covar_z_(0){
 }
-DeviceCalibration::DeviceCalibration(double sensor_noise_x):
-	sensor_noise_x_(sensor_noise_x){
+DeviceCalibration::DeviceCalibration(
+			  double linear_noise_x, double linear_noise_y, double linear_noise_z,
+			  double linear_covar_x, double linear_covar_y, double linear_covar_z,
+			  double angular_noise_x, double angular_noise_y, double angular_noise_z,
+			  double angular_covar_x, double angular_covar_y, double angular_covar_z):
+	linear_noise_x_(linear_noise_x), linear_noise_y_(linear_noise_y), linear_noise_z_(linear_noise_z),
+	linear_covar_x_(linear_covar_x), linear_covar_y_(linear_covar_y), linear_covar_z_(linear_covar_z),
+	angular_noise_x_(angular_noise_x), angular_noise_y_(angular_noise_y), angular_noise_z_(angular_noise_z),
+	angular_covar_x_(angular_covar_x), angular_covar_y_(angular_covar_y), angular_covar_z_(angular_covar_z){
 }
 
-double DeviceCalibration::sensor_noise_x(){
-	return sensor_noise_x_;
+double DeviceCalibration::linear_noise_x(){
+	return linear_noise_x_;
+}
+double DeviceCalibration::linear_noise_y(){
+	return linear_noise_y_;
+}
+double DeviceCalibration::linear_noise_z(){
+	return linear_noise_z_;
+}
+double DeviceCalibration::linear_covar_x(){
+	return linear_covar_x_;
+}
+double DeviceCalibration::linear_covar_y(){
+	return linear_covar_y_;
+}
+double DeviceCalibration::linear_covar_z(){
+	return linear_covar_z_;
+}
+double DeviceCalibration::angular_noise_x(){
+	return angular_noise_x_;
+}
+double DeviceCalibration::angular_noise_y(){
+	return angular_noise_y_;
+}
+double DeviceCalibration::angular_noise_z(){
+	return angular_noise_z_;
+}
+double DeviceCalibration::angular_covar_x(){
+	return angular_covar_x_;
+}
+double DeviceCalibration::angular_covar_y(){
+	return angular_covar_y_;
+}
+double DeviceCalibration::angular_covar_z(){
+	return angular_covar_z_;
 }
 
 ConfigurationManager::ConfigurationManager(){
@@ -126,8 +169,22 @@ DeviceConfiguration ConfigurationManager::load_configuration(ptree& device_tree)
 
 DeviceCalibration ConfigurationManager::load_calibration(ptree& device_tree){
 	ptree calibration_tree = device_tree.get_child("calibration");
-	double sensor_noise_x = calibration_tree.get<double>("sensor_noise.x");
-	return DeviceCalibration(sensor_noise_x);
+	double linear_noise_x = calibration_tree.get<double>("linear.noise.x");
+	double linear_noise_y = calibration_tree.get<double>("linear.noise.y");
+	double linear_noise_z = calibration_tree.get<double>("linear.noise.z");
+	double linear_covar_x = calibration_tree.get<double>("linear.covar.x");
+	double linear_covar_y = calibration_tree.get<double>("linear.covar.y");
+	double linear_covar_z = calibration_tree.get<double>("linear.covar.z");
+	double angular_noise_x = calibration_tree.get<double>("angular.noise.x");
+	double angular_noise_y = calibration_tree.get<double>("angular.noise.y");
+	double angular_noise_z = calibration_tree.get<double>("angular.noise.z");
+	double angular_covar_x = calibration_tree.get<double>("angular.covar.x");
+	double angular_covar_y = calibration_tree.get<double>("angular.covar.y");
+	double angular_covar_z = calibration_tree.get<double>("angular.covar.z");
+	return DeviceCalibration(linear_noise_x, linear_noise_y, linear_noise_z,
+				 linear_covar_x, linear_covar_y, linear_covar_z,
+				 angular_noise_x, angular_noise_y, angular_noise_z,
+				 angular_covar_x, angular_covar_y, angular_covar_z);
 }
 
 
