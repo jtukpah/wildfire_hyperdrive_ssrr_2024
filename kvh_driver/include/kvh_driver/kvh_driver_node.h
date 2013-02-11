@@ -39,6 +39,12 @@ private:
 
 	void dynamic_reconfigureCB(const KVHDriverConfig& config, uint32_t level);
 
+	void drFilterCB(bool filter);
+	void drUpdateRateCB(int update_freq);
+	void drOutputTopicCB(const std::string& output_topic);
+	void drDevAdrCB(const std::string& device_address);
+	void drPollRateCB(int poll_rate);
+
 	IMUFilter*       imu_filter_;
 	OdometryFilter*  odo_filter_;
 	ros::NodeHandle  nh_;

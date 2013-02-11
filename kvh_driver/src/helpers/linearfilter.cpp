@@ -87,29 +87,29 @@ bool LinearFilter::update(const ColumnVector& input, const ColumnVector& measure
 		//Check to make sure sizes match up
 		if(input.size() == this->input_size_ && measurement.size()==this->measurement_size_)
 		{
-			ROS_INFO("Performing Filter Update with input size %d,%d measurement size %d,%d...", input.size(), this->input_size_, measurement.size(), this->measurement_size_);;
+			//ROS_INFO("Performing Filter Update with input size %d,%d measurement size %d,%d...", input.size(), this->input_size_, measurement.size(), this->measurement_size_);;
 			//Perform filter update based on the type of input/measurement available
 			if(this->input_size_!=0 && this->measurement_size_!=0)
 			{
-				ROS_INFO("I'm Performing a Full Filter Update (u+z)");
+				//ROS_INFO("I'm Performing a Full Filter Update (u+z)");
 				this->filter_->Update(this->sys_model_, input, this->mes_model_, measurement);
 			}
 			else if(this->input_size_==0&&this->measurement_size_!=0)
 			{
-				ROS_INFO("I'm Performing a Partial Filter Update (z)");
+				//ROS_INFO("I'm Performing a Partial Filter Update (z)");
 				this->filter_->Update(this->sys_model_, this->mes_model_, measurement);
 			}
 			else if(this->input_size_!=0 && this->measurement_size_==0)
 			{
-				ROS_INFO("I'm Performing a Partial Filter Update (z)");
+				//ROS_INFO("I'm Performing a Partial Filter Update (z)");
 				this->filter_->Update(this->sys_model_, input);
 			}
 			else if(this->input_size_==0 && this->measurement_size_ ==0)
 			{
-				ROS_INFO("I'm Performing a Partial Filter Update (none)");
+				//ROS_INFO("I'm Performing a Partial Filter Update (none)");
 				this->filter_->Update(this->sys_model_);
 			}
-			ROS_INFO("Getting New Prior...");
+			//ROS_INFO("Getting New Prior...");
 			this->prior_ = this->filter_->PostGet();
 			return true;
 		}

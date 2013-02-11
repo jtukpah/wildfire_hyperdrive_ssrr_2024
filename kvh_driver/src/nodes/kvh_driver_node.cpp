@@ -93,7 +93,7 @@ KVHDriverNode::~KVHDriverNode()
 
 void KVHDriverNode::update(const ros::TimerEvent& event)
 {
-	ROS_INFO("I'm Performing a Update!");
+	//ROS_INFO("I'm Performing a Update!");
 	//TODO alternate what happens based on if IMU, Odom or both/none are being filtered
 	if(this->imu_filter_->isInitialized())
 	{
@@ -163,7 +163,56 @@ void KVHDriverNode::dynamic_reconfigureCB(const KVHDriverConfig& config, uint32_
 			      <<"\nFilter: "        <<config.filter
 			      <<"\nOutput Topic:"   <<config.output_topic
 			      <<"\nPoll Rate"       <<config.poll_rate
-			      <<"\nUpdate Frequency"<<config.update_frequency);
+			      <<"\nUpdate Frequency"<<config.update_frequency
+			      <<"\nLevel: "         <<level);
+	//Check for output topic change
+	if((level & 0b1) > 0)
+	{
+		this->drOutputTopicCB(config.output_topic);
+	}
+	//Check for update frequency change
+	if((level & 0b10) > 0)
+	{
+		this->drUpdateRateCB(config.update_frequency);
+	}
+	//Check for filter change
+	if((level & 0b100) > 0)
+	{
+		this->drFilterCB(config.filter);
+	}
+	//Check for device address change
+	if((level & 0b1000) > 0)
+	{
+		this->drDevAdrCB(config.device_address);
+	}
+	//Check for poll rate change
+	if((level & 0b10000) > 0)
+	{
+		this->drPollRateCB(config.poll_rate);
+	}
+}
+
+void KVHDriverNode::drFilterCB(bool filter)
+{
+	ROS_INFO_STREAM("I'm "<<((filter)?"Enabling":"Disabling")<<" The Output Filter!");
+}
+void KVHDriverNode::drUpdateRateCB(int update_freq)
+{
+	ROS_INFO_STREAM("I'm Setting the Update Frequency To "<<update_freq<<"Hz");
+	ros::Duration update(1.0/((double)update_freq));
+	this->update_timer_.setPeriod(update);
+}
+void KVHDriverNode::drOutputTopicCB(const std::string& output_topic)
+{
+	ROS_INFO_STREAM("I'm Setting the Output Topic to "<<output_topic);
+}
+void KVHDriverNode::drDevAdrCB(const std::string& device_address)
+{
+	ROS_INFO_STREAM("I'm Setting the Device Address to "<<device_address);
+}
+void KVHDriverNode::drPollRateCB(int poll_rate)
+{
+	ROS_INFO_STREAM("I'm Setting the Poll Rate to "<<poll_rate<<"Hz");
 }
 
 int main(int argc, char **argv) {
