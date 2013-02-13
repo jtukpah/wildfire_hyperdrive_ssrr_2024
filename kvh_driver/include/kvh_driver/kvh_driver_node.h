@@ -15,6 +15,7 @@
 //******************* SYSTEM DEPENDANCIES ****************//
 #include<ros/ros.h>
 #include<dynamic_reconfigure/server.h>
+#include<boost/circular_buffer.hpp>
 //******************* LOCAL DEPENDANCIES ****************//
 #include<kvh_driver/KVHDriverConfig.h>
 #include<kvh_driver/imu_filter.h>
@@ -25,6 +26,9 @@ namespace kvh_driver
 
 class KVHDriverNode
 {
+private:
+	typedef boost::shared_ptr<ColumnVector> ColumnVectorPtr;
+	typedef boost::circular_buffer<ColumnVectorPtr> Buffer;
 public:
 	KVHDriverNode(ros::NodeHandle& nh);
 	virtual ~KVHDriverNode();
@@ -34,6 +38,8 @@ private:
 	void testCB(sensor_msgs::ImuConstPtr message);
 
 	void update(const ros::TimerEvent& event);
+
+	void poll(const ros::TimerEvent& event);
 
 	bool stateToImu(const ColumnVector& state, const SymmetricMatrix& covar, sensor_msgs::Imu& message) const;
 
@@ -47,6 +53,7 @@ private:
 	void drDevAdrCB(const std::string& device_address);
 	void drPollRateCB(int poll_rate);
 
+	Buffer measurement_buffer_;
 
 	IMUFilter*       imu_filter_;
 	OdometryFilter*  odo_filter_;
@@ -56,7 +63,10 @@ private:
 	ros::Subscriber  test_sub_;
 
 	ros::Duration    update_frequency_;
+	ros::Duration    poll_frequency_;
 	ros::Timer       update_timer_;
+	ros::Timer		 poll_timer_;
+
 
 	dynamic_reconfigure::Server<KVHDriverConfig> dr_server_;
 };

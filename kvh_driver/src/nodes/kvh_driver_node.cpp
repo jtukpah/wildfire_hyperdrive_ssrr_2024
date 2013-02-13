@@ -22,6 +22,7 @@ void testCallback(kvh_driver::KVHDriverConfig& config, uint32_t levels)
  */
 
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
+		        measurement_buffer_(2),
 				imu_filter_(NULL),
 				odo_filter_(NULL),
 				nh_(nh)
@@ -83,6 +84,11 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 	this->update_frequency_ = ros::Duration(1.0/100.0); //TODO actually get this parameter from nh_
 	this->update_timer_ = this->nh_.createTimer(this->update_frequency_, &KVHDriverNode::update, this);
 
+	ROS_INFO("Registering Polling Timer...");
+	//Set up the poll timer
+	this->poll_frequency_ = ros::Duration(1.0/1000.0); //TODO actually get this parameter from nh_
+	this->poll_timer_     = this->nh_.createTimer(this->poll_frequency_, &KVHDriverNode::poll, this);
+
 	ros::NodeHandle nh_p("~");
 	bool test = false;
 	nh_p.getParam("test", test);
@@ -105,17 +111,38 @@ void KVHDriverNode::testCB(sensor_msgs::ImuConstPtr message)
 			<<"\n Stamp: "<<message->header.stamp
 			<<"\n Linear:\n"<<message->linear_acceleration
 			<<"\n Angular:\n"<<message->angular_velocity);
-	ColumnVector input(0);
-	input       = 0;
-	ColumnVector measurement(constants::IMU_STATE_SIZE());
-	measurement = 0;
-	measurement(constants::IMU_RX_DOT_STATE())    = message->angular_velocity.x;
-	measurement(constants::IMU_RY_DOT_STATE())    = message->angular_velocity.y;
-	measurement(constants::IMU_RZ_DOT_STATE())    = message->angular_velocity.z;
-	measurement(constants::IMU_X_DOT_DOT_STATE()) = message->linear_acceleration.x;
-	measurement(constants::IMU_Y_DOT_DOT_STATE()) = message->linear_acceleration.y;
-	measurement(constants::IMU_Z_DOT_DOT_STATE()) = message->linear_acceleration.z;
-	this->imu_filter_->update(input, measurement);
+	ColumnVectorPtr measurement(new ColumnVector(constants::IMU_STATE_SIZE()));
+	*measurement = 0;
+	(*measurement)(constants::IMU_RX_DOT_STATE())    = message->angular_velocity.x;
+	(*measurement)(constants::IMU_RY_DOT_STATE())    = message->angular_velocity.y;
+	(*measurement)(constants::IMU_RZ_DOT_STATE())    = message->angular_velocity.z;
+	(*measurement)(constants::IMU_X_DOT_DOT_STATE()) = message->linear_acceleration.x;
+	(*measurement)(constants::IMU_Y_DOT_DOT_STATE()) = message->linear_acceleration.y;
+	(*measurement)(constants::IMU_Z_DOT_DOT_STATE()) = message->linear_acceleration.z;
+	this->measurement_buffer_.push_back(measurement);
+}
+
+void KVHDriverNode::poll(const ros::TimerEvent& event)
+{
+	if(this->imu_filter_->isInitialized())
+	{
+		if(this->measurement_buffer_.size()!=0)
+		{
+			ColumnVectorPtr measurement(this->measurement_buffer_.back());
+			this->measurement_buffer_.pop_back();
+			ColumnVector input(0);
+			input = 0;
+			this->imu_filter_->update(input,*measurement);
+		}
+		else
+		{
+			this->imu_filter_->update();
+		}
+	}
+	else
+	{
+		ROS_ERROR("Cannot perform update on an uninitialized filter");
+	}
 }
 
 void KVHDriverNode::update(const ros::TimerEvent& event)
@@ -124,13 +151,6 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 	//TODO alternate what happens based on if IMU, Odom or both/none are being filtered
 	if(this->imu_filter_->isInitialized())
 	{
-		ColumnVector input(0);
-		input       = 0;
-		ColumnVector measurement(constants::IMU_STATE_SIZE());
-		measurement = 0;
-		//TODO actually generate real input from sensor
-		this->imu_filter_->update();
-
 		//Build and publish message
 		ColumnVector     state(constants::IMU_STATE_SIZE());
 		SymmetricMatrix  covar(constants::IMU_STATE_SIZE(),constants::IMU_STATE_SIZE());
