@@ -25,7 +25,7 @@ public:
 		noise_gen_(NULL)
 	{
 		mean_     = 0;
-		std_div_  = 1;
+		std_div_  = 0.001;
 		test_data_= false;
 		poll_rate_= 1000;
 		rot_x_    = 0;
@@ -41,8 +41,8 @@ public:
 		nh_p.getParam("std",       std_div_);
 		nh_p.getParam("poll_rate", poll_rate_);
 		nh_p.getParam("rot_x",     rot_x_);
-		nh_p.getParam("rot_y",     rot_x_);
-		nh_p.getParam("rot_z",     rot_x_);
+		nh_p.getParam("rot_y",     rot_y_);
+		nh_p.getParam("rot_z",     rot_z_);
 		nh_p.getParam("acc_x",     acc_x_);
 		nh_p.getParam("acc_y",     acc_y_);
 		nh_p.getParam("acc_z",     acc_z_);
@@ -89,7 +89,7 @@ private:
 
 	double rnd()
 	{
-		return scale_*(2.0*(*this->noise_gen_)()-1.0);
+		return scale_*(*this->noise_gen_)();
 	}
 
 	double mean_;
