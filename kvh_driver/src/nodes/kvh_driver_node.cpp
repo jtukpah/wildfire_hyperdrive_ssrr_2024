@@ -1,8 +1,8 @@
 /**
  * @file	kvh_driver_node.cpp
  * @date	Feb 2, 2013
- * @author	parallels
- * @brief	//TODO fill in detailed discription here
+ * @author	Adam Panzica
+ * @brief	//TODO fill in detailed description here
  */
 
 /*
