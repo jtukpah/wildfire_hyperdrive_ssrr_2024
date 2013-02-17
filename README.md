@@ -5,7 +5,8 @@ ROS driver for KVH IMU's
 
 Development
 -----------
-Checkout the repository to the src directory of the catkin worksapce (`${catkin_workspace}/src/kvh`). To build the packages return to the catkin workspace directory and then run `catkin_make`. To do a clean build run `rm -r build devel`.
+The code can be checked out using the following command.
+>$rosws set kvh https://github.com/RIVeR-Lab/kvh.git --git
 
 The development branch is the 'in-flux' version of the master branch. Code which has been at least tested for basic functionality, but not for full validation, should be merged into this branch.
 
@@ -14,4 +15,4 @@ When creating/modify data for the development branch, create a new 'topic' branc
 
 Packages
 --------
-- **kvh_driver**: ROS driver for KVH IMU's (rosbuild)
+- **kvh_driver**: ROS driver for KVH IMU's
