@@ -118,7 +118,7 @@ void KVHDriverNode::testCB(sensor_msgs::ImuConstPtr message)
 
 void KVHDriverNode::poll(const ros::TimerEvent& event)
 {
-	if(this->imu_filter_->isInitialized())
+	if(this->imu_filter_->isInitialized()&&this->should_filter_)
 	{
 		if(this->measurement_buffer_.size()!=0)
 		{
@@ -133,6 +133,10 @@ void KVHDriverNode::poll(const ros::TimerEvent& event)
 			this->imu_filter_->update();
 		}
 	}
+	else if(!this->should_filter_)
+	{
+		//TODO actually get information from sensor if needed
+	}
 	else
 	{
 		ROS_ERROR("Cannot perform update on an uninitialized filter");
@@ -143,7 +147,7 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 {
 	//ROS_INFO("I'm Performing a Update!");
 	//TODO alternate what happens based on if IMU, Odom or both/none are being filtered
-	if(this->imu_filter_->isInitialized())
+	if(this->imu_filter_->isInitialized()&&this->should_filter_)
 	{
 		//Build and publish message
 		ColumnVector     state(constants::IMU_STATE_SIZE());
@@ -152,6 +156,27 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		sensor_msgs::Imu message;
 		this->stateToImu(state, covar, message);
 		this->imu_pub_.publish(message);
+	}
+	else if(!this->should_filter_)
+	{
+		//TODO right now since we're only getting test data, this just pops off the measurement buffer. Might need to change when actually getting data from sensor
+		if(this->measurement_buffer_.size()!=0)
+		{
+			ColumnVectorPtr measurement(this->measurement_buffer_.back());
+			this->measurement_buffer_.pop_back();
+			SymmetricMatrix covar(constants::IMU_STATE_SIZE());
+			//TODO properly load covariance from the sensor noise data
+			covar(constants::IMU_X_DOT_DOT_STATE(), constants::IMU_X_DOT_DOT_STATE()) = 1;
+			covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE()) = 1;
+			covar(constants::IMU_Z_DOT_DOT_STATE(), constants::IMU_Z_DOT_DOT_STATE()) = 1;
+
+			covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE()) = 1;
+			covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = 1;
+			covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = 1;
+			sensor_msgs::Imu message;
+			this->stateToImu(*measurement, covar, message);
+			this->imu_pub_.publish(message);
+		}
 	}
 	else
 	{
