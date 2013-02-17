@@ -2,7 +2,7 @@
  * @file	kvh_driver_node.cpp
  * @date	Feb 2, 2013
  * @author	Adam Panzica
- * @brief	//TODO fill in detailed description here
+ * @brief	Implementation details for KVHDriverNode class, and any other implementation needed for lvh_driver_node
  */
 
 /*
@@ -15,6 +15,7 @@
 using namespace kvh_driver;
 
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
+				should_filter_(false),
 		        measurement_buffer_(2),
 				imu_filter_(NULL),
 				odo_filter_(NULL),
@@ -235,16 +236,20 @@ void KVHDriverNode::dynamic_reconfigureCB(const KVHDriverConfig& config, uint32_
 void KVHDriverNode::drFilterCB(bool filter)
 {
 	ROS_INFO_STREAM("I'm "<<((filter)?"Enabling":"Disabling")<<" The Output Filter!");
+	this->should_filter_=filter;
 }
 void KVHDriverNode::drUpdateRateCB(int update_freq)
 {
 	ROS_INFO_STREAM("I'm Setting the Update Frequency To "<<update_freq<<"Hz");
-	ros::Duration update(1.0/((double)update_freq));
-	this->update_timer_.setPeriod(update);
+	ros::Duration new_up(1.0/((double)update_freq));
+	this->update_frequency_ = new_up;
+	this->update_timer_.setPeriod(this->update_frequency_);
 }
 void KVHDriverNode::drOutputTopicCB(const std::string& output_topic)
 {
 	ROS_INFO_STREAM("I'm Setting the Output Topic to "<<output_topic);
+	this->imu_pub_.shutdown();
+	this->imu_pub_ = this->nh_.advertise<sensor_msgs::Imu>(output_topic, 10);
 }
 void KVHDriverNode::drDevAdrCB(const std::string& device_address)
 {
@@ -253,6 +258,9 @@ void KVHDriverNode::drDevAdrCB(const std::string& device_address)
 void KVHDriverNode::drPollRateCB(int poll_rate)
 {
 	ROS_INFO_STREAM("I'm Setting the Poll Rate to "<<poll_rate<<"Hz");
+	ros::Duration new_poll(1.0/((double)poll_rate));
+	this->poll_frequency_ = new_poll;
+	this->poll_timer_.setPeriod(this->poll_frequency_);
 }
 
 int main(int argc, char **argv) {

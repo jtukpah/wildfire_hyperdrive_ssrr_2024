@@ -119,6 +119,11 @@ private:
 	void drPollRateCB(int poll_rate);
 
 	/**
+	 * Flag for signalling if output filtering should be enabled
+	 */
+	bool should_filter_;
+
+	/**
 	 * Buffer for storing new sensor data to be processed
 	 */
 	Buffer measurement_buffer_;
