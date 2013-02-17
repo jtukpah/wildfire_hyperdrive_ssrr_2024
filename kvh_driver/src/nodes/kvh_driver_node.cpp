@@ -14,13 +14,6 @@
 //*********************** NAMESPACES ********************//
 using namespace kvh_driver;
 
-/*
-void testCallback(kvh_driver::KVHDriverConfig& config, uint32_t levels)
-{
-	ROS_INFO_STREAM("Reconfigure Request: "<<config.device_address<<config.filter<<config.output_topic<<config.poll_rate<<config.update_frequency);
-}
- */
-
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 		        measurement_buffer_(2),
 				imu_filter_(NULL),
@@ -265,14 +258,6 @@ void KVHDriverNode::drPollRateCB(int poll_rate)
 int main(int argc, char **argv) {
 	ros::init(argc, argv, "kvh_driver_node");
 	ros::NodeHandle nh;
-
-	/*
-	dynamic_reconfigure::Server<kvh_driver::KVHDriverConfig> dr_server;
-	dynamic_reconfigure::Server<kvh_driver::KVHDriverConfig>::CallbackType cb;
-	cb = boost::bind(&testCallback, _1, _2);
-	dr_server.setCallback(cb);
-	ROS_INFO("Dynamic Reconfigure Bindings Active");
-	 */
 
 	ROS_INFO("Setting up the driver...");
 
