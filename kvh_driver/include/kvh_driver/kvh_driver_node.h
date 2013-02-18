@@ -37,6 +37,36 @@ private:
 
 	/**
 	 * @author Adam Panzica
+	 * @brief  Builds the IMU filter based on device parameters
+	 */
+	void buildIMUFilter();
+
+	/**
+	 * @author Adam Panzica
+	 * @brief  Builds the Odometry filter based on device parameters
+	 */
+	void buildOdomFilter();
+
+	/**
+	 * @author Adam Panzica
+	 * @brief Registers the update and poll Timers with the ros system
+	 */
+	void registerTimers();
+
+	/**
+	 * @author Adam Panzica
+	 * @brief Registers input/output topics with the ROS system
+	 */
+	void registerTopics();
+
+	/**
+	 * @author Adam Panzica
+	 * @brief Registers the dynamic_reconfigure server for the node
+	 */
+	void registerDR();
+
+	/**
+	 * @author Adam Panzica
 	 * @brief Callback for processing test IMU data
 	 * @param [in] message Message containing test IMU data
 	 */

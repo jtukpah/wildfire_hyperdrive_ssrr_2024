@@ -15,65 +15,53 @@
 using namespace kvh_driver;
 
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
-				device_address_(""),
-				should_filter_(false),
-		        measurement_buffer_(2),
-				imu_filter_(NULL),
-				odo_filter_(NULL),
-				nh_(nh)
+								device_address_(""),
+								should_filter_(false),
+								measurement_buffer_(2),
+								imu_filter_(NULL),
+								odo_filter_(NULL),
+								nh_(nh)
 {
 
-	//Register the Dynamic Reconfigure Server
-	dynamic_reconfigure::Server<KVHDriverConfig>::CallbackType cb;
-	cb = boost::bind(&KVHDriverNode::dynamic_reconfigureCB, this, _1, _2);
-	this->dr_server_.setCallback(cb);
-
-	//Build the filters
 	ROS_INFO("Building Filters....");
-	//TODO actually get the system/measurement noise/covar from nh_
-	ColumnVector system_noise(constants::IMU_STATE_SIZE());
-	system_noise   = 0.01;
-	SymmetricMatrix system_sigma_noise(constants::IMU_STATE_SIZE());
-	system_sigma_noise = 0;
-	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
-	{
-		system_sigma_noise(r,r) = 0.5;
-	}
-
-	ColumnVector measurement_noise(constants::IMU_STATE_SIZE());
-	measurement_noise   = 0.001;
-	SymmetricMatrix measurement_sigma_noise(constants::IMU_STATE_SIZE());
-	measurement_sigma_noise = 0;
-	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
-	{
-		system_sigma_noise(r,r) = 0.1;
-	}
-
-	ROS_INFO("IMU Filter noise matrices built...");
-
-	this->imu_filter_ = new IMUFilter(system_noise, system_sigma_noise, measurement_noise, measurement_sigma_noise);
-
-	//TODO Actually get the initial state estimate/covar from nh_
-	ColumnVector initial_state_estimate(constants::IMU_STATE_SIZE());
-	initial_state_estimate   = 0;
-	SymmetricMatrix initial_state_covariance(constants::IMU_STATE_SIZE());
-	initial_state_covariance = 0;
-	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
-	{
-		initial_state_covariance(r,r) = 1;
-	}
-
-	this->imu_filter_->init(initial_state_estimate, initial_state_covariance);
-
-	//TODO Build the odo_filter if that is requested
-
+	this->buildIMUFilter();
+	this->buildOdomFilter();
 
 	ROS_INFO("Setting up Publishers....");
-	//Set up the publisher
+	this->registerTopics();
+
+	//Register Timers
+	ROS_INFO("Registering Timers...");
+	this->registerTimers();
+
+	ROS_INFO("Registering with Dynamic Reconfigure...");
+	this->registerDR();
+}
+
+KVHDriverNode::~KVHDriverNode()
+{
+	if(this->imu_filter_!=NULL) delete imu_filter_;
+	if(this->odo_filter_!=NULL) delete odo_filter_;
+}
+
+void KVHDriverNode::registerTopics()
+{
 	//TODO actually get the output topic from nh_
 	std::string imu_topic("kvh/imu");
 	this->imu_pub_ = this->nh_.advertise<sensor_msgs::Imu>(imu_topic, 2);
 
+	ros::NodeHandle nh_p("~");
+	bool test = false;
+	nh_p.getParam("test", test);
+	if(test)
+	{
+		ROS_INFO("Setting up to receive test data....");
+		this->test_sub_ = this->nh_.subscribe("kvh/kvh_test_imu_data", 10, &KVHDriverNode::testCB, this);
+	}
+}
+
+void KVHDriverNode::registerTimers()
+{
 	ROS_INFO("Registering Update Timer....");
 	//Set up the update timer
 	this->update_frequency_ = ros::Duration(1.0/100.0); //TODO actually get this parameter from nh_
@@ -83,21 +71,88 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 	//Set up the poll timer
 	this->poll_frequency_ = ros::Duration(1.0/1000.0); //TODO actually get this parameter from nh_
 	this->poll_timer_     = this->nh_.createTimer(this->poll_frequency_, &KVHDriverNode::poll, this);
-
-	ros::NodeHandle nh_p("~");
-	bool test = false;
-	nh_p.getParam("test", test);
-	if(test)
-	{
-		ROS_INFO("Setting up to receive test data....");
-		this->test_sub_ = nh.subscribe("kvh/kvh_test_imu_data", 10, &KVHDriverNode::testCB, this);
-	}
 }
 
-KVHDriverNode::~KVHDriverNode()
+void KVHDriverNode::buildIMUFilter()
 {
-	if(this->imu_filter_!=NULL) delete imu_filter_;
-	if(this->odo_filter_!=NULL) delete odo_filter_;
+	//TODO actually get the system/measurement noise/covar from nh_
+	ColumnVector imu_system_noise(constants::IMU_STATE_SIZE());
+	imu_system_noise   = 0.01;
+	SymmetricMatrix imu_system_sigma_noise(constants::IMU_STATE_SIZE());
+	imu_system_sigma_noise = 0;
+	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
+	{
+		imu_system_sigma_noise(r,r) = 0.5;
+	}
+
+	ColumnVector imu_measurement_noise(constants::IMU_STATE_SIZE());
+	imu_measurement_noise   = 0.001;
+	SymmetricMatrix imu_measurement_sigma_noise(constants::IMU_STATE_SIZE());
+	imu_measurement_sigma_noise = 0;
+	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
+	{
+		imu_system_sigma_noise(r,r) = 0.1;
+	}
+
+	ROS_INFO("IMU Filter noise matrices built...");
+
+	this->imu_filter_ = new IMUFilter(imu_system_noise, imu_system_sigma_noise, imu_measurement_noise, imu_measurement_sigma_noise);
+
+	//TODO Actually get the initial state estimate/covar from nh_
+	ColumnVector imu_initial_state_estimate(constants::IMU_STATE_SIZE());
+	imu_initial_state_estimate   = 0;
+	SymmetricMatrix imu_initial_state_covariance(constants::IMU_STATE_SIZE());
+	imu_initial_state_covariance = 0;
+	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
+	{
+		imu_initial_state_covariance(r,r) = 1;
+	}
+
+	this->imu_filter_->init(imu_initial_state_estimate, imu_initial_state_covariance);
+}
+
+void KVHDriverNode::buildOdomFilter()
+{
+	//TODO Build the odo_filter if that is requested
+	ColumnVector odo_system_noise(constants::ODOM_STATE_SIZE());
+	odo_system_noise   = 0.01;
+	SymmetricMatrix odo_system_sigma_noise(constants::ODOM_STATE_SIZE());
+	odo_system_sigma_noise = 0;
+	for (int r = 1; r <= constants::ODOM_STATE_SIZE(); ++r)
+	{
+		odo_system_sigma_noise(r,r) = 0.5;
+	}
+
+	ColumnVector odo_measurement_noise(constants::ODOM_STATE_SIZE());
+	odo_measurement_noise   = 0.001;
+	SymmetricMatrix odo_measurement_sigma_noise(constants::ODOM_STATE_SIZE());
+	odo_measurement_sigma_noise = 0;
+	for (int r = 1; r <= constants::ODOM_STATE_SIZE(); ++r)
+	{
+		odo_measurement_sigma_noise(r,r) = 0.1;
+	}
+
+	this->odo_filter_ = new OdometryFilter(odo_system_noise, odo_system_sigma_noise, odo_measurement_noise, odo_measurement_sigma_noise);
+
+	//TODO Actually get the initial state estimate/covar from nh_
+	ColumnVector odo_initial_state_estimate(constants::ODOM_STATE_SIZE());
+	odo_initial_state_estimate   = 0;
+	SymmetricMatrix odo_initial_state_covariance(constants::ODOM_STATE_SIZE());
+	odo_initial_state_covariance = 0;
+	for (int r = 1; r <= constants::ODOM_STATE_SIZE(); ++r)
+	{
+		odo_initial_state_covariance(r,r) = 1;
+	}
+
+
+	this->odo_filter_->init(odo_initial_state_estimate, odo_initial_state_covariance);
+}
+
+void KVHDriverNode::registerDR()
+{
+	dynamic_reconfigure::Server<KVHDriverConfig>::CallbackType cb;
+	cb = boost::bind(&KVHDriverNode::dynamic_reconfigureCB, this, _1, _2);
+	this->dr_server_.setCallback(cb);
 }
 
 void KVHDriverNode::testCB(sensor_msgs::ImuConstPtr message)
@@ -226,12 +281,12 @@ int KVHDriverNode::covarIndexCalc(int r, int c)
 void KVHDriverNode::dynamic_reconfigureCB(const KVHDriverConfig& config, uint32_t level)
 {
 	ROS_INFO_STREAM("\nGot a Dynamic Reconfigure Request:"
-			      <<"\nDevice Address: "<<config.device_address
-			      <<"\nFilter: "        <<config.filter
-			      <<"\nOutput Topic:"   <<config.output_topic
-			      <<"\nPoll Rate"       <<config.poll_rate
-			      <<"\nUpdate Frequency"<<config.update_frequency
-			      <<"\nLevel: "         <<level);
+			<<"\nDevice Address: "<<config.device_address
+			<<"\nFilter: "        <<config.filter
+			<<"\nOutput Topic:"   <<config.output_topic
+			<<"\nPoll Rate"       <<config.poll_rate
+			<<"\nUpdate Frequency"<<config.update_frequency
+			<<"\nLevel: "         <<level);
 	//Check for output topic change
 	if((level & 0b1) > 0)
 	{
