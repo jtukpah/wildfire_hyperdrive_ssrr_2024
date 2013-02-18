@@ -57,7 +57,7 @@ public:
 	 * Note that the size of the state vector and covariance matrix must match the size defined by the constant
 	 * SYSTEM_STATE_SIZE
 	 */
-	bool init(const ColumnVector& initial_state, const SymmetricMatrix& initial_covar);
+	virtual bool init(const ColumnVector& initial_state, const SymmetricMatrix& initial_covar);
 
 	/**
 	 * @author Adam Panzica
@@ -70,7 +70,7 @@ public:
 	 * Note that the size of the input and measurement vectors must match the size defined by the constants
 	 * INPUT_SIZE and MEASUREMENT_SIZE
 	 */
-	bool update(const ColumnVector& input, const ColumnVector& measurement);
+	virtual bool update(const ColumnVector& input, const ColumnVector& measurement);
 
 	/**
 	 * @author Adam Panzica
@@ -80,7 +80,7 @@ public:
 	 * This is intended to be used if the sensor missed an update cycle before time ran out. It moves the filter along based
 	 * purely on the system model
 	 */
-	bool update();
+	virtual bool update();
 
 	/**
 	 * @author Adam Panzica
@@ -91,13 +91,13 @@ public:
 	 *
 	 * Note that the init method must have been called prior to getting estimates
 	 */
-	bool getEstimate(ColumnVector& estimate, SymmetricMatrix& covar) const;
+	virtual bool getEstimate(ColumnVector& estimate, SymmetricMatrix& covar) const;
 
 	/**
 	 * @author Adam Panzica
 	 * @return true if the filter is intialized, else false
 	 */
-	bool isInitialized();
+	virtual bool isInitialized();
 
 protected:
 
