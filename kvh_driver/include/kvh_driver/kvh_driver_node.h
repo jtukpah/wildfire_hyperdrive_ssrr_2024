@@ -119,6 +119,11 @@ private:
 	void drPollRateCB(int poll_rate);
 
 	/**
+	 * The system device address of the device
+	 */
+	std::string device_address_;
+
+	/**
 	 * Flag for signalling if output filtering should be enabled
 	 */
 	bool should_filter_;

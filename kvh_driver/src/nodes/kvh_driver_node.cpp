@@ -15,6 +15,7 @@
 using namespace kvh_driver;
 
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
+				device_address_(""),
 				should_filter_(false),
 		        measurement_buffer_(2),
 				imu_filter_(NULL),
@@ -279,6 +280,7 @@ void KVHDriverNode::drOutputTopicCB(const std::string& output_topic)
 void KVHDriverNode::drDevAdrCB(const std::string& device_address)
 {
 	ROS_INFO_STREAM("I'm Setting the Device Address to "<<device_address);
+	this->device_address_ = device_address;
 }
 void KVHDriverNode::drPollRateCB(int poll_rate)
 {
