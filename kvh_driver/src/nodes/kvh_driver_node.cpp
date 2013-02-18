@@ -399,6 +399,7 @@ void KVHDriverNode::drIMUFilterCB(bool filter)
 void KVHDriverNode::drOdomFilterCB(bool filter)
 {
 	ROS_INFO_STREAM("I'm "<<((filter)?"Enabling":"Disabling")<<" The Odometry Output Filter!");
+	this->should_odom_filter_ = filter;
 }
 
 void KVHDriverNode::drUpdateRateCB(int update_freq)
