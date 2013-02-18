@@ -118,75 +118,25 @@ private:
 	 */
 	void drPollRateCB(int poll_rate);
 
-	/**
-	 * The system device address of the device
-	 */
-	std::string device_address_;
 
-	/**
-	 * Flag for signalling if output filtering should be enabled
-	 */
-	bool should_filter_;
+	std::string      device_address_;     ///The system device address of the device
 
-	/**
-	 * Buffer for storing new sensor data to be processed
-	 */
-	Buffer measurement_buffer_;
+	bool             should_filter_;      ///Flag for signalling if output filtering should be enabled
+	Buffer           measurement_buffer_; ///Buffer for storing new sensor data to be processed
+	IMUFilter*       imu_filter_;         ///The EKF for filtering IMU data
+	OdometryFilter*  odo_filter_;         ///The EKF for filtering IMU data into odometry data
 
-	/**
-	 * The EKF for filtering IMU data
-	 */
-	IMUFilter*       imu_filter_;
+	ros::NodeHandle  nh_;       ///Handle into the ROS system
+	ros::Publisher   odo_pub_;  ///Publisher for nav_msgs::Odometry messages
+	ros::Publisher   imu_pub_;  ///Publisher for sensor_msgs::Imu messages
+	ros::Subscriber  test_sub_; ///Subscriber to test IMU data in the form of sensor_msgs::Imu
 
-	/**
-	 * The EKF for filtering IMU data into odometry data
-	 */
-	OdometryFilter*  odo_filter_;
+	ros::Duration    update_frequency_; ///The duration between updates to the output topics
+	ros::Duration    poll_frequency_;   ///The duration between processing new sensor data
+	ros::Timer       update_timer_;     ///The Timer that performs updates of the output topics
+	ros::Timer		 poll_timer_;       ///The timer that performs processing of new sensor data
 
-	/**
-	 * Handle into the ROS system
-	 */
-	ros::NodeHandle  nh_;
-
-	/**
-	 * Publisher for nav_msgs::Odometry messages
-	 */
-	ros::Publisher   odo_pub_;
-
-	/**
-	 * Publisher for sensor_msgs::Imu messages
-	 */
-	ros::Publisher   imu_pub_;
-
-	/**
-	 * Subscriber to test IMU data in the form of sensor_msgs::Imu
-	 */
-	ros::Subscriber  test_sub_;
-
-	/**
-	 * The duration between updates to the output topics
-	 */
-	ros::Duration    update_frequency_;
-
-	/**
-	 * The duration between processing new sensor data
-	 */
-	ros::Duration    poll_frequency_;
-
-	/**
-	 * The Timer that performs updates of the output topics
-	 */
-	ros::Timer       update_timer_;
-
-	/**
-	 * The timer that performs processing of new sensor data
-	 */
-	ros::Timer		 poll_timer_;
-
-	/**
-	 * The server for dynamic_reconfigure messages
-	 */
-	dynamic_reconfigure::Server<KVHDriverConfig> dr_server_;
+	dynamic_reconfigure::Server<KVHDriverConfig> dr_server_;  ///The server for dynamic_reconfigure messages
 };
 
 } /* END KVH_DRIVER */
