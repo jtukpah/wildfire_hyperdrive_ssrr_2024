@@ -16,6 +16,7 @@ using namespace kvh_driver;
 
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 								device_address_(""),
+								should_odom_filter_(false),
 								should_IMU_filter_(false),
 								measurement_buffer_(2),
 								imu_filter_(NULL),
@@ -423,7 +424,31 @@ void KVHDriverNode::drPollRateCB(int poll_rate)
 
 void KVHDriverNode::imuCb(sensor_msgs::ImuConstPtr message)
 {
+	ColumnVector    state_in(constants::IMU_STATE_SIZE());
+	SymmetricMatrix covar_in(constants::IMU_STATE_SIZE());
+	ColumnVector    state_out(constants::ODOM_STATE_SIZE());
+	SymmetricMatrix covar_out(constants::ODOM_STATE_SIZE());
+	ColumnVector    input(constants::ODOM_INPUT_SIZE());
+	ColumnVector    measurement(constants::ODOM_MEASUREMENT_SIZE());
+	nav_msgs::Odometry message_out;
+	ros::Duration   sample_time(message->header.stamp-this->last_odom_update_);
+	this->last_odom_update_ = ros::Time::now();
 
+	//Extract state vector from message, convert to input/measurement for OdometryFilter
+	this->imuToState(state_in, covar_in, *message);
+	input(constants::X_DOT_DOT_INPUT())          = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_X_DOT_DOT_STATE()));
+	input(constants::Y_DOT_DOT_INPUT())          = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_Y_DOT_DOT_STATE()));
+	input(constants::Z_DOT_DOT_INPUT())          = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_Z_DOT_DOT_STATE()));
+	measurement(constants::RX_DOT_MEASUREMENT()) = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_RX_DOT_STATE()));
+	measurement(constants::RY_DOT_MEASUREMENT()) = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_RY_DOT_STATE()));
+	measurement(constants::RZ_DOT_MEASUREMENT()) = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_RZ_DOT_STATE()));
+
+	this->imu_filter_->update(input, measurement);
+	this->imu_filter_->getEstimate(state_out, covar_out);
+	this->stateToOdom(state_out, covar_out, message_out);
+	message_out.header.frame_id = "/kvh/odom";
+	message_out.header.stamp    = this->last_odom_update_;
+	this->odo_pub_.publish(message_out);
 }
 
 int main(int argc, char **argv) {

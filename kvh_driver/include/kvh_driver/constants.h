@@ -40,12 +40,12 @@ public:
 	static int ODOM_RY_DOT_STATE() {return 11;}
 	static int ODOM_RZ_DOT_STATE() {return 12;}
 
-	static int INPUT_SIZE()         {return 3;}
+	static int ODOM_INPUT_SIZE()         {return 3;}
 	static int X_DOT_DOT_INPUT()    {return 1;}
 	static int Y_DOT_DOT_INPUT()    {return 2;}
 	static int Z_DOT_DOT_INPUT()    {return 3;}
 
-	static int MEASUREMENT_SIZE()   {return 3;}
+	static int ODOM_MEASUREMENT_SIZE()   {return 3;}
 	static int RX_DOT_MEASUREMENT() {return 1;}
 	static int RY_DOT_MEASUREMENT() {return 2;}
 	static int RZ_DOT_MEASUREMENT() {return 3;}

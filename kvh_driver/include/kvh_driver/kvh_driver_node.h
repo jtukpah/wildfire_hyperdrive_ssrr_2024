@@ -192,6 +192,7 @@ private:
 
 	ros::Duration    update_frequency_; ///The duration between updates to the output topics
 	ros::Duration    poll_frequency_;   ///The duration between processing new sensor data
+	ros::Time        last_odom_update_; ///The time of the last odometry filter update
 	ros::Timer       update_timer_;     ///The Timer that performs updates of the output topics
 	ros::Timer		 poll_timer_;       ///The timer that performs processing of new sensor data
 
