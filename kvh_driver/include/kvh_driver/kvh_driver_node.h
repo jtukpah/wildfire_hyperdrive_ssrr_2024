@@ -118,7 +118,14 @@ private:
 	 * @brief Handles enabling/disabling filtering of the raw sensor data
 	 * @param [in] filter true to enable, false to disable
 	 */
-	void drFilterCB(bool filter);
+	void drIMUFilterCB(bool filter);
+
+	/**
+	 * @author Adam Panzica
+	 * @brief Handles enabling/disabling odometry filtering of the IMU sensor data
+	 * @param [in] filter true to enable, false to disable
+	 */
+	void drOdomFilterCB(bool filter);
 
 	/**
 	 * @author Adam Panzica
@@ -151,7 +158,8 @@ private:
 
 	std::string      device_address_;     ///The system device address of the device
 
-	bool             should_filter_;      ///Flag for signalling if output filtering should be enabled
+	bool             should_IMU_filter_;      ///Flag for signalling if output filtering should be enabled
+	bool             should_odom_filter_; ///Flag for signalling if odometry filtering should be enabled
 	Buffer           measurement_buffer_; ///Buffer for storing new sensor data to be processed
 	IMUFilter*       imu_filter_;         ///The EKF for filtering IMU data
 	OdometryFilter*  odo_filter_;         ///The EKF for filtering IMU data into odometry data

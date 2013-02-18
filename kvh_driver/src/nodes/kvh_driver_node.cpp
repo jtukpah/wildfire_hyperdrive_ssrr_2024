@@ -16,7 +16,7 @@ using namespace kvh_driver;
 
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 								device_address_(""),
-								should_filter_(false),
+								should_IMU_filter_(false),
 								measurement_buffer_(2),
 								imu_filter_(NULL),
 								odo_filter_(NULL),
@@ -174,7 +174,7 @@ void KVHDriverNode::testCB(sensor_msgs::ImuConstPtr message)
 
 void KVHDriverNode::poll(const ros::TimerEvent& event)
 {
-	if(this->imu_filter_->isInitialized()&&this->should_filter_)
+	if(this->imu_filter_->isInitialized()&&this->should_IMU_filter_)
 	{
 		if(this->measurement_buffer_.size()!=0)
 		{
@@ -189,7 +189,7 @@ void KVHDriverNode::poll(const ros::TimerEvent& event)
 			this->imu_filter_->update();
 		}
 	}
-	else if(!this->should_filter_)
+	else if(!this->should_IMU_filter_)
 	{
 		//TODO actually get information from sensor if needed
 	}
@@ -203,7 +203,7 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 {
 	//ROS_INFO("I'm Performing a Update!");
 	//TODO alternate what happens based on if IMU, Odom or both/none are being filtered
-	if(this->imu_filter_->isInitialized()&&this->should_filter_)
+	if(this->imu_filter_->isInitialized()&&this->should_IMU_filter_)
 	{
 		//Build and publish message
 		ColumnVector     state(constants::IMU_STATE_SIZE());
@@ -213,7 +213,7 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		this->stateToImu(state, covar, message);
 		this->imu_pub_.publish(message);
 	}
-	else if(!this->should_filter_)
+	else if(!this->should_IMU_filter_)
 	{
 		//TODO right now since we're only getting test data, this just pops off the measurement buffer. Might need to change when actually getting data from sensor
 		if(this->measurement_buffer_.size()!=0)
@@ -282,7 +282,8 @@ void KVHDriverNode::dynamic_reconfigureCB(const KVHDriverConfig& config, uint32_
 {
 	ROS_INFO_STREAM("\nGot a Dynamic Reconfigure Request:"
 			<<"\nDevice Address: "<<config.device_address
-			<<"\nFilter: "        <<config.filter
+			<<"\nIMU Filter: "    <<config.imu_filter
+			<<"\nOdom Filter"     <<config.odom_filter
 			<<"\nOutput Topic:"   <<config.output_topic
 			<<"\nPoll Rate"       <<config.poll_rate
 			<<"\nUpdate Frequency"<<config.update_frequency
@@ -300,7 +301,7 @@ void KVHDriverNode::dynamic_reconfigureCB(const KVHDriverConfig& config, uint32_
 	//Check for filter change
 	if((level & 0b100) > 0)
 	{
-		this->drFilterCB(config.filter);
+		this->drIMUFilterCB(config.imu_filter);
 	}
 	//Check for device address change
 	if((level & 0b1000) > 0)
@@ -312,13 +313,24 @@ void KVHDriverNode::dynamic_reconfigureCB(const KVHDriverConfig& config, uint32_
 	{
 		this->drPollRateCB(config.poll_rate);
 	}
+	//Check for odom filter change
+	if((level & 0b100000) > 0)
+	{
+		this->drOdomFilterCB(config.odom_filter);
+	}
 }
 
-void KVHDriverNode::drFilterCB(bool filter)
+void KVHDriverNode::drIMUFilterCB(bool filter)
 {
-	ROS_INFO_STREAM("I'm "<<((filter)?"Enabling":"Disabling")<<" The Output Filter!");
-	this->should_filter_=filter;
+	ROS_INFO_STREAM("I'm "<<((filter)?"Enabling":"Disabling")<<" The IMU Output Filter!");
+	this->should_IMU_filter_=filter;
 }
+
+void KVHDriverNode::drOdomFilterCB(bool filter)
+{
+	ROS_INFO_STREAM("I'm "<<((filter)?"Enabling":"Disabling")<<" The Odometry Output Filter!");
+}
+
 void KVHDriverNode::drUpdateRateCB(int update_freq)
 {
 	ROS_INFO_STREAM("I'm Setting the Update Frequency To "<<update_freq<<"Hz");
