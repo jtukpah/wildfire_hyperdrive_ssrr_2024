@@ -99,6 +99,15 @@ public:
 	 */
 	virtual bool isInitialized();
 
+	/**
+	 * @author Adam Panzica
+	 * @brief Converts a value which is in the form x/s into the form x/k where k=sample
+	 * @param [in] sample_time The Duration between samples
+	 * @param [in] value       The value to convert
+	 * @return The resultant value in x/k
+	 */
+	static double perSecToPerSample(ros::Duration& sample_time, double value);
+
 protected:
 
 	/**
