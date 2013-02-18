@@ -16,6 +16,7 @@
 #include<ros/ros.h>
 #include<dynamic_reconfigure/server.h>
 #include<boost/circular_buffer.hpp>
+#include<tf/tf.h>
 //******************* LOCAL DEPENDANCIES ****************//
 #include<kvh_driver/KVHDriverConfig.h>
 #include<kvh_driver/imu_filter.h>
@@ -98,6 +99,26 @@ private:
 
 	/**
 	 * @author Adam Panzica
+	 * @brief Converts a sensor_msgs::Imu to a state and covariance matrix of the type outputted by IMUFilter
+	 * @param [out]  state The state vector to fill with data
+	 * @param [out]  covar The covariance matrix to fill with data
+	 * @param [in]   message The messag to covert
+	 * @return True if succesfful, else false
+	 */
+	bool imuToState(ColumnVector& state, SymmetricMatrix& covar, const sensor_msgs::Imu& message) const;
+
+	/**
+	 * @author Adam Panzica
+	 * @brief Converts the state and covariance matricies from an OdometryFilter into a nav_msgs::Odometry message
+	 * @param [in]  state   The state vector from an OdometryFilter. Must have states in the locations defined by kvh_driver::constants
+	 * @param [in]  covar   The covariance matrix from an OdometryFilter. Must have states in the locations defined by kvh_driver::constants
+	 * @param [out] message A properly filled message
+	 * @return true if the message was sucessfully filled, else false
+	 */
+	bool stateToOdom(const ColumnVector& state, const SymmetricMatrix& covar, nav_msgs::Odometry& message) const;
+
+	/**
+	 * @author Adam Panzica
 	 * @brief Calculates the entry into the linear covariance array in a sensor_msgs::Imu for an entry in the covar matrix
 	 * @param [in] r The row in the covar matrix
 	 * @param [in] c The column in the covar matrix
@@ -155,6 +176,13 @@ private:
 	 */
 	void drPollRateCB(int poll_rate);
 
+	/**
+	 * @author Adam Panzica
+	 * @brief Takes the output from the IMU filter and performs odometry filtering on it
+	 * @param [in] message The IMU message from the IMUFilter
+	 */
+	void imuCb(sensor_msgs::ImuConstPtr message);
+
 
 	std::string      device_address_;     ///The system device address of the device
 
@@ -168,6 +196,7 @@ private:
 	ros::Publisher   odo_pub_;  ///Publisher for nav_msgs::Odometry messages
 	ros::Publisher   imu_pub_;  ///Publisher for sensor_msgs::Imu messages
 	ros::Subscriber  test_sub_; ///Subscriber to test IMU data in the form of sensor_msgs::Imu
+	ros::Subscriber  imu_sub_;  ///Subscriber to the IMU data stream to perform odometry filtering
 
 	ros::Duration    update_frequency_; ///The duration between updates to the output topics
 	ros::Duration    poll_frequency_;   ///The duration between processing new sensor data

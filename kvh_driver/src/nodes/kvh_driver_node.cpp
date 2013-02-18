@@ -48,7 +48,10 @@ void KVHDriverNode::registerTopics()
 {
 	//TODO actually get the output topic from nh_
 	std::string imu_topic("kvh/imu");
+	std::string odom_topic("kvh/odom");
 	this->imu_pub_ = this->nh_.advertise<sensor_msgs::Imu>(imu_topic, 2);
+	this->imu_sub_ = this->nh_.subscribe(imu_topic, 2, &KVHDriverNode::imuCb, this);
+	this->odo_pub_ = this->nh_.advertise<nav_msgs::Odometry>(odom_topic, 2);
 
 	ros::NodeHandle nh_p("~");
 	bool test = false;
@@ -242,7 +245,7 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 
 bool KVHDriverNode::stateToImu(const ColumnVector& state, const SymmetricMatrix& covar, sensor_msgs::Imu& message) const
 {
-	if(state.size()==constants::IMU_STATE_SIZE() && covar.size1()==constants::IMU_STATE_SIZE())
+	if((int)state.size()==constants::IMU_STATE_SIZE() && (int)covar.size1()==constants::IMU_STATE_SIZE())
 	{
 		message.orientation_covariance[0]   = -1;
 		message.orientation_covariance[1*3] = -1;
@@ -268,7 +271,73 @@ bool KVHDriverNode::stateToImu(const ColumnVector& state, const SymmetricMatrix&
 	}
 	else
 	{
-		ROS_ERROR("Cannot Build IMU Message for State Vector Size %d, Expecting %d", state.size(), constants::IMU_STATE_SIZE());
+		ROS_ERROR("Cannot Build IMU Message for State Vector Size %lu, Expecting %d", state.size(), constants::IMU_STATE_SIZE());
+		return false;
+	}
+}
+
+bool KVHDriverNode::stateToOdom(const ColumnVector& state, const SymmetricMatrix& covar, nav_msgs::Odometry& message) const
+{
+	if((int)state.size()==constants::ODOM_STATE_SIZE() && (int)covar.size1()==constants::ODOM_STATE_SIZE())
+	{
+		message.pose.pose.position.x = state(constants::ODOM_X_STATE());
+		message.pose.pose.position.y = state(constants::ODOM_Y_STATE());
+		message.pose.pose.position.z = state(constants::ODOM_Z_STATE());
+		tf::Quaternion q;
+		q.setRPY(state(constants::ODOM_RX_STATE()), state(constants::ODOM_RY_STATE()), state(constants::ODOM_RZ_STATE()));
+		tf::quaternionTFToMsg(q, message.pose.pose.orientation);
+		message.pose.covariance[(constants::ODOM_X_STATE()-constants::ODOM_X_STATE())*6]  = covar(constants::ODOM_X_STATE(),  constants::ODOM_X_STATE());
+		message.pose.covariance[(constants::ODOM_Y_STATE()-constants::ODOM_X_STATE())*6]  = covar(constants::ODOM_Y_STATE(),  constants::ODOM_Y_STATE());
+		message.pose.covariance[(constants::ODOM_Z_STATE()-constants::ODOM_X_STATE())*6]  = covar(constants::ODOM_Z_STATE(),  constants::ODOM_Z_STATE());
+		message.pose.covariance[(constants::ODOM_RX_STATE()-constants::ODOM_X_STATE())*6] = covar(constants::ODOM_RX_STATE(), constants::ODOM_RX_STATE());
+		message.pose.covariance[(constants::ODOM_RY_STATE()-constants::ODOM_X_STATE())*6] = covar(constants::ODOM_RY_STATE(), constants::ODOM_RY_STATE());
+		message.pose.covariance[(constants::ODOM_RZ_STATE()-constants::ODOM_X_STATE())*6] = covar(constants::ODOM_RZ_STATE(), constants::ODOM_RZ_STATE());
+
+		message.twist.twist.linear.x  = state(constants::ODOM_X_DOT_STATE());
+		message.twist.twist.linear.y  = state(constants::ODOM_Y_DOT_STATE());
+		message.twist.twist.linear.z  = state(constants::ODOM_Z_DOT_STATE());
+		message.twist.twist.angular.x = state(constants::ODOM_RX_DOT_STATE());
+		message.twist.twist.angular.y = state(constants::ODOM_RY_DOT_STATE());
+		message.twist.twist.angular.z = state(constants::ODOM_RZ_DOT_STATE());
+		message.pose.covariance[(constants::ODOM_X_DOT_STATE()-constants::ODOM_X_DOT_STATE())*6]  = covar(constants::ODOM_X_DOT_STATE(),  constants::ODOM_X_DOT_STATE());
+		message.pose.covariance[(constants::ODOM_Y_DOT_STATE()-constants::ODOM_X_DOT_STATE())*6]  = covar(constants::ODOM_Y_DOT_STATE(),  constants::ODOM_Y_DOT_STATE());
+		message.pose.covariance[(constants::ODOM_Z_DOT_STATE()-constants::ODOM_X_DOT_STATE())*6]  = covar(constants::ODOM_Z_DOT_STATE(),  constants::ODOM_Z_DOT_STATE());
+		message.pose.covariance[(constants::ODOM_RX_DOT_STATE()-constants::ODOM_X_DOT_STATE())*6] = covar(constants::ODOM_RX_DOT_STATE(), constants::ODOM_RX_DOT_STATE());
+		message.pose.covariance[(constants::ODOM_RY_DOT_STATE()-constants::ODOM_X_DOT_STATE())*6] = covar(constants::ODOM_RY_DOT_STATE(), constants::ODOM_RY_DOT_STATE());
+		message.pose.covariance[(constants::ODOM_RZ_DOT_STATE()-constants::ODOM_X_DOT_STATE())*6] = covar(constants::ODOM_RZ_DOT_STATE(), constants::ODOM_RZ_DOT_STATE());
+		return true;
+	}
+	else
+	{
+		ROS_ERROR("Cannot Build Odometry Message for State Vector Size %lu, Expecting %d", state.size(), constants::ODOM_STATE_SIZE());
+		return false;
+	}
+}
+
+bool KVHDriverNode::imuToState(ColumnVector& state, SymmetricMatrix& covar, const sensor_msgs::Imu& message) const
+{
+	if((int)state.size()==constants::IMU_STATE_SIZE() && (int)covar.size1()==constants::IMU_STATE_SIZE())
+	{
+		state(constants::IMU_RX_DOT_STATE()) = message.angular_velocity.x;
+		state(constants::IMU_RY_DOT_STATE()) = message.angular_velocity.y;
+		state(constants::IMU_RZ_DOT_STATE()) = message.angular_velocity.z;
+		covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE()) = message.angular_velocity_covariance[(constants::IMU_RX_DOT_STATE()-constants::IMU_RX_DOT_STATE())*3];
+		covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = message.angular_velocity_covariance[(constants::IMU_RY_DOT_STATE()-constants::IMU_RX_DOT_STATE())*3];
+		covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = message.angular_velocity_covariance[(constants::IMU_RZ_DOT_STATE()-constants::IMU_RX_DOT_STATE())*3];
+
+
+
+		state(constants::IMU_X_DOT_DOT_STATE()) = message.linear_acceleration.x;
+		state(constants::IMU_Y_DOT_DOT_STATE()) = message.linear_acceleration.y;
+		state(constants::IMU_Z_DOT_DOT_STATE()) = message.linear_acceleration.z;
+		covar(constants::IMU_X_DOT_DOT_STATE(), constants::IMU_X_DOT_DOT_STATE()) = message.linear_acceleration_covariance[(constants::IMU_X_DOT_DOT_STATE()-constants::IMU_X_DOT_DOT_STATE())*3];
+		covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE()) = message.linear_acceleration_covariance[(constants::IMU_Y_DOT_DOT_STATE()-constants::IMU_X_DOT_DOT_STATE())*3];
+		covar(constants::IMU_Z_DOT_DOT_STATE(), constants::IMU_Z_DOT_DOT_STATE()) = message.linear_acceleration_covariance[(constants::IMU_Z_DOT_DOT_STATE()-constants::IMU_X_DOT_DOT_STATE())*3];
+		return true;
+	}
+	else
+	{
+		ROS_ERROR("Cannot convert from IMU Message for State Vector Size %lu, Expecting %d", state.size(), constants::IMU_STATE_SIZE());
 		return false;
 	}
 }
@@ -355,6 +424,11 @@ void KVHDriverNode::drPollRateCB(int poll_rate)
 	ros::Duration new_poll(1.0/((double)poll_rate));
 	this->poll_frequency_ = new_poll;
 	this->poll_timer_.setPeriod(this->poll_frequency_);
+}
+
+void KVHDriverNode::imuCb(sensor_msgs::ImuConstPtr message)
+{
+
 }
 
 int main(int argc, char **argv) {
