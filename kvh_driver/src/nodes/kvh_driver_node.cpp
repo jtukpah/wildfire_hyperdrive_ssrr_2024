@@ -16,12 +16,13 @@ using namespace kvh_driver;
 
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 								device_address_(""),
-								should_odom_filter_(false),
 								should_IMU_filter_(false),
+								should_odom_filter_(false),
 								measurement_buffer_(2),
 								imu_filter_(NULL),
-								odo_filter_(NULL),
-								nh_(nh)
+								odom_filter_(NULL),
+								nh_(nh),
+								last_odom_update_(ros::Time::now())
 {
 
 	ROS_INFO("Building Filters....");
@@ -42,7 +43,7 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 KVHDriverNode::~KVHDriverNode()
 {
 	if(this->imu_filter_!=NULL) delete imu_filter_;
-	if(this->odo_filter_!=NULL) delete odo_filter_;
+	if(this->odom_filter_!=NULL) delete odom_filter_;
 }
 
 void KVHDriverNode::registerTopics()
@@ -119,12 +120,12 @@ void KVHDriverNode::buildOdomFilter()
 {
 	//TODO Build the odo_filter if that is requested
 	ColumnVector odo_system_noise(constants::ODOM_STATE_SIZE());
-	odo_system_noise   = 0.01;
+	odo_system_noise   = 0.001;
 	SymmetricMatrix odo_system_sigma_noise(constants::ODOM_STATE_SIZE());
 	odo_system_sigma_noise = 0;
 	for (int r = 1; r <= constants::ODOM_STATE_SIZE(); ++r)
 	{
-		odo_system_sigma_noise(r,r) = 0.5;
+		odo_system_sigma_noise(r,r) = 0.001;
 	}
 
 	ColumnVector odo_measurement_noise(constants::ODOM_STATE_SIZE());
@@ -133,10 +134,10 @@ void KVHDriverNode::buildOdomFilter()
 	odo_measurement_sigma_noise = 0;
 	for (int r = 1; r <= constants::ODOM_STATE_SIZE(); ++r)
 	{
-		odo_measurement_sigma_noise(r,r) = 0.1;
+		odo_measurement_sigma_noise(r,r) = 0.001;
 	}
 
-	this->odo_filter_ = new OdometryFilter(odo_system_noise, odo_system_sigma_noise, odo_measurement_noise, odo_measurement_sigma_noise);
+	this->odom_filter_ = new OdometryFilter(odo_system_noise, odo_system_sigma_noise, odo_measurement_noise, odo_measurement_sigma_noise);
 
 	//TODO Actually get the initial state estimate/covar from nh_
 	ColumnVector odo_initial_state_estimate(constants::ODOM_STATE_SIZE());
@@ -149,7 +150,7 @@ void KVHDriverNode::buildOdomFilter()
 	}
 
 
-	this->odo_filter_->init(odo_initial_state_estimate, odo_initial_state_covariance);
+	this->odom_filter_->init(odo_initial_state_estimate, odo_initial_state_covariance);
 }
 
 void KVHDriverNode::registerDR()
@@ -161,10 +162,10 @@ void KVHDriverNode::registerDR()
 
 void KVHDriverNode::testCB(sensor_msgs::ImuConstPtr message)
 {
-	ROS_INFO_STREAM("Received Test Data:\n Frame ID: "<<message->header.frame_id
+	/*ROS_INFO_STREAM("Received Test Data:\n Frame ID: "<<message->header.frame_id
 			<<"\n Stamp: "<<message->header.stamp
 			<<"\n Linear:\n"<<message->linear_acceleration
-			<<"\n Angular:\n"<<message->angular_velocity);
+			<<"\n Angular:\n"<<message->angular_velocity);*/
 	ColumnVectorPtr measurement(new ColumnVector(constants::IMU_STATE_SIZE()));
 	*measurement = 0;
 	(*measurement)(constants::IMU_RX_DOT_STATE())    = message->angular_velocity.x;
@@ -190,7 +191,7 @@ void KVHDriverNode::poll(const ros::TimerEvent& event)
 		}
 		else
 		{
-			this->imu_filter_->update();
+			//this->imu_filter_->update();
 		}
 	}
 	else if(!this->should_IMU_filter_)
@@ -214,6 +215,8 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		SymmetricMatrix  covar(constants::IMU_STATE_SIZE(),constants::IMU_STATE_SIZE());
 		this->imu_filter_->getEstimate(state, covar);
 		sensor_msgs::Imu message;
+		message.header.frame_id = "kvh/imu";
+		message.header.stamp = ros::Time::now();
 		this->stateToImu(state, covar, message);
 		this->imu_pub_.publish(message);
 	}
@@ -234,6 +237,8 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 			covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = 1;
 			covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = 1;
 			sensor_msgs::Imu message;
+			message.header.frame_id = "kvh/imu";
+			message.header.stamp = ros::Time::now();
 			this->stateToImu(*measurement, covar, message);
 			this->imu_pub_.publish(message);
 		}
@@ -422,33 +427,53 @@ void KVHDriverNode::drPollRateCB(int poll_rate)
 	this->poll_timer_.setPeriod(this->poll_frequency_);
 }
 
-void KVHDriverNode::imuCb(sensor_msgs::ImuConstPtr message)
+void KVHDriverNode::imuCb(const sensor_msgs::ImuConstPtr message)
 {
-	ColumnVector    state_in(constants::IMU_STATE_SIZE());
-	SymmetricMatrix covar_in(constants::IMU_STATE_SIZE());
-	ColumnVector    state_out(constants::ODOM_STATE_SIZE());
-	SymmetricMatrix covar_out(constants::ODOM_STATE_SIZE());
-	ColumnVector    input(constants::ODOM_INPUT_SIZE());
-	ColumnVector    measurement(constants::ODOM_MEASUREMENT_SIZE());
-	nav_msgs::Odometry message_out;
-	ros::Duration   sample_time(message->header.stamp-this->last_odom_update_);
-	this->last_odom_update_ = ros::Time::now();
+	if(this->should_odom_filter_)
+	{
+		if(message->header.stamp>this->last_odom_update_)
+		{
+			ColumnVector    state_in(constants::IMU_STATE_SIZE());
+			SymmetricMatrix covar_in(constants::IMU_STATE_SIZE());
+			ColumnVector    state_out(constants::ODOM_STATE_SIZE());
+			SymmetricMatrix covar_out(constants::ODOM_STATE_SIZE());
+			ColumnVector    input(constants::ODOM_INPUT_SIZE());
+			ColumnVector    measurement(constants::ODOM_MEASUREMENT_SIZE());
+			nav_msgs::Odometry message_out;
+			ros::Duration   sample_time(message->header.stamp-this->last_odom_update_);
+			this->last_odom_update_ = ros::Time::now();
 
-	//Extract state vector from message, convert to input/measurement for OdometryFilter
-	this->imuToState(state_in, covar_in, *message);
-	input(constants::X_DOT_DOT_INPUT())          = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_X_DOT_DOT_STATE()));
-	input(constants::Y_DOT_DOT_INPUT())          = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_Y_DOT_DOT_STATE()));
-	input(constants::Z_DOT_DOT_INPUT())          = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_Z_DOT_DOT_STATE()));
-	measurement(constants::RX_DOT_MEASUREMENT()) = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_RX_DOT_STATE()));
-	measurement(constants::RY_DOT_MEASUREMENT()) = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_RY_DOT_STATE()));
-	measurement(constants::RZ_DOT_MEASUREMENT()) = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_RZ_DOT_STATE()));
+			//Extract state vector from message, convert to input/measurement for OdometryFilter
+			this->imuToState(state_in, covar_in, *message);
+			input(constants::X_DOT_DOT_INPUT())          = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_X_DOT_DOT_STATE()));
+			input(constants::Y_DOT_DOT_INPUT())          = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_Y_DOT_DOT_STATE()));
+			input(constants::Z_DOT_DOT_INPUT())          = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_Z_DOT_DOT_STATE()));
+			measurement(constants::RX_DOT_MEASUREMENT()) = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_RX_DOT_STATE()));
+			measurement(constants::RY_DOT_MEASUREMENT()) = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_RY_DOT_STATE()));
+			measurement(constants::RZ_DOT_MEASUREMENT()) = LinearFilter::perSecToPerSample(sample_time, state_in(constants::IMU_RZ_DOT_STATE()));
 
-	this->imu_filter_->update(input, measurement);
-	this->imu_filter_->getEstimate(state_out, covar_out);
-	this->stateToOdom(state_out, covar_out, message_out);
-	message_out.header.frame_id = "/kvh/odom";
-	message_out.header.stamp    = this->last_odom_update_;
-	this->odo_pub_.publish(message_out);
+			ROS_INFO_STREAM("I'm Performing an OdometryFilter update with input:"
+					<<"\n u:"<<input
+					<<"\n z:"<<measurement);
+
+			this->odom_filter_->update(input, measurement);
+			this->odom_filter_->getEstimate(state_out, covar_out);
+
+			ROS_INFO_STREAM("I Got Back the Following State/Covar values:"
+					<<"\n X:"<<state_out
+					<<"\n c:"<<covar_out);
+
+
+			this->stateToOdom(state_out, covar_out, message_out);
+			message_out.header.frame_id = "/kvh/odom";
+			message_out.header.stamp    = this->last_odom_update_;
+			this->odo_pub_.publish(message_out);
+		}
+		else
+		{
+			ROS_ERROR("Cannot Perform Odometry Filter Update Into the Past!");
+		}
+	}
 }
 
 int main(int argc, char **argv) {
