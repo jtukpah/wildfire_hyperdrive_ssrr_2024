@@ -117,14 +117,6 @@ private:
 	 */
 	bool stateToOdom(const ColumnVector& state, const SymmetricMatrix& covar, nav_msgs::Odometry& message) const;
 
-	/**
-	 * @author Adam Panzica
-	 * @brief Calculates the entry into the linear covariance array in a sensor_msgs::Imu for an entry in the covar matrix
-	 * @param [in] r The row in the covar matrix
-	 * @param [in] c The column in the covar matrix
-	 * @return The index into the linear array
-	 */
-	int covarIndexCalc(int r, int c);
 
 	/**
 	 * @author Adam Panzica

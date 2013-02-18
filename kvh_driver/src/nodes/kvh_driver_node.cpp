@@ -342,11 +342,6 @@ bool KVHDriverNode::imuToState(ColumnVector& state, SymmetricMatrix& covar, cons
 	}
 }
 
-int KVHDriverNode::covarIndexCalc(int r, int c)
-{
-	return 1;
-}
-
 void KVHDriverNode::dynamic_reconfigureCB(const KVHDriverConfig& config, uint32_t level)
 {
 	ROS_INFO_STREAM("\nGot a Dynamic Reconfigure Request:"
