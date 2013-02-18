@@ -164,7 +164,7 @@ bool LinearFilter::isInitialized()
 double LinearFilter::perSecToPerSample(ros::Duration& sample_time, double value)
 {
 	ros::Duration one_sec(1,0);
-	double A = one_sec.toSec()/sample_time.toSec();
+	double A = sample_time.toSec()/one_sec.toSec();
 	return value*A;
 }
 
