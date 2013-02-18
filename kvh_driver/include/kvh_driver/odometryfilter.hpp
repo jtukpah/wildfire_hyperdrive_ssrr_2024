@@ -96,6 +96,21 @@ public:
 	OdometryFilter(const ColumnVector& sys_noise_mu, const SymmetricMatrix& sys_noise_cov, const ColumnVector& measurement_noise_mu, const SymmetricMatrix& measurement_noise_cov);
 	virtual ~OdometryFilter();
 
+	/**
+	 * @author Adam Panzica
+	 * @brief Updates the filter given new system input and measurement
+	 * @param [in] input The new system input
+	 * @param [in] measurement The new state measurement
+	 * @return True if succesfully updated, else false
+	 * Note that the init method must be called before performing filter updates.
+	 *
+	 * Note that the size of the input and measurement vectors must match the size defined by the constants
+	 * INPUT_SIZE and MEASUREMENT_SIZE
+	 *
+	 * Currently converts the input/measurement vectors to the correct frame using simple rotation matricies
+	 */
+	bool update(const ColumnVector& input, const ColumnVector& measurement);
+
 private:
 	const Matrix buildA();
 
