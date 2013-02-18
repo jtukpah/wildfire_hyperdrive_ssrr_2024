@@ -173,16 +173,16 @@ private:
 	 * @brief Takes the output from the IMU filter and performs odometry filtering on it
 	 * @param [in] message The IMU message from the IMUFilter
 	 */
-	void imuCb(sensor_msgs::ImuConstPtr message);
+	void imuCb(const sensor_msgs::ImuConstPtr message);
 
 
 	std::string      device_address_;     ///The system device address of the device
 
-	bool             should_IMU_filter_;      ///Flag for signalling if output filtering should be enabled
+	bool             should_IMU_filter_;  ///Flag for signalling if output filtering should be enabled
 	bool             should_odom_filter_; ///Flag for signalling if odometry filtering should be enabled
 	Buffer           measurement_buffer_; ///Buffer for storing new sensor data to be processed
 	IMUFilter*       imu_filter_;         ///The EKF for filtering IMU data
-	OdometryFilter*  odo_filter_;         ///The EKF for filtering IMU data into odometry data
+	OdometryFilter*  odom_filter_;         ///The EKF for filtering IMU data into odometry data
 
 	ros::NodeHandle  nh_;       ///Handle into the ROS system
 	ros::Publisher   odo_pub_;  ///Publisher for nav_msgs::Odometry messages

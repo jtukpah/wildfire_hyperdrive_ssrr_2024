@@ -45,6 +45,8 @@ bool OdometryFilter::update(const ColumnVector& input, const ColumnVector& measu
 		rotation(3,2)= sin(phi)*cos(theta);
 		rotation(3,3)= cos(phi)*cos(theta);
 
+		//ROS_INFO_STREAM("I Calaculated the following rotation matrix:\n"<<rotation);
+
 		ColumnVector rot_input(input);
 		rot_input = rotation*rot_input;
 

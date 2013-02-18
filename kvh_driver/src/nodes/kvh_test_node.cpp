@@ -49,6 +49,7 @@ public:
 		nh_p.getParam("scale",     scale_);
 
 		imu_sub_  = nh.subscribe("kvh/imu", 10, &KVHTestNode::imuCB, this);
+		odom_sub_ = nh.subscribe("kvh/odom", 10, &KVHTestNode::odomCB, this);
 
 		if(test_data_)
 		{
@@ -75,6 +76,15 @@ private:
 				<<"\n Angular:\n"<<message->angular_velocity);
 	}
 
+	void odomCB(const nav_msgs::OdometryConstPtr message)
+	{
+		ROS_INFO_STREAM("Recived Odometry Message:"
+					  <<"\n Frame ID: "<<message->header.frame_id
+					  <<"\n Stamp: "   <<message->header.stamp
+					  <<"\n Pose "     <<message->pose.pose
+					  <<"\n Twist: "   <<message->twist.twist);
+	}
+
 	void pollCB(const ros::TimerEvent& event)
 	{
 		sensor_msgs::Imu message;
@@ -84,6 +94,7 @@ private:
 		message.linear_acceleration.x = acc_x_+rnd();
 		message.linear_acceleration.y = acc_y_+rnd();
 		message.linear_acceleration.z = acc_z_+rnd();
+		message.header.stamp = ros::Time::now();
 		this->imu_pub_.publish(message);
 	}
 
@@ -105,6 +116,7 @@ private:
 	double scale_;
 	boost::variate_generator<boost::mt19937, boost::normal_distribution<> >* noise_gen_;
 	ros::Subscriber imu_sub_;
+	ros::Subscriber odom_sub_;
 	ros::Publisher  imu_pub_;
 	ros::Timer      poll_timer_;
 };
