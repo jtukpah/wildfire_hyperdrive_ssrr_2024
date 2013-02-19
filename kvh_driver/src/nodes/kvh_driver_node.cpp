@@ -492,6 +492,7 @@ void KVHDriverNode::imuCb(const sensor_msgs::ImuConstPtr message)
 	}
 }
 
+
 int main(int argc, char **argv) {
 	ros::init(argc, argv, "kvh_driver_node");
 	ros::NodeHandle nh;
@@ -501,7 +502,7 @@ int main(int argc, char **argv) {
 
 	KVHDriverNode node(nh, p_nh);
 
-	ROS_INFO("kvh_driver_node <%s> up and running", nh.getNamespace().c_str());
+	ROS_INFO_STREAM(node);
 	ros::spin();
 	return 1;
 }

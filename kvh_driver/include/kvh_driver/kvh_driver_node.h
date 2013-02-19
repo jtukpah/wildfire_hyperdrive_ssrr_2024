@@ -205,7 +205,23 @@ private:
 	ros::Timer		 poll_timer_;       ///The timer that performs processing of new sensor data
 
 	dynamic_reconfigure::Server<KVHDriverConfig> dr_server_;  ///The server for dynamic_reconfigure messages
+
+	friend std::ostream& operator<<(std::ostream& out, const KVHDriverNode& in)
+	{
+		out<<"KVHDriverNode{"
+		   <<"Device ID: "         <<in.device_id_
+		   <<", Device Address: "  <<in.device_address_
+		   <<", IMU Filtering: "   <<in.should_IMU_filter_
+		   <<", IMU Output Topic: "<<in.imu_pub_.getTopic().c_str()
+		   <<", Odom Filtering: "  <<in.should_odom_filter_
+		   <<", Odom Ouput Topic: "<<in.odo_pub_.getTopic().c_str()
+		   <<", Output Rate: "     <<in.update_frequency_<<"s"
+		   <<", Poll Rate: "       <<in.poll_frequency_<<"s}";
+		return out;
+	}
+
 };
+
 
 } /* END KVH_DRIVER */
 
