@@ -14,7 +14,8 @@
 //*********************** NAMESPACES ********************//
 using namespace kvh_driver;
 
-KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
+KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
+					    	    device_id_("default"),
 								device_address_(""),
 								should_IMU_filter_(false),
 								should_odom_filter_(false),
@@ -22,8 +23,19 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh):
 								imu_filter_(NULL),
 								odom_filter_(NULL),
 								nh_(nh),
+								p_nh_(p_nh),
 								last_odom_update_(ros::Time::now())
 {
+	std::string device_id("device_id");
+
+	if(this->p_nh_.hasParam(device_id))
+	{
+		this->p_nh_.getParam(device_id, this->device_id_);
+	}
+	else
+	{
+		ROS_WARN("No Device ID specified. Using Default Device Parameters");
+	}
 
 	ROS_INFO("Building Filters....");
 	this->buildIMUFilter();
@@ -80,14 +92,17 @@ void KVHDriverNode::registerTimers()
 
 void KVHDriverNode::buildIMUFilter()
 {
-	//TODO actually get the system/measurement noise/covar from nh_
+
+	//TODO actually get the system/measurement noise/covar from configuration file based on device id
 	ColumnVector imu_system_noise(constants::IMU_STATE_SIZE());
 	imu_system_noise   = 0.01;
+
+
 	SymmetricMatrix imu_system_sigma_noise(constants::IMU_STATE_SIZE());
 	imu_system_sigma_noise = 0;
 	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
 	{
-		imu_system_sigma_noise(r,r) = 0.5;
+		imu_system_sigma_noise(r,r) = 0.05;
 	}
 
 	ColumnVector imu_measurement_noise(constants::IMU_STATE_SIZE());
@@ -480,10 +495,11 @@ void KVHDriverNode::imuCb(const sensor_msgs::ImuConstPtr message)
 int main(int argc, char **argv) {
 	ros::init(argc, argv, "kvh_driver_node");
 	ros::NodeHandle nh;
+	ros::NodeHandle p_nh("~");
 
 	ROS_INFO("Setting up the driver...");
 
-	KVHDriverNode node(nh);
+	KVHDriverNode node(nh, p_nh);
 
 	ROS_INFO("kvh_driver_node <%s> up and running", nh.getNamespace().c_str());
 	ros::spin();

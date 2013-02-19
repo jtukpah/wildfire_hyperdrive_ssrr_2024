@@ -31,7 +31,13 @@ private:
 	typedef boost::shared_ptr<ColumnVector> ColumnVectorPtr;
 	typedef boost::circular_buffer<ColumnVectorPtr> Buffer;
 public:
-	KVHDriverNode(ros::NodeHandle& nh);
+	/**
+	 * @author Adam Panzica
+	 * @brief Constructs a new KVHDriverNode, including loading parameters off the param server and initializing filters
+	 * @param [in] nh Reference to a ros::NodeHandle to use
+	 * @param [in] p_nh Reference to a private ros::NodeHandle to use
+	 */
+	KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh);
 	virtual ~KVHDriverNode();
 
 private:
@@ -176,6 +182,7 @@ private:
 	void imuCb(const sensor_msgs::ImuConstPtr message);
 
 
+	std::string      device_id_;          ///The type od device connected
 	std::string      device_address_;     ///The system device address of the device
 
 	bool             should_IMU_filter_;  ///Flag for signalling if output filtering should be enabled
@@ -185,6 +192,7 @@ private:
 	OdometryFilter*  odom_filter_;         ///The EKF for filtering IMU data into odometry data
 
 	ros::NodeHandle  nh_;       ///Handle into the ROS system
+	ros::NodeHandle  p_nh_;		///{rivate Handle into the ROS system
 	ros::Publisher   odo_pub_;  ///Publisher for nav_msgs::Odometry messages
 	ros::Publisher   imu_pub_;  ///Publisher for sensor_msgs::Imu messages
 	ros::Subscriber  test_sub_; ///Subscriber to test IMU data in the form of sensor_msgs::Imu
