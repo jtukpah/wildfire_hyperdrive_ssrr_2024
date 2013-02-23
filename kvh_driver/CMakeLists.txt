@@ -45,3 +45,7 @@ rosbuild_add_executable(kvh_driver_node src/nodes/kvh_driver_node.cpp)
 target_link_libraries(kvh_driver_node ${PROJECT_NAME}_lib)
 rosbuild_add_executable(kvh_test_node src/nodes/kvh_test_node.cpp)
 target_link_libraries(kvh_test_node ${PROJECT_NAME}_lib)
+
+#Build Tests
+rosbuild_add_gtest(test/kvhtest test/kvhtest.cpp)
+target_link_libraries(test/kvhtest ${PROJECT_NAME}_lib)
