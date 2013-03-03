@@ -36,8 +36,6 @@ rosbuild_find_ros_package(dynamic_reconfigure)
 include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
 gencfg()
 
-#Build Nodes
-rosbuild_add_boost_directories()
-rosbuild_add_executable(kvh_driver_node src/nodes/kvh_driver_node.cpp src/helpers/linearfilter.cpp src/helpers/imu_filter.cpp src/helpers/odometryfilter.cpp src/helpers/configurations.cpp)
+add_subdirectory(src)
+add_subdirectory(test)
 
-rosbuild_add_executable(kvh_test_node src/nodes/kvh_test_node.cpp)
