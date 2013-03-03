@@ -36,16 +36,5 @@ rosbuild_find_ros_package(dynamic_reconfigure)
 include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
 gencfg()
 
-#build local library
-rosbuild_add_library(${PROJECT_NAME}_lib src/helpers/imu_filter.cpp src/helpers/linearfilter.cpp src/helpers/odometryfilter.cpp)
-rosbuild_link_boost(${PROJECT_NAME}_lib thread)
-
-#Build Nodes
-rosbuild_add_executable(kvh_driver_node src/nodes/kvh_driver_node.cpp)
-target_link_libraries(kvh_driver_node ${PROJECT_NAME}_lib)
-rosbuild_add_executable(kvh_test_node src/nodes/kvh_test_node.cpp)
-target_link_libraries(kvh_test_node ${PROJECT_NAME}_lib)
-
-#Build Tests
-rosbuild_add_gtest(test/kvhtest test/kvhtest.cpp)
-target_link_libraries(test/kvhtest ${PROJECT_NAME}_lib)
+add_subdirectory(src)
+add_subdirectory(test)
