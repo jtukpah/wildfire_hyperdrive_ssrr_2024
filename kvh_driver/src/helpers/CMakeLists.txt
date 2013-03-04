@@ -4,7 +4,7 @@ rosbuild_add_library(${PROJECT_NAME}Filters
 		      linearfilter.cpp
 		      odometryfilter.cpp)
 		      
-rosbuild_add_library(${PROJECT_NAME}Confiuration
+rosbuild_add_library(${PROJECT_NAME}Configuration
 		      configurations.cpp)
 		      
 rosbuild_link_boost(${PROJECT_NAME}Filters thread)

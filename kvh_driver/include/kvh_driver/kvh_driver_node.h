@@ -221,8 +221,6 @@ private:
 		return out;
 	}
 
-	dynamic_reconfigure::Server<KVHDriverConfig> dr_server_;
-
 	ConfigurationManager configurationManager;
 };
 

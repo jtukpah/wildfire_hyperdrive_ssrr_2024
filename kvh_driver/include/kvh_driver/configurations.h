@@ -16,12 +16,17 @@
 #include <utility>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
+#include <boost/shared_ptr.hpp>
+#include <wrappers/matrix/vector_wrapper.h>
 //*****************LOCAL DEPENDANCIES**************************//
 //**********************NAMESPACES*****************************//
 using boost::property_tree::ptree;
 
 namespace kvh_driver
 {
+using boost::shared_ptr;
+using MatrixWrapper::ColumnVector;
+using MatrixWrapper::SymmetricMatrix;
 
 /**
  * @author Mitchell Wills
@@ -40,14 +45,9 @@ enum serial_parity{
 class DeviceConfiguration
 {
 private:
-	int serial_baud_rate_;
-	enum serial_parity serial_parity_;
-	int serial_data_bits_;
-	int serial_stop_bits_;
-	bool serial_flow_control_;
+	ptree configuration_tree_;
 public:
-	DeviceConfiguration();
-	DeviceConfiguration(int serial_baud_rate, enum serial_parity serial_parity, int serial_data_bits, int serial_stop_bits, bool serial_flow_control);
+	DeviceConfiguration(ptree& configuration_tree);
 	/**
 	 * @author Mitchell Wills
 	 * @return The baud rate of the serial port used to comminicate with the device
@@ -82,51 +82,22 @@ public:
 class DeviceCalibration
 {
 private:
-	double linear_noise_x_;
-	double linear_noise_y_;
-	double linear_noise_z_;
-	double linear_covar_x_;
-	double linear_covar_y_;
-	double linear_covar_z_;
-	double angular_noise_x_;
-	double angular_noise_y_;
-	double angular_noise_z_;
-	double angular_covar_x_;
-	double angular_covar_y_;
-	double angular_covar_z_;
+	ptree calibration_tree_;
 public:
-	DeviceCalibration();
-	DeviceCalibration(
-			  double linear_noise_x, double linear_noise_y, double linear_noise_z,
-			  double linear_covar_x, double linear_covar_y, double linear_covar_z,
-			  double angular_noise_x, double angular_noise_y, double angular_noise_z,
-			  double angular_covar_x, double angular_covar_y, double angular_covar_z);
-	double linear_noise_x();
-	double linear_noise_y();
-	double linear_noise_z();
-	double linear_covar_x();
-	double linear_covar_y();
-	double linear_covar_z();
-	double angular_noise_x();
-	double angular_noise_y();
-	double angular_noise_z();
-	double angular_covar_x();
-	double angular_covar_y();
-	double angular_covar_z();
+	DeviceCalibration(ptree& calibration_tree);
+	bool noise(ColumnVector& noise);
+	bool covar(SymmetricMatrix& covar);
 };
 
 
 class ConfigurationManager
 {
 private:
-	std::map<std::string, std::pair<DeviceConfiguration, DeviceCalibration> > configurations;
+	std::map<std::string, std::pair<shared_ptr<DeviceConfiguration>, shared_ptr<DeviceCalibration> > > configurations;
 public:
 	ConfigurationManager();
 	void load(const std::string &filename);
-	std::pair<DeviceConfiguration, DeviceCalibration> GetConfigureation(std::string name);
-private:
-	DeviceConfiguration load_configuration(ptree& device_tree);
-	DeviceCalibration load_calibration(ptree& device_tree);
+	std::pair<shared_ptr<DeviceConfiguration>, shared_ptr<DeviceCalibration> > GetConfiguration(std::string name);
 };
 
 }; /*END kvh_driver*/

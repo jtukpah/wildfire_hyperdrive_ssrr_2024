@@ -14,107 +14,82 @@
 #include<boost/foreach.hpp>
 //******************* LOCAL DEPENDANCIES ****************//
 #include<kvh_driver/configurations.h>
+#include<kvh_driver/constants.h>
 //*********************** NAMESPACES ********************//
 using namespace kvh_driver;
 
 /*
  * kvh_driver::DeviceConfiguration
  */
-DeviceConfiguration::DeviceConfiguration():
-	serial_baud_rate_(9600),
-	serial_parity_(serial_parity_none),
-	serial_data_bits_(8),
-	serial_stop_bits_(0),
-	serial_flow_control_(false){
-}
-DeviceConfiguration::DeviceConfiguration(
-					 int serial_baud_rate,
-					 enum serial_parity serial_parity,
-					 int serial_data_bits,
-					 int serial_stop_bits,
-					 bool serial_flow_control):
-	serial_baud_rate_(serial_baud_rate),
-	serial_parity_(serial_parity),
-	serial_data_bits_(serial_data_bits),
-	serial_stop_bits_(serial_stop_bits),
-	serial_flow_control_(serial_flow_control){
+DeviceConfiguration::DeviceConfiguration(ptree& configuration_tree):
+	configuration_tree_(configuration_tree){
 }
 
 int DeviceConfiguration::serial_baud_rate(){
-	return serial_baud_rate_;
+	return configuration_tree_.get<int>("serial.baud_rate");
 }
 
 enum serial_parity DeviceConfiguration::serial_parity(){
-	return serial_parity_;
+	std::string serial_parity_str = configuration_tree_.get<std::string>("serial.parity");
+	if(!serial_parity_str.compare("odd"))
+		return serial_parity_odd;
+	else if(!serial_parity_str.compare("even"))
+		return serial_parity_even;
+	else
+		return serial_parity_none;
 }
 
 int DeviceConfiguration::serial_data_bits(){
-	return serial_data_bits_;
+	return configuration_tree_.get<int>("serial.data_bits");
 }
 
 int DeviceConfiguration::serial_stop_bits(){
-	return serial_stop_bits_;
+	return configuration_tree_.get<int>("serial.stop_bits");
 }
 
 bool DeviceConfiguration::serial_flow_control(){
-	return serial_flow_control_;
+	std::string serial_flow_control_str = configuration_tree_.get<std::string>("serial.flow_control");
+	return (!serial_flow_control_str.compare("enabled"))?true:false;
 }
 
 /*
  * kvh_driver::DeviceCalibration
  */
-DeviceCalibration::DeviceCalibration():
-	linear_noise_x_(0), linear_noise_y_(0), linear_noise_z_(0),
-	linear_covar_x_(0), linear_covar_y_(0), linear_covar_z_(0),
-	angular_noise_x_(0), angular_noise_y_(0), angular_noise_z_(0),
-	angular_covar_x_(0), angular_covar_y_(0), angular_covar_z_(0){
-}
-DeviceCalibration::DeviceCalibration(
-			  double linear_noise_x, double linear_noise_y, double linear_noise_z,
-			  double linear_covar_x, double linear_covar_y, double linear_covar_z,
-			  double angular_noise_x, double angular_noise_y, double angular_noise_z,
-			  double angular_covar_x, double angular_covar_y, double angular_covar_z):
-	linear_noise_x_(linear_noise_x), linear_noise_y_(linear_noise_y), linear_noise_z_(linear_noise_z),
-	linear_covar_x_(linear_covar_x), linear_covar_y_(linear_covar_y), linear_covar_z_(linear_covar_z),
-	angular_noise_x_(angular_noise_x), angular_noise_y_(angular_noise_y), angular_noise_z_(angular_noise_z),
-	angular_covar_x_(angular_covar_x), angular_covar_y_(angular_covar_y), angular_covar_z_(angular_covar_z){
+DeviceCalibration::DeviceCalibration(ptree& calibration_tree):
+	calibration_tree_(calibration_tree){}
+
+bool DeviceCalibration::noise(ColumnVector& noise){
+	if(noise.size()==constants::IMU_STATE_SIZE()){
+		noise[constants::IMU_X_DOT_DOT_STATE()] = calibration_tree_.get<double>("linear.noise.x");
+		noise[constants::IMU_Y_DOT_DOT_STATE()] = calibration_tree_.get<double>("linear.noise.y");
+		noise[constants::IMU_Z_DOT_DOT_STATE()] = calibration_tree_.get<double>("linear.noise.z");
+		noise[constants::IMU_RX_DOT_STATE()] = calibration_tree_.get<double>("angular.noise.x");
+		noise[constants::IMU_RY_DOT_STATE()] = calibration_tree_.get<double>("angular.noise.y");
+		noise[constants::IMU_RZ_DOT_STATE()] = calibration_tree_.get<double>("angular.noise.z");
+		return true;
+	}
+	else{
+		ROS_ERROR("Cannot get device noise information with matrix size %d, expecting %d", noise.size(), constants::IMU_STATE_SIZE());
+		return false;
+	}
 }
 
-double DeviceCalibration::linear_noise_x(){
-	return linear_noise_x_;
-}
-double DeviceCalibration::linear_noise_y(){
-	return linear_noise_y_;
-}
-double DeviceCalibration::linear_noise_z(){
-	return linear_noise_z_;
-}
-double DeviceCalibration::linear_covar_x(){
-	return linear_covar_x_;
-}
-double DeviceCalibration::linear_covar_y(){
-	return linear_covar_y_;
-}
-double DeviceCalibration::linear_covar_z(){
-	return linear_covar_z_;
-}
-double DeviceCalibration::angular_noise_x(){
-	return angular_noise_x_;
-}
-double DeviceCalibration::angular_noise_y(){
-	return angular_noise_y_;
-}
-double DeviceCalibration::angular_noise_z(){
-	return angular_noise_z_;
-}
-double DeviceCalibration::angular_covar_x(){
-	return angular_covar_x_;
-}
-double DeviceCalibration::angular_covar_y(){
-	return angular_covar_y_;
-}
-double DeviceCalibration::angular_covar_z(){
-	return angular_covar_z_;
+bool DeviceCalibration::covar(SymmetricMatrix& covar){
+	if(covar.rows()==constants::IMU_STATE_SIZE()
+	   && covar.columns()==constants::IMU_STATE_SIZE()){
+		covar = 0;
+		covar(constants::IMU_X_DOT_DOT_STATE(), constants::IMU_X_DOT_DOT_STATE()) = calibration_tree_.get<double>("linear.covar.x");
+		covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE()) = calibration_tree_.get<double>("linear.covar.y");
+		covar(constants::IMU_Z_DOT_DOT_STATE(), constants::IMU_Z_DOT_DOT_STATE()) = calibration_tree_.get<double>("linear.covar.z");
+		covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE()) = calibration_tree_.get<double>("angular.covar.x");
+		covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = calibration_tree_.get<double>("angular.covar.y");
+		covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = calibration_tree_.get<double>("angular.covar.z");
+		return true;
+	}
+	else{
+		ROS_ERROR("Cannot get device covar information with matrix size (%d, %d), expecting (%d, %d)", covar.rows(), covar.columns(), constants::IMU_STATE_SIZE(), constants::IMU_STATE_SIZE());
+		return false;
+	}
 }
 
 ConfigurationManager::ConfigurationManager(){
@@ -133,61 +108,22 @@ void ConfigurationManager::load(const std::string &filename){
 	BOOST_FOREACH(const ptree::value_type &v, root.get_child("devices")) {
 		std::string name = v.first;
 		ptree device_tree = v.second;
-		configurations[name] =
-			std::pair<DeviceConfiguration, DeviceCalibration>
-			(
-			 load_configuration(device_tree),
-			 load_calibration(device_tree)
-			 );
+		configurations.insert(std::make_pair(name,
+						     std::make_pair(
+								    shared_ptr<DeviceConfiguration>(new DeviceConfiguration(device_tree.get_child("configuration"))),
+								    shared_ptr<DeviceCalibration>(new DeviceCalibration(device_tree.get_child("calibration")))
+								    )));
 	}
 }
 
-DeviceConfiguration ConfigurationManager::load_configuration(ptree& device_tree){
-	ptree configuration_tree = device_tree.get_child("configuration");
-	int serial_baud_rate = configuration_tree.get<int>("serial.baud_rate");
-	std::string serial_parity_str = configuration_tree.get<std::string>("serial.parity");
-	int serial_data_bits = configuration_tree.get<int>("serial.data_bits");
-	int serial_stop_bits = configuration_tree.get<int>("serial.stop_bits");
-	std::string serial_flow_control_str = configuration_tree.get<std::string>("serial.flow_control");
-
-	bool serial_flow_control = (!serial_flow_control_str.compare("enabled"))?true:false;
-	enum serial_parity serial_parity;
-	if(!serial_parity_str.compare("odd"))
-		serial_parity = serial_parity_odd;
-	else if(!serial_parity_str.compare("even"))
-		serial_parity = serial_parity_even;
-	else
-		serial_parity = serial_parity_none;
-	return DeviceConfiguration(
-				   serial_baud_rate,
-				   serial_parity,
-				   serial_data_bits,
-				   serial_stop_bits,
-				   serial_flow_control
-				   );
-}
-
-DeviceCalibration ConfigurationManager::load_calibration(ptree& device_tree){
-	ptree calibration_tree = device_tree.get_child("calibration");
-	double linear_noise_x = calibration_tree.get<double>("linear.noise.x");
-	double linear_noise_y = calibration_tree.get<double>("linear.noise.y");
-	double linear_noise_z = calibration_tree.get<double>("linear.noise.z");
-	double linear_covar_x = calibration_tree.get<double>("linear.covar.x");
-	double linear_covar_y = calibration_tree.get<double>("linear.covar.y");
-	double linear_covar_z = calibration_tree.get<double>("linear.covar.z");
-	double angular_noise_x = calibration_tree.get<double>("angular.noise.x");
-	double angular_noise_y = calibration_tree.get<double>("angular.noise.y");
-	double angular_noise_z = calibration_tree.get<double>("angular.noise.z");
-	double angular_covar_x = calibration_tree.get<double>("angular.covar.x");
-	double angular_covar_y = calibration_tree.get<double>("angular.covar.y");
-	double angular_covar_z = calibration_tree.get<double>("angular.covar.z");
-	return DeviceCalibration(linear_noise_x, linear_noise_y, linear_noise_z,
-				 linear_covar_x, linear_covar_y, linear_covar_z,
-				 angular_noise_x, angular_noise_y, angular_noise_z,
-				 angular_covar_x, angular_covar_y, angular_covar_z);
-}
-
-
-std::pair<DeviceConfiguration, DeviceCalibration> ConfigurationManager::GetConfigureation(std::string name){
-	return configurations[name];
+std::pair<shared_ptr<DeviceConfiguration>, shared_ptr<DeviceCalibration> > ConfigurationManager::GetConfiguration(std::string name){
+	//TODO check if configuration actually exists
+	std::map<std::string, std::pair<shared_ptr<DeviceConfiguration>, shared_ptr<DeviceCalibration> > >::iterator itr = configurations.find(name);
+	if(itr!=configurations.end()){
+		return itr->second;
+	}
+	else{
+		ROS_ERROR_STREAM("Unknown KVH Configuration: " << name);
+		throw new std::exception();//TODO do something else
+	}
 }
