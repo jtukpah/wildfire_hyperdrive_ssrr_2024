@@ -60,12 +60,12 @@ DeviceCalibration::DeviceCalibration(ptree& calibration_tree):
 
 bool DeviceCalibration::noise(ColumnVector& noise){
 	if(noise.size()==constants::IMU_STATE_SIZE()){
-		noise[constants::IMU_X_DOT_DOT_STATE()] = calibration_tree_.get<double>("linear.noise.x");
-		noise[constants::IMU_Y_DOT_DOT_STATE()] = calibration_tree_.get<double>("linear.noise.y");
-		noise[constants::IMU_Z_DOT_DOT_STATE()] = calibration_tree_.get<double>("linear.noise.z");
-		noise[constants::IMU_RX_DOT_STATE()] = calibration_tree_.get<double>("angular.noise.x");
-		noise[constants::IMU_RY_DOT_STATE()] = calibration_tree_.get<double>("angular.noise.y");
-		noise[constants::IMU_RZ_DOT_STATE()] = calibration_tree_.get<double>("angular.noise.z");
+		noise(constants::IMU_X_DOT_DOT_STATE()) = calibration_tree_.get<double>("linear.noise.x");
+		noise(constants::IMU_Y_DOT_DOT_STATE()) = calibration_tree_.get<double>("linear.noise.y");
+		noise(constants::IMU_Z_DOT_DOT_STATE()) = calibration_tree_.get<double>("linear.noise.z");
+		noise(constants::IMU_RX_DOT_STATE()) = calibration_tree_.get<double>("angular.noise.x");
+		noise(constants::IMU_RY_DOT_STATE()) = calibration_tree_.get<double>("angular.noise.y");
+		noise(constants::IMU_RZ_DOT_STATE()) = calibration_tree_.get<double>("angular.noise.z");
 		return true;
 	}
 	else{
@@ -100,6 +100,9 @@ ConfigurationManager::ConfigurationManager(){
 		load(package_path+"/devices.xml");
 	}
 }
+ConfigurationManager::ConfigurationManager(const std::string& filename){
+	load(filename);
+}
 
 void ConfigurationManager::load(const std::string &filename){
 	ROS_INFO("Loading Device Configurations from: %s", filename.c_str());
@@ -124,6 +127,6 @@ std::pair<shared_ptr<DeviceConfiguration>, shared_ptr<DeviceCalibration> > Confi
 	}
 	else{
 		ROS_ERROR_STREAM("Unknown KVH Configuration: " << name);
-		throw new std::exception();//TODO do something else
+		return ConfigurationData(shared_ptr<DeviceConfiguration>(), shared_ptr<DeviceCalibration>());//return null pointers
 	}
 }

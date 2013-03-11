@@ -89,6 +89,8 @@ public:
 	bool covar(SymmetricMatrix& covar);
 };
 
+ typedef std::pair<shared_ptr<DeviceConfiguration>, shared_ptr<DeviceCalibration> > ConfigurationData;
+
 
 class ConfigurationManager
 {
@@ -96,6 +98,7 @@ private:
 	std::map<std::string, std::pair<shared_ptr<DeviceConfiguration>, shared_ptr<DeviceCalibration> > > configurations;
 public:
 	ConfigurationManager();
+	ConfigurationManager(const std::string& filename);
 	void load(const std::string &filename);
 	std::pair<shared_ptr<DeviceConfiguration>, shared_ptr<DeviceCalibration> > GetConfiguration(std::string name);
 };
