@@ -5,3 +5,5 @@ rosbuild_add_library(${PROJECT_NAME}Filters
 		      odometryfilter.cpp)
 		      
 rosbuild_link_boost(${PROJECT_NAME}Filters thread)
+
+rosbuild_add_library(${PROJECT_NAME}Driver kvh_imu.cpp)
