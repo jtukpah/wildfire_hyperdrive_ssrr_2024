@@ -7,6 +7,15 @@
 
 namespace kvh_driver{
 
+/**
+ * Macro to throw an exception like prinf and extract debugging information
+ */
+#define IMU_EXCEPT(except, msg, ...) {					\
+		char buf[1000];						\
+		snprintf(buf, 1000, msg " (in kvh_driver::IMU::%s)" , ##__VA_ARGS__, __FUNCTION__); \
+		throw except(buf);					\
+	}
+
 const uint8_t IMU::BIT_DATA_HEADER[4] = {0xFE, 0x81, 0x00, 0xAA};
 const uint8_t IMU::NORMAL_DATA_HEADER[4] = {0xFE, 0x81, 0xFF, 0x55};
 const uint32_t IMU::NORMAL_DATA_CRC_POLY = 0x04C11DB7;//stay endian independant in calc
@@ -26,45 +35,62 @@ void IMU::open(const char* port){
 	if(portOpen())
 		close();
 
-	int fd = ::open(port, O_RDWR | O_NOCTTY | O_NDELAY);
-	if (fd == -1){
-		if(errno==EACCES){
-			IMU_EXCEPT(Exception, "Error opening device port. Permission Denied (errno=%d)", errno);
+	int fd = -1;
+	try{
+		fd = ::open(port, O_RDWR | O_NOCTTY | O_NDELAY);
+		if (fd == -1){
+			if(errno==EACCES){
+				IMU_EXCEPT(Exception, "Error opening device port. Permission Denied (errno=%d: %s)", errno, strerror(errno));
+			}
+			else if(errno==ENOENT){
+				IMU_EXCEPT(Exception, "Error opening device port. The requested port does not exist (errno=%d: %s)", errno, strerror(errno));
+			}
+			return;
 		}
-		else if(errno==ENOENT){
-			IMU_EXCEPT(Exception, "Error opening device port. The requested port does not exist (errno=%d)", errno);
-		}
-		return;
+		struct flock fl;
+		fl.l_type   = F_WRLCK;
+		fl.l_whence = SEEK_SET;
+		fl.l_start = 0;
+		fl.l_len   = 0;
+		fl.l_pid   = getpid();
+		
+		if (fcntl(fd, F_SETLK, &fl) != 0)
+			IMU_EXCEPT(Exception, "Device is already locked.");
+
+
+		struct termios options;
+		tcgetattr(fd, &options);
+	
+		cfsetispeed(&options, B921600);
+		cfsetospeed(&options, B921600);
+		options.c_cflag |= (CLOCAL | CREAD);
+
+		//parity
+		options.c_cflag &= ~PARENB;
+		options.c_cflag &= ~CSTOPB;
+
+		//char size
+		options.c_cflag &= ~CSIZE;
+		options.c_cflag |= CS8;
+
+		//raw
+		options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+
+		//flow control
+		options.c_iflag &= ~(IXON | IXOFF | IXANY);
+
+		//raw output
+		options.c_oflag &= ~OPOST;
+	
+		if(tcsetattr(fd, TCSANOW, &options)<0)
+			IMU_EXCEPT(Exception, "Error applying serial port settings");
+
+		imu_fd_ = fd;
+	} catch(Exception& e){//something went wrong clean up
+		if(fd!=-1)
+			::close(fd);
+		throw e;
 	}
-	fcntl(fd, F_SETFL, 0);//set to blocking
-
-	struct termios options;
-	tcgetattr(fd, &options);
-	
-	cfsetispeed(&options, B921600);
-	cfsetospeed(&options, B921600);
-	options.c_cflag |= (CLOCAL | CREAD);
-
-	//parity
-	options.c_cflag &= ~PARENB;
-	options.c_cflag &= ~CSTOPB;
-
-	//char size
-	options.c_cflag &= ~CSIZE;
-	options.c_cflag |= CS8;
-
-	//raw
-	options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
-
-	//flow control
-	options.c_iflag &= ~(IXON | IXOFF | IXANY);
-
-	//raw output
-	options.c_oflag &= ~OPOST;
-	
-	tcsetattr(fd, TCSANOW, &options);
-
-	imu_fd_ = fd;
 }
 
 void IMU::close(){
@@ -76,18 +102,23 @@ void IMU::close(){
 }
 
 int IMU::write(const void* data, size_t size){
-	return ::write(imu_fd_, data, size);
+	int num_written = ::write(imu_fd_, data, size);
+	if(num_written<0)
+		IMU_EXCEPT(Exception, "Error writing to device (errno=%d: %s)", errno, strerror(errno));
+	if(num_written!=size)
+	   IMU_EXCEPT(Exception, "Error writing to device, did not write expected number of bytes");
+	return num_written;
 };
 int IMU::write_str(const char* data){
 	return write(data, strlen(data));
 };
-int IMU::read(void* data, size_t size){
-	char* cur_data = (char*)data;
+int IMU::read(void* data, size_t size){//TODO add timeout to read
+	uint8_t* cur_data = (uint8_t*)data;
 	size_t total_read = 0;
 	while(total_read<size){
 		int num_read = ::read(imu_fd_, cur_data, size-total_read);
 		if(num_read<0)
-			IMU_EXCEPT(Exception, "Error reading from device");
+			IMU_EXCEPT(Exception, "Error reading from device, (errno=%d: %s)", errno, strerror(errno));
 		total_read += num_read;
 		cur_data += num_read;
 	}
@@ -109,7 +140,7 @@ int IMU::read_from_header(const uint8_t* header, size_t header_size, void* data,
 	memcpy(data, header, header_size);
 	
 	//read rest data
-	int num_read = read(((char*)data)+header_size, total_size-header_size);
+	int num_read = read(((uint8_t*)data)+header_size, total_size-header_size);
 	if(num_read>=0)
 		return num_read+header_size;
 	IMU_EXCEPT(Exception, "Error reading data after header");
@@ -130,6 +161,7 @@ void IMU::config(bool in_config){
 		write_str("=config,1\n");
 	else
 		write_str("=config,0\n");
+	//TODO read until reach end of binary stream
 }
 
 #define QUOTE(str) #str
@@ -183,7 +215,7 @@ void IMU::read_data(imu_data_t& data){
 //4 byte crc
 #define CRC_WIDTH  (8 * 4)
 #define CRC_TOPBIT (1 << (CRC_WIDTH - 1))
-uint32_t IMU::calc_crc(const char* data, size_t size, uint32_t poly){
+uint32_t IMU::calc_crc(const uint8_t* data, size_t size, uint32_t poly){
 	uint32_t  remainder = 0xFFFFFFFF;	
 
 	for (size_t byte = 0; byte < size; byte++) {
@@ -202,7 +234,7 @@ uint32_t IMU::calc_crc(const char* data, size_t size, uint32_t poly){
 	return remainder;
 }
 
-uint8_t IMU::calc_checksum(const char* data, size_t size){
+uint8_t IMU::calc_checksum(const uint8_t* data, size_t size){
 	uint8_t  sum = 0;
 	for (size_t byte = 0; byte < size; byte++) {
 		sum += data[byte];
