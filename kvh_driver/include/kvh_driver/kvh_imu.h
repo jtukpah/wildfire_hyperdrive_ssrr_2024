@@ -3,45 +3,77 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <string>
 #include <unistd.h>
 #include <stdio.h>
 #include <exception>
+#include <stdexcept>
 #include <stdint.h>
 
 namespace kvh_driver{
 
-#define IMU_EXCEPT(msg) {\
-	throw std::exception();\
+class Exception : public std::runtime_error{
+	public:
+	Exception(const std::string msg):std::runtime_error(msg){}
+	};
+
+class CorruptDataException : public Exception{
+	public:
+	CorruptDataException(const std::string msg):Exception(msg){}
+	};
+
+class TimeoutException : public Exception{
+	public:
+	TimeoutException(const std::string msg):Exception(msg){}
+	};
+
+
+#define IMU_EXCEPT(except, msg, ...) {					\
+		char buf[1000];						\
+		snprintf(buf, 1000, msg " (in kvh_driver::IMU::%s)" , ##__VA_ARGS__, __FUNCTION__); \
+		throw except(buf);					\
 	}
 
-
-#define float_raw(name) union{\
-	float name;\
-	uint32_t name##_raw;\
+#define raw_union(name, type, raw_type) union{		\
+	type name;\
+	raw_type name##_raw;\
 }
+#define union_float_raw(name) raw_union(name, float, uint32_t)
+
+typedef struct {
+	bool gyro_a:1;
+	bool gyro_b:1;
+	bool gyro_c:1;
+	bool _zero_0:1;
+
+	bool accel_a:1;
+	bool accel_b:1;
+	bool accel_c:1;
+	bool _zero_1:1;
+} __attribute__ ((packed)) imu_data_status_t;
+
 typedef union {
 	char raw[36];
 	struct{
 		uint32_t header;
-		float_raw(angleX);
-		float_raw(angleY);
-		float_raw(angleZ);
-		float_raw(accelX);
-		float_raw(accelY);
-		float_raw(accelZ);
-		uint8_t status;
+		union_float_raw(angleX);
+		union_float_raw(angleY);
+		union_float_raw(angleZ);
+		union_float_raw(accelX);
+		union_float_raw(accelY);
+		union_float_raw(accelZ);
+		raw_union(status, imu_data_status_t, uint8_t);
 		uint8_t sequence_num;
 		uint16_t temp;
 		uint32_t crc;
 	};
-} imu_data_t;
+} __attribute__ ((packed)) imu_data_t;
 
 typedef union{
 	char raw[11];
 	struct{
-		char header[4];
-		//uint32_t header;
-		/*		struct{
+		uint32_t header;
+		struct{
 			bool gyro_a_sld:1;
 			bool gyro_a_moddac:1;
 			bool gyro_a_phase:1;
@@ -100,10 +132,10 @@ typedef union{
 			bool aux_sport:1;
 			bool sufficient_software_resources:1;
 			bool byte_5_zero:1;
-			};*/
-		//uint8_t checksum;
-	};
-} imu_bit_data_t;
+		};
+		uint8_t checksum;
+	}__attribute__ ((packed));
+} __attribute__ ((packed)) imu_bit_data_t;
 
 
 class IMU{
@@ -115,38 +147,37 @@ class IMU{
 	void close();
 	bool portOpen(){return imu_fd_!=0;};
 
-	int write(const void* data, size_t size){
-		return ::write(imu_fd_, data, size);
-	};
-	int write_str(const char* data){
-		return write(data, strlen(data));
-	};
-	int read(void* data, size_t size){
-		char* cur_data = (char*)data;
-		int total_read = 0;
-		while(total_read<size){
-			int num_read = ::read(imu_fd_, cur_data, size-total_read);
-			if(num_read<0)
-				IMU_EXCEPT("Error reading");
-			total_read += num_read;
-			cur_data += num_read;
-		}
-		return total_read;
-	};
-	int read_nb(void* data, size_t size){
-		int num_read = ::read(imu_fd_, data, size);
-		if(num_read<0)
-			IMU_EXCEPT("Error reading");
-		return num_read;
-	};
+	int write(const void* data, size_t size);
+	int write_str(const char* data);
+	int read(void* data, size_t size);
+	int read_from_header(const uint8_t* header, size_t header_size, void* data, size_t total_size);
 
 
 	
 	void config(bool in_config);
 	void ebit(imu_bit_data_t& data);
 	void read_data(imu_data_t& data);
+
+	/*
+	 * Internal Functions
+	 */
+	static uint32_t calc_crc(const char* data, size_t size, uint32_t poly);
+	static uint8_t calc_checksum(const char* data, size_t size);
+
+	/*
+	 * Private Fields
+	 */
  private:
 	int imu_fd_;
+
+
+	/*
+	 * Protocol Constants
+	 */
+ public:
+	static const uint8_t BIT_DATA_HEADER[4];
+	static const uint8_t NORMAL_DATA_HEADER[4];
+	static const uint32_t NORMAL_DATA_CRC_POLY;
 };
 	
 }

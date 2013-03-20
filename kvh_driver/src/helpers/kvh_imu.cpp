@@ -7,6 +7,10 @@
 
 namespace kvh_driver{
 
+const uint8_t IMU::BIT_DATA_HEADER[4] = {0xFE, 0x81, 0x00, 0xAA};
+const uint8_t IMU::NORMAL_DATA_HEADER[4] = {0xFE, 0x81, 0xFF, 0x55};
+const uint32_t IMU::NORMAL_DATA_CRC_POLY = 0x04C11DB7;//stay endian independant in calc
+
 
 IMU::IMU(){
 	imu_fd_ = -1;
@@ -17,13 +21,19 @@ IMU::~IMU(){
 		close();
 }
 
+
 void IMU::open(const char* port){
 	if(portOpen())
 		close();
 
 	int fd = ::open(port, O_RDWR | O_NOCTTY | O_NDELAY);
 	if (fd == -1){
-		perror("open");
+		if(errno==EACCES){
+			IMU_EXCEPT(Exception, "Error opening device port. Permission Denied (errno=%d)", errno);
+		}
+		else if(errno==ENOENT){
+			IMU_EXCEPT(Exception, "Error opening device port. The requested port does not exist (errno=%d)", errno);
+		}
 		return;
 	}
 	fcntl(fd, F_SETFL, 0);//set to blocking
@@ -58,59 +68,107 @@ void IMU::open(const char* port){
 }
 
 void IMU::close(){
+	if(imu_fd_==-1)
+		return;
 	int fd = imu_fd_;
 	imu_fd_ = -1;
 	::close(fd);
 }
 
+int IMU::write(const void* data, size_t size){
+	return ::write(imu_fd_, data, size);
+};
+int IMU::write_str(const char* data){
+	return write(data, strlen(data));
+};
+int IMU::read(void* data, size_t size){
+	char* cur_data = (char*)data;
+	size_t total_read = 0;
+	while(total_read<size){
+		int num_read = ::read(imu_fd_, cur_data, size-total_read);
+		if(num_read<0)
+			IMU_EXCEPT(Exception, "Error reading from device");
+		total_read += num_read;
+		cur_data += num_read;
+	}
+	return total_read;
+};
+
+int IMU::read_from_header(const uint8_t* header, size_t header_size, void* data, size_t total_size){
+	//wait for header to appear
+	for(size_t i = 0; i<header_size;){
+		uint8_t b;
+		read(&b, 1);
+		if(b == header[i]){
+			++i;
+		}
+		else
+			i = 0;
+	}
+	//copy header into data block after reading it
+	memcpy(data, header, header_size);
+	
+	//read rest data
+	int num_read = read(((char*)data)+header_size, total_size-header_size);
+	if(num_read>=0)
+		return num_read+header_size;
+	IMU_EXCEPT(Exception, "Error reading data after header");
+}
+
+
+
+
+
+
+
+
+
 void IMU::config(bool in_config){
 	if(!portOpen())
-		IMU_EXCEPT("Port not open");
+		IMU_EXCEPT(Exception, "Port not open");
 	if(in_config)
 		write_str("=config,1\n");
 	else
 		write_str("=config,0\n");
 }
 
+#define QUOTE(str) #str
+#define assert_bit_zero(bit) if(bit)\
+		IMU_EXCEPT(CorruptDataException, "Zero bit "QUOTE(bit)" was not zero")
 void IMU::ebit(imu_bit_data_t& data){
+	if(!portOpen())
+		IMU_EXCEPT(Exception, "Port not open");
 	write_str("?bit\n");
-	const uint32_t start_byte = htobe32(0xFE8100AA);
-	for(int i = 0; i<4;){
-		uint8_t b;
-		read(&b, 1);
-		if(b == (0xFF & (start_byte>>8*i))){
-			++i;
-		}
-		else
-			i = 0;
-	}
-
-	//data.header = start_byte;//already read start byte
-	data.header[0] = 0;
-	data.header[1] = 0;
-	data.header[2] = 0;
-	data.header[3] = 0;
-	read(((char*)&data)+sizeof(data.header), sizeof(data)-sizeof(data.header));
-	//TODO validate 0 bits
-	//TODO calc checksum
+	read_from_header(BIT_DATA_HEADER, sizeof(BIT_DATA_HEADER), data.raw, sizeof(data));
+	assert_bit_zero(data.byte_0_zero);
+	assert_bit_zero(data.byte_1_zero);
+	assert_bit_zero(data.byte_2_zero);
+	assert_bit_zero(data.byte_3_zero);
+	assert_bit_zero(data.byte_4_zero);
+	assert_bit_zero(data.byte_5_zero);
+	if(data.checksum!=calc_checksum(data.raw, sizeof(data)-sizeof(data.checksum)))
+	   IMU_EXCEPT(CorruptDataException, "Checksum did not match for Extended Built in Test");
 }
 
+#define assert_status_bit(data, bit) if(!data.status.bit)		\
+		IMU_EXCEPT(Exception, "Message status reported invalid measurement from "QUOTE(bit))
 void IMU::read_data(imu_data_t& data){
-	const uint32_t start_byte = htobe32(0xFE81FF55);
-	for(int i = 0; i<4;){
-		uint8_t b;
-		read(&b, 1);
-		if(b == (0xFF & (start_byte>>8*i))){
-			++i;
-		}
-		else
-			i = 0;
-	}
+	if(!portOpen())
+		IMU_EXCEPT(Exception, "Port not open");
+	read_from_header(NORMAL_DATA_HEADER, sizeof(NORMAL_DATA_HEADER), data.raw, sizeof(data));
 
-	data.header = start_byte;//already read start byte
-	read(((char*)&data)+sizeof(data.header), sizeof(data)-sizeof(data.header));
-	//TODO calc CRC
+	assert_bit_zero(data.status._zero_0);
+	assert_bit_zero(data.status._zero_1);
+	if(data.crc!=calc_crc(data.raw, sizeof(data)-sizeof(data.crc), NORMAL_DATA_CRC_POLY))
+		IMU_EXCEPT(CorruptDataException, "CRC did not match for normal data message");
+	assert_status_bit(data, gyro_a);
+	assert_status_bit(data, gyro_b);
+	assert_status_bit(data, gyro_c);
+	assert_status_bit(data, accel_a);
+	assert_status_bit(data, accel_b);
+	assert_status_bit(data, accel_c);
 
+	//fix endianes if needed
 	data.angleX_raw = be32toh(data.angleX_raw);
 	data.angleY_raw = be32toh(data.angleY_raw);
 	data.angleZ_raw = be32toh(data.angleZ_raw);
@@ -119,6 +177,39 @@ void IMU::read_data(imu_data_t& data){
 	data.accelZ_raw = be32toh(data.accelZ_raw);
 	data.temp = be16toh(data.temp);
 }
+
+
+
+//4 byte crc
+#define CRC_WIDTH  (8 * 4)
+#define CRC_TOPBIT (1 << (CRC_WIDTH - 1))
+uint32_t IMU::calc_crc(const char* data, size_t size, uint32_t poly){
+	uint32_t  remainder = 0xFFFFFFFF;	
+
+	for (size_t byte = 0; byte < size; byte++) {
+		remainder ^= (data[byte] << (CRC_WIDTH - 8));
+
+		for (uint8_t bit = 8; bit > 0; --bit) {
+			if (remainder & CRC_TOPBIT) {
+				remainder = (remainder << 1) ^ poly;
+			}
+			else {
+				remainder = (remainder << 1);
+			}
+		}
+	}
+
+	return remainder;
+}
+
+uint8_t IMU::calc_checksum(const char* data, size_t size){
+	uint8_t  sum = 0;
+	for (size_t byte = 0; byte < size; byte++) {
+		sum += data[byte];
+	}
+	return sum;
+}
+
 
 
 }
