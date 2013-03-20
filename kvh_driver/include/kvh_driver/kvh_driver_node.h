@@ -19,6 +19,7 @@
 #include<tf/tf.h>
 //******************* LOCAL DEPENDANCIES ****************//
 #include<kvh_driver/KVHDriverConfig.h>
+#include<kvh_driver/configurations.h>
 #include<kvh_driver/imu_filter.h>
 #include<kvh_driver/odometryfilter.hpp>
 //*********************** NAMESPACES ********************//
@@ -220,6 +221,7 @@ private:
 		return out;
 	}
 
+	ConfigurationManager configurationManager;
 };
 
 
