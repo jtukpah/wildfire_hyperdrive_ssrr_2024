@@ -47,22 +47,21 @@ void IMU::open(const char* port){
 			}
 			return;
 		}
-		struct flock fl;
-		fl.l_type   = F_WRLCK;
-		fl.l_whence = SEEK_SET;
-		fl.l_start = 0;
-		fl.l_len   = 0;
-		fl.l_pid   = getpid();
 		
-		if (fcntl(fd, F_SETLK, &fl) != 0)
-			IMU_EXCEPT(Exception, "Device is already locked.");
 
+		fcntl (handle, F_SETFL, O_APPEND | O_NONBLOCK);
+		
 
 		struct termios options;
 		tcgetattr(fd, &options);
 	
 		cfsetispeed(&options, B921600);
 		cfsetospeed(&options, B921600);
+
+		options.c_iflag = IGNBRK;
+		options.c_lflag = 0;//reset to RAW input mode
+		options.c_oflag = 0;//reset to RAW output mode
+
 		options.c_cflag |= (CLOCAL | CREAD);
 
 		//parity
@@ -73,15 +72,6 @@ void IMU::open(const char* port){
 		options.c_cflag &= ~CSIZE;
 		options.c_cflag |= CS8;
 
-		//raw
-		options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
-
-		//flow control
-		options.c_iflag &= ~(IXON | IXOFF | IXANY);
-
-		//raw output
-		options.c_oflag &= ~OPOST;
-	
 		if(tcsetattr(fd, TCSANOW, &options)<0)
 			IMU_EXCEPT(Exception, "Error applying serial port settings");
 
@@ -112,6 +102,9 @@ int IMU::write(const void* data, size_t size){
 int IMU::write_str(const char* data){
 	return write(data, strlen(data));
 };
+
+
+
 int IMU::read(void* data, size_t size){//TODO add timeout to read
 	uint8_t* cur_data = (uint8_t*)data;
 	size_t total_read = 0;
