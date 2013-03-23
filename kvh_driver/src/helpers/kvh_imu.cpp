@@ -37,7 +37,7 @@ void IMU::open(const char* port){
 
 	int fd = -1;
 	try{
-		fd = ::open(port, O_RDWR | O_NOCTTY | O_NDELAY);
+		fd = ::open(port, O_RDWR | O_NOCTTY);
 		if (fd == -1){
 			if(errno==EACCES){
 				IMU_EXCEPT(Exception, "Error opening device port. Permission Denied (errno=%d: %s)", errno, strerror(errno));
@@ -49,9 +49,7 @@ void IMU::open(const char* port){
 		}
 		
 
-		fcntl (handle, F_SETFL, O_APPEND | O_NONBLOCK);
 		
-
 		struct termios options;
 		tcgetattr(fd, &options);
 	
@@ -134,7 +132,7 @@ int IMU::read_from_header(const uint8_t* header, size_t header_size, void* data,
 	
 	//read rest data
 	int num_read = read(((uint8_t*)data)+header_size, total_size-header_size);
-	if(num_read>=0)
+	if(num_read==total_size-header_size)
 		return num_read+header_size;
 	IMU_EXCEPT(Exception, "Error reading data after header");
 }
@@ -184,8 +182,8 @@ void IMU::read_data(imu_data_t& data){
 
 	assert_bit_zero(data.status._zero_0);
 	assert_bit_zero(data.status._zero_1);
-	if(data.crc!=calc_crc(data.raw, sizeof(data)-sizeof(data.crc), NORMAL_DATA_CRC_POLY))
-		IMU_EXCEPT(CorruptDataException, "CRC did not match for normal data message");
+	if(be32toh(data.crc)!=calc_crc(data.raw, sizeof(data)-sizeof(data.crc), NORMAL_DATA_CRC_POLY))
+	  IMU_EXCEPT(CorruptDataException, "CRC did not match for normal data message");
 	assert_status_bit(data, gyro_a);
 	assert_status_bit(data, gyro_b);
 	assert_status_bit(data, gyro_c);

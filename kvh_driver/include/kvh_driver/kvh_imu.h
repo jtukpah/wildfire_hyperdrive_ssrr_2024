@@ -75,7 +75,7 @@ typedef struct {
 typedef union {
 	uint8_t raw[SIZE_OF_IMU_DATA];//To allow for raw byte access
 	struct{
-		uint32_t header;
+		uint8_t header[4];
 		union_float_raw(angleX);
 		union_float_raw(angleY);
 		union_float_raw(angleZ);
@@ -100,7 +100,7 @@ typedef union {
 typedef union{
 	uint8_t raw[SIZE_OF_IMU_BIT_DATA];//to allow for raw byte access
 	struct{
-		uint32_t header;
+		uint8_t header[4];
 		struct{
 			bool gyro_a_sld:1;
 			bool gyro_a_moddac:1;

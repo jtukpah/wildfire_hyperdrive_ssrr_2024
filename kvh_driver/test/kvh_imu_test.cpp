@@ -34,6 +34,12 @@ TEST(KVH_IMU_DRIVER, crc_checksum)
 	};
 	uint8_t checksum = kvh_driver::IMU::calc_checksum(input, sizeof(input));
 	ASSERT_EQ(0x1E, checksum)<<"The calculated checksum did not match the expected one";
+
+	uint8_t input2[] = {
+		0xFE, 0x81, 0x00, 0xAA, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F
+	};
+	uint8_t checksum2 = kvh_driver::IMU::calc_checksum(input2, sizeof(input2));
+	ASSERT_EQ(0x23, checksum2)<<"The calculated checksum did not match the expected one";
 }
 
 
