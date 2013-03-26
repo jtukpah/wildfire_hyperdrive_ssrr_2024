@@ -10,34 +10,9 @@
 #include <stdexcept>
 #include <stdint.h>
 #include <boost/static_assert.hpp>
+#include "serial_driver_base/serial_port.h"
 
 namespace kvh_driver{
-
-/**
- * @author Mitchell Wills
- * @brief A general exception thrown by the kvh_imu driver
- */
-class Exception : public std::runtime_error{
-	public:
-	Exception(const std::string msg):std::runtime_error(msg){}
-	};
-/**
- * @author Mitchell Wills
- * @brief An exception indicating that corrupt data was recieved from the device
- */
-class CorruptDataException : public Exception{
-	public:
-	CorruptDataException(const std::string msg):Exception(msg){}
-	};
-/**
- * @author Mitchell Wills
- * @brief An exception indicating that a function timed out while reading bytes from the device
- */
-class TimeoutException : public Exception{
-	public:
-	TimeoutException(const std::string msg):Exception(msg){}
-	};
-
 
 /**
  * Some macros which create an anonomous union of a given type as well as a raw unsigned
@@ -182,7 +157,7 @@ class IMU{
 	 * @brief Opens the connection to the imu on the given port
 	 * @param [in] port the port to connect to the device with (ex. /dev/ttyUSB0)
 	 */
-	void open(const char* port);
+	void open(const std::string port);
 	/**
 	 * @author Mitchell Wills
 	 * @brief Closes the connection to the device
@@ -192,7 +167,7 @@ class IMU{
 	 * @author Mitchell Wills
 	 * @return true if the connection to the device is open
 	 */
-	bool portOpen(){return imu_fd_!=0;};
+	bool portOpen(){return serial_port.is_open();};
 	
 	/**
 	 * @author Mitchell Wills
@@ -258,11 +233,7 @@ class IMU{
 	 * Private Fields
 	 */
  private:
-	/**
-	 * The file descriptor of the connection to the device or -1 if the device is not connected
-	 */
-	int imu_fd_;
-
+	serial_driver::DriverSerialPort serial_port;
 
 	/*
 	 * Protocol Constants

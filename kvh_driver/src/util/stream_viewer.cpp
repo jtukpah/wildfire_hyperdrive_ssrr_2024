@@ -23,7 +23,7 @@ int main(){
 	    printf("\tSequence #: %u\n", data.sequence_num);
 	    printf("\tTemperature: %u\n", data.temp);
 	    printf("\tCRC: %08X\n", data.crc);
-	  } catch(kvh_driver::CorruptDataException& e){
+	  } catch(serial_driver::CorruptDataException& e){
 	    fprintf(stderr, "Got corrupt message: %s\n", e.what());
 	  }
 	}
