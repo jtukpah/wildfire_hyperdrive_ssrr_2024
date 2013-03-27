@@ -32,31 +32,6 @@ void IMU::close(){
   serial_port.close();
 }
 
-int IMU::read_from_header(const uint8_t* header, size_t header_size, void* data, size_t total_size){
-  //wait for header to appear
-  for(size_t i = 0; i<header_size;){
-    uint8_t b;
-    serial_port.read(&b, 1, 10);
-    if(b == header[i]){
-      ++i;
-    }
-    else
-      i = 0;
-  }
-  //copy header into data block after reading it
-  memcpy(data, header, header_size);
-
-  //read rest data
-  int num_read = serial_port.read(((uint8_t*)data)+header_size, total_size-header_size, 10);
-  if(num_read<0)
-    SERIAL_DRIVER_EXCEPT(Exception, "Error reading data after header");
-  if((unsigned int)num_read==total_size-header_size)
-    return num_read+header_size;
-  SERIAL_DRIVER_EXCEPT(Exception, "Error reading data after header");
-}
-
-
-
 
 void IMU::config(bool in_config){
   if(!portOpen())
@@ -75,7 +50,7 @@ void IMU::ebit(imu_bit_data_t& data){
   if(!portOpen())
     SERIAL_DRIVER_EXCEPT(Exception, "Port not open");
   serial_port.write("?bit\n", 10);
-  read_from_header(BIT_DATA_HEADER, sizeof(BIT_DATA_HEADER), data.raw, sizeof(data));
+  serial_port.read_from_header(BIT_DATA_HEADER, sizeof(BIT_DATA_HEADER), data.raw, sizeof(data), 10);
   assert_bit_zero(data.byte_0_zero);
   assert_bit_zero(data.byte_1_zero);
   assert_bit_zero(data.byte_2_zero);
@@ -91,7 +66,7 @@ void IMU::ebit(imu_bit_data_t& data){
 void IMU::read_data(imu_data_t& data){
   if(!portOpen())
     SERIAL_DRIVER_EXCEPT(Exception, "Port not open");
-  read_from_header(NORMAL_DATA_HEADER, sizeof(NORMAL_DATA_HEADER), data.raw, sizeof(data));
+  serial_port.read_from_header(NORMAL_DATA_HEADER, sizeof(NORMAL_DATA_HEADER), data.raw, sizeof(data), 10);
 
   assert_bit_zero(data.status._zero_0);
   assert_bit_zero(data.status._zero_1);
