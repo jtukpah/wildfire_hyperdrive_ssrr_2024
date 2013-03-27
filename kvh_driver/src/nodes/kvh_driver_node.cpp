@@ -40,15 +40,16 @@ using namespace kvh_driver;
 
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
 					    	    device_id_("default"),
-								device_address_(""),
-								should_IMU_filter_(false),
-								should_odom_filter_(false),
-								measurement_buffer_(2),
-								imu_filter_(NULL),
-								odom_filter_(NULL),
-								nh_(nh),
-								p_nh_(p_nh),
-								last_odom_update_(ros::Time::now())
+						    device_address_(""),
+						    should_IMU_filter_(false),
+						    should_odom_filter_(false),
+						    measurement_buffer_(2),
+						    imu_filter_(NULL),
+						    odom_filter_(NULL),
+						    nh_(nh),
+						    p_nh_(p_nh),
+						    last_odom_update_(ros::Time::now()),
+						    imu(1000)
 {
 	std::string device_id("device_id");
 
@@ -60,6 +61,8 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
 	{
 		ROS_WARN("No Device ID specified. Using Default Device Parameters");
 	}
+
+	imu.open("/dev/ttyUSB0");
 
 	ROS_INFO("Building Filters....");
 	this->buildIMUFilter();
@@ -80,6 +83,7 @@ KVHDriverNode::~KVHDriverNode()
 {
 	if(this->imu_filter_!=NULL) delete imu_filter_;
 	if(this->odom_filter_!=NULL) delete odom_filter_;
+	imu.close();
 }
 
 void KVHDriverNode::registerTopics()
@@ -226,6 +230,7 @@ void KVHDriverNode::poll(const ros::TimerEvent& event)
 			this->measurement_buffer_.pop_back();
 			ColumnVector input(0);
 			input = 0;
+			imu.read_measurement(measurement);
 			this->imu_filter_->update(input,*measurement);
 		}
 		else

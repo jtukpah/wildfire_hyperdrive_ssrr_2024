@@ -9,6 +9,7 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://robot.wpi.edu/wiki/kvh_driver</url>
+  <depend package="roslib"/>
   <depend package="roscpp"/>
   <depend package="rospy"/>
   <depend package="std_msgs"/>
@@ -16,6 +17,7 @@
   <depend package="sensor_msgs"/>
   <depend package="bfl"/>
   <depend package="dynamic_reconfigure"/>
+  <depend package="serial_driver_base"/>
 
 </package>
 
