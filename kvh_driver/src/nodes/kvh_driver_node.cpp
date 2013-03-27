@@ -6,32 +6,8 @@
  */
 
 /*
- * Copyright (c) 2013, RIVeR Lab
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of the <organization> nor the
- *    names of its contributors may be used to endorse or promote products
- *    derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * LICENSE FILE
  */
-
 //******************* SYSTEM DEPENDANCIES ****************//
 //******************* LOCAL DEPENDANCIES ****************//
 #include<kvh_driver/kvh_driver_node.h>
@@ -224,19 +200,11 @@ void KVHDriverNode::poll(const ros::TimerEvent& event)
 {
 	if(this->imu_filter_->isInitialized()&&this->should_IMU_filter_)
 	{
-		if(this->measurement_buffer_.size()!=0)
-		{
-			ColumnVectorPtr measurement(this->measurement_buffer_.back());
-			this->measurement_buffer_.pop_back();
-			ColumnVector input(0);
-			input = 0;
-			imu.read_measurement(measurement);
-			this->imu_filter_->update(input,*measurement);
-		}
-		else
-		{
-			//this->imu_filter_->update();
-		}
+	  ColumnVectorPtr measurement(new ColumnVector(constants::IMU_STATE_SIZE()));
+	  ColumnVector input(0);
+	  input = 0;
+	  if(imu.read_measurement(measurement))
+	    this->imu_filter_->update(input,*measurement);
 	}
 	else if(!this->should_IMU_filter_)
 	{
@@ -256,7 +224,7 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 	{
 		//Build and publish message
 		ColumnVector     state(constants::IMU_STATE_SIZE());
-		SymmetricMatrix  covar(constants::IMU_STATE_SIZE(),constants::IMU_STATE_SIZE());
+		SymmetricMatrix  covar(constants::IMU_STATE_SIZE());
 		this->imu_filter_->getEstimate(state, covar);
 		sensor_msgs::Imu message;
 		message.header.frame_id = "kvh/imu";

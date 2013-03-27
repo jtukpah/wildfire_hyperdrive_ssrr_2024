@@ -57,7 +57,7 @@ const Matrix IMUFilter::buildA()
 	//Build System Matrix
 	Matrix A(constants::IMU_STATE_SIZE(),constants::IMU_STATE_SIZE());
 	A = 0;
-	for (int r = 1; r <= constants::ODOM_STATE_SIZE(); ++r)
+	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
 	{
 		A(r,r) = 1;
 	}
