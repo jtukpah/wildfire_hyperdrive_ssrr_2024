@@ -4,19 +4,19 @@
 #include <errno.h>
 #include <termios.h>
 #include <endian.h>
+#include "kvh_driver/constants.h"
+#include <ros/ros.h>
 
 namespace kvh_driver{	
-
 
 using namespace serial_driver;
 
 const uint8_t IMU::BIT_DATA_HEADER[4] = {0xFE, 0x81, 0x00, 0xAA};
 const uint8_t IMU::NORMAL_DATA_HEADER[4] = {0xFE, 0x81, 0xFF, 0x55};
-const uint32_t IMU::NORMAL_DATA_CRC_POLY = 0x04C11DB7;//this stay endian independant in calc
+const uint32_t IMU::NORMAL_DATA_CRC_POLY = 0x04C11DB7;//this stay endian independant in cal
 
 
-
-IMU::IMU(){
+IMU::IMU(int data_rate):valid_data(false), data_rate_(data_rate){
 }
 
 IMU::~IMU(){
@@ -26,20 +26,51 @@ IMU::~IMU(){
 
 void IMU::open(const std::string port){
   serial_port.open(port, (speed_t)B921600, 8, serial_parity_none);
+  config(true);
+  set("rotfmt", "RATE");
+  set("rotunits", "RAD");
+  set("dr", data_rate_);
+  config(false);
+  read_thread = boost::thread(&IMU::read_thread_main, this);
 }
 
 void IMU::close(){
+  read_thread.interrupt();
+  read_thread.join();
   serial_port.close();
+  valid_data = false;
 }
+
+void IMU::read_thread_main(){
+  while(true){
+    boost::this_thread::interruption_point();
+    try{
+      imu_data_t data;
+      read_data(data);
+      {
+	boost::mutex::scoped_lock lock(data_lock);
+	recent_data = data;
+	valid_data = true;
+      }
+    } catch(Exception& e){
+    }
+  }
+}
+
+
+void IMU::set(const char* name, const char* value){
+  serial_port.writef(10, "=%s,%s\n", name, value);
+}
+void IMU::set(const char* name, int value){
+  serial_port.writef(10, "=%s,%d\n", name, value);
+}
+
 
 
 void IMU::config(bool in_config){
   if(!portOpen())
     SERIAL_DRIVER_EXCEPT(Exception, "Port not open");
-  if(in_config)
-    serial_port.write("=config,1\n", 10);
-  else
-    serial_port.write("=config,0\n", 10);
+  set("config", !!in_config);
   //TODO read until reach end of binary stream
 }
 
@@ -120,6 +151,31 @@ uint8_t IMU::calc_checksum(const uint8_t* data, size_t size){
   }
   return sum;
 }
+
+bool IMU::read_measurement(ColumnVectorPtr measurement_vector){
+  try{
+    {
+      boost::mutex::scoped_lock lock(data_lock);
+      if(!valid_data){
+	return false;
+      }
+
+      (*measurement_vector)(constants::IMU_X_DOT_DOT_STATE()) = recent_data.accelX;
+      (*measurement_vector)(constants::IMU_Y_DOT_DOT_STATE()) = recent_data.accelY;
+      (*measurement_vector)(constants::IMU_Z_DOT_DOT_STATE()) = recent_data.accelZ;
+      
+      (*measurement_vector)(constants::IMU_RX_DOT_STATE()) = recent_data.angleX;
+      (*measurement_vector)(constants::IMU_RY_DOT_STATE()) = recent_data.angleY;
+      (*measurement_vector)(constants::IMU_RZ_DOT_STATE()) = recent_data.angleZ;
+    }
+    return true;
+  } catch(Exception& e){
+    ROS_ERROR("IMU error reading message %s", e.what());
+    return false;
+  }
+}
+
+
 
 
 

@@ -22,6 +22,7 @@
 #include<kvh_driver/configurations.h>
 #include<kvh_driver/imu_filter.h>
 #include<kvh_driver/odometryfilter.hpp>
+#include<kvh_driver/kvh_imu.h>
 //*********************** NAMESPACES ********************//
 namespace kvh_driver
 {
@@ -191,6 +192,7 @@ private:
 	Buffer           measurement_buffer_; ///Buffer for storing new sensor data to be processed
 	IMUFilter*       imu_filter_;         ///The EKF for filtering IMU data
 	OdometryFilter*  odom_filter_;         ///The EKF for filtering IMU data into odometry data
+	IMU imu;
 
 	ros::NodeHandle  nh_;       ///Handle into the ROS system
 	ros::NodeHandle  p_nh_;		///{rivate Handle into the ROS system

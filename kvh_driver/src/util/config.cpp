@@ -6,13 +6,13 @@
  */
 
 int main(){
-	kvh_driver::IMU imu;
-	imu.open("/dev/ttyUSB0");
-	
-	imu.config(true);
+  kvh_driver::IMU imu(1000);
+  imu.open("/dev/ttyUSB0");
+  
+  imu.config(true);
 
-	printf("Device is now is config mode\n");
+  printf("Device is now is config mode\n");
 
-	imu.close();
-	return 0;
+  imu.close();
+  return 0;
 }

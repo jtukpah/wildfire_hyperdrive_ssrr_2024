@@ -10,9 +10,14 @@
 #include <stdexcept>
 #include <stdint.h>
 #include <boost/static_assert.hpp>
+#include <boost/thread.hpp>
 #include "serial_driver_base/serial_port.h"
+#include <wrappers/matrix/vector_wrapper.h>
 
 namespace kvh_driver{
+
+using MatrixWrapper::ColumnVector;
+
 
 /**
  * Some macros which create an anonomous union of a given type as well as a raw unsigned
@@ -149,75 +154,91 @@ typedef union{
  */
 class IMU{
  public:
-	IMU();
-	~IMU();
+  typedef boost::shared_ptr<ColumnVector> ColumnVectorPtr;
+
+  IMU(int data_rate);
+  ~IMU();
 	
-	/**
-	 * @author Mitchell Wills
-	 * @brief Opens the connection to the imu on the given port
-	 * @param [in] port the port to connect to the device with (ex. /dev/ttyUSB0)
-	 */
-	void open(const std::string port);
-	/**
-	 * @author Mitchell Wills
-	 * @brief Closes the connection to the device
-	 */
-	void close();
-	/**
-	 * @author Mitchell Wills
-	 * @return true if the connection to the device is open
-	 */
-	bool portOpen(){return serial_port.is_open();};
-	
-
-	/**
-	 * @author Mitchell Wills
-	 * @brief commands the device to enter or exit config mode
-	 * @param [in] true if the device should enter config mode
-	 */
-	void config(bool in_config);
-	/**
-	 * @author Mitchell Wills
-	 * @brief  commands the device to do an extended built in test and retrieve the results (this can only be called when the device is NOT in config mode)
-	 * @param [out] the buffer to read the data into
-	 */
-	void ebit(imu_bit_data_t& data);
-	/**
-	 * @author Mitchell Wills
-	 * @brief reads a message from the continual stream of data sent from the device while in normal mode
-	 * @param [out] the buffer to read the data into (this may not be the raw recieved bytes as they may be reordered to match the endianess of the system)
-	 */
-
-	void read_data(imu_data_t& data);
-
-	/*
-	 * Internal Functions
-	 */
-	static uint32_t calc_crc(const uint8_t* data, size_t size, uint32_t poly);
-	static uint8_t calc_checksum(const uint8_t* data, size_t size);
-
-	/*
-	 * Private Fields
-	 */
+  /**
+   * @author Mitchell Wills
+   * @brief Opens the connection to the imu on the given port
+   * @param [in] port the port to connect to the device with (ex. /dev/ttyUSB0)
+   */
+  void open(const std::string port);
+  /**
+   * @author Mitchell Wills
+   * @brief Closes the connection to the device
+   */
+  void close();
+  /**
+   * @author Mitchell Wills
+   * @return true if the connection to the device is open
+   */
+  bool portOpen(){return serial_port.is_open();};
  private:
-	serial_driver::DriverSerialPort serial_port;
+  boost::mutex data_lock;
+  imu_data_t recent_data;
+  bool valid_data;
+  void read_thread_main();
 
-	/*
-	 * Protocol Constants
-	 */
+
+
+ public:	
+  /**
+   * @author Mitchell Wills
+   * @brief commands the device to enter or exit config mode
+   * @param [in] true if the device should enter config mode
+   */
+  void config(bool in_config);
+  /**
+   * @author Mitchell Wills
+   * @brief  commands the device to do an extended built in test and retrieve the results (this can only be called when the device is NOT in config mode)
+   * @param [out] the buffer to read the data into
+   */
+  void ebit(imu_bit_data_t& data);
+  /**
+   * @author Mitchell Wills
+   * @brief reads a message from the continual stream of data sent from the device while in normal mode
+   * @param [out] the buffer to read the data into (this may not be the raw recieved bytes as they may be reordered to match the endianess of the system)
+   */
+  void read_data(imu_data_t& data);
+
+  bool read_measurement(ColumnVectorPtr measurement_vector);
+
+  /*
+   * Internal Functions
+   */
+  static uint32_t calc_crc(const uint8_t* data, size_t size, uint32_t poly);
+  static uint8_t calc_checksum(const uint8_t* data, size_t size);
+
+ protected:
+  void set(const char* name, const char* value);
+  void set(const char* name, int value);
+
+  /*
+   * Private Fields
+   */
+ private:
+  serial_driver::DriverSerialPort serial_port;
+  const int data_rate_;
+  boost::thread read_thread;
+
+  /*
+   * Protocol Constants
+   */
  public:
-	/**
-	 * The header which is sent at the begining of a built in test
-	 */
-	static const uint8_t BIT_DATA_HEADER[4];
-	/**
-	 * The header which is sent at the beginning of a normal data message
-	 */
-	static const uint8_t NORMAL_DATA_HEADER[4];
-	/**
-	 * Polynomial used in calculating the CRC of a normal data message
-	 */
-	static const uint32_t NORMAL_DATA_CRC_POLY;
+  /**
+   * The header which is sent at the begining of a built in test
+   */
+  static const uint8_t BIT_DATA_HEADER[4];
+  /**
+   * The header which is sent at the beginning of a normal data message
+   */
+  static const uint8_t NORMAL_DATA_HEADER[4];
+  /**
+   * Polynomial used in calculating the CRC of a normal data message
+   */
+  static const uint32_t NORMAL_DATA_CRC_POLY;
 };
 	
 }
