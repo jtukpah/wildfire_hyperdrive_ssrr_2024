@@ -25,7 +25,7 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
 						    nh_(nh),
 						    p_nh_(p_nh),
 						    last_odom_update_(ros::Time::now()),
-						    imu(1000)
+						    imu(1000, true)
 {
 	std::string device_id("device_id");
 

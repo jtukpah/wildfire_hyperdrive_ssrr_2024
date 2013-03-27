@@ -10,7 +10,7 @@
  */
 
 int main(){
-  kvh_driver::IMU imu(1000);
+  kvh_driver::IMU imu(1000, false);
 	imu.open("/dev/ttyUSB0");
 
 	imu.config(false);//make sure the device is not in config mode

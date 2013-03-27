@@ -84,7 +84,7 @@ LinearFilter::~LinearFilter()
 	if(this->mes_model_!= NULL) delete this->mes_model_;
 	if(this->mes_pdf_  != NULL) delete this->mes_pdf_;
 	if(this->filter_   != NULL) delete this->filter_;
-	if(this->prior_    != NULL) delete this->prior_;
+	//if(this->prior_    != NULL) delete this->prior_;
 }
 
 bool LinearFilter::init(const ColumnVector& initial_state, const SymmetricMatrix& initial_covar)

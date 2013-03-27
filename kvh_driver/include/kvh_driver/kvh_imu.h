@@ -156,7 +156,7 @@ class IMU{
  public:
   typedef boost::shared_ptr<ColumnVector> ColumnVectorPtr;
 
-  IMU(int data_rate);
+  IMU(int data_rate, bool enable_background_thread);
   ~IMU();
 	
   /**
@@ -221,6 +221,7 @@ class IMU{
  private:
   serial_driver::DriverSerialPort serial_port;
   const int data_rate_;
+  const bool enable_background_thread_;
   boost::thread read_thread;
 
   /*

@@ -16,7 +16,7 @@ const uint8_t IMU::NORMAL_DATA_HEADER[4] = {0xFE, 0x81, 0xFF, 0x55};
 const uint32_t IMU::NORMAL_DATA_CRC_POLY = 0x04C11DB7;//this stay endian independant in cal
 
 
-IMU::IMU(int data_rate):valid_data(false), data_rate_(data_rate){
+IMU::IMU(int data_rate, bool enable_background_thread):valid_data(false), data_rate_(data_rate), enable_background_thread_(enable_background_thread){
 }
 
 IMU::~IMU(){
@@ -31,14 +31,17 @@ void IMU::open(const std::string port){
   set("rotunits", "RAD");
   set("dr", data_rate_);
   config(false);
-  read_thread = boost::thread(&IMU::read_thread_main, this);
+  if(enable_background_thread_)
+    read_thread = boost::thread(&IMU::read_thread_main, this);
 }
 
 void IMU::close(){
-  read_thread.interrupt();
-  read_thread.join();
-  serial_port.close();
-  valid_data = false;
+  if(enable_background_thread_){
+    read_thread.interrupt();
+    read_thread.join();
+    serial_port.close();
+    valid_data = false;
+  }
 }
 
 void IMU::read_thread_main(){

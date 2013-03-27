@@ -7,7 +7,7 @@
  */
 
 int main(){
-  kvh_driver::IMU imu(1000);
+  kvh_driver::IMU imu(1000, false);
 	imu.open("/dev/ttyUSB0");
 
 	imu.config(false);//make sure the device is not in config mode
@@ -25,6 +25,8 @@ int main(){
 	    printf("\tCRC: %08X\n", data.crc);
 	  } catch(serial_driver::CorruptDataException& e){
 	    fprintf(stderr, "Got corrupt message: %s\n", e.what());
+	  } catch(serial_driver::Exception& e){
+	    fprintf(stderr, "Read timed out\n", e.what());
 	  }
 	}
 
