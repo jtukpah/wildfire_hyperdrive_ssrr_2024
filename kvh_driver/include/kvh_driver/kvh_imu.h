@@ -169,39 +169,6 @@ class IMU{
 	 */
 	bool portOpen(){return serial_port.is_open();};
 	
-	/**
-	 * @author Mitchell Wills
-	 * @brief write raw bytes to the device
-	 * @param [in] data the data to write to the device
-	 * @param [in] size the number of bytes to write to the device
-	 * @return the number of bytes written to the device
-	 */
-	int write(const void* data, size_t size);
-	/**
-	 * @author Mitchell Wills
-	 * @brief write a null terminated string to the device (not including the null terminator)
-	 * @param [in] data a null terminated string
-	 * @return the number of bytes written to the device
-	 */
-	int write_str(const char* data);
-	/**
-	 * @author Mitchell Wills
-	 * @brief read bytes from the device into a given buffer
-	 * @param [out] data the buffer to read bytes into
-	 * @param [in] size the number of bytes to read
-	 * @return the number of bytes read into the buffer
-	 */
-	int read(void* data, size_t size);
-	/**
-	 * @author Mitchell Wills
-	 * @brief read a number of bytes into a buffer after a starting header is detected in the stream
-	 * @param [in] header the bytes to look for in at the beginning
-	 * @param [in] header_size the size of the header in bytes
-	 * @param [out] data The buffer to write bytes back into (this will include the header)
-	 * @param [in] total_size the total size of all the bytes to be read including the header
-	 */
-	int read_from_header(const uint8_t* header, size_t header_size, void* data, size_t total_size);
-
 
 	/**
 	 * @author Mitchell Wills
