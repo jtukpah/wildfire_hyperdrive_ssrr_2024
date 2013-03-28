@@ -31,6 +31,7 @@ void IMU::open(const std::string port){
   set("rotunits", "RAD");
   set("dr", data_rate_);
   config(false);
+  usleep(1000000);
   if(enable_background_thread_)
     read_thread = boost::thread(&IMU::read_thread_main, this);
 }
@@ -56,6 +57,7 @@ void IMU::read_thread_main(){
 	valid_data = true;
       }
     } catch(Exception& e){
+      ROS_WARN("Eror reading imu data %s", e.what());
     }
   }
 }
@@ -163,9 +165,9 @@ bool IMU::read_measurement(ColumnVectorPtr measurement_vector){
 	return false;
       }
 
-      (*measurement_vector)(constants::IMU_X_DOT_DOT_STATE()) = recent_data.accelX;
-      (*measurement_vector)(constants::IMU_Y_DOT_DOT_STATE()) = recent_data.accelY;
-      (*measurement_vector)(constants::IMU_Z_DOT_DOT_STATE()) = recent_data.accelZ;
+      (*measurement_vector)(constants::IMU_X_DOT_DOT_STATE()) = recent_data.accelX*M_S_S_PER_G;
+      (*measurement_vector)(constants::IMU_Y_DOT_DOT_STATE()) = recent_data.accelY*M_S_S_PER_G;
+      (*measurement_vector)(constants::IMU_Z_DOT_DOT_STATE()) = recent_data.accelZ*M_S_S_PER_G;
       
       (*measurement_vector)(constants::IMU_RX_DOT_STATE()) = recent_data.angleX;
       (*measurement_vector)(constants::IMU_RY_DOT_STATE()) = recent_data.angleY;

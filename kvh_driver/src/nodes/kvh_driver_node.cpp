@@ -14,6 +14,12 @@
 //*********************** NAMESPACES ********************//
 using namespace kvh_driver;
 
+#define define_and_get_param(type, var_name, param_name, default_value)	\
+	type var_name(default_value);						\
+	if(!ros::param::get(param_name, var_name))\
+		ROS_WARN_STREAM("Parameter <"<<param_name<<"> not set. Using default value '"<<var_name<<"'")
+
+
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
 					    	    device_id_("default"),
 						    device_address_(""),
@@ -27,16 +33,7 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
 						    last_odom_update_(ros::Time::now()),
 						    imu(1000, true)
 {
-	std::string device_id("device_id");
-
-	if(this->p_nh_.hasParam(device_id))
-	{
-		this->p_nh_.getParam(device_id, this->device_id_);
-	}
-	else
-	{
-		ROS_WARN("No Device ID specified. Using Default Device Parameters");
-	}
+        define_and_get_param(std::string, device_id, "~device_id", "device_id");
 
 	imu.open("/dev/ttyUSB0");
 
@@ -64,8 +61,7 @@ KVHDriverNode::~KVHDriverNode()
 
 void KVHDriverNode::registerTopics()
 {
-	//TODO actually get the output topic from nh_
-	std::string imu_topic("kvh/imu");
+        define_and_get_param(std::string, imu_topic, "~imu_topic", "kvh/imu");
 	std::string odom_topic("kvh/odom");
 	this->imu_pub_ = this->nh_.advertise<sensor_msgs::Imu>(imu_topic, 2);
 	this->imu_sub_ = this->nh_.subscribe(imu_topic, 2, &KVHDriverNode::imuCb, this);

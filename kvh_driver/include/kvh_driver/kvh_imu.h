@@ -18,6 +18,7 @@ namespace kvh_driver{
 
 using MatrixWrapper::ColumnVector;
 
+#define M_S_S_PER_G (9.80665)
 
 /**
  * Some macros which create an anonomous union of a given type as well as a raw unsigned
