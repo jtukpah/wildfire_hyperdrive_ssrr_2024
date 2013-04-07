@@ -23,9 +23,9 @@ int main(){
 	    printf("\tSequence #: %u\n", data.sequence_num);
 	    printf("\tTemperature: %u\n", data.temp);
 	    printf("\tCRC: %08X\n", data.crc);
-	  } catch(serial_driver::CorruptDataException& e){
+	  } catch(device_driver::CorruptDataException& e){
 	    fprintf(stderr, "Got corrupt message: %s\n", e.what());
-	  } catch(serial_driver::Exception& e){
+	  } catch(device_driver::Exception& e){
 	    fprintf(stderr, "Read timed out\n", e.what());
 	  }
 	}

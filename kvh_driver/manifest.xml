@@ -17,7 +17,7 @@
   <depend package="sensor_msgs"/>
   <depend package="bfl"/>
   <depend package="dynamic_reconfigure"/>
-  <depend package="serial_driver_base"/>
+  <depend package="device_driver_base"/>
 
 </package>
 

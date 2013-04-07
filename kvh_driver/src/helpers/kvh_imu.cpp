@@ -9,7 +9,7 @@
 
 namespace kvh_driver{	
 
-using namespace serial_driver;
+using namespace device_driver;
 
 const uint8_t IMU::BIT_DATA_HEADER[4] = {0xFE, 0x81, 0x00, 0xAA};
 const uint8_t IMU::NORMAL_DATA_HEADER[4] = {0xFE, 0x81, 0xFF, 0x55};
@@ -74,17 +74,17 @@ void IMU::set(const char* name, int value){
 
 void IMU::config(bool in_config){
   if(!portOpen())
-    SERIAL_DRIVER_EXCEPT(Exception, "Port not open");
+    DRIVER_EXCEPT(Exception, "Port not open");
   set("config", !!in_config);
   //TODO read until reach end of binary stream
 }
 
 #define QUOTE(str) #str
 #define assert_bit_zero(bit) if(bit)\
-		SERIAL_DRIVER_EXCEPT(CorruptDataException, "Zero bit "QUOTE(bit)" was not zero")
+		DRIVER_EXCEPT(CorruptDataException, "Zero bit "QUOTE(bit)" was not zero")
 void IMU::ebit(imu_bit_data_t& data){
   if(!portOpen())
-    SERIAL_DRIVER_EXCEPT(Exception, "Port not open");
+    DRIVER_EXCEPT(Exception, "Port not open");
   serial_port.write("?bit\n", 10);
   serial_port.read_from_header(BIT_DATA_HEADER, sizeof(BIT_DATA_HEADER), data.raw, sizeof(data), 10);
   assert_bit_zero(data.byte_0_zero);
@@ -94,20 +94,20 @@ void IMU::ebit(imu_bit_data_t& data){
   assert_bit_zero(data.byte_4_zero);
   assert_bit_zero(data.byte_5_zero);
   if(data.checksum!=calc_checksum(data.raw, sizeof(data)-sizeof(data.checksum)))
-    SERIAL_DRIVER_EXCEPT(CorruptDataException, "Checksum did not match for Extended Built in Test");
+    DRIVER_EXCEPT(CorruptDataException, "Checksum did not match for Extended Built in Test");
 }
 
 #define assert_status_bit(data, bit) if(!data.status.bit)		\
-		SERIAL_DRIVER_EXCEPT(Exception, "Message status reported invalid measurement from "QUOTE(bit))
+		DRIVER_EXCEPT(Exception, "Message status reported invalid measurement from "QUOTE(bit))
 void IMU::read_data(imu_data_t& data){
   if(!portOpen())
-    SERIAL_DRIVER_EXCEPT(Exception, "Port not open");
+    DRIVER_EXCEPT(Exception, "Port not open");
   serial_port.read_from_header(NORMAL_DATA_HEADER, sizeof(NORMAL_DATA_HEADER), data.raw, sizeof(data), 10);
 
   assert_bit_zero(data.status._zero_0);
   assert_bit_zero(data.status._zero_1);
   if(be32toh(data.crc)!=calc_crc(data.raw, sizeof(data)-sizeof(data.crc), NORMAL_DATA_CRC_POLY))
-    SERIAL_DRIVER_EXCEPT(CorruptDataException, "CRC did not match for normal data message");
+    DRIVER_EXCEPT(CorruptDataException, "CRC did not match for normal data message");
   assert_status_bit(data, gyro_a);
   assert_status_bit(data, gyro_b);
   assert_status_bit(data, gyro_c);

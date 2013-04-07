@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <boost/static_assert.hpp>
 #include <boost/thread.hpp>
-#include "serial_driver_base/serial_port.h"
+#include "device_driver_base/serial_port.h"
 #include <wrappers/matrix/vector_wrapper.h>
 
 namespace kvh_driver{
@@ -220,7 +220,7 @@ class IMU{
    * Private Fields
    */
  private:
-  serial_driver::DriverSerialPort serial_port;
+  device_driver::DriverSerialPort serial_port;
   const int data_rate_;
   const bool enable_background_thread_;
   boost::thread read_thread;

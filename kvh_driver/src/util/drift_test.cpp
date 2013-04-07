@@ -30,7 +30,7 @@ int main(){
 	    _rx += data.angleX;
 	    _ry += data.angleY;
 	    _rz += data.angleZ;
-	  } catch(serial_driver::CorruptDataException& e){
+	  } catch(device_driver::CorruptDataException& e){
 	    fprintf(stderr, "Got corrupt message: %s\n", e.what());
 	  }
 	}
@@ -56,7 +56,7 @@ int main(){
 	    printf("%f, %f, %f     (%ld s)\n", rx, ry, rz, diff_start/1000000);
 	    printf("\tGyro: %f, %f, %f\n", data.angleX, data.angleY, data.angleZ);
 	    printf("\tAccel: %f, %f, %f\n", data.accelX, data.accelY, data.accelZ);
-	  } catch(serial_driver::CorruptDataException& e){
+	  } catch(device_driver::CorruptDataException& e){
 	    fprintf(stderr, "Got corrupt message: %s\n", e.what());
 	  }
 	}
