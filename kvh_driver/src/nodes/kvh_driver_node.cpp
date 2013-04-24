@@ -14,28 +14,22 @@
 //*********************** NAMESPACES ********************//
 using namespace kvh_driver;
 
-#define define_and_get_param(type, var_name, param_name, default_value)	\
-	type var_name(default_value);						\
-	if(!ros::param::get(param_name, var_name))\
-		ROS_WARN_STREAM("Parameter <"<<param_name<<"> not set. Using default value '"<<var_name<<"'")
-
-
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
-					    	    device_id_("default"),
+					    	    device_id_("/dev/ttyUSB0"),
 						    device_address_(""),
 						    should_IMU_filter_(false),
 						    should_odom_filter_(false),
 						    measurement_buffer_(2),
 						    imu_filter_(NULL),
 						    odom_filter_(NULL),
+						    imu(1000, true),
 						    nh_(nh),
 						    p_nh_(p_nh),
-						    last_odom_update_(ros::Time::now()),
-						    imu(1000, true)
+						    last_odom_update_(ros::Time::now())
 {
         define_and_get_param(std::string, device_id, "~device_id", "device_id");
 
-	imu.open("/dev/ttyUSB0");
+	imu.open(device_id);
 
 	ROS_INFO("Building Filters....");
 	this->buildIMUFilter();
