@@ -11,12 +11,13 @@
 //******************* SYSTEM DEPENDANCIES ****************//
 //******************* LOCAL DEPENDANCIES ****************//
 #include<kvh_driver/kvh_driver_node.h>
+#include<device_driver_base/driver_util.h>
 //*********************** NAMESPACES ********************//
 using namespace kvh_driver;
 
 KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
-					    	    device_id_("/dev/ttyUSB0"),
-						    device_address_(""),
+					    	    device_id_(""),
+						    device_address_("/dev/ttyUSB0"),
 						    should_IMU_filter_(false),
 						    should_odom_filter_(false),
 						    measurement_buffer_(2),
@@ -27,9 +28,10 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
 						    p_nh_(p_nh),
 						    last_odom_update_(ros::Time::now())
 {
-        define_and_get_param(std::string, device_id, "~device_id", "device_id");
+        device_driver::get_param(device_id_, "~device_id");
+	device_driver::get_param(device_address_, "~device_address");
 
-	imu.open(device_id);
+	imu.open(device_address_);
 
 	ROS_INFO("Building Filters....");
 	this->buildIMUFilter();
@@ -217,7 +219,7 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		SymmetricMatrix  covar(constants::IMU_STATE_SIZE());
 		this->imu_filter_->getEstimate(state, covar);
 		sensor_msgs::Imu message;
-		message.header.frame_id = "kvh/imu";
+		message.header.frame_id = "imu";
 		message.header.stamp = ros::Time::now();
 		this->stateToImu(state, covar, message);
 		this->imu_pub_.publish(message);

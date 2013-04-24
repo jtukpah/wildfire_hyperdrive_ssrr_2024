@@ -207,7 +207,7 @@ private:
 	void imuCb(const sensor_msgs::ImuConstPtr message);
 
 
-	std::string      device_id_;          ///The type od device connected
+	std::string      device_id_;          ///The type of device connected
 	std::string      device_address_;     ///The system device address of the device
 
 	bool             should_IMU_filter_;  ///Flag for signalling if output filtering should be enabled
