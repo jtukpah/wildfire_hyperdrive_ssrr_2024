@@ -24,6 +24,7 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
 						    imu_filter_(NULL),
 						    odom_filter_(NULL),
 						    imu(1000, true),
+						    filter_updated_(false),
 						    nh_(nh),
 						    p_nh_(p_nh),
 						    last_odom_update_(ros::Time::now())
@@ -195,8 +196,10 @@ void KVHDriverNode::poll(const ros::TimerEvent& event)
 	  ColumnVectorPtr measurement(new ColumnVector(constants::IMU_STATE_SIZE()));
 	  ColumnVector input(0);
 	  input = 0;
-	  if(imu.read_measurement(measurement))
+	  if(imu.read_measurement(measurement)){
 	    this->imu_filter_->update(input,*measurement);
+	    filter_updated_ = true;
+	  }
 	}
 	else if(!this->should_IMU_filter_)
 	{
@@ -214,6 +217,7 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 	//TODO alternate what happens based on if IMU, Odom or both/none are being filtered
 	if(this->imu_filter_->isInitialized()&&this->should_IMU_filter_)
 	{
+	  if(filter_updated_){
 		//Build and publish message
 		ColumnVector     state(constants::IMU_STATE_SIZE());
 		SymmetricMatrix  covar(constants::IMU_STATE_SIZE());
@@ -223,6 +227,8 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		message.header.stamp = ros::Time::now();
 		this->stateToImu(state, covar, message);
 		this->imu_pub_.publish(message);
+		filter_updated_ = false;
+	  }
 	}
 	else if(!this->should_IMU_filter_)
 	{

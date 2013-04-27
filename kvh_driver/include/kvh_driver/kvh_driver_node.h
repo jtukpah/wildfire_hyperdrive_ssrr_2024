@@ -216,6 +216,7 @@ private:
 	IMUFilter*       imu_filter_;         ///The EKF for filtering IMU data
 	OdometryFilter*  odom_filter_;         ///The EKF for filtering IMU data into odometry data
 	IMU imu;
+	bool filter_updated_;
 
 	ros::NodeHandle  nh_;       ///Handle into the ROS system
 	ros::NodeHandle  p_nh_;		///{rivate Handle into the ROS system
@@ -231,6 +232,7 @@ private:
 	ros::Timer		 poll_timer_;       ///The timer that performs processing of new sensor data
 
 	dynamic_reconfigure::Server<KVHDriverConfig> dr_server_;  ///The server for dynamic_reconfigure messages
+
 
 	friend std::ostream& operator<<(std::ostream& out, const KVHDriverNode& in)
 	{
