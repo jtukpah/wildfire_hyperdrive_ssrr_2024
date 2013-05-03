@@ -218,6 +218,13 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		message.header.frame_id = "imu";
 		message.header.stamp = ros::Time::now();
 		this->stateToImu(state, covar, message);
+		covar(constants::IMU_X_DOT_DOT_STATE(), constants::IMU_X_DOT_DOT_STATE()) = 0.1;
+		covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE()) = 0.1;
+		covar(constants::IMU_Z_DOT_DOT_STATE(), constants::IMU_Z_DOT_DOT_STATE()) = 0.1;
+
+		covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE()) = 1;
+		covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = 1;
+		covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = 1;
 		this->imu_pub_.publish(message);
 		filter_updated_ = false;
 	  }
