@@ -64,17 +64,6 @@ void KVHDriverNode::registerTopics()
 	  ROS_WARN_STREAM("Using default ~imu_topic "<<imu_topic);
 	std::string odom_topic("kvh/odom");
 	this->imu_pub_ = this->nh_.advertise<sensor_msgs::Imu>(imu_topic, 2);
-	this->imu_sub_ = this->nh_.subscribe(imu_topic, 2, &KVHDriverNode::imuCb, this);
-	this->odo_pub_ = this->nh_.advertise<nav_msgs::Odometry>(odom_topic, 2);
-
-	ros::NodeHandle nh_p("~");
-	bool test = false;
-	nh_p.getParam("test", test);
-	if(test)
-	{
-		ROS_INFO("Setting up to receive test data....");
-		this->test_sub_ = this->nh_.subscribe("kvh/kvh_test_imu_data", 10, &KVHDriverNode::testCB, this);
-	}
 }
 
 void KVHDriverNode::registerTimers()
@@ -367,14 +356,14 @@ void KVHDriverNode::dynamic_reconfigureCB(const KVHDriverConfig& config, uint32_
 			<<"\nDevice Address: "<<config.device_address
 			<<"\nIMU Filter: "    <<config.imu_filter
 			<<"\nOdom Filter"     <<config.odom_filter
-			<<"\nOutput Topic:"   <<config.output_topic
+			<<"\nOutput Topic:"   <<config.imu_topic
 			<<"\nPoll Rate"       <<config.poll_rate
 			<<"\nUpdate Frequency"<<config.update_frequency
 			<<"\nLevel: "         <<level);
 	//Check for output topic change
 	if((level & 0b1) > 0)
 	{
-		this->drOutputTopicCB(config.output_topic);
+		this->drOutputTopicCB(config.imu_topic);
 	}
 	//Check for update frequency change
 	if((level & 0b10) > 0)
