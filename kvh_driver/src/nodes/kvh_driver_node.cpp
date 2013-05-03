@@ -217,7 +217,6 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		sensor_msgs::Imu message;
 		message.header.frame_id = "imu";
 		message.header.stamp = ros::Time::now();
-		this->stateToImu(state, covar, message);
 		covar(constants::IMU_X_DOT_DOT_STATE(), constants::IMU_X_DOT_DOT_STATE()) = 0.1;
 		covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE()) = 0.1;
 		covar(constants::IMU_Z_DOT_DOT_STATE(), constants::IMU_Z_DOT_DOT_STATE()) = 0.1;
@@ -225,6 +224,7 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE()) = 1;
 		covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = 1;
 		covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = 1;
+		this->stateToImu(state, covar, message);
 		this->imu_pub_.publish(message);
 		filter_updated_ = false;
 	  }
@@ -270,17 +270,17 @@ bool KVHDriverNode::stateToImu(const ColumnVector& state, const SymmetricMatrix&
 		message.angular_velocity.y    = state(constants::IMU_RY_DOT_STATE());
 		message.angular_velocity.z    = state(constants::IMU_RZ_DOT_STATE());
 
-		message.angular_velocity_covariance[(constants::IMU_RX_DOT_STATE()-constants::IMU_RX_DOT_STATE())*3] = covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE());
-		message.angular_velocity_covariance[(constants::IMU_RY_DOT_STATE()-constants::IMU_RX_DOT_STATE())*3] = covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE());
-		message.angular_velocity_covariance[(constants::IMU_RZ_DOT_STATE()-constants::IMU_RX_DOT_STATE())*3] = covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE());
+		message.angular_velocity_covariance[(constants::IMU_RX_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE());
+		message.angular_velocity_covariance[(constants::IMU_RY_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE());
+		message.angular_velocity_covariance[(constants::IMU_RZ_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE());
 
 		message.linear_acceleration.x = state(constants::IMU_X_DOT_DOT_STATE());
 		message.linear_acceleration.y = state(constants::IMU_Y_DOT_DOT_STATE());
 		message.linear_acceleration.z = state(constants::IMU_Z_DOT_DOT_STATE());
 
-		message.linear_acceleration_covariance[(constants::IMU_X_DOT_DOT_STATE()-constants::IMU_X_DOT_DOT_STATE())*3] = covar(constants::IMU_X_DOT_DOT_STATE(), constants::IMU_X_DOT_DOT_STATE());
-		message.linear_acceleration_covariance[(constants::IMU_Y_DOT_DOT_STATE()-constants::IMU_X_DOT_DOT_STATE())*3] = covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE());
-		message.linear_acceleration_covariance[(constants::IMU_Z_DOT_DOT_STATE()-constants::IMU_X_DOT_DOT_STATE())*3] = covar(constants::IMU_Z_DOT_DOT_STATE(), constants::IMU_Z_DOT_DOT_STATE());
+		message.linear_acceleration_covariance[(constants::IMU_X_DOT_DOT_STATE()-constants::IMU_X_DOT_DOT_STATE())*4] = covar(constants::IMU_X_DOT_DOT_STATE(), constants::IMU_X_DOT_DOT_STATE());
+		message.linear_acceleration_covariance[(constants::IMU_Y_DOT_DOT_STATE()-constants::IMU_X_DOT_DOT_STATE())*4] = covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE());
+		message.linear_acceleration_covariance[(constants::IMU_Z_DOT_DOT_STATE()-constants::IMU_X_DOT_DOT_STATE())*4] = covar(constants::IMU_Z_DOT_DOT_STATE(), constants::IMU_Z_DOT_DOT_STATE());
 
 		return true;
 	}
