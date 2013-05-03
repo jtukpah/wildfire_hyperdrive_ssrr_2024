@@ -58,7 +58,10 @@ KVHDriverNode::~KVHDriverNode()
 
 void KVHDriverNode::registerTopics()
 {
-        define_and_get_param(std::string, imu_topic, "~imu_topic", "kvh/imu");
+        ros::NodeHandle pnh("~");
+        std::string imu_topic("kvh/imu");
+	if(!pnh.getParam("imu_topic", imu_topic))
+	  ROS_WARN_STREAM("Using default ~imu_topic "<<imu_topic);
 	std::string odom_topic("kvh/odom");
 	this->imu_pub_ = this->nh_.advertise<sensor_msgs::Imu>(imu_topic, 2);
 	this->imu_sub_ = this->nh_.subscribe(imu_topic, 2, &KVHDriverNode::imuCb, this);
