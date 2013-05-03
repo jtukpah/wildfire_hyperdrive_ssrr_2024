@@ -262,9 +262,7 @@ bool KVHDriverNode::stateToImu(const ColumnVector& state, const SymmetricMatrix&
 {
 	if((int)state.size()==constants::IMU_STATE_SIZE() && (int)covar.size1()==constants::IMU_STATE_SIZE())
 	{
-		message.orientation_covariance[0]   = -1;
-		message.orientation_covariance[1*3] = -1;
-		message.orientation_covariance[2*3] = -1;
+                message.orientation_covariance[0] = -1;
 
 		message.angular_velocity.x    = state(constants::IMU_RX_DOT_STATE());
 		message.angular_velocity.y    = state(constants::IMU_RY_DOT_STATE());
