@@ -225,7 +225,7 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		SymmetricMatrix  covar(constants::IMU_STATE_SIZE());
 		this->imu_filter_->getEstimate(state, covar);
 		sensor_msgs::Imu message;
-		message.header.frame_id = "imu";
+		message.header.frame_id = "base_footprint";
 		message.header.stamp = ros::Time::now();
 		covar(constants::IMU_X_DOT_DOT_STATE(), constants::IMU_X_DOT_DOT_STATE()) = 0.1;
 		covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE()) = 0.1;
@@ -236,9 +236,9 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = 1;
 		this->stateToImu(state, covar, message);
 
-		message.orientation_covariance[(constants::IMU_RX_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = 0.5;
+		message.orientation_covariance[(constants::IMU_RX_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = 1e-9;
 		message.orientation_covariance[(constants::IMU_RY_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = 1e-9;
-		message.orientation_covariance[(constants::IMU_RZ_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = 1e-9;
+		message.orientation_covariance[(constants::IMU_RZ_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = 0.5;
 		message.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, angular_position_);
 
 		this->imu_pub_.publish(message);
