@@ -27,7 +27,10 @@ KVHDriverNode::KVHDriverNode(ros::NodeHandle& nh, ros::NodeHandle& p_nh):
 						    filter_updated_(false),
 						    nh_(nh),
 						    p_nh_(p_nh),
-						    last_odom_update_(ros::Time::now())
+						    last_odom_update_(ros::Time::now()),
+						    last_angle_update_(ros::Time::now()),
+						    last_angular_rate_(0),
+						    angular_position_(0)
 {
         device_driver::get_param(device_id_, "~device_id");
 	device_driver::get_param(device_address_, "~device_address");
@@ -190,6 +193,13 @@ void KVHDriverNode::poll(const ros::TimerEvent& event)
 	  input = 0;
 	  if(imu.read_measurement(measurement)){
 	    this->imu_filter_->update(input,*measurement);
+	    ros::Time now = ros::Time::now();
+	    angular_position_ += last_angular_rate_ * (last_angle_update_-now).toSec();
+	    while(angular_position_<0)
+	      angular_position_ += M_PI*2;
+	    fmod(angular_position_, M_PI*2);
+	    last_angle_update_ = now;
+	    last_angular_rate_ = (*measurement)(constants::IMU_RX_DOT_STATE());
 	    filter_updated_ = true;
 	  }
 	}
@@ -225,6 +235,12 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = 1;
 		covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = 1;
 		this->stateToImu(state, covar, message);
+
+		message.orientation_covariance[(constants::IMU_RX_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = 0.5;
+		message.orientation_covariance[(constants::IMU_RY_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = 1e-9;
+		message.orientation_covariance[(constants::IMU_RZ_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = 1e-9;
+		message.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, angular_position_);
+
 		this->imu_pub_.publish(message);
 		filter_updated_ = false;
 	  }
@@ -262,8 +278,6 @@ bool KVHDriverNode::stateToImu(const ColumnVector& state, const SymmetricMatrix&
 {
 	if((int)state.size()==constants::IMU_STATE_SIZE() && (int)covar.size1()==constants::IMU_STATE_SIZE())
 	{
-                message.orientation_covariance[0] = -1;
-
 		message.angular_velocity.x    = state(constants::IMU_RX_DOT_STATE());
 		message.angular_velocity.y    = state(constants::IMU_RY_DOT_STATE());
 		message.angular_velocity.z    = state(constants::IMU_RZ_DOT_STATE());

@@ -230,6 +230,9 @@ private:
 	ros::Time        last_odom_update_; ///The time of the last odometry filter update
 	ros::Timer       update_timer_;     ///The Timer that performs updates of the output topics
 	ros::Timer		 poll_timer_;       ///The timer that performs processing of new sensor data
+	ros::Time        last_angle_update_; ///The time of the last angle was updated
+	double last_angular_rate_;
+	double angular_position_;
 
 	dynamic_reconfigure::Server<KVHDriverConfig> dr_server_;  ///The server for dynamic_reconfigure messages
 
