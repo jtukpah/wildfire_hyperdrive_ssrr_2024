@@ -194,7 +194,7 @@ void KVHDriverNode::poll(const ros::TimerEvent& event)
 	  if(imu.read_measurement(measurement)){
 	    this->imu_filter_->update(input,*measurement);
 	    ros::Time now = ros::Time::now();
-	    angular_position_ += last_angular_rate_ * (last_angle_update_-now).toSec();
+	    angular_position_ -= last_angular_rate_ * (last_angle_update_-now).toSec();
 	    while(angular_position_<0)
 	      angular_position_ += M_PI*2;
 	    fmod(angular_position_, M_PI*2);
