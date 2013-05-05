@@ -103,7 +103,7 @@ void KVHDriverNode::buildIMUFilter()
 	imu_measurement_sigma_noise = 0;
 	for (int r = 1; r <= constants::IMU_STATE_SIZE(); ++r)
 	{
-		imu_system_sigma_noise(r,r) = 0.1;
+		imu_system_sigma_noise(r,r) = 0.001;
 	}
 
 	ROS_INFO("IMU Filter noise matrices built...");
@@ -231,9 +231,9 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 		covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE()) = 0.1;
 		covar(constants::IMU_Z_DOT_DOT_STATE(), constants::IMU_Z_DOT_DOT_STATE()) = 0.1;
 
-		covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE()) = 1;
-		covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = 1;
-		covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = 1;
+		covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE()) = 2;
+		covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = 2;
+		covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = 2;
 		this->stateToImu(state, covar, message);
 
 		message.orientation_covariance[(constants::IMU_RX_DOT_STATE()-constants::IMU_RX_DOT_STATE())*4] = 1e-9;
@@ -254,13 +254,13 @@ void KVHDriverNode::update(const ros::TimerEvent& event)
 			this->measurement_buffer_.pop_back();
 			SymmetricMatrix covar(constants::IMU_STATE_SIZE());
 			//TODO properly load covariance from the sensor noise data
-			covar(constants::IMU_X_DOT_DOT_STATE(), constants::IMU_X_DOT_DOT_STATE()) = 1;
-			covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE()) = 1;
-			covar(constants::IMU_Z_DOT_DOT_STATE(), constants::IMU_Z_DOT_DOT_STATE()) = 1;
+			covar(constants::IMU_X_DOT_DOT_STATE(), constants::IMU_X_DOT_DOT_STATE()) = 0.1;
+			covar(constants::IMU_Y_DOT_DOT_STATE(), constants::IMU_Y_DOT_DOT_STATE()) = 0.1;
+			covar(constants::IMU_Z_DOT_DOT_STATE(), constants::IMU_Z_DOT_DOT_STATE()) = 0.1;
 
-			covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE()) = 1;
-			covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = 1;
-			covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = 1;
+			covar(constants::IMU_RX_DOT_STATE(), constants::IMU_RX_DOT_STATE()) = 2;
+			covar(constants::IMU_RY_DOT_STATE(), constants::IMU_RY_DOT_STATE()) = 2;
+			covar(constants::IMU_RZ_DOT_STATE(), constants::IMU_RZ_DOT_STATE()) = 2;
 			sensor_msgs::Imu message;
 			message.header.frame_id = "kvh/imu";
 			message.header.stamp = ros::Time::now();
