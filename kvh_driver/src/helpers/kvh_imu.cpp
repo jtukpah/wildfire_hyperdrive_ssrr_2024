@@ -27,7 +27,7 @@ IMU::~IMU(){
 void IMU::open(const std::string port){
   serial_port.open(port, (speed_t)B921600, 8, serial_parity_none);
   config(true);
-  set("rotfmt", "RATE");
+  set("rotfmt", "DELTA");
   set("rotunits", "RAD");
   set("dr", data_rate_);
   config(false);

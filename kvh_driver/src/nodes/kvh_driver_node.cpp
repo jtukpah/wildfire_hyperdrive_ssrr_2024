@@ -20,7 +20,7 @@
 //*********************** NAMESPACES ********************//
 using namespace kvh_driver;
 
-#define CAL_SAMPLES 10000
+#define CAL_SAMPLES 40000
 
 int main(int argc, char **argv) {
 	ros::init(argc, argv, "kvh_driver_node");
@@ -29,19 +29,17 @@ int main(int argc, char **argv) {
 	kvh_driver::IMU imu(1000, false);
 	imu.open("/dev/ttyUSB0");
 
-	imu.config(true);
-	imu.setRotUnits("DELTA");
 	imu.config(false);
 
 	kvh_driver::imu_data_t data;
-	struct timeval start, current;
+	struct timeval start, current, last;
 	gettimeofday(&start, NULL);
 
 	double _rx, _ry, _rz, _x, _y, _z;
 	_rx = _ry = _rz = _x = _y = _z = 0;
 
 	printf("Calibrating...");
-	for(int i = 0; i<CAL_SAMPLES; ++i){
+	for(int i = 0; i<CAL_SAMPLES;){
 
 		try{
 			imu.read_data(data);
@@ -53,6 +51,7 @@ int main(int argc, char **argv) {
 			_x += data.accelX;
 			_y += data.accelY;
 			_z += data.accelZ;
+			++i;
 		} catch(device_driver::CorruptDataException& e){
 			fprintf(stderr, "Got corrupt message: %s\n", e.what());
 		}
@@ -75,38 +74,65 @@ int main(int argc, char **argv) {
 	printf("dz = %d\n", _z);
 	printf("\n");
 
-	ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("/kvh/odom", 1000, false);
+	ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("/kvh/odom", 5, false);
+	ros::Publisher imu_pub = nh.advertise<sensor_msgs::Imu>("/kvh/imu", 5, false);
 
-
+	int i = 0;
 	double rx, ry, rz, x, y, z, x_dot, y_dot, z_dot;
-	rx = ry = rz = x = y = z = 0;
+	rx = ry = rz = x = y = z = x_dot = y_dot = z_dot = 0;
 	nav_msgs::Odometry msg;
-	msg.child_frame_id = "/base_footprint";
-	msg.header.frame_id = "/base_footprint";
+	sensor_msgs::Imu imu_msg;
+	msg.child_frame_id = "/imu";
+	msg.header.frame_id = "/imu";
+	imu_msg.header.frame_id = "/imu";
+	gettimeofday(&last, NULL);
 	while(ros::ok()){
 		try{
 
 			imu.read_data(data);
 			gettimeofday(&current, NULL);
 			long diff_start = (current.tv_sec - start.tv_sec)*1000000 + (current.tv_usec - start.tv_usec);
+			long diff_last = (current.tv_sec - last.tv_sec)*1000000 + (current.tv_usec - last.tv_usec);
+			last = current;
 
 			rx += data.angleX-_rx;
 			ry += data.angleY-_ry;
 			rz += data.angleZ-_rz;
 
+			x_dot += (data.accelX-_x)*M_S_S_PER_G * diff_last / 1000000;
+			y_dot += (data.accelY-_y)*M_S_S_PER_G * diff_last / 1000000;
+			z_dot += (data.accelZ-_z)*M_S_S_PER_G * diff_last / 1000000;
+			
+			x += x_dot * diff_last / 1000000;
+			y += y_dot * diff_last / 1000000;
+			z += z_dot * diff_last / 1000000;
+			
+
 			msg.pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rz);
-			msg.pose.covariance[(constants::ODOM_X_STATE()-constants::ODOM_X_STATE())*7]  = 1.0;
-			msg.pose.covariance[(constants::ODOM_Y_STATE()-constants::ODOM_X_STATE())*7]  = 1.0;
-			msg.pose.covariance[(constants::ODOM_Z_STATE()-constants::ODOM_X_STATE())*7]  = 1.0;
-			msg.pose.covariance[(constants::ODOM_RX_STATE()-constants::ODOM_X_STATE())*7] = 1e-9;
-			msg.pose.covariance[(constants::ODOM_RY_STATE()-constants::ODOM_X_STATE())*7] = 1e-9;
-			msg.pose.covariance[(constants::ODOM_RZ_STATE()-constants::ODOM_X_STATE())*7] = 1e-9;
+			//msg.pose.pose.position.x = x;
+			//msg.pose.pose.position.y = y;
+			//msg.pose.pose.position.z = z;
+			msg.pose.covariance[(constants::ODOM_X_STATE()-constants::ODOM_X_STATE())*7]  = 0.01;
+			msg.pose.covariance[(constants::ODOM_Y_STATE()-constants::ODOM_X_STATE())*7]  = 0.01;
+			msg.pose.covariance[(constants::ODOM_Z_STATE()-constants::ODOM_X_STATE())*7]  = 0.01;
+			msg.pose.covariance[(constants::ODOM_RX_STATE()-constants::ODOM_X_STATE())*7] = 1e9;
+			msg.pose.covariance[(constants::ODOM_RY_STATE()-constants::ODOM_X_STATE())*7] = 1e9;
+			msg.pose.covariance[(constants::ODOM_RZ_STATE()-constants::ODOM_X_STATE())*7] = 1e9;
 
-			printf("%f, %f, %f     (%ld s)\n", rx, ry, rz, diff_start/1000000);
-			printf("\tGyro: %f, %f, %f\n", data.angleX, data.angleY, data.angleZ);
-			printf("\tAccel: %f, %f, %f\n", data.accelX, data.accelY, data.accelZ);
+			
+			if((i++)>=10){
+			  printf("%f, %f, %f : %f, %f, %f    (%ld s)\n", rx, ry, rz, x, y, z, diff_start/1000000);
+			  printf("\tGyro: %f, %f, %f\n", data.angleX, data.angleY, data.angleZ);
+			  printf("\tAccel: %f, %f, %f\n", data.accelX, data.accelY, data.accelZ);
 
-			odom_pub.publish(msg);
+			  msg.header.stamp = ros::Time::now();
+			  odom_pub.publish(msg);
+
+			  imu_msg.orientation = msg.pose.pose.orientation;
+			  imu_msg.header.stamp = ros::Time::now();
+			  imu_pub.publish(imu_msg);
+			  i = 0;
+			}
 		} catch(device_driver::CorruptDataException& e){
 			fprintf(stderr, "Got corrupt message: %s\n", e.what());
 		}
