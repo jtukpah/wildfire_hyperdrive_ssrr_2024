@@ -191,6 +191,7 @@ class IMU{
    * @param [in] true if the device should enter config mode
    */
   void config(bool in_config);
+  void setRotUnits(const char* units);
   /**
    * @author Mitchell Wills
    * @brief  commands the device to do an extended built in test and retrieve the results (this can only be called when the device is NOT in config mode)
