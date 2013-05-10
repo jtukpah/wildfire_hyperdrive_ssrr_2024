@@ -95,9 +95,9 @@ int main(int argc, char **argv) {
 			long diff_last = (current.tv_sec - last.tv_sec)*1000000 + (current.tv_usec - last.tv_usec);
 			last = current;
 
-			rx += data.angleX-_rx;
-			ry += data.angleY-_ry;
-			rz += data.angleZ-_rz;
+			rx += (data.angleX-_rx) * diff_last / 1000000;
+			ry += (data.angleY-_ry) * diff_last / 1000000;
+			rz += (data.angleZ-_rz) * diff_last / 1000000;
 
 			x_dot += (data.accelX-_x)*M_S_S_PER_G * diff_last / 1000000;
 			y_dot += (data.accelY-_y)*M_S_S_PER_G * diff_last / 1000000;
@@ -112,9 +112,9 @@ int main(int argc, char **argv) {
 			//msg.pose.pose.position.x = x;
 			//msg.pose.pose.position.y = y;
 			//msg.pose.pose.position.z = z;
-			msg.pose.covariance[(constants::ODOM_X_STATE()-constants::ODOM_X_STATE())*7]  = 0.01;
-			msg.pose.covariance[(constants::ODOM_Y_STATE()-constants::ODOM_X_STATE())*7]  = 0.01;
-			msg.pose.covariance[(constants::ODOM_Z_STATE()-constants::ODOM_X_STATE())*7]  = 0.01;
+			msg.pose.covariance[(constants::ODOM_X_STATE()-constants::ODOM_X_STATE())*7]  = 1e-9;
+			msg.pose.covariance[(constants::ODOM_Y_STATE()-constants::ODOM_X_STATE())*7]  = 1e-9;
+			msg.pose.covariance[(constants::ODOM_Z_STATE()-constants::ODOM_X_STATE())*7]  = 1e-9;
 			msg.pose.covariance[(constants::ODOM_RX_STATE()-constants::ODOM_X_STATE())*7] = 1e9;
 			msg.pose.covariance[(constants::ODOM_RY_STATE()-constants::ODOM_X_STATE())*7] = 1e9;
 			msg.pose.covariance[(constants::ODOM_RZ_STATE()-constants::ODOM_X_STATE())*7] = 1e9;
@@ -129,6 +129,18 @@ int main(int argc, char **argv) {
 			  odom_pub.publish(msg);
 
 			  imu_msg.orientation = msg.pose.pose.orientation;
+			  imu_msg.angular_velocity.x = data.angleX-_rx;
+			  imu_msg.angular_velocity.y = data.angleY-_ry;
+			  imu_msg.angular_velocity.z = data.angleZ-_rz;
+			  imu_msg.angular_velocity_covariance[(0)*4]  = 1e-9;
+			  imu_msg.angular_velocity_covariance[(1)*4]  = 1e-9;
+			  imu_msg.angular_velocity_covariance[(2)*4]  = 1e-9;
+			  imu_msg.linear_acceleration.x = (data.accelX-_x)*M_S_S_PER_G;
+			  imu_msg.linear_acceleration.y = (data.accelY-_y)*M_S_S_PER_G;
+			  imu_msg.linear_acceleration.z = (data.accelZ-_z)*M_S_S_PER_G;
+			  imu_msg.linear_acceleration_covariance[(0)*4]  = 999;
+			  imu_msg.linear_acceleration_covariance[(1)*4]  = 999;
+			  imu_msg.linear_acceleration_covariance[(2)*4]  = 999;
 			  imu_msg.header.stamp = ros::Time::now();
 			  imu_pub.publish(imu_msg);
 			  i = 0;
