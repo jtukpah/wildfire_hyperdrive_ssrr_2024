@@ -143,7 +143,7 @@ int main(int argc, char **argv) {
 			  /*
 			   * Create imu message
 			   */
-			  imu_msg.orientation = msg.pose.pose.orientation;
+			  imu_msg.orientation_covariance[0] = -1;
 			  imu_msg.angular_velocity.x = data.angleX-_rx;
 			  imu_msg.angular_velocity.y = data.angleY-_ry;
 			  imu_msg.angular_velocity.z = data.angleZ-_rz;
