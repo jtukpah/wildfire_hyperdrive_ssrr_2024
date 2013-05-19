@@ -78,9 +78,6 @@ void IMU::config(bool in_config){
   set("config", !!in_config);
   //TODO read until reach end of binary stream
 }
-void IMU::setRotUnits(const char* units){
-	  set("rotunits", units);
-}
 
 #define QUOTE(str) #str
 #define assert_bit_zero(bit) if(bit)\
