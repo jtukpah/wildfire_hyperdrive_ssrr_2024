@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$imu__filter_8h.html" title="Class declaration for the IMU filter." alt="" coords="84,83,169,112"/>
-<area shape="rect" id="node11" href="$odometryfilter_8hpp.html" title="EKF filter definitions for filtering KVH IMU data." alt="" coords="193,83,319,112"/>
-<area shape="rect" id="node16" href="$linearfilter_8cpp.html" title="linearfilter.cpp" alt="" coords="343,83,444,112"/>
-<area shape="rect" id="node5" href="$kvh__driver__node_8h.html" title="//TODO fill in detailed discription here" alt="" coords="128,160,256,189"/>
-<area shape="rect" id="node9" href="$imu__filter_8cpp.html" title="implementation of the IMUFilter class" alt="" coords="5,160,104,189"/>
-<area shape="rect" id="node7" href="$kvh__driver__node_8cpp.html" title="//TODO fill in detailed discription here" alt="" coords="121,237,263,267"/>
-<area shape="rect" id="node14" href="$odometryfilter_8cpp.html" title="Implementaiton of the IMUFilter class." alt="" coords="280,160,405,189"/>
-</map>

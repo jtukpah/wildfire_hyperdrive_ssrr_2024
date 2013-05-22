@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['setinitialstate',['setInitialState',['../classkvh__driver_1_1KVHDriverConfig_1_1AbstractGroupDescription.html#a7e0fd3853ac8d0ef3734838c01558793',1,'kvh_driver::KVHDriverConfig::AbstractGroupDescription::setInitialState()'],['../classkvh__driver_1_1KVHDriverConfig_1_1GroupDescription.html#aeb8972e2141a81fa59177c79569bc997',1,'kvh_driver::KVHDriverConfig::GroupDescription::setInitialState()'],['../classkvh__driver_1_1KVHParamsConfig_1_1AbstractGroupDescription.html#a2da2ea89469184cddaa769c6b6fed8c0',1,'kvh_driver::KVHParamsConfig::AbstractGroupDescription::setInitialState()'],['../classkvh__driver_1_1KVHParamsConfig_1_1GroupDescription.html#a35b2d2517b2df26724cb388f1dd5ccda',1,'kvh_driver::KVHParamsConfig::GroupDescription::setInitialState()']]],
-  ['setparams',['setParams',['../classkvh__driver_1_1KVHDriverConfig_1_1DEFAULT.html#ae808e4d101809a9c988e780cba491eef',1,'kvh_driver::KVHDriverConfig::DEFAULT::setParams()'],['../classkvh__driver_1_1KVHParamsConfig_1_1DEFAULT.html#ad36eb94daa559a67e6d56ec5512c4b53',1,'kvh_driver::KVHParamsConfig::DEFAULT::setParams()']]],
-  ['statetoimu',['stateToImu',['../classkvh__driver_1_1KVHDriverNode.html#aeb1fc161a8b7c6c2953b6ae8762da24b',1,'kvh_driver::KVHDriverNode']]]
-];

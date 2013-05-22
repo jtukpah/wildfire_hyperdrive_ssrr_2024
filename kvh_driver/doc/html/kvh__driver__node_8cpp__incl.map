@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$kvh__driver__node_8h.html" title="//TODO fill in detailed discription here" alt="" coords="824,83,1016,112"/>
-<area shape="rect" id="node9" href="$KVHDriverConfig_8h.html" title="kvh_driver/KVHDriverConfig.h" alt="" coords="821,160,1018,189"/>
-<area shape="rect" id="node27" href="$imu__filter_8h.html" title="Class declaration for the IMU filter." alt="" coords="1276,160,1425,189"/>
-<area shape="rect" id="node44" href="$odometryfilter_8hpp.html" title="EKF filter definitions for filtering KVH IMU data." alt="" coords="1565,160,1754,189"/>
-<area shape="rect" id="node29" href="$linearfilter_8h.html" title="kvh_driver/linearfilter.h" alt="" coords="1701,237,1853,267"/>
-<area shape="rect" id="node42" href="$constants_8h.html" title="//TODO fill in detailed discription here" alt="" coords="2528,315,2682,344"/>
-</map>
