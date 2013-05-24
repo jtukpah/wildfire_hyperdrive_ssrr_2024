@@ -13,92 +13,109 @@
 #include "kvh_driver/kvh_imu.h"
 #include <device_driver_base/driver_util.h>
 #include <sensor_msgs/Imu.h>
+#include <device_driver_base/reconfigurable_device_driver.h>
+#include "kvh_driver/KVHDriverConfig.h"
 #include <nav_msgs/Odometry.h>
 #include <tf/tf.h>
 #include <ros/ros.h>
 #include <kvh_driver/constants.h>
 //*********************** NAMESPACES ********************//
 using namespace kvh_driver;
+using namespace device_driver;
 
 #define CAL_SAMPLES 40000
 
-int main(int argc, char **argv) {
-	ros::init(argc, argv, "kvh_driver_node");
-	ros::NodeHandle nh;
+class KVHDriver : public ReconfigurableDeviceDriver<kvh_driver::KVHDriverConfig>{
+private:
+	kvh_driver::IMU imu;
 
-	define_and_get_param(std::string, device_address, "~device_address", "/dev/ttyUSB0");
-	define_and_get_param(std::string, imu_topic, "~imu_topic", "/kvh/imu");
-	define_and_get_param(std::string, odom_topic, "~odom_topic", "/kvh/odom");
-	define_and_get_param(std::string, imu_frame, "~imu_frame", "/imu");
-	define_and_get_param(std::string, odom_frame, "~odom_frame", "/odom");
+	std::string device_address_;
+	std::string imu_frame_;
+	std::string odom_frame_;
 
-	kvh_driver::IMU imu(1000, false);
-	imu.open(device_address);
+	double _rx, _ry, _rz, _x, _y, _z;//average values
+	double rx, ry, rz, x, y, z, x_dot, y_dot, z_dot;
 
-	imu.config(false);
+	ReconfigurableAdvertisePtr odom_pub_;
+	ReconfigurableAdvertisePtr imu_pub_;
 
 	kvh_driver::imu_data_t data;
-	struct timeval start, current, last;
-	gettimeofday(&start, NULL);
-
-	double _rx, _ry, _rz, _x, _y, _z;
-	_rx = _ry = _rz = _x = _y = _z = 0;
-
-	ROS_INFO("Calibrating...");
-	for(int i = 0; i<CAL_SAMPLES;){
-
-		try{
-			imu.read_data(data);
-
-			_rx += data.angleX;
-			_ry += data.angleY;
-			_rz += data.angleZ;
-
-			_x += data.accelX;
-			_y += data.accelY;
-			_z += data.accelZ;
-			++i;
-		} catch(device_driver::CorruptDataException& e){
-			ROS_WARN("Got corrupt message: %s", e.what());
-		}
-	}
-
-	_rx /= CAL_SAMPLES;
-	_ry /= CAL_SAMPLES;
-	_rz /= CAL_SAMPLES;
-	_x /= CAL_SAMPLES;
-	_y /= CAL_SAMPLES;
-	_z /= CAL_SAMPLES;
-
-
-	ROS_INFO("Calibration complete");
-	ROS_DEBUG("drx = %f", _rx);
-	ROS_DEBUG("dry = %f", _ry);
-	ROS_DEBUG("drz = %f", _rz);
-	ROS_DEBUG("dx = %f", _x);
-	ROS_DEBUG("dy = %f", _y);
-	ROS_DEBUG("dz = %f", _z);
-
-	ros::Publisher odom_pub = nh.advertise<nav_msgs::Odometry>("/kvh/odom", 5, false);
-	ros::Publisher imu_pub = nh.advertise<sensor_msgs::Imu>(imu_topic, 5, false);
-
-	int i = 0;
-	double rx, ry, rz, x, y, z, x_dot, y_dot, z_dot;
-	rx = ry = rz = x = y = z = x_dot = y_dot = z_dot = 0;
 	nav_msgs::Odometry msg;
 	sensor_msgs::Imu imu_msg;
-	msg.child_frame_id = imu_frame;
-	msg.header.frame_id = odom_frame;
-	imu_msg.header.frame_id = imu_frame;
-	gettimeofday(&last, NULL);
-	while(ros::ok()){
-		try{
 
+	bool time_init_;
+	struct timeval start, current, last;
+
+	bool did_calibration_;
+
+public:
+	void openDevice(){
+		imu.open(device_address_);
+		imu.config(false);
+		time_init_ = false;
+	}
+	void closeDevice(){
+		imu.close();
+	}
+
+	virtual void runningLoop(){
+		if(!did_calibration_)
+			calibrate();
+		readSensor();
+	}
+
+
+	void calibrate(){
+		_rx = _ry = _rz = _x = _y = _z = 0;
+		rx = ry = rz = x = y = z = x_dot = y_dot = z_dot = 0;
+
+		ROS_INFO("Calibrating...");
+		for(int i = 0; i<CAL_SAMPLES;){
+
+			try{
+				imu.read_data(data);
+
+				_rx += data.angleX;
+				_ry += data.angleY;
+				_rz += data.angleZ;
+
+				_x += data.accelX;
+				_y += data.accelY;
+				_z += data.accelZ;
+				++i;
+			} catch(device_driver::CorruptDataException& e){
+				ROS_WARN("Got corrupt message: %s", e.what());
+			}
+		}
+
+		_rx /= CAL_SAMPLES;
+		_ry /= CAL_SAMPLES;
+		_rz /= CAL_SAMPLES;
+		_x /= CAL_SAMPLES;
+		_y /= CAL_SAMPLES;
+		_z /= CAL_SAMPLES;
+
+		ROS_INFO("Calibration complete");
+		ROS_DEBUG("drx = %f", _rx);
+		ROS_DEBUG("dry = %f", _ry);
+		ROS_DEBUG("drz = %f", _rz);
+		ROS_DEBUG("dx = %f", _x);
+		ROS_DEBUG("dy = %f", _y);
+		ROS_DEBUG("dz = %f", _z);
+
+		did_calibration_ = true;
+	}
+
+	void readSensor(){
+		try{
 			imu.read_data(data);
 			gettimeofday(&current, NULL);
-			long diff_start = (current.tv_sec - start.tv_sec)*1000000 + (current.tv_usec - start.tv_usec);
 			long diff_last = (current.tv_sec - last.tv_sec)*1000000 + (current.tv_usec - last.tv_usec);
 			last = current;
+			if(!time_init_){//if we don't have a valid last time then just skip this measurement
+				time_init_ = true;
+				return;
+			}
 
 			/*
 			 * Integrate
@@ -110,16 +127,16 @@ int main(int argc, char **argv) {
 			x_dot += (data.accelX-_x)*M_S_S_PER_G * diff_last / 1000000;
 			y_dot += (data.accelY-_y)*M_S_S_PER_G * diff_last / 1000000;
 			z_dot += (data.accelZ-_z)*M_S_S_PER_G * diff_last / 1000000;
-			
+
 			x += x_dot * diff_last / 1000000;
 			y += y_dot * diff_last / 1000000;
 			z += z_dot * diff_last / 1000000;
-			
 
 
-			
+
+			static int i = 0;
 			if((i++)>=10){
-			  ROS_DEBUG("%f, %f, %f : %f, %f, %f    (%ld s)\n", rx, ry, rz, x, y, z, diff_start/1000000);
+			  ROS_DEBUG("%f, %f, %f : %f, %f, %f\n", rx, ry, rz, x, y, z);
 			  ROS_DEBUG("\tGyro: %f, %f, %f\n", data.angleX, data.angleY, data.angleZ);
 			  ROS_DEBUG("\tAccel: %f, %f, %f\n", data.accelX, data.accelY, data.accelZ);
 
@@ -138,7 +155,7 @@ int main(int argc, char **argv) {
 			  msg.pose.covariance[(constants::ODOM_RX_STATE()-constants::ODOM_X_STATE())*7] = 99999;
 			  msg.pose.covariance[(constants::ODOM_RY_STATE()-constants::ODOM_X_STATE())*7] = 99999;
 			  msg.pose.covariance[(constants::ODOM_RZ_STATE()-constants::ODOM_X_STATE())*7] = 99999;
-			  odom_pub.publish(msg);
+			  odom_pub_->publish(msg);
 
 			  /*
 			   * Create imu message
@@ -157,7 +174,7 @@ int main(int argc, char **argv) {
 			  imu_msg.linear_acceleration_covariance[(1)*4]  = 99999;
 			  imu_msg.linear_acceleration_covariance[(2)*4]  = 99999;
 			  imu_msg.header.stamp = ros::Time::now();
-			  imu_pub.publish(imu_msg);
+			  imu_pub_->publish(imu_msg);
 
 
 			  i = 0;
@@ -167,10 +184,47 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	imu.close();
 
-	ros::spin();
-	return 1;
+
+	KVHDriver() : ReconfigurableDeviceDriver(2000), imu(1000, false), device_address_("/dev/ttyUSB0"),
+			imu_frame_("/imu"), odom_frame_("/odom"),
+			time_init_(false), did_calibration_(false){
+		_rx = _ry = _rz = _x = _y = _z = 0;
+		rx = ry = rz = x = y = z = x_dot = y_dot = z_dot = 0;
+
+		addDriverStateFunctions(device_driver_state::OPEN, &KVHDriver::openDevice, &KVHDriver::closeDevice, this);
+
+		odom_pub_ = addReconfigurableAdvertise<nav_msgs::Odometry>(device_driver_state::RUNNING, "/kvh/odom", 5, false);
+		imu_pub_ = addReconfigurableAdvertise<sensor_msgs::Imu>(device_driver_state::RUNNING, "/kvh/imu", 5, false);
+	}
+	virtual void reconfigureStopped(kvh_driver::KVHDriverConfig& config){
+		device_address_ = config.device_address;
+	}
+	virtual void reconfigureOpen(kvh_driver::KVHDriverConfig& config){
+		imu_pub_->setTopic(config.imu_topic);
+		odom_pub_->setTopic(config.odom_topic);
+		imu_frame_ = config.imu_frame;
+		odom_frame_ = config.odom_frame;
+
+		msg.child_frame_id = imu_frame_;
+		msg.header.frame_id = odom_frame_;
+		imu_msg.header.frame_id = imu_frame_;
+	}
+	virtual void reconfigureRunning(kvh_driver::KVHDriverConfig& config){
+	}
+
+};
+
+
+int main(int argc, char **argv){
+  ros::init(argc, argv, "kvh_driver");
+
+  KVHDriver driver;
+  driver.spin();
+
+  ROS_INFO("Initializing KVH Device");
+
+  return 0;
 }
 
 
