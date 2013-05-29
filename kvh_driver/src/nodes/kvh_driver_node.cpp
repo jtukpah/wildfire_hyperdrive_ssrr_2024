@@ -95,6 +95,8 @@ public:
 		_y /= CAL_SAMPLES;
 		_z /= CAL_SAMPLES;
 
+		_x += 1;
+
 		ROS_INFO("Calibration complete");
 		ROS_DEBUG("drx = %f", _rx);
 		ROS_DEBUG("dry = %f", _ry);
@@ -135,7 +137,7 @@ public:
 
 
 			static int i = 0;
-			if((i++)>=10){
+			if((i++)>=50){
 			  ROS_DEBUG("%f, %f, %f : %f, %f, %f\n", rx, ry, rz, x, y, z);
 			  ROS_DEBUG("\tGyro: %f, %f, %f\n", data.angleX, data.angleY, data.angleZ);
 			  ROS_DEBUG("\tAccel: %f, %f, %f\n", data.accelX, data.accelY, data.accelZ);
@@ -145,7 +147,7 @@ public:
 			   * Create odometry message
 			   */
 			  msg.header.stamp = ros::Time::now();
-			  msg.pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rz);
+			  msg.pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rx);
 			  //msg.pose.pose.position.x = x;
 			  //msg.pose.pose.position.y = y;
 			  //msg.pose.pose.position.z = z;
@@ -160,19 +162,21 @@ public:
 			  /*
 			   * Create imu message
 			   */
-			  imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rz);
-			  imu_msg.orientation_covariance[(0)*4]  = 0.001;
-			  imu_msg.orientation_covariance[(1)*4]  = 0.001;
-			  imu_msg.orientation_covariance[(2)*4]  = 0.001;
-			  imu_msg.angular_velocity.x = data.angleX-_rx;
-			  imu_msg.angular_velocity.y = data.angleY-_ry;
-			  imu_msg.angular_velocity.z = data.angleZ-_rz;
+			  //imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rz); don't do this cause robotpose ekf expects it to be world aligned
+			  imu_msg.header.frame_id = "/base_footprint";	
+			  imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, rx);
+			  imu_msg.orientation_covariance[(0)*4]  = 0.000001;
+			  imu_msg.orientation_covariance[(1)*4]  = 0.01;
+			  imu_msg.orientation_covariance[(2)*4]  = 0.01;
+			  //imu_msg.angular_velocity.x = data.angleX-_rx;
+			  //imu_msg.angular_velocity.y = data.angleY-_ry;
+			  //imu_msg.angular_velocity.z = data.angleZ-_rz;
 			  imu_msg.angular_velocity_covariance[(0)*4]  = 0.001;
 			  imu_msg.angular_velocity_covariance[(1)*4]  = 0.001;
 			  imu_msg.angular_velocity_covariance[(2)*4]  = 0.001;
-			  imu_msg.linear_acceleration.x = (data.accelX-_x)*M_S_S_PER_G;
-			  imu_msg.linear_acceleration.y = (data.accelY-_y)*M_S_S_PER_G;
-			  imu_msg.linear_acceleration.z = (data.accelZ-_z)*M_S_S_PER_G;
+			  //imu_msg.linear_acceleration.x = (data.accelX-_x)*M_S_S_PER_G;
+			  //imu_msg.linear_acceleration.y = (data.accelY-_y)*M_S_S_PER_G;
+			  //imu_msg.linear_acceleration.z = (data.accelZ-_z)*M_S_S_PER_G;
 			  imu_msg.linear_acceleration_covariance[(0)*4]  = 99999;
 			  imu_msg.linear_acceleration_covariance[(1)*4]  = 99999;
 			  imu_msg.linear_acceleration_covariance[(2)*4]  = 99999;
@@ -211,7 +215,6 @@ public:
 
 		msg.child_frame_id = imu_frame_;
 		msg.header.frame_id = odom_frame_;
-		imu_msg.header.frame_id = imu_frame_;
 	}
 	virtual void reconfigureRunning(kvh_driver::KVHDriverConfig& config){
 	}
