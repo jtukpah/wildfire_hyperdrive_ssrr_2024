@@ -23,7 +23,7 @@
 using namespace kvh_driver;
 using namespace device_driver;
 
-#define CAL_SAMPLES 40000
+#define CAL_SAMPLES 10000
 
 class KVHDriver : public ReconfigurableDeviceDriver<kvh_driver::KVHDriverConfig>{
 private:
@@ -160,7 +160,10 @@ public:
 			  /*
 			   * Create imu message
 			   */
-			  imu_msg.orientation_covariance[0] = -1;
+			  imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rz);
+			  imu_msg.orientation_covariance[(0)*4]  = 0.001;
+			  imu_msg.orientation_covariance[(1)*4]  = 0.001;
+			  imu_msg.orientation_covariance[(2)*4]  = 0.001;
 			  imu_msg.angular_velocity.x = data.angleX-_rx;
 			  imu_msg.angular_velocity.y = data.angleY-_ry;
 			  imu_msg.angular_velocity.z = data.angleZ-_rz;
