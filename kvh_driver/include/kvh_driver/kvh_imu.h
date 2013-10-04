@@ -12,11 +12,8 @@
 #include <boost/static_assert.hpp>
 #include <boost/thread.hpp>
 #include "device_driver_base/serial_port.h"
-#include <wrappers/matrix/vector_wrapper.h>
 
 namespace kvh_driver{
-
-using MatrixWrapper::ColumnVector;
 
 #define M_S_S_PER_G (9.80665)
 
