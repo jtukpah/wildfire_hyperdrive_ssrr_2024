@@ -152,9 +152,8 @@ typedef union{
  */
 class IMU{
  public:
-  typedef boost::shared_ptr<ColumnVector> ColumnVectorPtr;
 
-  IMU(int data_rate, bool enable_background_thread);
+  IMU(int data_rate);
   ~IMU();
 	
   /**
@@ -201,7 +200,6 @@ class IMU{
    */
   void read_data(imu_data_t& data);
 
-  bool read_measurement(ColumnVectorPtr measurement_vector);
 
   /*
    * Internal Functions
@@ -219,8 +217,6 @@ class IMU{
  private:
   device_driver::DriverSerialPort serial_port;
   const int data_rate_;
-  const bool enable_background_thread_;
-  boost::thread read_thread;
 
   /*
    * Protocol Constants

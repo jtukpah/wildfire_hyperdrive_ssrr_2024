@@ -16,7 +16,7 @@ const uint8_t IMU::NORMAL_DATA_HEADER[4] = {0xFE, 0x81, 0xFF, 0x55};
 const uint32_t IMU::NORMAL_DATA_CRC_POLY = 0x04C11DB7;//this stay endian independant in cal
 
 
-IMU::IMU(int data_rate, bool enable_background_thread):valid_data(false), data_rate_(data_rate), enable_background_thread_(enable_background_thread){
+IMU::IMU(int data_rate):valid_data(false), data_rate_(data_rate){
 }
 
 IMU::~IMU(){
@@ -32,34 +32,11 @@ void IMU::open(const std::string port){
   set("dr", data_rate_);
   config(false);
   usleep(1000000);
-  if(enable_background_thread_)
-    read_thread = boost::thread(&IMU::read_thread_main, this);
 }
 
 void IMU::close(){
-  if(enable_background_thread_){
-    read_thread.interrupt();
-    read_thread.join();
-    serial_port.close();
-    valid_data = false;
-  }
-}
-
-void IMU::read_thread_main(){
-  while(true){
-    boost::this_thread::interruption_point();
-    try{
-      imu_data_t data;
-      read_data(data);
-      {
-	boost::mutex::scoped_lock lock(data_lock);
-	recent_data = data;
-	valid_data = true;
-      }
-    } catch(Exception& e){
-      ROS_WARN("Eror reading imu data %s", e.what());
-    }
-  }
+  serial_port.close();
+  valid_data = false;
 }
 
 
@@ -156,32 +133,6 @@ uint8_t IMU::calc_checksum(const uint8_t* data, size_t size){
   }
   return sum;
 }
-
-bool IMU::read_measurement(ColumnVectorPtr measurement_vector){
-  try{
-    {
-      boost::mutex::scoped_lock lock(data_lock);
-      if(!valid_data){
-	return false;
-      }
-
-      (*measurement_vector)(constants::IMU_X_DOT_DOT_STATE()) = recent_data.accelX*M_S_S_PER_G;
-      (*measurement_vector)(constants::IMU_Y_DOT_DOT_STATE()) = recent_data.accelY*M_S_S_PER_G;
-      (*measurement_vector)(constants::IMU_Z_DOT_DOT_STATE()) = recent_data.accelZ*M_S_S_PER_G;
-      
-      (*measurement_vector)(constants::IMU_RX_DOT_STATE()) = recent_data.angleX;
-      (*measurement_vector)(constants::IMU_RY_DOT_STATE()) = recent_data.angleY;
-      (*measurement_vector)(constants::IMU_RZ_DOT_STATE()) = recent_data.angleZ;
-    }
-    return true;
-  } catch(Exception& e){
-    ROS_ERROR("IMU error reading message %s", e.what());
-    return false;
-  }
-}
-
-
-
 
 
 }

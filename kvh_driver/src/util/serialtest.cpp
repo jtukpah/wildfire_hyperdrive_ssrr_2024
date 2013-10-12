@@ -3,7 +3,7 @@
 
 
 int main(){
-  kvh_driver::IMU imu(1000, false);
+  kvh_driver::IMU imu(1000);
 	imu.open("/dev/ttyUSB0");
 
 	/*imu.config(true);

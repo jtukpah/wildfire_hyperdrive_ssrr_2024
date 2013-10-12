@@ -193,7 +193,7 @@ public:
 
 
 
-	KVHDriver() : ReconfigurableDeviceDriver(2000), imu(1000, false), device_address_("/dev/ttyUSB0"),
+	KVHDriver() : ReconfigurableDeviceDriver(2000), imu(1000), device_address_("/dev/ttyUSB0"),
 			imu_frame_("/imu"), odom_frame_("/odom"),
 			time_init_(false), did_calibration_(false){
 		_rx = _ry = _rz = _x = _y = _z = 0;
