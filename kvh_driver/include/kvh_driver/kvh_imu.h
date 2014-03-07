@@ -200,6 +200,12 @@ class IMU{
    */
   void read_data(imu_data_t& data);
 
+  /**
+   * @author Mitchell Wills
+   * @brief issues the restart command to the imu, must be called while in config mode
+   */
+  void restart();
+
 
   /*
    * Internal Functions
@@ -210,6 +216,7 @@ class IMU{
  protected:
   void set(const char* name, const char* value);
   void set(const char* name, int value);
+  void command(const char* command);
 
   /*
    * Private Fields

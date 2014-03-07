@@ -33,8 +33,9 @@ private:
 	std::string imu_frame_;
 	std::string odom_frame_;
 
-	double _rx, _ry, _rz, _x, _y, _z;//average values
 	double rx, ry, rz, x, y, z, x_dot, y_dot, z_dot;
+        double rx_zero, ry_zero, rz_zero;
+	int num_cal;
 
 	ReconfigurableAdvertisePtr odom_pub_;
 	ReconfigurableAdvertisePtr imu_pub_;
@@ -46,7 +47,6 @@ private:
 	bool time_init_;
 	struct timeval start, current, last;
 
-	bool did_calibration_;
 
 public:
 	void openDevice(){
@@ -59,53 +59,7 @@ public:
 	}
 
 	virtual void runningLoop(){
-		if(!did_calibration_)
-			calibrate();
 		readSensor();
-	}
-
-
-	void calibrate(){
-		_rx = _ry = _rz = _x = _y = _z = 0;
-		rx = ry = rz = x = y = z = x_dot = y_dot = z_dot = 0;
-
-		ROS_INFO("Calibrating...");
-		for(int i = 0; i<CAL_SAMPLES;){
-
-			try{
-				imu.read_data(data);
-
-				_rx += data.angleX;
-				_ry += data.angleY;
-				_rz += data.angleZ;
-
-				_x += data.accelX;
-				_y += data.accelY;
-				_z += data.accelZ;
-				++i;
-			} catch(device_driver::CorruptDataException& e){
-				ROS_WARN("Got corrupt message: %s", e.what());
-			}
-		}
-
-		_rx /= CAL_SAMPLES;
-		_ry /= CAL_SAMPLES;
-		_rz /= CAL_SAMPLES;
-		_x /= CAL_SAMPLES;
-		_y /= CAL_SAMPLES;
-		_z /= CAL_SAMPLES;
-
-		_x += 1;
-
-		ROS_INFO("Calibration complete");
-		ROS_DEBUG("drx = %f", _rx);
-		ROS_DEBUG("dry = %f", _ry);
-		ROS_DEBUG("drz = %f", _rz);
-		ROS_DEBUG("dx = %f", _x);
-		ROS_DEBUG("dy = %f", _y);
-		ROS_DEBUG("dz = %f", _z);
-
-		did_calibration_ = true;
 	}
 
 	void readSensor(){
@@ -119,72 +73,83 @@ public:
 				return;
 			}
 
-			/*
-			 * Integrate
-			 */
-			rx += (data.angleX-_rx) * diff_last / 1000000;
-			ry += (data.angleY-_ry) * diff_last / 1000000;
-			rz += (data.angleZ-_rz) * diff_last / 1000000;
+			if(num_cal<CAL_SAMPLES){
+			  if(num_cal == 0)
+			    ROS_INFO("Calibrating IMU with %d samples", CAL_SAMPLES);
+			  rx_zero += data.angleX;
+			  ry_zero += data.angleY;
+			  rz_zero += data.angleZ;
 
-			x_dot += (data.accelX-_x)*M_S_S_PER_G * diff_last / 1000000;
-			y_dot += (data.accelY-_y)*M_S_S_PER_G * diff_last / 1000000;
-			z_dot += (data.accelZ-_z)*M_S_S_PER_G * diff_last / 1000000;
+			  ++num_cal;
+			  if(num_cal == CAL_SAMPLES){
+			    rx_zero /= CAL_SAMPLES;
+			    ry_zero /= CAL_SAMPLES;
+			    rz_zero /= CAL_SAMPLES;
+			    ROS_INFO("Calibration complete (%f, %f, %f)\n", rx_zero, ry_zero, rz_zero);
+			    ++num_cal;
+			  }
+			}
+			else{
+			  rx += (data.angleX - rx_zero);
+			  ry += (data.angleY - ry_zero);
+			  rz += (data.angleZ - rz_zero);
 
-			x += x_dot * diff_last / 1000000;
-			y += y_dot * diff_last / 1000000;
-			z += z_dot * diff_last / 1000000;
+			  x_dot += data.accelX*M_S_S_PER_G * diff_last / 1000000;
+			  y_dot += data.accelY*M_S_S_PER_G * diff_last / 1000000;
+			  z_dot += data.accelZ*M_S_S_PER_G * diff_last / 1000000;
 
-
-
-			static int i = 0;
-			if((i++)>=50){
-			  ROS_DEBUG("%f, %f, %f : %f, %f, %f\n", rx, ry, rz, x, y, z);
-			  ROS_DEBUG("\tGyro: %f, %f, %f\n", data.angleX, data.angleY, data.angleZ);
-			  ROS_DEBUG("\tAccel: %f, %f, %f\n", data.accelX, data.accelY, data.accelZ);
-
-
-			  /*
-			   * Create odometry message
-			   */
-			  msg.header.stamp = ros::Time::now();
-			  msg.pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rx);
-			  //msg.pose.pose.position.x = x;
-			  //msg.pose.pose.position.y = y;
-			  //msg.pose.pose.position.z = z;
-			  msg.pose.covariance[(constants::ODOM_X_STATE()-constants::ODOM_X_STATE())*7]  = 0.001;
-			  msg.pose.covariance[(constants::ODOM_Y_STATE()-constants::ODOM_X_STATE())*7]  = 0.001;
-			  msg.pose.covariance[(constants::ODOM_Z_STATE()-constants::ODOM_X_STATE())*7]  = 0.001;
-			  msg.pose.covariance[(constants::ODOM_RX_STATE()-constants::ODOM_X_STATE())*7] = 99999;
-			  msg.pose.covariance[(constants::ODOM_RY_STATE()-constants::ODOM_X_STATE())*7] = 99999;
-			  msg.pose.covariance[(constants::ODOM_RZ_STATE()-constants::ODOM_X_STATE())*7] = 99999;
-			  odom_pub_->publish(msg);
-
-			  /*
-			   * Create imu message
-			   */
-			  //imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rz); don't do this cause robotpose ekf expects it to be world aligned
-			  imu_msg.header.frame_id = "/base_footprint";	
-			  imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, rx);
-			  imu_msg.orientation_covariance[(0)*4]  = 0.000001;
-			  imu_msg.orientation_covariance[(1)*4]  = 0.000001;
-			  imu_msg.orientation_covariance[(2)*4]  = 0.000001;
-			  //imu_msg.angular_velocity.x = data.angleX-_rx;
-			  //imu_msg.angular_velocity.y = data.angleY-_ry;
-			  //imu_msg.angular_velocity.z = data.angleZ-_rz;
-			  imu_msg.angular_velocity_covariance[(0)*4]  = 0.000001;
-			  imu_msg.angular_velocity_covariance[(1)*4]  = 0.000001;
-			  imu_msg.angular_velocity_covariance[(2)*4]  = 0.000001;
-			  //imu_msg.linear_acceleration.x = (data.accelX-_x)*M_S_S_PER_G;
-			  //imu_msg.linear_acceleration.y = (data.accelY-_y)*M_S_S_PER_G;
-			  //imu_msg.linear_acceleration.z = (data.accelZ-_z)*M_S_S_PER_G;
-			  imu_msg.linear_acceleration_covariance[(0)*4]  = 99999;
-			  imu_msg.linear_acceleration_covariance[(1)*4]  = 99999;
-			  imu_msg.linear_acceleration_covariance[(2)*4]  = 99999;
-			  imu_msg.header.stamp = ros::Time::now();
-			  imu_pub_->publish(imu_msg);
+			  x += x_dot * diff_last / 1000000;
+			  y += y_dot * diff_last / 1000000;
+			  z += z_dot * diff_last / 1000000;
 
 
-			  i = 0;
+
+			  static int i = 0;
+			  if((i++)>=50){//send message every 50 readings
+			    ROS_DEBUG("%f, %f, %f : %f, %f, %f\n", rx, ry, rz, x, y, z);
+			    ROS_DEBUG("\tGyro: %f, %f, %f\n", data.angleX, data.angleY, data.angleZ);
+			    ROS_DEBUG("\tAccel: %f, %f, %f\n", data.accelX, data.accelY, data.accelZ);
+
+			    /*
+			     * Create odometry message
+			     */
+			    msg.header.stamp = ros::Time::now();
+			    msg.pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rx);
+			    msg.pose.pose.position.x = x;
+			    msg.pose.pose.position.y = y;
+			    msg.pose.pose.position.z = z;
+			    msg.pose.covariance[(constants::ODOM_X_STATE()-constants::ODOM_X_STATE())*7]  = 0.001;
+			    msg.pose.covariance[(constants::ODOM_Y_STATE()-constants::ODOM_X_STATE())*7]  = 0.001;
+			    msg.pose.covariance[(constants::ODOM_Z_STATE()-constants::ODOM_X_STATE())*7]  = 0.001;
+			    msg.pose.covariance[(constants::ODOM_RX_STATE()-constants::ODOM_X_STATE())*7] = 99999;
+			    msg.pose.covariance[(constants::ODOM_RY_STATE()-constants::ODOM_X_STATE())*7] = 99999;
+			    msg.pose.covariance[(constants::ODOM_RZ_STATE()-constants::ODOM_X_STATE())*7] = 99999;
+			    odom_pub_->publish(msg);
+
+			    /*
+			     * Create imu message
+			     */
+			    //imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rz); don't do this cause robotpose ekf expects it to be world aligned
+			    imu_msg.header.frame_id = "/base_footprint";	
+			    imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, rx);
+			    imu_msg.orientation_covariance[(0)*4]  = 0.000001;
+			    imu_msg.orientation_covariance[(1)*4]  = 0.000001;
+			    imu_msg.orientation_covariance[(2)*4]  = 0.000001;
+			    imu_msg.angular_velocity_covariance[(0)*4]  = 0.000001;
+			    imu_msg.angular_velocity_covariance[(1)*4]  = 0.000001;
+			    imu_msg.angular_velocity_covariance[(2)*4]  = 0.000001;
+			    imu_msg.linear_acceleration.x = data.accelX*M_S_S_PER_G;
+			    imu_msg.linear_acceleration.y = data.accelY*M_S_S_PER_G;
+			    imu_msg.linear_acceleration.z = data.accelZ*M_S_S_PER_G;
+			    imu_msg.linear_acceleration_covariance[(0)*4]  = 99999;
+			    imu_msg.linear_acceleration_covariance[(1)*4]  = 99999;
+			    imu_msg.linear_acceleration_covariance[(2)*4]  = 99999;
+			    imu_msg.header.stamp = ros::Time::now();
+			    imu_pub_->publish(imu_msg);
+
+
+			    i = 0;
+			  }
 			}
 		} catch(device_driver::CorruptDataException& e){
 			ROS_WARN("Got corrupt message: %s\n", e.what());
@@ -195,9 +160,12 @@ public:
 
 	KVHDriver() : ReconfigurableDeviceDriver(2000), imu(1000), device_address_("/dev/ttyUSB0"),
 			imu_frame_("/imu"), odom_frame_("/odom"),
-			time_init_(false), did_calibration_(false){
-		_rx = _ry = _rz = _x = _y = _z = 0;
-		rx = ry = rz = x = y = z = x_dot = y_dot = z_dot = 0;
+			time_init_(false){
+		rx_zero = ry_zero = rz_zero = 0;
+		num_cal = 0;
+		rx = ry = rz = 0;
+		x_dot = y_dot = z_dot = 0;
+		x = y = z = 0;
 
 		addDriverStateFunctions(device_driver_state::OPEN, &KVHDriver::openDevice, &KVHDriver::closeDevice, this);
 

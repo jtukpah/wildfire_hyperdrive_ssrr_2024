@@ -27,7 +27,7 @@ IMU::~IMU(){
 void IMU::open(const std::string port){
   serial_port.open(port, (speed_t)B921600, 8, serial_parity_none);
   config(true);
-  set("rotfmt", "RATE");
+  set("rotfmt", "DELTA");
   set("rotunits", "RAD");
   set("dr", data_rate_);
   config(false);
@@ -46,6 +46,9 @@ void IMU::set(const char* name, const char* value){
 void IMU::set(const char* name, int value){
   serial_port.writef(10, "=%s,%d\n", name, value);
 }
+void IMU::command(const char* command){
+  serial_port.writef(10, "=%s\n", command);
+}
 
 
 
@@ -54,6 +57,11 @@ void IMU::config(bool in_config){
     DRIVER_EXCEPT(Exception, "Port not open");
   set("config", !!in_config);
   //TODO read until reach end of binary stream
+}
+  void IMU::restart(){
+  if(!portOpen())
+    DRIVER_EXCEPT(Exception, "Port not open");
+  command("=restart");
 }
 
 #define QUOTE(str) #str
