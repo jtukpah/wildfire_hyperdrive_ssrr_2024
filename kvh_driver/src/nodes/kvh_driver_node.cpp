@@ -19,6 +19,7 @@
 #include <tf/tf.h>
 #include <ros/ros.h>
 #include <kvh_driver/constants.h>
+#include <std_msgs/Bool.h>
 //*********************** NAMESPACES ********************//
 using namespace kvh_driver;
 using namespace device_driver;
@@ -39,6 +40,7 @@ private:
 
 	ReconfigurableAdvertisePtr odom_pub_;
 	ReconfigurableAdvertisePtr imu_pub_;
+	ros::Publisher cal_pub_;
 
 	kvh_driver::imu_data_t data;
 	nav_msgs::Odometry msg;
@@ -87,6 +89,9 @@ public:
 			    rz_zero /= CAL_SAMPLES;
 			    ROS_INFO("Calibration complete (%f, %f, %f)\n", rx_zero, ry_zero, rz_zero);
 			    ++num_cal;
+			    std_msgs::Bool cal_msg;
+			    cal_msg.data = true;
+			    cal_pub_.publish(cal_msg);
 			  }
 			}
 			else{
@@ -171,6 +176,11 @@ public:
 
 		odom_pub_ = addReconfigurableAdvertise<nav_msgs::Odometry>(device_driver_state::RUNNING, "/kvh/odom", 5, false);
 		imu_pub_ = addReconfigurableAdvertise<sensor_msgs::Imu>(device_driver_state::RUNNING, "/kvh/imu", 5, false);
+		ros::NodeHandle nh;
+		cal_pub_ = nh.advertise<std_msgs::Bool>("is_calibrated", 1, true);
+		std_msgs::Bool cal_msg;
+		cal_msg.data = false;
+		cal_pub_.publish(cal_msg);
 	}
 	virtual void reconfigureStopped(kvh_driver::KVHDriverConfig& config){
 		device_address_ = config.device_address;
