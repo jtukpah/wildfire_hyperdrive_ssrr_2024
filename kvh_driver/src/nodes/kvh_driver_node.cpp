@@ -119,25 +119,25 @@ public:
 			     * Create odometry message
 			     */
 			    msg.header.stamp = ros::Time::now();
-			    msg.header.frame_id = odom_frame_;	
-			    msg.pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rx);
+			    msg.header.frame_id = odom_frame_;
+			    msg.pose.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rz);
 			    //msg.pose.pose.position.x = x;
 			    //msg.pose.pose.position.y = y;
 			    //msg.pose.pose.position.z = z;
-			    msg.pose.covariance[(constants::ODOM_X_STATE()-constants::ODOM_X_STATE())*7]  = 0.001;
-			    msg.pose.covariance[(constants::ODOM_Y_STATE()-constants::ODOM_X_STATE())*7]  = 0.001;
-			    msg.pose.covariance[(constants::ODOM_Z_STATE()-constants::ODOM_X_STATE())*7]  = 0.001;
-			    msg.pose.covariance[(constants::ODOM_RX_STATE()-constants::ODOM_X_STATE())*7] = 99999;
-			    msg.pose.covariance[(constants::ODOM_RY_STATE()-constants::ODOM_X_STATE())*7] = 99999;
-			    msg.pose.covariance[(constants::ODOM_RZ_STATE()-constants::ODOM_X_STATE())*7] = 99999;
+			    msg.pose.covariance[(constants::ODOM_X_STATE()-constants::ODOM_X_STATE())*7]  = 99999;
+			    msg.pose.covariance[(constants::ODOM_Y_STATE()-constants::ODOM_X_STATE())*7]  = 99999;
+			    msg.pose.covariance[(constants::ODOM_Z_STATE()-constants::ODOM_X_STATE())*7]  = 99999;
+			    msg.pose.covariance[(constants::ODOM_RX_STATE()-constants::ODOM_X_STATE())*7] = 0.0;
+			    msg.pose.covariance[(constants::ODOM_RY_STATE()-constants::ODOM_X_STATE())*7] = 0.0;
+			    msg.pose.covariance[(constants::ODOM_RZ_STATE()-constants::ODOM_X_STATE())*7] = 0.0;
 			    odom_pub_->publish(msg);
 
 			    /*
 			     * Create imu message
 			     */
-			    //imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rz); don't do this cause robotpose ekf expects it to be world aligned
 			    imu_msg.header.frame_id = imu_frame_;	
-			    imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, rx);
+			    imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(rx, ry, rz);
+			    //imu_msg.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, rx);
 			    /*imu_msg.orientation_covariance[(0)*4]  = 0.000001;
 			    imu_msg.orientation_covariance[(1)*4]  = 0.000001;
 			    imu_msg.orientation_covariance[(2)*4]  = 0.000001;

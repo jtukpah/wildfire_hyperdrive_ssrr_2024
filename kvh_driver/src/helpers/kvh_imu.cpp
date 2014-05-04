@@ -29,6 +29,7 @@ void IMU::open(const std::string port){
   config(true);
   set("rotfmt", "DELTA");
   set("rotunits", "RAD");
+  set("axes", "0,0.7171,0.7171,0,-0.7171,0.7171,1,0,0");
   set("dr", data_rate_);
   config(false);
   usleep(1000000);
