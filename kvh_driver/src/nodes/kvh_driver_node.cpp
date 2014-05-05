@@ -110,7 +110,7 @@ public:
 
 
 			  static int i = 0;
-			  if((i++)>=50){//send message every 50 readings
+			  if((i++)>=30){//send message every 50 readings
 			    ROS_DEBUG("%f, %f, %f : %f, %f, %f\n", rx, ry, rz, x, y, z);
 			    ROS_DEBUG("\tGyro: %f, %f, %f\n", data.angleX, data.angleY, data.angleZ);
 			    ROS_DEBUG("\tAccel: %f, %f, %f\n", data.accelX, data.accelY, data.accelZ);
