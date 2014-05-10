@@ -159,6 +159,8 @@ public:
 			}
 		} catch(device_driver::CorruptDataException& e){
 			ROS_WARN("Got corrupt message: %s\n", e.what());
+		} catch(device_driver::Exception& e){
+			ROS_WARN("Error reading data: %s\n", e.what());
 		}
 	}
 
