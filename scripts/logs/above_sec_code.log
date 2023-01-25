@@ -1,0 +1,14 @@
+get log command: pprofile --exclude-syspath hsi_driver.py > test.log 2>&1
+
+File: /home/river/Downloads/HSI Suite/python_apis/hsi_camera/hsi_camera_api.py
+File duration: 160.035s (95.73%)
+Line #|      Hits|         Time| Time per hit|      %|Source code
+------+----------+-------------+-------------+-------+-----------  
+   416|      2346|      153.042|    0.0652352| 91.54%|    result = __api_dll.cameraAcquireFrame (handle, ctypes.byref(frame), timeout_ms)
+   253|         1|      3.18922|      3.18922|  1.91%|    result = __api_dll.cameraInitialize (handle)
+
+File: /home/river/ros_package/src/ros_numpy/src/ros_numpy/image.py
+File duration: 1.94413s (1.16%)
+Line #|      Hits|         Time| Time per hit|      %|Source code
+------+----------+-------------+-------------+-------+-----------
+   113|      2346|      1.80509|  0.000769432|  1.08%|	im.data = contig.tostring()

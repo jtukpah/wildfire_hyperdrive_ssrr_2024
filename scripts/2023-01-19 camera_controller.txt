@@ -1,0 +1,2 @@
+2023-01-19 13:50:32.226070 INFO    - [CameraController::_AcquisitionLoop] thread finished
+2023-01-19 13:56:15.768008 INFO    - [CameraController::_AcquisitionLoop] thread finished

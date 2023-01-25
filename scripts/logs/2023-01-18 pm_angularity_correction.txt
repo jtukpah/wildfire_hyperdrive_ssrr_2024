@@ -1,0 +1,12 @@
+2023-01-18 16:54:36.966606 INFO    - Module::Initialize -->
+2023-01-18 16:54:36.966606 VERBOSE -    trying to initialize...
+2023-01-18 16:54:37.077160 INFO    - Module::Initialize <--
+2023-01-18 16:54:37.101435 INFO    - Module::Start -->
+2023-01-18 16:54:37.101438 INFO    - Module::Start <--
+2023-01-18 16:54:37.326491 INFO    - Module::Pauze -->
+2023-01-18 16:54:37.326494 INFO    - Module::Pauze <--
+2023-01-18 16:54:37.414424 INFO    - Module::Initialize -->
+2023-01-18 16:54:37.414424 VERBOSE -    trying to initialize...
+2023-01-18 16:54:37.524419 INFO    - Module::Initialize <--
+2023-01-18 16:54:37.563094 INFO    - Module::Start -->
+2023-01-18 16:54:37.563111 INFO    - Module::Start <--

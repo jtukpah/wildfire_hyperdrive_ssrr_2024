@@ -1,0 +1,64 @@
+2023-01-19 10:03:47.484338 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:03:47.484341 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 10:03:47.484344 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 10:03:47.760352 INFO    - ProcessingUnit::Process
+2023-01-19 10:19:19.106060 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:19:19.106063 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 10:19:19.106066 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 10:19:19.377811 INFO    - ProcessingUnit::Process
+2023-01-19 10:22:18.262798 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:22:18.262825 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 10:22:18.262830 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 10:22:18.535287 INFO    - ProcessingUnit::Process
+2023-01-19 10:23:49.022575 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:23:49.022578 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 10:23:49.022582 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 10:23:49.296419 INFO    - ProcessingUnit::Process
+2023-01-19 10:24:22.270604 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:24:22.270608 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 10:24:22.270611 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 10:24:22.546760 INFO    - ProcessingUnit::Process
+2023-01-19 10:34:27.555116 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:34:27.555120 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 10:34:27.555137 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 10:34:27.829762 INFO    - ProcessingUnit::Process
+2023-01-19 10:45:09.948289 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:45:09.948292 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 10:45:09.948296 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 10:45:10.220592 INFO    - ProcessingUnit::Process
+2023-01-19 10:45:33.952454 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:45:33.952457 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 10:45:33.952462 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 10:45:34.226840 INFO    - ProcessingUnit::Process
+2023-01-19 11:39:19.083828 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:39:19.083832 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 11:39:19.083836 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 11:39:19.355942 INFO    - ProcessingUnit::Process
+2023-01-19 11:42:33.430758 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:42:33.430761 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 11:42:33.430764 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 11:42:33.703526 INFO    - ProcessingUnit::Process
+2023-01-19 11:47:24.212165 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:47:24.212169 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 11:47:24.212173 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 11:47:24.486414 INFO    - ProcessingUnit::Process
+2023-01-19 11:49:35.952139 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:49:35.952142 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 11:49:35.952145 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 11:49:36.227492 INFO    - ProcessingUnit::Process
+2023-01-19 11:51:44.913699 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:51:44.913703 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 11:51:44.913706 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 11:51:45.191230 INFO    - ProcessingUnit::Process
+2023-01-19 11:52:57.111635 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:52:57.111638 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 11:52:57.111641 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 11:52:57.399485 INFO    - ProcessingUnit::Process
+2023-01-19 11:58:10.324247 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:58:10.324250 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 11:58:10.324253 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 11:58:10.598411 INFO    - ProcessingUnit::Process
+2023-01-19 12:01:18.457418 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:01:18.457421 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.illumination_fall_off.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ARRAY
+2023-01-19 12:01:18.457425 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_processing_group_out.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
+2023-01-19 12:01:18.732630 INFO    - ProcessingUnit::Process

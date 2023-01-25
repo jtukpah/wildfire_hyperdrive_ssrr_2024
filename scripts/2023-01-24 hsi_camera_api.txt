@@ -1,0 +1,293 @@
+2023-01-24 10:20:29.370269 INFO    - Module::Initialize -->
+2023-01-24 10:20:29.370275 VERBOSE -    trying to initialize...
+2023-01-24 10:20:32.544180 INFO    - Module::Initialize <--
+2023-01-24 10:20:32.564925 INFO    - Module::Start -->
+2023-01-24 10:20:32.570204 INFO    - Module::Start <--
+2023-01-24 10:27:09.967517 INFO    - Module::Initialize -->
+2023-01-24 10:27:09.967524 VERBOSE -    trying to initialize...
+2023-01-24 10:27:13.253002 INFO    - Module::Initialize <--
+2023-01-24 10:27:13.275772 INFO    - Module::Start -->
+2023-01-24 10:27:13.281705 INFO    - Module::Start <--
+2023-01-24 10:31:34.937652 ERROR   - cameraOpenDevice: An error occurred - [virtual void ihspt::drivers::CM_XimeaXiq::_Connect()] xiOpenDeviceBy(XI_OPEN_BY_SN, _identification_string.c_str(), &_device) : Resource(device) or function locked by mutex
+2023-01-24 10:33:09.445197 INFO    - Module::Pauze -->
+2023-01-24 10:33:09.502302 INFO    - Module::Pauze <--
+2023-01-24 10:33:09.502419 INFO    - Module::Stop -->
+2023-01-24 10:33:09.694363 INFO    - Module::Stop <--
+2023-01-24 10:33:09.694444 INFO    - Module::Stop -->
+2023-01-24 10:34:07.115197 INFO    - Module::Initialize -->
+2023-01-24 10:34:07.115203 VERBOSE -    trying to initialize...
+2023-01-24 10:34:10.322896 INFO    - Module::Initialize <--
+2023-01-24 10:34:10.342781 INFO    - Module::Start -->
+2023-01-24 10:34:10.348420 INFO    - Module::Start <--
+2023-01-24 10:34:54.711209 INFO    - Module::Pauze -->
+2023-01-24 10:34:54.768662 INFO    - Module::Pauze <--
+2023-01-24 10:34:54.768745 INFO    - Module::Stop -->
+2023-01-24 10:34:54.953156 INFO    - Module::Stop <--
+2023-01-24 10:34:54.953313 INFO    - Module::Stop -->
+2023-01-24 10:45:33.780693 INFO    - Module::Initialize -->
+2023-01-24 10:45:33.780699 VERBOSE -    trying to initialize...
+2023-01-24 10:45:36.969879 INFO    - Module::Initialize <--
+2023-01-24 10:45:36.985451 INFO    - Module::Start -->
+2023-01-24 10:45:36.990857 INFO    - Module::Start <--
+2023-01-24 10:48:13.953157 INFO    - Module::Pauze -->
+2023-01-24 10:48:14.011267 INFO    - Module::Pauze <--
+2023-01-24 10:48:14.011404 INFO    - Module::Stop -->
+2023-01-24 10:48:14.192944 INFO    - Module::Stop <--
+2023-01-24 10:48:14.193075 INFO    - Module::Stop -->
+2023-01-24 13:53:12.736835 INFO    - Module::Initialize -->
+2023-01-24 13:53:12.736849 VERBOSE -    trying to initialize...
+2023-01-24 13:53:13.096669 INFO    - Module::Initialize <--
+2023-01-24 13:53:13.102676 INFO    - Module::Start -->
+2023-01-24 13:53:13.130264 INFO    - Module::Start <--
+2023-01-24 14:05:19.079790 INFO    - Module::Initialize -->
+2023-01-24 14:05:19.079802 VERBOSE -    trying to initialize...
+2023-01-24 14:05:19.355325 INFO    - Module::Initialize <--
+2023-01-24 14:05:19.358278 INFO    - Module::Start -->
+2023-01-24 14:05:19.382867 INFO    - Module::Start <--
+2023-01-24 14:06:21.015690 INFO    - Module::Pauze -->
+2023-01-24 14:06:21.338347 INFO    - Module::Pauze <--
+2023-01-24 14:06:21.338369 INFO    - Module::Stop -->
+2023-01-24 14:06:21.391628 INFO    - Module::Stop <--
+2023-01-24 14:06:21.391645 INFO    - Module::Stop -->
+2023-01-24 14:07:47.431648 INFO    - Module::Initialize -->
+2023-01-24 14:07:47.431660 VERBOSE -    trying to initialize...
+2023-01-24 14:07:47.701250 INFO    - Module::Initialize <--
+2023-01-24 14:07:47.704380 INFO    - Module::Start -->
+2023-01-24 14:07:47.728004 INFO    - Module::Start <--
+2023-01-24 14:08:17.120112 INFO    - Module::Pauze -->
+2023-01-24 14:08:17.443863 INFO    - Module::Pauze <--
+2023-01-24 14:08:17.443920 INFO    - Module::Stop -->
+2023-01-24 14:08:17.496884 INFO    - Module::Stop <--
+2023-01-24 14:08:17.496980 INFO    - Module::Stop -->
+2023-01-24 14:09:25.870109 INFO    - Module::Initialize -->
+2023-01-24 14:09:25.870120 VERBOSE -    trying to initialize...
+2023-01-24 14:09:29.059454 INFO    - Module::Initialize <--
+2023-01-24 14:09:29.064906 INFO    - Module::Start -->
+2023-01-24 14:09:29.070466 INFO    - Module::Start <--
+2023-01-24 14:09:38.161592 INFO    - Module::Pauze -->
+2023-01-24 14:09:38.224322 INFO    - Module::Pauze <--
+2023-01-24 14:09:38.224340 INFO    - Module::Stop -->
+2023-01-24 14:09:38.407780 INFO    - Module::Stop <--
+2023-01-24 14:09:38.407831 INFO    - Module::Stop -->
+2023-01-24 14:57:24.428551 INFO    - Module::Initialize -->
+2023-01-24 14:57:24.428555 VERBOSE -    trying to initialize...
+2023-01-24 14:57:24.799300 INFO    - Module::Initialize <--
+2023-01-24 14:57:24.800999 INFO    - Module::Start -->
+2023-01-24 14:57:24.825436 INFO    - Module::Start <--
+2023-01-24 14:57:24.826761 INFO    - Module::Pauze -->
+2023-01-24 14:57:25.150571 INFO    - Module::Pauze <--
+2023-01-24 14:57:25.150621 INFO    - Module::Stop -->
+2023-01-24 14:57:25.205265 INFO    - Module::Stop <--
+2023-01-24 14:57:25.205374 INFO    - Module::Stop -->
+2023-01-24 14:59:27.793729 INFO    - Module::Initialize -->
+2023-01-24 14:59:27.793734 VERBOSE -    trying to initialize...
+2023-01-24 14:59:28.051518 INFO    - Module::Initialize <--
+2023-01-24 14:59:28.053191 INFO    - Module::Start -->
+2023-01-24 14:59:28.076862 INFO    - Module::Start <--
+2023-01-24 14:59:28.077918 INFO    - Module::Pauze -->
+2023-01-24 14:59:28.401041 INFO    - Module::Pauze <--
+2023-01-24 14:59:28.401078 INFO    - Module::Stop -->
+2023-01-24 14:59:28.455706 INFO    - Module::Stop <--
+2023-01-24 14:59:28.455755 INFO    - Module::Stop -->
+2023-01-24 15:00:15.008679 INFO    - Module::Initialize -->
+2023-01-24 15:00:15.008684 VERBOSE -    trying to initialize...
+2023-01-24 15:00:15.266445 INFO    - Module::Initialize <--
+2023-01-24 15:00:15.268064 INFO    - Module::Start -->
+2023-01-24 15:00:15.292973 INFO    - Module::Start <--
+2023-01-24 15:00:15.294197 INFO    - Module::Pauze -->
+2023-01-24 15:00:15.617880 INFO    - Module::Pauze <--
+2023-01-24 15:00:15.617923 INFO    - Module::Stop -->
+2023-01-24 15:00:15.670915 INFO    - Module::Stop <--
+2023-01-24 15:00:15.671029 INFO    - Module::Stop -->
+2023-01-24 16:24:29.341767 INFO    - Module::Initialize -->
+2023-01-24 16:24:29.341777 VERBOSE -    trying to initialize...
+2023-01-24 16:24:29.606641 INFO    - Module::Initialize <--
+2023-01-24 16:24:29.616604 INFO    - Module::Start -->
+2023-01-24 16:24:29.644229 INFO    - Module::Start <--
+2023-01-24 16:24:38.295273 INFO    - Module::Pauze -->
+2023-01-24 16:24:38.617569 INFO    - Module::Pauze <--
+2023-01-24 16:24:38.617633 INFO    - Module::Stop -->
+2023-01-24 16:24:38.670574 INFO    - Module::Stop <--
+2023-01-24 16:24:38.670605 INFO    - Module::Stop -->
+2023-01-24 16:24:55.164185 INFO    - Module::Initialize -->
+2023-01-24 16:24:55.164197 VERBOSE -    trying to initialize...
+2023-01-24 16:24:55.447660 INFO    - Module::Initialize <--
+2023-01-24 16:24:55.457536 INFO    - Module::Start -->
+2023-01-24 16:24:55.484565 INFO    - Module::Start <--
+2023-01-24 16:25:54.127708 INFO    - Module::Pauze -->
+2023-01-24 16:25:54.449880 INFO    - Module::Pauze <--
+2023-01-24 16:25:54.449901 INFO    - Module::Stop -->
+2023-01-24 16:25:54.502987 INFO    - Module::Stop <--
+2023-01-24 16:25:54.503011 INFO    - Module::Stop -->
+2023-01-24 16:26:03.361983 INFO    - Module::Initialize -->
+2023-01-24 16:26:03.361994 VERBOSE -    trying to initialize...
+2023-01-24 16:26:03.628471 INFO    - Module::Initialize <--
+2023-01-24 16:26:03.631148 INFO    - Module::Start -->
+2023-01-24 16:26:03.655798 INFO    - Module::Start <--
+2023-01-24 16:27:19.856174 INFO    - Module::Pauze -->
+2023-01-24 16:27:20.178783 INFO    - Module::Pauze <--
+2023-01-24 16:27:20.178808 INFO    - Module::Stop -->
+2023-01-24 16:27:20.231833 INFO    - Module::Stop <--
+2023-01-24 16:27:20.231855 INFO    - Module::Stop -->
+2023-01-24 16:30:24.395013 INFO    - Module::Initialize -->
+2023-01-24 16:30:24.395029 VERBOSE -    trying to initialize...
+2023-01-24 16:30:24.663728 INFO    - Module::Initialize <--
+2023-01-24 16:30:24.665400 INFO    - Module::Start -->
+2023-01-24 16:30:24.689965 INFO    - Module::Start <--
+2023-01-24 16:39:57.460993 INFO    - Module::Initialize -->
+2023-01-24 16:39:57.461005 VERBOSE -    trying to initialize...
+2023-01-24 16:39:57.728189 INFO    - Module::Initialize <--
+2023-01-24 16:39:57.729947 INFO    - Module::Start -->
+2023-01-24 16:39:57.755235 INFO    - Module::Start <--
+2023-01-24 16:40:44.740546 INFO    - Module::Initialize -->
+2023-01-24 16:40:44.740559 VERBOSE -    trying to initialize...
+2023-01-24 16:40:45.021845 INFO    - Module::Initialize <--
+2023-01-24 16:40:45.023433 INFO    - Module::Start -->
+2023-01-24 16:40:45.047621 INFO    - Module::Start <--
+2023-01-24 16:42:01.333028 INFO    - Module::Pauze -->
+2023-01-24 16:42:01.653419 INFO    - Module::Pauze <--
+2023-01-24 16:42:01.653440 INFO    - Module::Stop -->
+2023-01-24 16:42:01.706696 INFO    - Module::Stop <--
+2023-01-24 16:42:01.706728 INFO    - Module::Stop -->
+2023-01-24 16:42:10.283726 INFO    - Module::Initialize -->
+2023-01-24 16:42:10.283735 VERBOSE -    trying to initialize...
+2023-01-24 16:42:10.563496 INFO    - Module::Initialize <--
+2023-01-24 16:42:10.569012 INFO    - Module::Start -->
+2023-01-24 16:42:10.596560 INFO    - Module::Start <--
+2023-01-24 16:42:16.897863 INFO    - Module::Pauze -->
+2023-01-24 16:42:17.219083 INFO    - Module::Pauze <--
+2023-01-24 16:42:17.219140 INFO    - Module::Stop -->
+2023-01-24 16:42:17.272221 INFO    - Module::Stop <--
+2023-01-24 16:42:17.272254 INFO    - Module::Stop -->
+2023-01-24 16:42:32.038643 INFO    - Module::Initialize -->
+2023-01-24 16:42:32.038656 VERBOSE -    trying to initialize...
+2023-01-24 16:42:32.305950 INFO    - Module::Initialize <--
+2023-01-24 16:42:32.307581 INFO    - Module::Start -->
+2023-01-24 16:42:32.332212 INFO    - Module::Start <--
+2023-01-24 16:42:57.730397 INFO    - Module::Pauze -->
+2023-01-24 16:42:58.051538 INFO    - Module::Pauze <--
+2023-01-24 16:42:58.051565 INFO    - Module::Stop -->
+2023-01-24 16:42:58.104694 INFO    - Module::Stop <--
+2023-01-24 16:42:58.104716 INFO    - Module::Stop -->
+2023-01-24 16:43:22.455244 INFO    - Module::Initialize -->
+2023-01-24 16:43:22.455257 VERBOSE -    trying to initialize...
+2023-01-24 16:43:22.732143 INFO    - Module::Initialize <--
+2023-01-24 16:43:22.737686 INFO    - Module::Start -->
+2023-01-24 16:43:22.764619 INFO    - Module::Start <--
+2023-01-24 16:43:39.880351 INFO    - Module::Pauze -->
+2023-01-24 16:43:40.200515 INFO    - Module::Pauze <--
+2023-01-24 16:43:40.200588 INFO    - Module::Stop -->
+2023-01-24 16:43:40.253455 INFO    - Module::Stop <--
+2023-01-24 16:43:40.253469 INFO    - Module::Stop -->
+2023-01-24 16:44:35.579761 INFO    - Module::Initialize -->
+2023-01-24 16:44:35.579776 VERBOSE -    trying to initialize...
+2023-01-24 16:44:35.860334 INFO    - Module::Initialize <--
+2023-01-24 16:44:35.862067 INFO    - Module::Start -->
+2023-01-24 16:44:35.886510 INFO    - Module::Start <--
+2023-01-24 16:44:45.220752 INFO    - Module::Pauze -->
+2023-01-24 16:44:45.541673 INFO    - Module::Pauze <--
+2023-01-24 16:44:45.541721 INFO    - Module::Stop -->
+2023-01-24 16:44:45.594825 INFO    - Module::Stop <--
+2023-01-24 16:44:45.594856 INFO    - Module::Stop -->
+2023-01-24 16:44:57.966710 INFO    - Module::Initialize -->
+2023-01-24 16:44:57.966724 VERBOSE -    trying to initialize...
+2023-01-24 16:44:58.234809 INFO    - Module::Initialize <--
+2023-01-24 16:44:58.236545 INFO    - Module::Start -->
+2023-01-24 16:44:58.260851 INFO    - Module::Start <--
+2023-01-24 16:45:15.156583 INFO    - Module::Pauze -->
+2023-01-24 16:45:15.477844 INFO    - Module::Pauze <--
+2023-01-24 16:47:28.571848 INFO    - Module::Initialize -->
+2023-01-24 16:47:28.571864 VERBOSE -    trying to initialize...
+2023-01-24 16:47:28.834134 INFO    - Module::Initialize <--
+2023-01-24 16:47:28.836938 INFO    - Module::Start -->
+2023-01-24 16:47:28.861321 INFO    - Module::Start <--
+2023-01-24 16:47:35.430131 INFO    - Module::Pauze -->
+2023-01-24 16:47:35.753312 INFO    - Module::Pauze <--
+2023-01-24 16:47:35.926312 INFO    - Module::Start -->
+2023-01-24 16:47:35.953179 INFO    - Module::Start <--
+2023-01-24 16:48:55.139599 INFO    - Module::Initialize -->
+2023-01-24 16:48:55.139611 VERBOSE -    trying to initialize...
+2023-01-24 16:48:55.412662 INFO    - Module::Initialize <--
+2023-01-24 16:48:55.414485 INFO    - Module::Start -->
+2023-01-24 16:48:55.439139 INFO    - Module::Start <--
+2023-01-24 16:49:04.138206 INFO    - Module::Pauze -->
+2023-01-24 16:49:04.460919 INFO    - Module::Pauze <--
+2023-01-24 16:51:50.712434 INFO    - Module::Initialize -->
+2023-01-24 16:51:50.712450 VERBOSE -    trying to initialize...
+2023-01-24 16:51:50.995350 INFO    - Module::Initialize <--
+2023-01-24 16:51:51.001344 INFO    - Module::Start -->
+2023-01-24 16:51:51.029387 INFO    - Module::Start <--
+2023-01-24 16:51:56.821344 INFO    - Module::Pauze -->
+2023-01-24 16:51:57.142358 INFO    - Module::Pauze <--
+2023-01-24 16:54:19.660601 INFO    - Module::Initialize -->
+2023-01-24 16:54:19.660613 VERBOSE -    trying to initialize...
+2023-01-24 16:54:19.943251 INFO    - Module::Initialize <--
+2023-01-24 16:54:19.949327 INFO    - Module::Start -->
+2023-01-24 16:54:19.976576 INFO    - Module::Start <--
+2023-01-24 16:54:24.709403 INFO    - Module::Pauze -->
+2023-01-24 16:54:25.031659 INFO    - Module::Pauze <--
+2023-01-24 16:54:25.204651 INFO    - Module::Start -->
+2023-01-24 16:54:25.231568 INFO    - Module::Start <--
+2023-01-24 16:54:50.008134 INFO    - Module::Pauze -->
+2023-01-24 16:54:50.328719 INFO    - Module::Pauze <--
+2023-01-24 16:56:03.952089 INFO    - Module::Initialize -->
+2023-01-24 16:56:03.952101 VERBOSE -    trying to initialize...
+2023-01-24 16:56:04.233620 INFO    - Module::Initialize <--
+2023-01-24 16:56:04.235330 INFO    - Module::Start -->
+2023-01-24 16:56:04.259681 INFO    - Module::Start <--
+2023-01-24 16:56:10.223325 INFO    - Module::Pauze -->
+2023-01-24 16:56:10.544593 INFO    - Module::Pauze <--
+2023-01-24 16:56:10.717583 INFO    - Module::Start -->
+2023-01-24 16:56:10.743975 INFO    - Module::Start <--
+2023-01-24 16:56:15.536416 INFO    - Module::Pauze -->
+2023-01-24 16:56:15.857646 INFO    - Module::Pauze <--
+2023-01-24 17:22:14.548838 INFO    - Module::Initialize -->
+2023-01-24 17:22:14.548843 VERBOSE -    trying to initialize...
+2023-01-24 17:22:14.805936 INFO    - Module::Initialize <--
+2023-01-24 17:22:14.811037 INFO    - Module::Start -->
+2023-01-24 17:22:14.837873 INFO    - Module::Start <--
+2023-01-24 17:22:14.841546 INFO    - Module::Pauze -->
+2023-01-24 17:22:15.166067 INFO    - Module::Pauze <--
+2023-01-24 17:22:15.166105 INFO    - Module::Stop -->
+2023-01-24 17:22:15.220859 INFO    - Module::Stop <--
+2023-01-24 17:22:15.220915 INFO    - Module::Stop -->
+2023-01-24 17:23:02.907995 INFO    - Module::Initialize -->
+2023-01-24 17:23:02.907998 VERBOSE -    trying to initialize...
+2023-01-24 17:23:03.168984 INFO    - Module::Initialize <--
+2023-01-24 17:23:03.175126 INFO    - Module::Start -->
+2023-01-24 17:23:03.202816 INFO    - Module::Start <--
+2023-01-24 17:23:08.498031 INFO    - Module::Pauze -->
+2023-01-24 17:23:08.819206 INFO    - Module::Pauze <--
+2023-01-24 17:23:08.819283 INFO    - Module::Stop -->
+2023-01-24 17:23:08.872198 INFO    - Module::Stop <--
+2023-01-24 17:23:08.872210 INFO    - Module::Stop -->
+2023-01-24 17:27:26.419122 INFO    - Module::Initialize -->
+2023-01-24 17:27:26.419133 VERBOSE -    trying to initialize...
+2023-01-24 17:35:28.433192 INFO    - Module::Initialize <--
+2023-01-24 17:35:29.037179 INFO    - Module::Start -->
+2023-01-24 17:35:29.043012 INFO    - Module::Start <--
+2023-01-24 17:35:29.045338 INFO    - Module::Pauze -->
+2023-01-24 17:35:29.046377 INFO    - Module::Pauze <--
+2023-01-24 17:35:29.046393 INFO    - Module::Stop -->
+2023-01-24 17:35:29.177437 INFO    - Module::Stop <--
+2023-01-24 17:35:29.177458 INFO    - Module::Stop -->
+2023-01-24 17:37:15.131421 INFO    - Module::Initialize -->
+2023-01-24 17:37:15.131436 VERBOSE -    trying to initialize...
+2023-01-24 17:37:18.373296 INFO    - Module::Initialize <--
+2023-01-24 17:37:18.378572 INFO    - Module::Start -->
+2023-01-24 17:37:18.384628 INFO    - Module::Start <--
+2023-01-24 17:38:09.432937 INFO    - Module::Pauze -->
+2023-01-24 17:38:09.471933 INFO    - Module::Pauze <--
+2023-01-24 17:38:09.471969 INFO    - Module::Stop -->
+2023-01-24 17:38:09.650295 INFO    - Module::Stop <--
+2023-01-24 17:38:09.650316 INFO    - Module::Stop -->
+2023-01-24 17:39:04.144326 INFO    - Module::Initialize -->
+2023-01-24 17:39:04.144338 VERBOSE -    trying to initialize...
+2023-01-24 17:39:16.239942 INFO    - Module::Initialize <--
+2023-01-24 17:39:16.844057 INFO    - Module::Start -->
+2023-01-24 17:39:16.849384 INFO    - Module::Start <--
+2023-01-24 17:39:16.851165 INFO    - Module::Pauze -->
+2023-01-24 17:39:16.852471 INFO    - Module::Pauze <--
+2023-01-24 17:39:16.852529 INFO    - Module::Stop -->
+2023-01-24 17:39:16.978079 INFO    - Module::Stop <--
+2023-01-24 17:39:16.978128 INFO    - Module::Stop -->

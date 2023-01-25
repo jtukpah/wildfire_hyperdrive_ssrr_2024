@@ -1,0 +1,8 @@
+<launch>
+    <node pkg="imec_driver" type="cube_data.py" name="cube_processor">
+        <param name="camera_model" value="ximea"/>
+    </node>
+    <node pkg="imec_driver" type="hsi_driver.py" name="hsi_processor">
+        <param name="camera_model" value="ximea"/>
+    </node>
+</launch>

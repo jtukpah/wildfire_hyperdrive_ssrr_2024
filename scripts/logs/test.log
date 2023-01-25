@@ -1,0 +1,10 @@
+Command line: hsi_driver.py
+Total duration: 0s
+Traceback (most recent call last):
+  File "/home/river/.local/bin/pprofile", line 11, in <module>
+    sys.exit(main())
+  File "/home/river/.local/lib/python3.6/site-packages/pprofile/__init__.py", line 1464, in main
+    getattr(runner, runner_method_id)(**runner_method_kw)
+  File "/home/river/.local/lib/python3.6/site-packages/pprofile/__init__.py", line 906, in runpath
+    return self.runfile(open(path, 'rb'), argv, fd_name=path)
+FileNotFoundError: [Errno 2] No such file or directory: 'hsi_driver.py'

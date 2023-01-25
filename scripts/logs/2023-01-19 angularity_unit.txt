@@ -1,0 +1,145 @@
+2023-01-19 10:03:47.616929 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:03:47.616951 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:03:47.616957 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:03:47.819492 INFO    - ProcessingUnit::Process
+2023-01-19 10:03:48.065181 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:03:48.065205 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:03:48.065211 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:19:19.236123 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:19:19.236147 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:19:19.236152 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:19:19.436084 INFO    - ProcessingUnit::Process
+2023-01-19 10:19:19.674188 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:19:19.674213 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:19:19.674219 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:22:18.392867 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:22:18.392895 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:22:18.392901 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:22:18.592990 INFO    - ProcessingUnit::Process
+2023-01-19 10:22:18.832137 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:22:18.832164 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:22:18.832170 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:23:49.153396 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:23:49.153443 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:23:49.153450 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:23:49.355245 INFO    - ProcessingUnit::Process
+2023-01-19 10:23:49.594034 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:23:49.594057 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:23:49.594063 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:24:22.404704 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:24:22.404750 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:24:22.404758 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:24:22.604414 INFO    - ProcessingUnit::Process
+2023-01-19 10:24:22.842852 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:24:22.842878 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:24:22.842884 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:34:27.687044 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:34:27.687068 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:34:27.687074 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:34:27.888038 INFO    - ProcessingUnit::Process
+2023-01-19 10:34:28.133487 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:34:28.133510 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:34:28.133516 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:45:10.078954 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:45:10.078977 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:45:10.078982 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:45:10.278532 INFO    - ProcessingUnit::Process
+2023-01-19 10:45:10.518033 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:45:10.518057 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:45:10.518063 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:45:34.084032 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:45:34.084056 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:45:34.084062 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:45:34.285412 INFO    - ProcessingUnit::Process
+2023-01-19 10:45:34.528522 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 10:45:34.528545 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 10:45:34.528551 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:39:19.213950 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:39:19.213973 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:39:19.213979 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:39:19.413701 INFO    - ProcessingUnit::Process
+2023-01-19 11:39:19.653977 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:39:19.654001 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:39:19.654007 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:42:33.561570 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:42:33.561594 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:42:33.561600 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:42:33.761583 INFO    - ProcessingUnit::Process
+2023-01-19 11:42:34.000827 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:42:34.000851 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:42:34.000857 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:47:24.343817 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:47:24.343844 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:47:24.343850 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:47:24.544553 INFO    - ProcessingUnit::Process
+2023-01-19 11:47:24.784126 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:47:24.784153 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:47:24.784158 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:49:36.083397 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:49:36.083420 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:49:36.083427 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:49:36.286474 INFO    - ProcessingUnit::Process
+2023-01-19 11:49:36.530144 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:49:36.530168 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:49:36.530173 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:51:45.047525 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:51:45.047547 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:51:45.047554 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:51:45.249430 INFO    - ProcessingUnit::Process
+2023-01-19 11:51:45.494442 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:51:45.494467 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:51:45.494473 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:52:57.250684 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:52:57.250712 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:52:57.250718 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:52:57.461588 INFO    - ProcessingUnit::Process
+2023-01-19 11:52:57.709014 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:52:57.709042 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:52:57.709049 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:58:10.455644 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:58:10.455672 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:58:10.455678 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:58:10.656975 INFO    - ProcessingUnit::Process
+2023-01-19 11:58:10.901981 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 11:58:10.902009 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 11:58:10.902014 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:01:18.588884 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:01:18.588911 INFO    - OutputPort: non_uniformity_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:01:18.588916 INFO    - InputPort: non_uniformity_pipeline.spectral_processing_group.illuminant_compensation_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:01:18.791371 INFO    - ProcessingUnit::Process
+2023-01-19 12:01:19.037037 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:01:19.037066 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:01:19.037072 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.non_uniformity_unit.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:12:42.790703 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:12:42.790730 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:12:42.790735 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
+2023-01-19 12:27:06.147895 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:27:06.147923 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:27:06.147930 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
+2023-01-19 12:29:09.387701 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:29:09.387733 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:29:09.387740 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
+2023-01-19 12:30:48.091689 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:30:48.091708 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:30:48.091714 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
+2023-01-19 12:32:44.328268 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:32:44.328284 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:32:44.328290 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
+2023-01-19 12:34:38.887080 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:34:38.887101 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:34:38.887107 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
+2023-01-19 12:52:03.094005 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:52:03.094024 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:52:03.094030 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
+2023-01-19 12:59:56.044848 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 12:59:56.044868 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 12:59:56.044874 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
+2023-01-19 13:00:42.140553 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 13:00:42.140569 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 13:00:42.140575 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
+2023-01-19 13:49:26.930907 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 13:49:26.930929 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 13:49:26.930937 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
+2023-01-19 13:49:38.488034 INFO    - ProcessingUnit::_PropagateDataTypes()
+2023-01-19 13:49:38.488051 INFO    - OutputPort: reference_spectrum_pipeline.spectral_processing_group.angularity_unit.out; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_ARRAY
+2023-01-19 13:49:38.488058 INFO    - InputPort: reference_spectrum_pipeline.spectral_processing_group.spectral_processing_group_out.in; Actual kind: AK_HYPERCUBE_BIP; Minimal kind: AK_HYPERCUBE_BIP
