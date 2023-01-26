@@ -33,7 +33,7 @@ class Nodo(object):
         self.pub = rospy.Publisher('img_pub', Image, queue_size=10)
         
         #getting user input exposure
-        self.model = rospy.get_param('cube_processor')
+        self.model = rospy.get_param('hsi_processor')
 
         # look for connected cameras
         if self.model['camera_model'] == 'ximea':
@@ -101,7 +101,7 @@ class Nodo(object):
             tmp = HSI_COMMON.FrameAsArray(self.frame) # internally convert frame to numpy array
             ros_image = ros_numpy.msgify(Image, tmp, encoding="32FC1")
             self.pub.publish(ros_image)
-            # self.loop_rate.sleep()
+
         # And Cleanup ...
         HSI_CAMERA.Pause(self.device)
         HSI_CAMERA.Stop(self.device)

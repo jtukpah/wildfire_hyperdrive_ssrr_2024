@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import rospy
-import ros_numpy
 import cv2
 import os
 import numpy as np
@@ -10,7 +9,7 @@ import logging
 from imec_driver.msg import Num
 from imec_driver.srv import adjust_param
 
-os.environ['PATH'] += os.pathsep + r'/home/river/Downloads/HSI Suite/bin'
+os.environ['PATH'] += os.pathsep + r'/opt/imec/hsi-mosaic/bin'
 
 try:
     os.add_dll_directory(r'/opt/imec/hsi-mosaic/python_apis')
@@ -35,10 +34,6 @@ class DataCube(object):
         # subscriber
         rospy.Subscriber('cube_pub', Num, self.callback)
 
-        # publisher
-        self.pub = rospy.Publisher('cube_pub', Num, queue_size=10)
-
-        ########################################################################
         #CAMERA SETUP
         rospy.loginfo ("Starting Logger.")
         
@@ -48,6 +43,9 @@ class DataCube(object):
         elif self.model['camera_model'] == 'imec':
             self.dev_list = HSI_CAMERA.EnumerateConnectedDevices(manufacturer=HSI_CAMERA.Manufacturer.EM_IMEC)
         rospy.loginfo('return number of devices = {}'.format(len(self.dev_list)))
+       
+        # publisher
+        self.pub = rospy.Publisher('cube_pub/{}'.format(self.model['camera_model']), Num, queue_size=10)
 
         # and connect to the first one
         rospy.loginfo('looking for device:: {}'.format(self.dev_list[0]))
@@ -80,7 +78,7 @@ class DataCube(object):
             HSI_CAMERA.Pause(self.device)
             self.r_params['exposure_time_ms'] = result
             HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)       
-
+        HSI_CAMERA.Initialize(self.device)
         HSI_CAMERA.Start(self.device)
         return result
 
@@ -102,12 +100,9 @@ class DataCube(object):
             # Send a Software Trigger to the camera and grab the Frame
             HSI_CAMERA.Trigger(self.device)
             HSI_CAMERA.AcquireFrame(self.device, frame=self.frame)
-            rospy.loginfo(self.frame)
 
             tmp = HSI_COMMON.FrameAsArray(self.frame) # internally convert frame to numpy array
-            rospy.loginfo(self.frame.format)
-            rospy.loginfo('Acquired Frame :: {}'.format(tmp.shape))
-
+            
             ### TEMPORARY WORKAROUND TO MAKE A CUBE
             if self.model['camera_model'].lower() == 'ximea':
                 cube = np.zeros((217,409,25))
@@ -143,9 +138,6 @@ class DataCube(object):
         
         rospy.loginfo("Cleanup ...")
         HSI_COMMON.DeallocateFrame(self.frame)
-        # HSI_COMMON.DeallocateCube(cube)
-        # HSI_MOSAIC.DeallocateContext(context)
-        # And Cleanup ...
         HSI_CAMERA.Pause(self.device)
         HSI_CAMERA.Stop(self.device)
         HSI_CAMERA.CloseDevice(self.device)

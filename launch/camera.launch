@@ -5,4 +5,7 @@
     <node pkg="imec_driver" type="hsi_driver.py" name="hsi_processor">
         <param name="camera_model" value="ximea"/>
     </node>
+    <node pkg="imec_driver" type="combined_cube_data.py" name="combined_cube_processor">
+        <param name="camera_model" value="ximea"/>
+    </node>
 </launch>
