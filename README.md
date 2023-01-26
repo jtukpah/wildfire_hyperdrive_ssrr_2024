@@ -4,7 +4,7 @@ The main two code files in this repository are hsi_driver.py, and cube_data.py. 
 and as well as for subscribing to these published images. cube_data.py also contains a publisher, and a subscriber, but instead of images, for data cubes from imec and ximea cameras.
 
 ### Camera parameter adjustments
-The camera parameters can be adjusted through use of a rosservice called /adjust_param. Currently the only supported parameter adjustments is exposure time in milliseconds
+The camera parameters can be adjusted through use of a rosservice called /adjust_param. Currently the only supported parameter adjustment is exposure time in milliseconds
 When running the code, you can check to see if the srv is working by running:
 > rosservice list
 
@@ -21,7 +21,7 @@ This srv can be started by first running:
 
 > roslaunch imec_driver camera.launch 
 
-This starts the launch file where the user_in input can then be adjusted, currently only exposure time in ms is supported
+This starts the launch file where the user_in input can then be adjusted.
 You can check to see if the params are now visible by running:
 > rosparam list
 
