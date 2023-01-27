@@ -33,7 +33,7 @@ class Nodo(object):
         self.pub = rospy.Publisher('img_pub', Image, queue_size=10)
         
         #getting user input exposure
-        self.model = rospy.get_param('hsi_processor')
+        self.model = rospy.get_param('hsi_processor')['camera_model']
 
         # look for connected cameras
         if self.model['camera_model'] == 'ximea':
