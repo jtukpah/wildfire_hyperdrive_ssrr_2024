@@ -2,6 +2,7 @@
 
 from PyQt5 import QtCore, QtGui
 from PyQt5 import QtWidgets
+import rospy
 
 class Widget(QtWidgets.QWidget):
 
@@ -31,7 +32,23 @@ class Widget(QtWidgets.QWidget):
         self.slider.setMinimum(0)
         # max is the last index of the image list
         self.slider.setMaximum(len(self._images)-1)
+
+        #slider label
+        self.label = QtWidgets.QLabel('0', self)
+        self.label.setAlignment(QtCore.Qt.AlignCenter |
+                                QtCore.Qt.AlignVCenter)
+        self.label.setMinimumWidth(80)
+
         self.layout.addWidget(self.slider)
+        self.layout.addWidget(self.label)
+
+        #dropdown box
+        self.drop_box = QtWidgets.QComboBox(self)
+        self.drop_box.addItem('Topic 1')
+        self.drop_box.addItem('Topic 2')
+        self.drop_box.move(13, 445)
+
+        self.drop_box.activated[str].connect(self.handle_drop_box)
 
         # set it to the first image, if you want.
         self.slidermove(0)
@@ -39,11 +56,14 @@ class Widget(QtWidgets.QWidget):
         self.slider.valueChanged.connect(self.slidermove)
 
     def slidermove(self, val):
-        print("Slider moved to:", val)
+        self.label.setText(str(val))
         try:
             self.image.setPixmap(self._images[val])
         except IndexError:
             print("Error: No image at index", val)
+
+    def handle_drop_box(self, val):
+        print('Got {}'.format(val))
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
