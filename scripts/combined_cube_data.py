@@ -6,7 +6,7 @@ import os
 import numpy as np
 import sys
 import logging
-from imec_driver.msg import Num
+from imec_driver.msg import DataCube
 
 os.environ['PATH'] += os.pathsep + r'/home/river/Downloads/HSI Suite/bin'
 
@@ -30,11 +30,11 @@ class CombineDataCube(object):
         self.imec_cube = []
         
         # subscriber
-        rospy.Subscriber(f'cube_pub/ximea', Num, self.callback_ximea)
-        rospy.Subscriber(f'cube_pub/imec', Num, self.callback_imec)
+        rospy.Subscriber(f'cube_pub/ximea', DataCube, self.callback_ximea)
+        rospy.Subscriber(f'cube_pub/imec', DataCube, self.callback_imec)
 
         # publisher
-        self.pub = rospy.Publisher('com_cube_pub', Num, queue_size=10)
+        self.pub = rospy.Publisher('com_cube_pub', DataCube, queue_size=10)
 
     #callback for subscriber
     def callback_ximea(self, msg):
@@ -54,12 +54,12 @@ class CombineDataCube(object):
         while not rospy.is_shutdown():
             if self.ximea_cube != [] and self.imec_cube !=[]:
                 rospy.loginfo(f'XIMEA SHAPE: {self.ximea_cube.shape}')
-                rospy.loginfo(f'IMEC SHAPE: {self.imec_cube.shape}')
+                rospy.loginfo(f'IMEC SHAPE: {self.imec_cube2.shape}')
 
                 #combines ximea and imec data cube into one (adds by lambda axis)
                 combine_cube = np.dstack((self.ximea_cube, self.imec_cube2))
                 np.save('/home/river/combine_cube.npy',combine_cube)
-                ros_cube = Num()
+                ros_cube = DataCube()
                 ros_cube.data = combine_cube.flatten()
                 ros_cube.width = combine_cube.shape[0]
                 ros_cube.height = combine_cube.shape[1]

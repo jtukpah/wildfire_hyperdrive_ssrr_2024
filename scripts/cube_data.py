@@ -7,11 +7,14 @@ import rospy
 import typing
 import rospkg
 import traceback
+import ros_numpy
 import numpy as np
 from bs4 import BeautifulSoup
 from numba import jit, prange
+import matplotlib.pyplot as plt
 from imec_driver.msg import DataCube
 from imec_driver.srv import adjust_param
+from sensor_msgs.msg import Image
 
 ### Set parameters to find the HSI mosaic binaries
 os.environ['PATH'] += os.pathsep + r'/opt/imec/hsi-mosaic/bin'
@@ -39,6 +42,7 @@ class DataCubeGenerator(object):
        
         # Create publisher to send datacubes on
         self.pub = rospy.Publisher(f'cube_pub/{self.model}', DataCube, queue_size=10)
+        self.pub_raw = rospy.Publisher(f'raw_pub/{self.model}', Image, queue_size=10)
         # Load camera parameters
         self.parse_parameters()
         # Connect to the first available camera of the specified model type
@@ -108,18 +112,26 @@ class DataCubeGenerator(object):
     
     @staticmethod
     @jit(nopython=True)
-    def demosaic_cube(data: np.ndarray, input_shape: np.array, out_width: np.int, out_height: np.int, mosaic_size: np.int) -> np.ndarray:
+    def demosaic_cube(data: np.ndarray, outpt_shape: np.array, use_in_width: np.int, use_in_height: np.int, mosaic_size: np.int) -> np.ndarray:
         '''
         Workaround method to demosaic image
         '''
-        cube = np.zeros(input_shape)
-        for x in prange(out_width):
-            for y in prange(out_height):
+        cube = np.zeros(outpt_shape, dtype=np.float32)
+        # Pixel array lookup
+        voxel_lookup = np.arange(0,mosaic_size**2,1).reshape((mosaic_size, mosaic_size))
+        used_bands = []
+        for x in range(use_in_width):
+            for y in range(use_in_height):
                 # Add pixel value to cube
                 use_x = x//mosaic_size
                 use_y = y//mosaic_size
-                band = (x%mosaic_size)*(y%mosaic_size)
+                # NATHANIEL IS FIXING THIS CALCULATION
+                band = voxel_lookup[(x%mosaic_size),(y%mosaic_size)]
+                used_bands.append(band)
+                # print(f'USE X: {use_x} USE Y: {use_y} BAND: {band}')
                 cube[use_x][use_y][band] = data[x][y]
+        # plt.imshow(cube[:,:,10])
+        # plt.show()
         return cube
     
     @staticmethod
@@ -132,6 +144,10 @@ class DataCubeGenerator(object):
         '''
         # TODO
         return data
+
+    def publish_raw(self, raw: np.ndarray) -> None:
+        ros_image = ros_numpy.msgify(Image, raw, encoding="32FC1")
+        self.pub_raw.publish(ros_image)
 
     def publish_cube(self, cube: np.ndarray) -> None:
         '''
@@ -155,6 +171,8 @@ class DataCubeGenerator(object):
             HSI_CAMERA.Trigger(self.device)
             HSI_CAMERA.AcquireFrame(self.device, frame=self.frame)
             tmp = HSI_COMMON.FrameAsArray(self.frame) # internally convert frame to numpy array
+            # Publish the raw image
+            self.publish_raw(tmp)
             # TODO - Parameterize these values
             if self.model == 'ximea':
                 cube = self.demosaic_cube(tmp, (217,409,25), 1085, 2045, 5)
@@ -163,9 +181,8 @@ class DataCubeGenerator(object):
             else:
                 rospy.loginfo('Unknown camera model')
                 continue
-
             self.publish_cube(cube)
-            rospy.sleep(1)
+            rospy.sleep(0.1)
         # End of loop behavior        
         self.shutdown()
 
