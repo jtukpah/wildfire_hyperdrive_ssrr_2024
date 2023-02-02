@@ -22,8 +22,6 @@ import hsi_camera as HSI_CAMERA
 
 class CombineDataCube(object):
     def __init__(self):
-        # node cycle rate
-        self.loop_rate = rospy.Rate(1)
         
         #cube vars
         self.ximea_cube = []

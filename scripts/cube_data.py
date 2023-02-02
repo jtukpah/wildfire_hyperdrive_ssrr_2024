@@ -30,7 +30,6 @@ class DataCubeGenerator(object):
         self.model = rospy.get_param('cube_processor')['camera_model']
         self.param_server = rospy.Service(f'/{self.model}/adjust_param', adjust_param, self.handle_adjust_param)
         # Rate at which to generate composite data cubes
-        self.loop_rate = rospy.Rate(1)
         # Look for connected cameras an choose appropriate model (assumes we only have 1 IMEC and 1 XIMEA)
         if self.model == 'ximea':
             self.integration_range = (0.021000, 999.995000)
@@ -41,7 +40,7 @@ class DataCubeGenerator(object):
         rospy.loginfo('Found number of devices = {}'.format(len(self.dev_list)))
        
         # Create publisher to send datacubes on
-        self.pub = rospy.Publisher(f'cube_pub/{self.model}', DataCube, queue_size=10)
+        # self.pub = rospy.Publisher(f'cube_pub/{self.model}', DataCube, queue_size=10)
         self.pub_raw = rospy.Publisher(f'raw_pub/{self.model}', Image, queue_size=10)
         # Load camera parameters
         self.parse_parameters()
@@ -119,7 +118,6 @@ class DataCubeGenerator(object):
         cube = np.zeros(outpt_shape, dtype=np.float32)
         # Pixel array lookup
         voxel_lookup = np.arange(0,mosaic_size**2,1).reshape((mosaic_size, mosaic_size))
-        used_bands = []
         for x in range(use_in_width):
             for y in range(use_in_height):
                 # Add pixel value to cube
@@ -127,11 +125,7 @@ class DataCubeGenerator(object):
                 use_y = y//mosaic_size
                 # NATHANIEL IS FIXING THIS CALCULATION
                 band = voxel_lookup[(x%mosaic_size),(y%mosaic_size)]
-                used_bands.append(band)
-                # print(f'USE X: {use_x} USE Y: {use_y} BAND: {band}')
                 cube[use_x][use_y][band] = data[x][y]
-        # plt.imshow(cube[:,:,10])
-        # plt.show()
         return cube
     
     @staticmethod
@@ -173,16 +167,16 @@ class DataCubeGenerator(object):
             tmp = HSI_COMMON.FrameAsArray(self.frame) # internally convert frame to numpy array
             # Publish the raw image
             self.publish_raw(tmp)
-            # TODO - Parameterize these values
-            if self.model == 'ximea':
-                cube = self.demosaic_cube(tmp, (217,409,25), 1085, 2045, 5)
-            elif self.model == 'imec':
-                cube = self.demosaic_cube(tmp, (170,213,9), 510, 639, 3)
-            else:
-                rospy.loginfo('Unknown camera model')
-                continue
-            self.publish_cube(cube)
-            rospy.sleep(0.1)
+            # # TODO - Parameterize these values
+            # if self.model == 'ximea':
+            #     cube = self.demosaic_cube(tmp, (217,409,25), 1085, 2045, 5)
+            # elif self.model == 'imec':
+            #     cube = self.demosaic_cube(tmp, (170,213,9), 510, 639, 3)
+            # else:
+            #     rospy.loginfo('Unknown camera model')
+            #     continue
+            # self.publish_cube(cube)
+            rospy.sleep(0.01)
         # End of loop behavior        
         self.shutdown()
 
