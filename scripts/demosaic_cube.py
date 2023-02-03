@@ -105,24 +105,6 @@ class CubeDemosaicer(object):
                 coefficients.append(np.array([float(z) for z in coefficient['values'].split()]))
             self.coefficients = np.array(coefficients)
 
-    # @staticmethod
-    # @jit(nopython=True)
-    # def demosaic_cube(data: np.ndarray, outpt_shape: np.array, use_in_width: np.int, use_in_height: np.int, mosaic_size: np.int) -> np.ndarray:
-        # '''
-        # Workaround method to demosaic image
-        # '''
-        # cube = np.zeros(outpt_shape, dtype=np.float32)
-        # # Pixel array lookup
-        # voxel_lookup = np.arange(0,mosaic_size**2,1).reshape((mosaic_size, mosaic_size))
-        # for x in range(use_in_width):
-        #     for y in range(use_in_height):
-        #         # Add pixel value to cube
-        #         use_x = x//mosaic_size
-        #         use_y = y//mosaic_size
-        #         band = voxel_lookup[(x%mosaic_size),(y%mosaic_size)]
-        #         cube[use_x][use_y][band] = data[x][y]
-        # return cube
-
     @staticmethod
     @jit(nopython=True)
     def demosaic_cube(im, radius):

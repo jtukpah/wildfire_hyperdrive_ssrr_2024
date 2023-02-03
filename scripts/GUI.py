@@ -135,8 +135,6 @@ class Widget(QtWidgets.QWidget):
             if self.new_cube == False and override == False:
                 return
             slice_image = self.cube[:, :, self.lam]
-            #plt.imshow(slice_image)
-            #plt.show()
             self.img = slice_image
             img = self.rescale_image(slice_image)
             self.img = img
