@@ -58,17 +58,26 @@ class CubeDemosaicer(object):
         '''
         # Mark that we've received a new cube
         cube = ros_numpy.numpify(msg)
-        cube = cube.astype(np.int16)
         if self.model == 'ximea':
-            #cube = self.demosaic_cube(cube, (217,409,25), 1085, 2045, 5)
-            print(cube.shape)
-            cube = self.im2cube_sinc(cube, 5, cube.shape[0]//5, cube.shape[1]//5)
+            big_cube = self.im2cube_sinc(cube, 5, cube.shape[0], cube.shape[1])
+            np.save('/home/river/test_cube.npy', big_cube)
+            cube = self.minimize_cube(big_cube, big_cube.shape[0], big_cube.shape[1], 5)
         elif self.model == 'imec':
-            #cube = self.demosaic_cube(cube, (170,213,9), 510, 639, 3)
-            cube = self.im2cube_sinc(cube, 3, cube.shape[0]//3, cube.shape[1]//3)
+            big_cube = self.im2cube_sinc(cube, 3, cube.shape[0], cube.shape[1])
+            cube = self.minimize_cube(big_cube, big_cube.shape[0], big_cube.shape[1], 3)
         else:
             rospy.loginfo('Unknown camera model')
         self.publish_cube(cube)
+
+    #reduces size of cube
+    def minimize_cube(self, big_cube: np.ndarray, height: int, width: int, pattern: int) -> np.ndarray:
+        #creates shell for reduced cube
+        cube_sinc_out = np.zeros((height//pattern, width//pattern, pattern**2))
+        
+        #resizing of cube data
+        for channel_num in range(big_cube.shape[2]):
+            cube_sinc_out[:,:,channel_num] = cv.resize(big_cube[:,:,channel_num], (big_cube.shape[1]//pattern, big_cube.shape[0]//pattern), interpolation = cv.INTER_LANCZOS4)
+        return cube_sinc_out
 
     def parse_parameters(self) -> None:
         '''
@@ -243,14 +252,7 @@ class CubeDemosaicer(object):
         Create a data cube message and publish to topic
         '''
         print(f'CUBE SHAPE: {cube.shape}')
-        cube = cube.astype(np.int16)
-        print(cube.size * cube.itemsize)
-        print(cube.dtype)
-        print(cube.min())
-        print(cube.max())
         ros_cube = DataCube()
-        #flat_data = cube.flatten()
-        #ros_cube.data = gzip.compress(flat_data)
         ros_cube.data = cube.flatten()
         ros_cube.width, ros_cube.height, ros_cube.lam = tuple(cube.shape)
         ros_cube.qe = self.QE

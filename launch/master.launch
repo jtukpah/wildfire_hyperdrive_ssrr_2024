@@ -1,5 +1,5 @@
 <launch>
-    <node pkg="imec_driver" type="cube_data.py" name="cube_processor">
+    <node pkg="imec_driver" type="cube_data.py" name="cube_processor" output="screen">
         <param name="camera_model" value="ximea"/>
     </node>
     <node pkg="imec_driver" type="demosaic_cube.py" name="hsi_processor" output="screen">

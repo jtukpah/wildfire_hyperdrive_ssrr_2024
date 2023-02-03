@@ -167,15 +167,6 @@ class DataCubeGenerator(object):
             tmp = HSI_COMMON.FrameAsArray(self.frame) # internally convert frame to numpy array
             # Publish the raw image
             self.publish_raw(tmp)
-            # # TODO - Parameterize these values
-            # if self.model == 'ximea':
-            #     cube = self.demosaic_cube(tmp, (217,409,25), 1085, 2045, 5)
-            # elif self.model == 'imec':
-            #     cube = self.demosaic_cube(tmp, (170,213,9), 510, 639, 3)
-            # else:
-            #     rospy.loginfo('Unknown camera model')
-            #     continue
-            # self.publish_cube(cube)
             rospy.sleep(0.01)
         # End of loop behavior        
         self.shutdown()
