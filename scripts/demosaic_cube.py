@@ -62,10 +62,10 @@ class CubeDemosaicer(object):
         if self.model == 'ximea':
             #cube = self.demosaic_cube(cube, (217,409,25), 1085, 2045, 5)
             print(cube.shape)
-            cube = self.im2cube_sinc(cube, 5, cube.shape[0], cube.shape[1])
+            cube = self.im2cube_sinc(cube, 5, cube.shape[0]//5, cube.shape[1]//5)
         elif self.model == 'imec':
             #cube = self.demosaic_cube(cube, (170,213,9), 510, 639, 3)
-            cube = self.im2cube_sinc(cube, 3, cube.shape[0], cube.shape[1])
+            cube = self.im2cube_sinc(cube, 3, cube.shape[0]//3, cube.shape[1]//3)
         else:
             rospy.loginfo('Unknown camera model')
         self.publish_cube(cube)

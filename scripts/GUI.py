@@ -140,7 +140,7 @@ class Widget(QtWidgets.QWidget):
             self.img = slice_image
             img = self.rescale_image(slice_image)
             self.img = img
-            self.image.setPixmap(self.convert_nparray_to_QPixmap(img, grayscale=True))
+            self.image.setPixmap(self.convert_nparray_to_QPixmap(self.img, grayscale=True))
             self.new_cube = False
         except IndexError:
             print("Error: No image at index", self.lam)

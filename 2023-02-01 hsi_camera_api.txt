@@ -1,0 +1,1 @@
+2023-02-01T18:57:37.606353Z ERROR   - cameraOpenDevice: An error occurred - [virtual void ihspt::drivers::CM_XimeaXiq::_Connect()] xiOpenDeviceBy(XI_OPEN_BY_SN, _identification_string.c_str(), &_device) : Resource(device) or function locked by mutex
