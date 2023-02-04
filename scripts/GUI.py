@@ -122,7 +122,7 @@ class Widget(QtWidgets.QWidget):
         Callback function to update the GUI elements periodically
         '''
         self.update_image()
-        #self.update_histogram()
+        self.update_histogram()
 
     def update_image(self, override = False):
         '''
