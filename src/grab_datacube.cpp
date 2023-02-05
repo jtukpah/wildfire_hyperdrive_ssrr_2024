@@ -17,6 +17,9 @@ class DatacubeGrabber
 public:
     DatacubeGrabber(ros::NodeHandle *nh)
     {
+        
+        this->datacube_pub = nh->advertise<imec_driver::DataCube>("spectral_data", 10);
+
         this->model = "imec";
 
         if (this->model.compare("imec") == 0)
@@ -58,7 +61,7 @@ public:
 
         this->runtime_parameters = {};
         cameraGetRuntimeParameters(this->camera, &this->runtime_parameters);
-        this->runtime_parameters.frame_rate_hz = 60;
+        this->runtime_parameters.frame_rate_hz = 100;
         this->runtime_parameters.exposure_time_ms = 5.0;
         this->runtime_parameters.trigger_mode = TM_NoTriggering;
         this->ret_val = cameraSetRuntimeParameters(this->camera, this->runtime_parameters);
@@ -97,19 +100,23 @@ private:
         this->ret_val = cameraStart(this->camera);
         
         int width = this->frame.format.width;
-        int height = this->frame.format.width;
- 
+        int height = this->frame.format.height;
+        
+        imec_driver::DataCube msg;
+        msg.width = width;
+        msg.height = height;
+
         while (ros::ok()) {
-            this->flattened_data.clear();
+            msg.header.stamp = ros::Time::now();
+            msg.data.clear();
             // this->ret_val = cameraTrigger ... 
             this->ret_val = cameraAcquireFrame(this->camera, &this->frame);
             for(int row = 0; row < height; row++) {
                 for(int col = 0; col < width; col++) {
-                    //std::cout << "row: " << row << " col: " << col << " data: " << this->frame.pp_data[row][col] << std::endl;
-                    // this->flattened_data.push_back(this->frame.pp_data[row][col]);
+                    msg.data.push_back(this->frame.pp_data[row][col]);
                 }
             }
-            std::cout << "read image one" << std::endl;
+            this->datacube_pub.publish(msg);
         }
     }
 
