@@ -1,12 +1,13 @@
 #include <ros/ros.h>
-#include "hsi_camera_api.h"
+#include <imec_driver/hsi_camera_api.h>
+// #include <hsi_camera_api.h>
 
 #include <string>
 #include <iomanip>
 #include <iostream>
 
-#include "imec_drivers/DataCube.h"
-#include "imec_drivers/adjust_param.h"
+#include "imec_driver/DataCube.h"
+#include "imec_driver/adjust_param.h"
 
 // Modified main.cpp from hsi-mosiac/hsi_camera_api/example_C_api
 // Authored by Gary Lvov and Nathaniel Hanson
@@ -22,7 +23,7 @@ public:
         {
             this->integration_range = std::make_pair(0.010000, 90);
         }
-        else if (this->model.compare('ximea') == 0)
+        else if (this->model.compare("ximea") == 0)
         {
             this->integration_range = std::make_pair(0.021000, 999.995000);
         }
@@ -57,7 +58,7 @@ public:
 
         this->runtime_parameters = {};
         cameraGetRuntimeParameters(this->camera, &this->runtime_parameters);
-        this->runtime_parameters.frame_rate_hz = 25;
+        this->runtime_parameters.frame_rate_hz = 60;
         this->runtime_parameters.exposure_time_ms = 5.0;
         this->runtime_parameters.trigger_mode = TM_NoTriggering;
         this->ret_val = cameraSetRuntimeParameters(this->camera, this->runtime_parameters);
@@ -89,18 +90,38 @@ private:
     FrameDataFormat data_format;
     FrameFloat frame;
 
-    void stream_camera_feed() {
+    std::vector<float> flattened_data;
+
+    void stream_camera_feed()
+    {
         this->ret_val = cameraStart(this->camera);
-        this->ret_val = cameraAcquireFrame (this->camera, &this->frame);
+        
+        int width = this->frame.format.width;
+        int height = this->frame.format.width;
+ 
+        while (ros::ok()) {
+            this->flattened_data.clear();
+            // this->ret_val = cameraTrigger ... 
+            this->ret_val = cameraAcquireFrame(this->camera, &this->frame);
+            for(int row = 0; row < height; row++) {
+                for(int col = 0; col < width; col++) {
+                    //std::cout << "row: " << row << " col: " << col << " data: " << this->frame.pp_data[row][col] << std::endl;
+                    // this->flattened_data.push_back(this->frame.pp_data[row][col]);
+                }
+            }
+            std::cout << "read image one" << std::endl;
+        }
     }
-    bool adjust_cam_param(imec_drivers::adjust_param::Request &req,
-                          imec_drivers::adjust_param::Response &res)
+
+    bool adjust_cam_param(imec_driver::adjust_param::Request &req,
+                          imec_driver::adjust_param::Response &res)
     {
         if (this->integration_range.first < req.integration_time < this->integration_range.second)
         {
-            cameraPause(camera);
-
-            // TODO: finish
+            cameraPause(this->camera);
+            cameraGetRuntimeParameters(this->camera, &this->runtime_parameters);
+            this->runtime_parameters.exposure_time_ms = req.integration_time;
+            this->ret_val = cameraStart(this->camera);
             return true;
         }
         else
@@ -115,11 +136,11 @@ private:
         int major = 0, minor = 0, patch = 0, build = 0;
         this->ret_val = commonGetAPIVersion(&major, &minor, &patch, &build);
         this->DisplayResult("commonGetAPIVersion", this->ret_val);
-        if (HSI_OK != this->ret_val)
-        {
-            system("pause");
-            return -1;
-        }
+        // if (HSI_OK != this->ret_val)
+        // {
+        //     system("pause");
+        //     return -1;
+        // }
 
         // print the version number
         std::cout << "*** HSI Common API version: " << major << "." << minor << "." << patch << "." << build << std::endl;
@@ -127,11 +148,11 @@ private:
         // get the HSI Camera API version
         this->ret_val = cameraGetAPIVersion(&major, &minor, &patch, &build);
         this->DisplayResult("cameraGetAPIVersion", this->ret_val);
-        if (HSI_OK != this->ret_val)
-        {
-            system("pause");
-            return -1;
-        }
+        // if (HSI_OK != this->ret_val)
+        // {
+        //     system("pause");
+        //     return -1;
+        // }
 
         // print the version number
         std::cout << "*** HSI Camera API version: " << major << "." << minor << "." << patch << "." << build << std::endl;
@@ -144,18 +165,18 @@ private:
         int nr_devices = 0;
         this->ret_val = cameraEnumerateConnectedDevices(&camera_infos[0], &nr_devices, nr_preallocated_devices, {EM_ALL});
         this->DisplayResult("cameraEnumerateConnectedDevices", this->ret_val);
-        if (HSI_OK != this->ret_val)
-        {
-            system("pause");
-            return -1;
-        }
+        // if (HSI_OK != this->ret_val)
+        // {
+        //     system("pause");
+        //     return -1;
+        // }
 
-        if (0 == nr_devices)
-        {
-            std::cout << "No connected devices found." << std::endl;
-            system("pause");
-            return 0;
-        }
+        // if (0 == nr_devices)
+        // {
+        //     std::cout << "No connected devices found." << std::endl;
+        //     system("pause");
+        //     return 0;
+        // }
 
         std::cout << "Number of connected devices: " << nr_devices << std::endl;
 
@@ -238,3 +259,10 @@ private:
         }
     }
 };
+
+int main(int argc, char **argv)
+{
+    ros::init(argc, argv, "imec_driver", ros::init_options::AnonymousName);
+    ros::NodeHandle nh("~");
+    DatacubeGrabber nc = DatacubeGrabber(&nh);
+}

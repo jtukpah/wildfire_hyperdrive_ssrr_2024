@@ -68,6 +68,7 @@
   <exec_depend>rospy</exec_depend>
   <exec_depend>sensor_msgs.msg</exec_depend>
 
+  <build_depend>hsi_camera_api</build_depend>
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- Other tools can request additional information be placed here -->
