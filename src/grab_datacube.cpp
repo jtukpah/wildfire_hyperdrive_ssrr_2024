@@ -5,8 +5,11 @@
 #include <string>
 #include <iomanip>
 #include <iostream>
-
+#include <opencv2/opencv.hpp>
+#include <sensor_msgs/Image.h>
 #include "imec_driver/DataCube.h"
+
+#include <cv_bridge/cv_bridge.h>
 #include "imec_driver/adjust_param.h"
 
 // Modified main.cpp from hsi-mosiac/hsi_camera_api/example_C_api
@@ -18,7 +21,7 @@ public:
     DatacubeGrabber(ros::NodeHandle *nh)
     {
         
-        this->datacube_pub = nh->advertise<imec_driver::DataCube>("spectral_data", 10);
+        this->datacube_pub = nh->advertise<sensor_msgs::Image>("spectral_data", 10);
 
         this->model = "imec";
 
@@ -101,21 +104,22 @@ private:
         
         int width = this->frame.format.width;
         int height = this->frame.format.height;
-        
-        imec_driver::DataCube msg;
-        msg.width = width;
-        msg.height = height;
-
+        cv::Mat image = cv::Mat::zeros(width, height, CV_32F);
+        cv_bridge::CvImage cv_image;
+        cv_image.encoding = "32FC1";    
+        sensor_msgs::Image msg;
         while (ros::ok()) {
-            msg.header.stamp = ros::Time::now();
-            msg.data.clear();
-            // this->ret_val = cameraTrigger ... 
+            
+            cv_image.header.stamp = ros::Time::now();
+            this->ret_val =cameraTrigger(this->camera);
             this->ret_val = cameraAcquireFrame(this->camera, &this->frame);
             for(int row = 0; row < height; row++) {
                 for(int col = 0; col < width; col++) {
-                    msg.data.push_back(this->frame.pp_data[row][col]);
+                    image.at<float>(row, col) = this->frame.pp_data[row][col];
                 }
             }
+            cv_image.image = image;
+            cv_image.toImageMsg(msg);
             this->datacube_pub.publish(msg);
         }
     }
