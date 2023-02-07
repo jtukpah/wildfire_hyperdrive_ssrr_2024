@@ -1,8 +1,16 @@
 <launch>
-    <node pkg="imec_driver" type="cube_data.py" name="cube_processor" output="screen">
+    <node pkg="imec_driver" type="cube_data.py" name="cube_processor_imec" output="screen">
+        <param name="camera_model" value="imec"/>
+    </node>
+    <node pkg="imec_driver" type="demosaic_cube.py" name="hsi_processor_imec" output="screen">
+        <param name="camera_model" value="imec"/>
+    </node>
+    <node pkg="imec_driver" type="cube_data.py" name="cube_processor_ximea" output="screen">
         <param name="camera_model" value="ximea"/>
     </node>
-    <node pkg="imec_driver" type="demosaic_cube.py" name="hsi_processor" output="screen">
+    <node pkg="imec_driver" type="demosaic_cube.py" name="hsi_processor_ximea" output="screen">
         <param name="camera_model" value="ximea"/>
+    </node>
+    <node pkg="imec_driver" type="GUI.py" name="hsi_gui"> 
     </node>
 </launch>

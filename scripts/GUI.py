@@ -73,7 +73,7 @@ class Widget(QtWidgets.QWidget):
         # Mark that we've received a new cube
         self.new_cube = True
         self.cube = np.reshape(msg.data, (msg.width, msg.height, msg.lam))
-        self.cube = self.cube.astype(np.int)
+        #self.cube = self.cube.astype(np.int)
 
     def rescale_image(self, arr):
         '''
@@ -89,7 +89,7 @@ class Widget(QtWidgets.QWidget):
             w,h = img.shape
             img =  cv.cvtColor(img,cv.COLOR_GRAY2RGB)
         else:
-            print(img.shape)
+            #print(img.shape)
             w,h,ch = img.shape
         # Convert resulting image to pixmap
         qimg = QImage(img.data, h, w, 3*h, QImage.Format_RGB888) 
@@ -104,14 +104,16 @@ class Widget(QtWidgets.QWidget):
         '''
         # configure and draw the histogram figure
         if self.img.size > 0:
-            histogram, bin_edges = np.histogram(self.cube[:, :, self.lam], bins=1000, range=(0, 1))
+            histogram, bin_edges = np.histogram(self.cube[:, :, self.lam])
+            print(histogram)
             fig = plt.figure()
             canvas = FigureCanvas(fig)
             ax = fig.gca()
             ax.set_title("Grayscale Histogram")
             ax.set_xlabel("grayscale value")
             ax.set_ylabel("pixel count")
-            ax.plot(bin_edges[0:-1], histogram)  # <- or here
+            ax.plot(bin_edges[0:-1], histogram)
+            #ax.hist(bin_edges[0:-1], histogram)  # <- or here
             canvas.draw()
             image = np.frombuffer(canvas.tostring_rgb(), dtype='uint8').reshape(fig.canvas.get_width_height()[::-1] + (3,))
             self.histo_image.setPixmap(self.convert_nparray_to_QPixmap(image, grayscale=False))
@@ -192,3 +194,9 @@ if __name__ == "__main__":
     # Start the timer for ROS to regularly check for new messages
     timer = rospy.Timer(rospy.Duration(0.01), timer_callback) # start the ros spin after 1 s
     app.exec_()
+
+    try:
+        my_node = Widget()
+        my_node.run()
+    except rospy.ROSInterruptExcetion:
+        my_node.shutdown()

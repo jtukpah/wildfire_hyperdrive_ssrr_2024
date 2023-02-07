@@ -3,10 +3,27 @@ project(imec_driver)
 
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
+  message_generation
   rospy
   roscpp
-  message_generation
+  rviz
 )
+
+## This plugin includes Qt widgets, so we must include Qt.
+## We'll use the version that rviz used so they are compatible.
+if(rviz_QT_VERSION VERSION_LESS "5")
+  message(STATUS "Using Qt4 based on the rviz_QT_VERSION: ${rviz_QT_VERSION}")
+  find_package(Qt4 ${rviz_QT_VERSION} EXACT REQUIRED QtCore QtGui)
+  include(${QT_USE_FILE})
+else()
+  message(STATUS "Using Qt5 based on the rviz_QT_VERSION: ${rviz_QT_VERSION}")
+  find_package(Qt5 ${rviz_QT_VERSION} EXACT REQUIRED Core Widgets)
+  set(QT_LIBRARIES Qt5::Widgets)
+endif()
+
+## Use Qt signals and slots to avoid conflicts with boost signals,
+## so define QT_NO_KEYWORDS here.
+add_definitions(-DQT_NO_KEYWORDS)
 
 add_message_files(
    FILES
@@ -33,6 +50,11 @@ catkin_package(
    CATKIN_DEPENDS message_runtime
 )
 
+if(rviz_QT_VERSION VERSION_LESS "5")
+  qt4_wrap_cpp(${PROJECT_NAME}_MOCS ${HEADER_FILES})
+else()
+  qt5_wrap_cpp(${PROJECT_NAME}_MOCS ${HEADER_FILES})
+endif()
 
 include_directories(
   include
@@ -67,3 +89,7 @@ target_link_libraries(grab_datacube ${catkin_LIBRARIES} ${SO_FILES})
 # target_include_directories(grab_datacube PUBLIC
 #   "/opt/imec/hsi-mosiac/include"
 # )
+
+install(FILES
+  plugin_description.xml
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})

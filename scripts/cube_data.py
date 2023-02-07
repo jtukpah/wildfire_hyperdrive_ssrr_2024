@@ -27,7 +27,7 @@ import hsi_camera as HSI_CAMERA
 class DataCubeGenerator(object):
     def __init__(self):
         # Setup callback for data
-        self.model = rospy.get_param('cube_processor')['camera_model']
+        self.model = rospy.get_param('~camera_model')
         self.param_server = rospy.Service(f'/{self.model}/adjust_param', adjust_param, self.handle_adjust_param)
         # Rate at which to generate composite data cubes
         # Look for connected cameras an choose appropriate model (assumes we only have 1 IMEC and 1 XIMEA)
