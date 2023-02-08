@@ -1,0 +1,10 @@
+<library path="lib/libGUI">
+  <class name="imec_driver/GUI"
+         type="imec_driver::GUI"
+         base_class_type="rviz::Panel">
+    <description>
+      A panel widget that allows for the vizuialization of the Imec camera information, along with an histogram
+      for comparison of items.
+    </description>
+  </class>
+</library>

@@ -1,7 +1,0 @@
-2023-01-18 16:54:36.896719 INFO    - ProcessingUnit::_PropagateDataTypes()
-2023-01-18 16:54:36.896733 INFO    - OutputPort: non_uniformity_pipeline.spatial_processing_group.cube_generation_unit.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
-2023-01-18 16:54:36.896739 INFO    - InputPort: non_uniformity_pipeline.spatial_processing_group.spatial_median_filtering_unit.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ABSTRACT_BAND_IMAGE
-2023-01-18 16:54:37.106177 INFO    - ProcessingUnit::Process
-2023-01-18 16:54:37.349759 INFO    - ProcessingUnit::_PropagateDataTypes()
-2023-01-18 16:54:37.349775 INFO    - OutputPort: reference_spectrum_pipeline.spatial_processing_group.cube_generation_unit.out; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_BAND_IMAGE_BSQ
-2023-01-18 16:54:37.349780 INFO    - InputPort: reference_spectrum_pipeline.spatial_processing_group.spatial_median_filtering_unit.in; Actual kind: AK_BAND_IMAGE_BSQ; Minimal kind: AK_ABSTRACT_BAND_IMAGE

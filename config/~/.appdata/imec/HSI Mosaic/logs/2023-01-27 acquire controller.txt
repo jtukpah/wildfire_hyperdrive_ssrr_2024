@@ -1,4 +1,0 @@
-2023-01-27T03:46:00.472788Z INFO    - Module::Initialize -->
-2023-01-27T03:46:00.472788Z VERBOSE -    trying to initialize...
-2023-01-27T03:46:00.472789Z INFO    - Module::Initialize <--
-2023-01-27T03:48:05.552621Z ERROR   - Invalid state. Expected STARTED , current state is READY

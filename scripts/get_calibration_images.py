@@ -3,179 +3,50 @@
 import os
 import sys
 import cv2 as cv
-import rospy
-import typing
-import rospkg
-import ros_numpy
-import traceback
 import numpy as np
-from bs4 import BeautifulSoup
-from numba import jit, prange
-from imec_driver.msg import DataCube
-from imec_driver.srv import adjust_param
-from sensor_msgs.msg import Image
-import gzip
+import matplotlib.pyplot as plt
+### Set parameters to find the HSI mosaic binaries
+os.environ['PATH'] += os.pathsep + r'/opt/imec/hsi-mosaic/bin'
+# Also add them to the path
+sys.path.append('/opt/imec/hsi-mosaic/python_apis')
+# Import IMEC specific libraries
+import hsi_common as HSI_COMMON
+import hsi_camera as HSI_CAMERA
 
-class CubeDemosaicer(object):
+class CalibrationImages():
     def __init__(self):
-        # Setup callback for data
-        self.model = rospy.get_param('~camera_model')
-        self.parse_parameters()
-        # Create publisher to send datacubes on
-        self.pub = rospy.Publisher(f'cube_pub/{self.model}', DataCube, queue_size=10)
-        # Subscribe to the raw data image
-        self.sub = rospy.Subscriber(f'raw_pub/{self.model}', Image, self.cube_callback)
+        self.dev_lists = [HSI_CAMERA.EnumerateConnectedDevices(manufacturer=HSI_CAMERA.Manufacturer.EM_XIMEA),
+                          HSI_CAMERA.EnumerateConnectedDevices(manufacturer=HSI_CAMERA.Manufacturer.EM_IMEC)]
 
-    def parse_parameters(self) -> None:
-        '''
-        Load parameter for camera from manufacturer provided XML file
-        for publication in datacube messages
-        '''
-        # Get an instance of RosPack with the default search paths
-        rospack = rospkg.RosPack()
-        param_path = os.path.join(rospack.get_path('imec_driver'),'config',f'{self.model}.xml')
-        with open(param_path, 'r') as f:
-            data = f.read()
-            Bs_data = BeautifulSoup(data, "xml")
-            self.central_wave = []
-            self.fwhm = []
-            self.QE = []
-            for band in Bs_data.find_all("wavelength_nm"):
-                self.central_wave.append(float(band.getText()))
-            for band in Bs_data.find_all("fwhm_nm"):
-                self.fwhm.append(float(band.getText()))
-            for band in Bs_data.find_all("QE"):
-                self.QE.append(float(band.getText()))
-            # Get calibration coefficients
-            coefficients = []
-            for coefficient in Bs_data.find_all("coefficients"):
-                coefficients.append(np.array([float(z) for z in coefficient['values'].split()]))
-            self.coefficients = np.array(coefficients)
+        self.devices = [HSI_CAMERA.OpenDevice(dev_list[0]) for dev_list in self.dev_lists]
+        [HSI_CAMERA.Initialize(device) for device in self.devices]  
+        self.c_params =  [HSI_CAMERA.GetConfigurationParameters(device) for device in self.devices]
+        self.r_params = [HSI_CAMERA.GetRuntimeParameters(device) for device in self.devices]
+        self.r_params[1]['exposure_time_ms'] = 60
+        self.data_formats = [HSI_CAMERA.GetOutputFrameDataFormat(device) for device in self.devices]
+        self.frames = [HSI_COMMON.AllocateFrame(dataformat) for dataformat in self.data_formats]
+        [HSI_CAMERA.Start(device) for device in self.devices]
 
-    def cube_callback(self, msg: Image):
-        '''
-        Callback function for hypercube data
-        '''
-        # Mark that we've received a new cube
-        cube = ros_numpy.numpify(msg)
-        if self.model == 'ximea':
-            big_cube = self.im2cube_sinc(cube, 5, cube.shape[0], cube.shape[1])
-            np.save('/home/river/test_cube.npy', big_cube)
-            cube = self.minimize_cube(big_cube, big_cube.shape[0], big_cube.shape[1], 5)
-        elif self.model == 'imec':
-            big_cube = self.im2cube_sinc(cube, 3, cube.shape[0], cube.shape[1])
-            cube = self.minimize_cube(big_cube, big_cube.shape[0], big_cube.shape[1], 3)
-        else:
-            rospy.loginfo('Unknown camera model')
-        self.publish_cube(cube)
+    def grab_images(self):
+        [HSI_CAMERA.Trigger(device) for device in self.devices]
+        [HSI_CAMERA.AcquireFrame(device, frame=frame) for device, frame in zip(self.devices, self.frames)]
+        images = [HSI_COMMON.FrameAsArray(frame) for frame in self.frames]
+        patterns = [5, 3]
+        heights = [image.shape[0] for image in images]
+        widths = [image.shape[1] for image in images]
+        big_cubes = [self.im2cube_sinc(image, pattern, height, width) for (image, pattern, height, width) in zip(images, patterns, heights, widths)]
+        small_cubes = (self.minimize_cube(big_cube, height, width, pattern) for (big_cube, height, width, pattern) in zip(big_cubes, heights, widths, patterns))
 
-    #reduces size of cube
-    def minimize_cube(self, big_cube: np.ndarray, height: int, width: int, pattern: int) -> np.ndarray:
-        #creates shell for reduced cube
-        cube_sinc_out = np.zeros((height//pattern, width//pattern, pattern**2))
-        
-        #resizing of cube data
-        for channel_num in range(big_cube.shape[2]):
-            cube_sinc_out[:,:,channel_num] = cv.resize(big_cube[:,:,channel_num], (big_cube.shape[1]//pattern, big_cube.shape[0]//pattern), interpolation = cv.INTER_LANCZOS4)
-        return cube_sinc_out
+        model_names = ["ximea", "imec"]
+        cleaned = [self.clean_cube(small_cube, model_name) for (small_cube, model_name) in zip(small_cubes, model_names)]
+        cleaned = [np.array(x) for x in cleaned]
 
-    def parse_parameters(self) -> None:
-        '''
-        Load parameter for camera from manufacturer provided XML file
-        for publication in datacube messages
-        '''
-        # Get an instance of RosPack with the default search paths
-        rospack = rospkg.RosPack()
-        param_path = os.path.join(rospack.get_path('imec_driver'),'config',f'{self.model}.xml')
-        with open(param_path, 'r') as f:
-            data = f.read()
-            Bs_data = BeautifulSoup(data, "xml")
-            self.central_wave = []
-            self.fwhm = []
-            self.QE = []
-            for band in Bs_data.find_all("wavelength_nm"):
-                self.central_wave.append(float(band.getText()))
-            for band in Bs_data.find_all("fwhm_nm"):
-                self.fwhm.append(float(band.getText()))
-            for band in Bs_data.find_all("QE"):
-                self.QE.append(float(band.getText()))
-            # Get calibration coefficients
-            coefficients = []
-            for coefficient in Bs_data.find_all("coefficients"):
-                coefficients.append(np.array([float(z) for z in coefficient['values'].split()]))
-            self.coefficients = np.array(coefficients)
+        resized_imec = cv.resize(cleaned[1], (426, 340))
+        cleaned[1] = resized_imec[62:-61,9:-8,:]
 
-    @staticmethod
-    @jit(nopython=True)
-    def demosaic_cube(im, radius):
-        """
-        Box filter with running average O(1)
-        :param im: input image
-        :param radius: radius of box kernel
-        :return: box-filtered image
-        """
-        (rows, cols) = im.shape[:2]
-        z = np.zeros_like(im)
+        images = [x[:,:,0] for x in cleaned]
 
-        tile = [1] * im.ndim
-        tile[0] = radius
-        t = np.cumsum(im, 0)
-        z[0:radius + 1, :, ...] = t[radius:2 * radius + 1, :, ...]
-        z[radius + 1:rows - radius, :, ...] = t[2 * radius + 1:rows, :, ...] - t[0:rows - 2 * radius - 1, :, ...]
-        z[rows - radius:rows, :, ...] = np.tile(t[rows - 1:rows, :, ...], tile) - t[rows - 2 * radius - 1:rows - radius - 1, :, ...]
-
-        tile = [1] * im.ndim
-        tile[1] = radius
-        t = np.cumsum(z, 1)
-        z[:, 0:radius + 1, ...] = t[:, radius:2 * radius + 1, ...]
-        z[:, radius + 1:cols - radius, ...] = t[:, 2 * radius + 1: cols, ...] - t[:, 0: cols - 2 * radius - 1, ...]
-        z[:, cols - radius: cols, ...] = np.tile(t[:, cols - 1:cols, ...], tile) - t[:, cols - 2 * radius - 1: cols - radius - 1, ...]
-        return z
-    
-    def filter_guided_gray(self,im,guide,radius,smooth):
-        """
-        Guided filter for grayscale images
-        :param im: input image
-        :param guide: guidance image
-        :param radius: window radius parameter
-        :param smooth: regularization or smooth parameter
-        :return: guided-filtered image
-        """
-
-        (rows, cols) = guide.shape
-        N = self.demosaic_cube(np.ones([rows, cols]), radius)
-
-        meanI = self.demosaic_cube(guide, radius) / N
-        meanP = self.demosaic_cube(im, radius) / N
-        corrI = self.demosaic_cube(guide * guide, radius) / N
-        corrIp = self.demosaic_cube(guide * im, radius) / N
-        varI = corrI - meanI * meanI
-        covIp = corrIp - meanI * meanP
-
-        a = covIp / (varI + smooth)
-        b = meanP - a * meanI
-
-        meanA = self.demosaic_cube(a, radius) / N
-        meanB = self.demosaic_cube(b, radius) / N
-
-        z = meanA * guide + meanB
-
-        return z
-
-    def im2cube_sinc_guided(self, im_raw, pattern, height, width):
-        """
-        Interpolated demosaicking with guided filter
-        :param im_raw: raw input image
-        :param pattern: integer dimension of the mosaic pattern (e.g. 4 or 5)
-        :param height: height of valid image region
-        :param width: width of valid image region
-        :return:
-        """
-        cube = self.im2cube_sinc(im_raw, pattern, height, width)
-        im_guide = cube[:, :, 0]
-        cube = self.filter_guided_gray(cube, im_guide, 3, 0.01)
-
-        return cube
+        return images
 
     def im2cube_sinc(self, im_raw, pattern, height, width):
         """
@@ -203,7 +74,7 @@ class CubeDemosaicer(object):
         im_guide = cube[:, :, 0]
 
         return cube
-
+    
     def filter_shift(sefl,im,offset):
         """
         Shift image with offset
@@ -217,25 +88,19 @@ class CubeDemosaicer(object):
         z = cv.warpAffine(im, M, (cols, rows), cv.INTER_LANCZOS4)
 
         return z
+    
+    #reduces size of cube
+    def minimize_cube(self, big_cube: np.ndarray, height: int, width: int, pattern: int) -> np.ndarray:
+        #creates shell for reduced cube
+        cube_sinc_out = np.zeros((height//pattern, width//pattern, pattern**2))
+        
+        #resizing of cube data
+        for channel_num in range(big_cube.shape[2]):
+            cube_sinc_out[:,:,channel_num] = cv.resize(big_cube[:,:,channel_num], (big_cube.shape[1]//pattern, big_cube.shape[0]//pattern), interpolation = cv.INTER_LANCZOS4)
+        return cube_sinc_out
 
-    @staticmethod
-    @jit(nopython=True)
-    def perform_corrective_factors(data: np.ndarray) -> np.ndarray:
-        '''
-        Using the factors provided in the XML file calculate the final bands
-
-        This operation should be optimized with numpy for simplicity
-        '''
-        # TODO
-        return data
-
-    def publish_cube(self, cube: np.ndarray) -> None:
-        '''
-        Create a data cube message and publish to topic
-        '''
-        print(f'CUBE SHAPE: {self.model}')
-
-        if self.model == 'ximea':
+    def clean_cube(self, cube, model_name):
+        if model_name == 'ximea':
             values = [["-0.0870111 -0.0797373 -0.0516343 0.0228433 -0.0434904 0.00188421 -0.0180086 -0.00180196 -0.0035571 0.00762132 -0.00192729 -0.0269716 -0.00267334 -0.00188096 -0.00355713 -0.0463655 -0.142786 -0.0296149 -0.00297669 0.00437106 0 1.62659 -0.113809 0.00685329 -0.0123591"],
             ["-0.00640826 -0.0231203 -0.0828399 -0.0284085 -0.0164755 0.00130988 -0.000259826 -0.00621806 -0.00446879 0.000878751 -0.00149024 -0.00233908 -0.0190474 -0.000765457 -0.00230613 0.00894476 -0.025628 -0.0953716 -0.0214167 0.00234876 0 -0.0831558 1.42672 -0.00146256 -0.0190242"],
             ["-0.00171508 -0.00194242 -0.0276622 -0.0796324 -0.0499271 -0.000936207 0.000384042 0.00209444 -0.00864609 -0.00118338 -0.00297327 -0.00343256 -0.00107147 -0.0172835 -0.00184215 0.0124785 -0.00110149 -0.0217123 -0.0907514 -0.0165816 0 0.0013707 -0.143579 1.62258 -0.166931"],
@@ -261,7 +126,7 @@ class CubeDemosaicer(object):
             ["-0.0139254 0.0229062 0.138812 1.2963 0.117764 -0.00933331 -0.0115507 -0.0472659 -0.16392 -0.0682551 -0.00200637 -0.00700835 -0.00379523 -0.00168341 -0.00439197 -0.00768255 -0.00476704 -0.00743789 -0.0317416 -0.00433318 0 -0.0174472 -0.0408097 -0.0933671 -0.0350615"],
             ["-0.17027 -0.0140712 0.0131364 0.0895526 1.63598 -0.0195949 0.00282474 -0.00442651 -0.0590773 -0.18719 0.000525542 -0.00659809 -0.00255743 0.000200812 -0.0106862 -0.00805829 -0.00184906 -0.00460846 -0.00941471 -0.0325482 0 -0.0273852 -0.00959795 -0.0424129 -0.131876"]]
 
-        elif self.model == 'imec':
+        elif model_name == 'imec':
             values = [["-0.0104603 -0.0011669 -0.00172989 0.16087 0.00711459 -0.0293091 -0.00449294 -0.00060095 -0.00113117"],
             ["-0.000956892 -0.0114393 -0.00205378 -0.0428224 0.179392 0.00857657 -0.000385928 -0.00538833 -0.000962117"],
             ["-0.00127986 -0.000596364 -0.0137547 -0.00149089 -0.0423064 0.191897 0.00138469 -0.000389815 -0.00618386"],
@@ -282,27 +147,4 @@ class CubeDemosaicer(object):
             for lam in range(cube.shape[2]):
                 noiseless_channel[:, :, band_num] += cube[:, :, lam]*vals[lam]
 
-        print(noiseless_channel.shape)
-
-        ros_cube = DataCube()
-        ros_cube.data = noiseless_channel.flatten()
-        ros_cube.width, ros_cube.height, ros_cube.lam = tuple(noiseless_channel.shape)
-        ros_cube.qe = self.QE
-        ros_cube.fwhm_nm = self.fwhm
-        ros_cube.central_wavelengths = self.central_wave
-
-        self.pub.publish(ros_cube)
-
-    def shutdown(self):
-        '''
-        Custom shutdown behavior
-        '''
-        return 
-
-if __name__ == '__main__':
-    rospy.init_node('CubeProcessor', anonymous=True)
-    try:
-        my_node = CubeDemosaicer()
-        rospy.spin()
-    except rospy.ROSInterruptException:
-        my_node.shutdown()
+        return noiseless_channel

@@ -1,5 +1,0 @@
-2023-01-18 16:54:36.879899 INFO    - Module::Initialize -->
-2023-01-18 16:54:36.879901 VERBOSE -    trying to initialize...
-2023-01-18 16:54:37.554545 INFO    - Module::Initialize <--
-2023-01-18 16:54:37.562864 INFO    - Module::Start -->
-2023-01-18 16:54:37.563171 INFO    - Module::Start <--

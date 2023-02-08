@@ -32,7 +32,7 @@ class CombineDataCube(object):
         rospy.Subscriber(f'cube_pub/imec', DataCube, self.callback_imec)
 
         # publisher
-        self.pub = rospy.Publisher('com_cube_pub', DataCube, queue_size=10)
+        # self.pub = rospy.Publisher('com_cube_pub', DataCube, queue_size=10)
 
     #callback for subscriber
     def callback_ximea(self, msg):
@@ -54,16 +54,16 @@ class CombineDataCube(object):
                 rospy.loginfo(f'XIMEA SHAPE: {self.ximea_cube.shape}')
                 rospy.loginfo(f'IMEC SHAPE: {self.imec_cube2.shape}')
 
-                #combines ximea and imec data cube into one (adds by lambda axis)
-                combine_cube = np.dstack((self.ximea_cube, self.imec_cube2))
-                np.save('/home/river/combine_cube.npy',combine_cube)
-                ros_cube = DataCube()
-                ros_cube.data = combine_cube.flatten()
-                ros_cube.width = combine_cube.shape[0]
-                ros_cube.height = combine_cube.shape[1]
-                ros_cube.lam = combine_cube.shape[2]
-                self.pub.publish(ros_cube)
-                rospy.sleep(1)
+                # #combines ximea and imec data cube into one (adds by lambda axis)
+                # combine_cube = np.dstack((self.ximea_cube, self.imec_cube2))
+                # np.save('/home/river/combine_cube.npy',combine_cube)
+                # ros_cube = DataCube()
+                # ros_cube.data = combine_cube.flatten()
+                # ros_cube.width = combine_cube.shape[0]
+                # ros_cube.height = combine_cube.shape[1]
+                # ros_cube.lam = combine_cube.shape[2]
+                # self.pub.publish(ros_cube)
+                # rospy.sleep(1)
 
 if __name__ == '__main__':
     rospy.init_node('CombineDataCube', anonymous=True)

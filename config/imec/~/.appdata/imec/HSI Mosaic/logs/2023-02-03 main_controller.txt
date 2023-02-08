@@ -1,4 +1,0 @@
-2023-02-03T17:56:52.884256Z ERROR   - LoadPreferences (104) - The preferences file does not exist: ~/.appdata/imec/HSI Mosaic/configurations/preferences.xml
-2023-02-03T17:56:53.287821Z INFO    - Module::Initialize -->
-2023-02-03T17:56:53.287826Z VERBOSE -    trying to initialize...
-2023-02-03T17:56:53.288010Z INFO    - Module::Initialize <--

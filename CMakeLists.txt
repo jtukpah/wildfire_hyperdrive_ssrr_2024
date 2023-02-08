@@ -76,6 +76,10 @@ include_directories(
 # set(hsi_camera_api "/opt/imec/hsi-mosiac/bin/libhsi_camera_api.so")  # the full path. if postfix is `.so`, change it
 
 add_executable(grab_datacube src/grab_datacube.cpp)
+add_executable(gui src/gui.cpp)
+
+target_link_libraries(gui ${QT_LIBRARIES} ${catkin_LIBRARIES})
+
 
 # target_include_directories(grab_datacube PUBLIC "/opt/imec/hsi-mosiac/include/hsi_camera_api.h")
 # target_link_directories(grab_datacube PUBLIC "/opt/imec/hsi-mosiac/bin/libhsi_camera_api.so")

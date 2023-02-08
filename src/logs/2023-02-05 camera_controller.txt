@@ -1,0 +1,1557 @@
+2023-02-05T01:54:00.019360Z DEBUG   - _AcquisitionLoop (1648) - Starting wakeup condition
+2023-02-05T01:54:00.081783Z DEBUG   - _AcquisitionLoop (1658) - Condition interrupted.
+2023-02-05T01:54:00.137932Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.138383Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.138386Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.176698Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.177239Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.177241Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.216526Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.216970Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.216972Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.256466Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.257001Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.257003Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.296493Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.296972Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.296975Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.336753Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.337219Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.337221Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.376497Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.377041Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.377043Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.416709Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.417279Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.417283Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.456770Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.457271Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.457274Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.496621Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.497075Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.497077Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.536573Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.537008Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.537011Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.576536Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.577023Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.577026Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.616673Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.617073Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.617075Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.656884Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.657389Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.657391Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.696422Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.696920Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.696922Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.736734Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.737160Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.737162Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.776582Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.777004Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.777006Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.816410Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.816850Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.816852Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.856582Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.857051Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.857053Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.896511Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.896937Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.896939Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.936612Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.937103Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.937105Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:00.976515Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:00.977019Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:00.977021Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.016540Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.016932Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.016934Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.056664Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.057176Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.057179Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.096562Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.097004Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.097007Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.136532Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.136925Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.136927Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.176793Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.177199Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.177201Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.216383Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.216828Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.216831Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.256418Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.256839Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.256841Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.296324Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.296706Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.296708Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.336340Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.336796Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.336798Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.376571Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.377125Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.377128Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.416427Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.416819Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.416821Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.456488Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.457018Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.457020Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.496476Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.496947Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.496948Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.536686Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.537236Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.537239Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.576424Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.576923Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.576925Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.616497Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.616945Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.616947Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.656492Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.656999Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.657002Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.696908Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.697292Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.697294Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.736534Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.737012Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.737014Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.776817Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.777288Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.777291Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.816576Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.817000Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.817002Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.856466Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.856965Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.856967Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.896289Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.896673Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.896675Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.936626Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.937099Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.937101Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:01.976357Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:01.976796Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:01.976798Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.016432Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.016880Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.016882Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.056623Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.057058Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.057061Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.096402Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.096780Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.096782Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.136767Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.137361Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.137363Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.176652Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.177088Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.177090Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.216758Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.217139Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.217141Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.256460Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.256935Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.256938Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.296540Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.297019Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.297021Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.336912Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.337389Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.337392Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.376653Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.377129Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.377132Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.416511Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.416966Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.416969Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.456808Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.457287Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.457290Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.496488Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.496861Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.496863Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.536559Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.536993Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.536995Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.576468Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.576889Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.576891Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.616505Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.616879Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.616881Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.656553Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.657022Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.657024Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.696544Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.696955Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.696958Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.736986Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.737426Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.737429Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.776568Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.776996Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.776998Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.816543Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.816996Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.816998Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.856642Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.857155Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.857157Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.896437Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.896828Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.896831Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.936556Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.937069Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.937072Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:02.976581Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:02.977033Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:02.977035Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.016439Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.016822Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.016824Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.056358Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.056788Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.056790Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.096646Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.097153Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.097155Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.136582Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.137036Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.137038Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.176526Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.176976Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.176978Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.216529Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.216984Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.216987Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.257065Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.257598Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.257601Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.296486Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.296951Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.296953Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.336609Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.337084Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.337087Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.376634Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.377150Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.377152Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.416455Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.416836Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.416838Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.456287Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.456735Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.456737Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.496691Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.497196Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.497199Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.536515Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.536964Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.536966Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.576404Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.576790Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.576792Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.616584Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.617040Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.617042Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.656721Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.657193Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.657196Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.696417Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.696789Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.696791Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.736432Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.736947Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.736949Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.776921Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.777375Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.777377Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.816324Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.816813Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.816815Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.856469Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.856967Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.856969Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.896434Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.896857Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.896859Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.936584Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.936993Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.936995Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:03.976531Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:03.976997Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:03.977000Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.016368Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.016799Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.016801Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.056600Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.057099Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.057102Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.096507Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.096900Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.096903Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.136559Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.136954Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.136957Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.176496Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.176980Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.176982Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.216410Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.216816Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.216818Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.256528Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.257003Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.257019Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.297108Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.297534Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.297537Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.336680Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.337120Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.337123Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.376501Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.376887Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.376890Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.416520Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.417000Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.417002Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.456565Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.457052Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.457054Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.496468Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.496846Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.496848Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.536514Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.536958Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.536960Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.576731Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.577191Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.577193Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.616447Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.616847Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.616849Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.656661Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.657154Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.657157Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.696552Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.697101Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.697104Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.736589Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.737074Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.737077Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.776615Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.777070Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.777072Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.816906Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.817419Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.817421Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.856832Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.857535Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.857538Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.896626Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.897049Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.897052Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.936898Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.937526Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.937529Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:04.976682Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:04.977203Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:04.977206Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.016487Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.016964Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.016967Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.056892Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.057374Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.057377Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.096445Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.096869Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.096871Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.136563Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.137014Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.137016Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.176447Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.176921Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.176924Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.216561Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.217075Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.217077Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.256475Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.256891Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.256894Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.296422Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.296901Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.296904Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.336855Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.337328Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.337330Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.376469Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.376854Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.376856Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.416449Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.416828Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.416830Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.456504Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.456961Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.456963Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.496440Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.496864Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.496867Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.536618Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.537001Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.537003Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.576443Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.576900Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.576903Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.616593Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.617075Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.617077Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.656458Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.656844Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.656846Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.696382Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.696771Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.696773Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.736507Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.736943Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.736946Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.776431Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.776810Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.776812Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.816393Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.816796Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.816798Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.856705Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.857151Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.857153Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.896427Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.896886Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.896888Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.936558Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.936944Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.936946Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:05.976667Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:05.977134Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:05.977136Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.016502Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.016922Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.016924Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.056504Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.056917Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.056919Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.096301Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.096726Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.096728Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.136457Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.136956Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.136959Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.176380Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.176815Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.176818Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.216373Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.216849Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.216852Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.256453Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.256929Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.256931Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.296443Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.296875Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.296877Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.336541Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.336971Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.336973Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.376810Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.377227Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.377229Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.416438Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.416826Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.416828Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.456515Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.456914Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.456916Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.496392Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.496871Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.496873Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.536548Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.536934Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.536936Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.576354Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.576781Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.576783Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.616348Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.616769Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.616772Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.656502Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.656947Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.656949Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.696359Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.696742Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.696745Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.736564Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.737058Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.737060Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.776569Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.777054Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.777057Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:06.816448Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:06.816835Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:06.816837Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:19.177645Z DEBUG   - _AcquisitionLoop (1648) - Starting wakeup condition
+2023-02-05T01:54:19.240957Z DEBUG   - virtual void ihspt::drivers::CM_Controller::_Pause(std::unique_lock<std::mutex>&) (783) - -->
+2023-02-05T01:54:19.240959Z DEBUG   - _Pause (816) - Creating trigger lock
+2023-02-05T01:54:19.240962Z DEBUG   - _Pause (818) - Passed trigger lock
+2023-02-05T01:54:19.240965Z DEBUG   - pausing the camera
+2023-02-05T01:54:19.304327Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 33
+2023-02-05T01:54:19.305662Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 33
+2023-02-05T01:54:19.305674Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:19.305783Z DEBUG   - camera paused
+2023-02-05T01:54:19.305833Z DEBUG   - virtual void ihspt::drivers::CM_Controller::_Pause(std::unique_lock<std::mutex>&) (833) - <--
+2023-02-05T01:54:19.478173Z DEBUG   - _AcquisitionLoop (1658) - Condition interrupted.
+2023-02-05T01:54:19.478184Z INFO    - [CameraController::_AcquisitionLoop] thread finished
+2023-02-05T01:54:28.449997Z DEBUG   - _AcquisitionLoop (1648) - Starting wakeup condition
+2023-02-05T01:54:28.512455Z DEBUG   - _AcquisitionLoop (1658) - Condition interrupted.
+2023-02-05T01:54:28.568495Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.568947Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.568950Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:28.607154Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.607569Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.607571Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:28.647185Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.647569Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.647571Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:28.686876Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.687263Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.687265Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:28.727152Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.727608Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.727611Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:28.767177Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.767671Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.767673Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:28.807586Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.808021Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.808023Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:28.847053Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.847467Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.847469Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:28.887108Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.887534Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.887536Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:28.927061Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.927433Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.927435Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:28.967278Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:28.967751Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:28.967753Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.007323Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.007775Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.007777Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.047069Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.047444Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.047447Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.087402Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.087809Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.087811Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.127526Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.128009Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.128011Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.167195Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.167733Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.167735Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.207173Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.207663Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.207665Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.247067Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.247586Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.247589Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.287041Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.287447Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.287449Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.327104Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.327539Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.327541Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.366975Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.367421Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.367425Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.407247Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.407678Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.407680Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.447248Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.447683Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.447684Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.487044Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.487512Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.487514Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.527268Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.527740Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.527743Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.567173Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.567697Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.567700Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.607415Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.607833Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.607835Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.647021Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.647462Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.647464Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.687133Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.687545Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.687547Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.727003Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.727374Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.727376Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.766847Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.767257Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.767260Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.807061Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.807538Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.807540Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.847023Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.847428Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.847431Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.887123Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.887534Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.887534Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.927063Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.927426Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.927426Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:29.967785Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:29.968289Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:29.968292Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.007110Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.007515Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.007518Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.047192Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.047617Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.047620Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.087200Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.087641Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.087644Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.127330Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.127767Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.127769Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.166919Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.167408Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.167411Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.207376Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.207824Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.207826Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.247140Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.247533Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.247535Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.287243Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.287638Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.287641Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.327092Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.327521Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.327524Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.367026Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.367550Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.367552Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.407269Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.407694Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.407697Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.447032Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.447469Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.447471Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.487508Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.488098Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.488100Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.527252Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.527686Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.527688Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.567147Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.567680Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.567683Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.607167Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.607614Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.607616Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.647437Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.647811Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.647813Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.687097Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.687496Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.687499Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.727264Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.727706Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.727708Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.767053Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.767490Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.767492Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.807224Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.807674Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.807676Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.847210Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.847641Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.847643Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.887630Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.888126Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.888129Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.927120Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.927566Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.927568Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:30.967066Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:30.967545Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:30.967548Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.007408Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.007835Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.007838Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.047275Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.047673Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.047675Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.087088Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.087539Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.087541Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.127181Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.127700Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.127702Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.167215Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.167727Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.167729Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.207148Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.207546Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.207548Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.247074Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.247529Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.247531Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.287218Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.287598Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.287600Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.326958Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.327395Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.327397Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.366857Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.367233Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.367236Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.407260Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.407700Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.407703Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.446999Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.447371Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.447373Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.487037Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.487519Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.487521Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.527114Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.527559Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.527562Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.567236Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.567765Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.567767Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.606999Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.607451Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.607453Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.646961Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.647418Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.647421Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.687605Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.688119Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.688121Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.726931Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.727326Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.727328Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.766924Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.767402Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.767404Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.807012Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.807469Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.807471Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.847072Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.847472Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.847474Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.886978Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.887508Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.887510Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.927176Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.927590Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.927592Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:31.967082Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:31.967554Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:31.967556Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.007127Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.007568Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.007570Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.046931Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.047359Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.047361Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.087087Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.087654Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.087657Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.127041Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.127431Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.127433Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.166847Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.167252Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.167255Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.207499Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.207962Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.207964Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.247017Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.247419Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.247422Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.287080Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.287608Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.287611Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.327054Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.327531Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.327533Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.366914Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.367396Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.367398Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.407084Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.407516Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.407518Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.446999Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.447443Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.447445Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.487470Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.488004Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.488006Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.527115Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.527664Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.527666Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.567014Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.567594Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.567596Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.607003Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.607437Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.607440Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.646925Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.647327Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.647329Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.687052Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.687479Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.687481Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.727404Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.727829Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.727831Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.766992Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.767539Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.767541Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.807077Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.807501Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.807503Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.847071Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.847548Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.847550Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.887107Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.887587Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.887589Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.927002Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.927399Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.927401Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:32.967052Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:32.967587Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:32.967589Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.006999Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.007487Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.007489Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.047048Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.047562Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.047582Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.086949Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.087342Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.087344Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.127017Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.127449Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.127451Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.166982Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.167436Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.167438Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.207092Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.207542Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.207544Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.247415Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.247938Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.247940Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.287141Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.287660Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.287662Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.327066Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.327469Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.327471Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.367047Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.367556Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.367558Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.407162Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.407670Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.407672Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.447122Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.447597Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.447600Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.487014Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.487438Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.487440Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.526954Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.527394Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.527396Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.567146Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.567638Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.567640Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.607012Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.607407Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.607409Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.646985Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.647379Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.647381Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.687108Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.687592Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.687594Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.727158Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.727713Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.727715Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.767328Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.767757Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.767759Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.806922Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.807438Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.807440Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.846943Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.847382Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.847385Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.887083Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.887568Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.887570Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.927035Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.927519Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.927521Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:33.967205Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:33.967730Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:33.967732Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.007150Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.007636Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.007638Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.047169Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.047669Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.047672Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.086956Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.087343Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.087345Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.127007Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.127497Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.127499Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.167150Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.167723Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.167726Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.206969Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.207419Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.207421Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.247044Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.247498Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.247500Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.287369Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.287756Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.287757Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.327317Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.327763Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.327765Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.366974Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.367546Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.367548Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.407223Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.407682Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.407684Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.447066Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.447573Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.447574Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.487042Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.487494Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.487496Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.526919Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.527356Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.527358Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.567056Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.567576Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.567578Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.607046Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.607435Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.607437Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.647056Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.647448Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.647449Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.686919Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.687292Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.687294Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.727068Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.727513Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.727515Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.766875Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.767401Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.767402Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.807187Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.807626Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.807629Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.847170Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.847736Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.847739Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.887072Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.887451Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.887453Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.927137Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.927572Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.927574Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:34.967089Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:34.967621Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:34.967624Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.007337Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.007720Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.007722Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.047015Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.047535Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.047538Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.086916Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.087342Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.087344Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.127039Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.127427Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.127429Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.167101Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.167618Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.167620Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.207117Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.207612Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.207614Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.247116Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.247513Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.247515Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.287117Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.287507Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.287509Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.327411Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.327875Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.327878Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.367004Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.367526Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.367529Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.406963Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.407360Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.407363Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.447055Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.447480Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.447482Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.487128Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.487623Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.487625Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.526934Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.527314Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.527316Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:35.566962Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:35.567447Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:35.567449Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:47.711041Z DEBUG   - _AcquisitionLoop (1648) - Starting wakeup condition
+2023-02-05T01:54:47.774549Z DEBUG   - _AcquisitionLoop (1658) - Condition interrupted.
+2023-02-05T01:54:47.831077Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:47.831571Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:47.831574Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:47.869489Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:47.869934Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:47.869936Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:47.909224Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:47.909636Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:47.909638Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:47.949081Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:47.949501Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:47.949503Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:47.989237Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:47.989733Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:47.989734Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.029150Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.029574Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.029576Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.069220Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.069641Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.069643Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.109353Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.109781Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.109783Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.149291Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.149716Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.149718Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.189228Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.189612Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.189614Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.229217Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.229693Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.229695Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.269415Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.269899Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.269901Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.309311Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.309705Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.309707Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.349519Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.350038Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.350041Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.389173Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.389647Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.389649Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.429255Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.429706Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.429708Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.469208Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.469645Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.469647Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.509157Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.509630Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.509632Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.549144Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.549507Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.549508Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.589419Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.590091Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.590093Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.629249Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.629630Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.629633Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.669146Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.669611Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.669613Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.709144Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.709523Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.709525Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.749199Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.749623Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.749624Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.789149Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.789650Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.789652Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.829271Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.829670Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.829672Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.869490Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.869921Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.869924Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.909197Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.909659Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.909662Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.949623Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.950277Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.950280Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:48.989095Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:48.989464Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:48.989466Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.029124Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.029659Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.029661Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.069297Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.069785Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.069787Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.109204Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.109623Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.109625Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.149101Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.149575Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.149577Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.189173Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.189644Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.189646Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.229179Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.229614Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.229616Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.269240Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.269668Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.269670Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.309414Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.310010Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.310012Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.349249Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.349717Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.349719Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.389486Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.389956Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.389958Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.429407Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.429841Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.429843Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.469164Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.469691Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.469693Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.509345Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.509786Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.509788Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.549179Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.549614Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.549616Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.589166Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.589654Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.589656Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.629219Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.629604Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.629607Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.669305Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.669830Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.669833Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.709394Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.709856Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.709858Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.749219Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.749604Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.749606Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.789046Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.789427Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.789429Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.829282Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.829744Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.829747Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.869173Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.869666Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.869669Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.909596Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.910039Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.910042Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.949110Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.949518Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.949520Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:49.989199Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:49.989672Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:49.989675Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.029313Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.029688Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.029690Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.069234Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.069624Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.069626Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.109302Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.109823Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.109825Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.149323Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.149697Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.149699Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.189170Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.189639Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.189641Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.229155Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.229609Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.229611Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.269179Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.269657Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.269660Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.309207Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.309646Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.309648Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.349251Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.349677Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.349679Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.389699Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.390251Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.390254Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.429458Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.429907Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.429908Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.469030Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.469573Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.469575Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.509173Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.509605Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.509607Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.549185Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.549621Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.549623Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.589023Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.589481Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.589483Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.628997Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.629401Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.629403Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.669193Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.669627Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.669629Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.709214Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.709677Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.709679Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.749136Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.749665Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.749667Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.789288Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.789817Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.789820Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.829194Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.829628Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.829630Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.869320Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.869851Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.869854Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.909364Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.909844Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.909846Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.949518Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.950052Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.950054Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:50.989356Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:50.989830Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:50.989831Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.029178Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.029663Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.029666Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.069264Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.069716Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.069718Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.109169Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.109559Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.109562Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.149106Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.149545Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.149547Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.189170Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.189644Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.189646Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.229252Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.229741Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.229744Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.269244Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.269696Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.269699Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.309295Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.309791Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.309793Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.349267Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.349745Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.349747Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.389162Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.389599Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.389601Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.429242Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.429711Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.429714Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.469631Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.470081Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.470084Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.509232Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.509665Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.509667Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.549245Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.549642Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.549645Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.589151Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.589717Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.589720Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.629196Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.629587Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.629589Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.669161Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.669537Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.669539Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.709453Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.709979Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.709982Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.749236Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.749653Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.749656Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.789268Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.789789Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.789791Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.829451Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.830123Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.830126Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.869485Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.870095Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.870097Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.909138Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.909555Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.909557Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.949340Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.949915Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.949918Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:51.989568Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:51.990035Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:51.990037Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.029205Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.029640Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.029643Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.069171Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.069660Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.069662Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.109423Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.109881Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.109884Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.149219Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.149664Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.149666Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.189137Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.189559Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.189561Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.229206Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.229665Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.229667Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.269233Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.269711Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.269713Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.309192Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.309634Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.309636Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.349185Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.349655Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.349657Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.389255Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.389811Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.389813Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.429049Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.429456Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.429458Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.469075Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.469489Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.469491Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.509793Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.510278Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.510280Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.549216Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.549621Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.549623Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.589255Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.589668Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.589670Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.629339Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.629847Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.629849Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.669347Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.669833Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.669835Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.709258Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.709691Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.709693Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.749289Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.749731Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.749733Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.789112Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.789524Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.789526Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.829154Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.829565Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.829567Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.869275Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.869686Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.869688Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.909221Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.909837Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.909839Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.949334Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.949820Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.949822Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:52.989180Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:52.989590Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:52.989592Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.029669Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.030140Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.030142Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.069205Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.069664Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.069666Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.109176Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.109637Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.109640Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.149169Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.149577Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.149580Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.189296Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.189792Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.189795Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.229254Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.229679Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.229682Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.269242Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.269691Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.269694Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.309482Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.309996Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.309998Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.349348Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.349846Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.349848Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.389222Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.389735Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.389737Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.429297Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.429786Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.429789Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.469344Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.469974Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.469976Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.509209Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.509679Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.509681Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.549643Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.550151Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.550154Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.589316Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.589895Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.589898Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.629169Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.629627Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.629629Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.669228Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.669717Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.669720Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.709552Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.710081Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.710083Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.749166Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.749595Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.749597Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.789345Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.789851Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.789853Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.829217Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.829666Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.829668Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.869320Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.869768Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.869771Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.909257Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.909697Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.909699Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.949175Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.949550Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.949552Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:53.989381Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:53.989855Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:53.989857Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.029389Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.029820Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.029822Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.069589Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.069995Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.069997Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.109099Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.109520Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.109523Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.149301Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.149798Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.149801Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.189700Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.190154Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.190157Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.229125Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.229501Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.229503Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.269192Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.269674Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.269677Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.309239Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.309777Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.309780Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.349133Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.349533Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.349536Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.389185Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.389764Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.389766Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.429133Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.429549Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.429551Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.469102Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.469531Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.469533Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.509285Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.509766Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.509768Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition
+2023-02-05T01:54:54.549167Z DEBUG   - _CameraParametersCallbackReceiver (907) - me index params: 0 hdr index params: 0
+2023-02-05T01:54:54.549570Z DEBUG   - me frame index: 0 me index: 0 HDR frame index: 0 HDR index: 0
+2023-02-05T01:54:54.549573Z DEBUG   - [_CallbackReceiver] Notifying wakeup condition

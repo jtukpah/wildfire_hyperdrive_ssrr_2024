@@ -1,9 +1,0 @@
-2023-01-18 16:54:36.883003 INFO    - ProcessingUnit::_PropagateDataTypes()
-2023-01-18 16:54:36.883016 INFO    - OutputPort: non_uniformity_pipeline.frame_processing_group.source_unit.out; Actual kind: AK_ROI_FRAME; Minimal kind: AK_ARRAY
-2023-01-18 16:54:36.883021 INFO    - InputPort: non_uniformity_pipeline.frame_processing_group.bias_correction_unit.in; Actual kind: AK_ROI_FRAME; Minimal kind: AK_IMAGE
-2023-01-18 16:54:37.101283 INFO    - ProcessingUnit::Process
-2023-01-18 16:54:37.106131 INFO    - ProcessingUnit::Process
-2023-01-18 16:54:37.338472 INFO    - ProcessingUnit::_PropagateDataTypes()
-2023-01-18 16:54:37.338493 INFO    - OutputPort: reference_spectrum_pipeline.frame_processing_group.source_unit.out; Actual kind: AK_ROI_FRAME; Minimal kind: AK_ARRAY
-2023-01-18 16:54:37.338499 INFO    - InputPort: reference_spectrum_pipeline.frame_processing_group.bias_correction_unit.in; Actual kind: AK_ROI_FRAME; Minimal kind: AK_IMAGE
-2023-01-18 16:54:37.562957 INFO    - ProcessingUnit::Process

@@ -1,3 +1,0 @@
-2023-02-03T17:56:53.287995Z INFO    - Module::Initialize -->
-2023-02-03T17:56:53.287997Z VERBOSE -    trying to initialize...
-2023-02-03T17:56:53.287998Z INFO    - Module::Initialize <--
