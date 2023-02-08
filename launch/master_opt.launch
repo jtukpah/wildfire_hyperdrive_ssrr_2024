@@ -2,15 +2,16 @@
     <node pkg="imec_driver" type="grab_datacube" name="cube_grabber_imec" output="screen">
         <param name="camera_model" value="imec"/>
     </node>
-    <node pkg="imec_driver" type="demosaic_datacube" name="hsi_processor_imec" output="screen">
+    <!-- <node pkg="imec_driver" type="demosaic_datacube" name="hsi_processor_imec" output="screen">
         <param name="camera_model" value="imec"/>
-    </node>
-    <!-- <node pkg="imec_driver" type="cube_data.py" name="cube_processor_ximea" output="screen">
-        <param name="camera_model" value="ximea"/>
-    </node>
-    <node pkg="imec_driver" type="demosaic_cube.py" name="hsi_processor_ximea" output="screen">
-        <param name="camera_model" value="ximea"/>
-    </node>
-    <node pkg="imec_driver" type="GUI.py" name="hsi_gui"> 
     </node> -->
+    <node pkg="imec_driver" type="grab_datacube" name="cube_processor_ximea" output="screen">
+        <param name="camera_model" value="ximea"/>
+    </node>
+    <!-- <node pkg="imec_driver" type="demosaic_datacube" name="hsi_processor_ximea" output="screen">
+        <param name="camera_model" value="ximea"/>
+    </node> -->
+    <!-- <node pkg="imec_driver" type="GUI.py" name="hsi_gui"> 
+    </node> -->
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find imec_driver)/rviz_configs/camera_visualize.rviz"/>
 </launch>

@@ -20,7 +20,8 @@ class DatacubeGrabber
 public:
     DatacubeGrabber(ros::NodeHandle *nh)
     {
-        
+        ros::ServiceServer service = nh->advertiseService("set_integration_time", &DatacubeGrabber::adjust_cam_param, this);
+
         this->raw_pub = nh->advertise<sensor_msgs::Image>("spectral_data", 10);
         ros::param::get("~camera_model", this->model);
         if (this->model.compare("imec") == 0)
@@ -63,7 +64,7 @@ public:
         this->runtime_parameters = {};
         cameraGetRuntimeParameters(this->camera, &this->runtime_parameters);
         this->runtime_parameters.frame_rate_hz = 100;
-        this->runtime_parameters.exposure_time_ms = 5.0;
+        this->runtime_parameters.exposure_time_ms = 10;
         this->runtime_parameters.trigger_mode = TM_NoTriggering;
         this->ret_val = cameraSetRuntimeParameters(this->camera, this->runtime_parameters);
         this->DisplayResult("cameraSetRuntimeParameters", this->ret_val);
@@ -119,24 +120,30 @@ private:
             cv_image.image = image;
             cv_image.toImageMsg(msg);
             this->raw_pub.publish(msg);
+            ros::spinOnce();
         }
     }
 
     bool adjust_cam_param(imec_driver::adjust_param::Request &req,
                           imec_driver::adjust_param::Response &res)
     {
-        if (this->integration_range.first < req.integration_time < this->integration_range.second)
+        res.success = true;
+        if (req.integration_time > this->integration_range.first && req.integration_time < this->integration_range.second)
         {
+            ROS_INFO("%f, %f",this->integration_range.first, this->integration_range.second);
+            ROS_INFO("%f",req.integration_time);
             cameraPause(this->camera);
             cameraGetRuntimeParameters(this->camera, &this->runtime_parameters);
             this->runtime_parameters.exposure_time_ms = req.integration_time;
+            cameraSetRuntimeParameters(this->camera, this->runtime_parameters);
             this->ret_val = cameraStart(this->camera);
             return true;
         }
         else
         {
-            return false;
+            res.success = false;
         }
+        return true;
     }
 
     CameraInfo get_device_info(int selected_camera)

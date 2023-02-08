@@ -55,6 +55,10 @@ class DataCubeGenerator(object):
         print(self.c_params)
         self.r_params = HSI_CAMERA.GetRuntimeParameters(self.device)
         # self.r_params['trigger_mode'] = 1
+        if self.model == 'imec':
+            # self.r_params['exposure_time_ms'] = 60
+            self.r_params['flip_vertical'] = False
+
         HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)
         print("R PARAMS>")
         print(self.r_params)        # Explicit Allocate based on Output-Data-Format

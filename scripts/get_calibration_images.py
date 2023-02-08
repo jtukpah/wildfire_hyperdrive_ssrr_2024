@@ -22,6 +22,7 @@ class CalibrationImages():
         [HSI_CAMERA.Initialize(device) for device in self.devices]  
         self.c_params =  [HSI_CAMERA.GetConfigurationParameters(device) for device in self.devices]
         self.r_params = [HSI_CAMERA.GetRuntimeParameters(device) for device in self.devices]
+        print(self.r_params)
         self.r_params[1]['exposure_time_ms'] = 60
         self.data_formats = [HSI_CAMERA.GetOutputFrameDataFormat(device) for device in self.devices]
         self.frames = [HSI_COMMON.AllocateFrame(dataformat) for dataformat in self.data_formats]
