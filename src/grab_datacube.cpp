@@ -21,10 +21,8 @@ public:
     DatacubeGrabber(ros::NodeHandle *nh)
     {
         
-        this->datacube_pub = nh->advertise<sensor_msgs::Image>("spectral_data", 10);
-
-        this->model = "imec";
-
+        this->raw_pub = nh->advertise<sensor_msgs::Image>("spectral_data", 10);
+        ros::param::get("~camera_model", this->model);
         if (this->model.compare("imec") == 0)
         {
             this->integration_range = std::make_pair(0.010000, 90);
@@ -84,7 +82,7 @@ public:
     }
 
 private:
-    ros::Publisher datacube_pub;
+    ros::Publisher raw_pub;
     ros::ServiceServer adjust_cam_param_srv;
 
     std::string model;
@@ -120,7 +118,7 @@ private:
             }
             cv_image.image = image;
             cv_image.toImageMsg(msg);
-            this->datacube_pub.publish(msg);
+            this->raw_pub.publish(msg);
         }
     }
 
@@ -174,7 +172,11 @@ private:
 
         // enumerate the connected devices
         int nr_devices = 0;
-        this->ret_val = cameraEnumerateConnectedDevices(&camera_infos[0], &nr_devices, nr_preallocated_devices, {EM_ALL});
+        if (this->model.compare("imec") == 0) {
+            this->ret_val = cameraEnumerateConnectedDevices(&camera_infos[0], &nr_devices, nr_preallocated_devices, {EM_IMEC});
+        } else if (this->model.compare("ximea") == 0) {
+            this->ret_val = cameraEnumerateConnectedDevices(&camera_infos[0], &nr_devices, nr_preallocated_devices, {EM_XIMEA});
+        }
         this->DisplayResult("cameraEnumerateConnectedDevices", this->ret_val);
         // if (HSI_OK != this->ret_val)
         // {
