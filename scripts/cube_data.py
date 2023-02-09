@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 from imec_driver.msg import DataCube
 from imec_driver.srv import adjust_param
 from sensor_msgs.msg import Image
+import logging
 
 ### Set parameters to find the HSI mosaic binaries
 os.environ['PATH'] += os.pathsep + r'/opt/imec/hsi-mosaic/bin'
@@ -28,10 +29,19 @@ import hsi_mosaic as HSI_MOSAIC
 
 class DataCubeGenerator(object):
     def __init__(self):
+        #logging
+        log_path = '/home/river/.ros/log'
+        
+        HSI_COMMON.InitializeLogger('logs', HSI_COMMON.LoggerVerbosity.LV_DEBUG)
+
+        logging.info ("Loading Context ...")
+        logging.info(Path(log_path).absolute())
+        assert Path(log_path).exists()
+        
         # Setup callback for data
         self.ros_pack = rospkg.RosPack()
         self.model = rospy.get_param('~camera_model')
-        self.param_server = rospy.Service(f'adjust_param', adjust_param, self.handle_adjust_param)
+        self.param_server = rospy.Service('adjust_param', adjust_param, self.handle_adjust_param)
         # Rate at which to generate composite data cubes
         # Look for connected cameras an choose appropriate model (assumes we only have 1 IMEC and 1 XIMEA)
         if self.model == 'ximea':
@@ -64,7 +74,8 @@ class DataCubeGenerator(object):
         print("C PARAMS>")
         print(self.c_params)
         self.r_params = HSI_CAMERA.GetRuntimeParameters(self.device)
-        self.r_params.frame_rate_hz = 60
+        print(self.r_params)
+        # self.r_params.frame_rate_hz = 60
         # self.r_params['trigger_mode'] = 1
         if self.model == 'imec':
             # self.r_params['exposure_time_ms'] = 60
@@ -140,11 +151,15 @@ class DataCubeGenerator(object):
         '''
         Listen to user parameter requests
         '''
+
+        frame_time = 1/(req.frame_rate) * 1000
+
         try:
             # Pause the camera
-            if self.integration_range[0] < req.integration_time < self.integration_range[1]:
+            if (self.integration_range[0] < req.integration_time < self.integration_range[1]) & (req.integration_time < frame_time):
                 HSI_CAMERA.Pause(self.device)
                 self.r_params.exposure_time_ms = req.integration_time
+                self.r_params.frame_rate_hz = frame_time
                 print(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)}')       
                 HSI_CAMERA.Start(self.device)
                 return True

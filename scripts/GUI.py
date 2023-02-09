@@ -104,15 +104,15 @@ class Widget(QtWidgets.QWidget):
         '''
         # configure and draw the histogram figure
         if self.img.size > 0:
-            histogram, bin_edges = np.histogram(self.cube[:, :, self.lam])
+            histogram, bin_edges = np.histogram(self.cube[:, :, self.lam], bins=50)
             fig = plt.figure()
             canvas = FigureCanvas(fig)
             ax = fig.gca()
             ax.set_title("Grayscale Histogram")
             ax.set_xlabel("grayscale value")
             ax.set_ylabel("pixel count")
-            ax.plot(bin_edges[0:-1], histogram)
-            #ax.hist(bin_edges[0:-1], histogram)  # <- or here
+            ax.plot(bin_edges[0:-1], histogram, color="yellow")
+            ax.fill_between(bin_edges[0:-1], histogram, color="purple")
             canvas.draw()
             image = np.frombuffer(canvas.tostring_rgb(), dtype='uint8').reshape(fig.canvas.get_width_height()[::-1] + (3,))
             self.histo_image.setPixmap(self.convert_nparray_to_QPixmap(image, grayscale=False))

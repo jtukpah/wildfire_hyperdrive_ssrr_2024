@@ -1,3 +1,4 @@
 float32 integration_time
+int8 frame_rate
 ---
 bool success

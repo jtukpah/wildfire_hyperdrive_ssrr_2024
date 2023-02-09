@@ -53,6 +53,24 @@ else()
   qt5_wrap_cpp(${PROJECT_NAME}_MOCS ${HEADER_FILES})
 endif()
 
+## An rviz plugin is just a shared library, so here we declare the
+## library to be called ``${PROJECT_NAME}`` (which is
+## "rviz_plugin_tutorials", or whatever your version of this project
+## is called) and specify the list of source files we collected above
+## in ``${SOURCE_FILES}``
+
+## Here we specify the list of source files, including the output of
+## the previous command which is stored in ``${MOC_FILES}``.
+
+# set(SOURCE_FILES
+#   src/gui.cpp
+# )
+# include_directories(include ${catkin_INCLUDE_DIRS})
+# add_library(${PROJECT_NAME} ${SOURCE_FILES})
+
+# target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${catkin_LIBRARIES})
+
 install(FILES
   plugin_description.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+

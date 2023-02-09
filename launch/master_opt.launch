@@ -15,8 +15,17 @@
             <param name="camera_model" value="ximea"/>
         </node>
     </group>
+    <group ns="imec" if="$(arg use_imec)">
+        <node pkg="imec_driver" type="cube_data.py" name="cube_processor_imec" output="screen">
+            <param name="camera_model" value="imec"/>
+        </node>
+    </group>
+    <group ns="gui" if="$(arg gui)">
+        <node pkg="imec_driver" type="GUI.py" name="hsi_gui" output="screen">
+        </node>
+    </group>
+    
     <!-- TODO MOVE THIS GUI INTO THE MAIN APPLICATION! -->
-    <!-- <node pkg="imec_driver" type="GUI.py" name="hsi_gui"/>  -->
-    <!-- Optionally launch RVIZ to view the data topics-->
-    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find imec_driver)/rviz_configs/camera_visualize.rviz" if="$(arg gui)"/>
+    <!-- Optionally launch RVIZ to view the data topics -->
+    <!-- <node type="rviz" name="rviz" pkg="rviz" args="-d $(find imec_driver)/rviz_configs/camera_visualize.rviz" if="$(arg gui)"/> -->
 </launch>

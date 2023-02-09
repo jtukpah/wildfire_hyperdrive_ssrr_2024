@@ -6,10 +6,6 @@
 #include <time.h>
 #include <chrono>
 #include <thread>
-
-#include <std_msgs/Bool.h>
-#include <std_msgs/String.h>
-
 #include "imec_driver/GUI.h"
 #include <pluginlib/class_list_macros.h>
 
