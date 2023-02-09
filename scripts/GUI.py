@@ -105,7 +105,6 @@ class Widget(QtWidgets.QWidget):
         # configure and draw the histogram figure
         if self.img.size > 0:
             histogram, bin_edges = np.histogram(self.cube[:, :, self.lam])
-            print(histogram)
             fig = plt.figure()
             canvas = FigureCanvas(fig)
             ax = fig.gca()
@@ -162,10 +161,10 @@ class Widget(QtWidgets.QWidget):
             self.data_sub.unregister()
         except:
             pass
-        self.data_sub = rospy.Subscriber('/cube_pub/{}'.format(self.cam_model), DataCube, self.callback)
+        self.data_sub = rospy.Subscriber('/{}/cube_data'.format(self.cam_model), DataCube, self.callback)
         # Max is the last index of the image list
         if self.cam_model == 'ximea':
-            self.slider.setMaximum(24)
+            self.slider.setMaximum(23)
         elif self.cam_model == 'imec':
             self.slider.setMaximum(8)
 

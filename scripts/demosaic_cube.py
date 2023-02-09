@@ -1,20 +1,26 @@
 #!/usr/bin/env python3
 
 import os
+os.environ['PATH'] += os.pathsep + 'opt/imec/hsi-mosaic/bin'
 import sys
 import cv2 as cv
 import rospy
 import typing
 import rospkg
+import logging
 import ros_numpy
 import traceback
 import numpy as np
+from pathlib import Path
 from bs4 import BeautifulSoup
 from numba import jit, prange
 from imec_driver.msg import DataCube
 from imec_driver.srv import adjust_param
 from sensor_msgs.msg import Image
-import gzip
+import hsi_common as HSI_COMMON
+import hsi_mosaic as HSI_MOSAIC
+import hsi_camera as HSI_CAMERA
+
 
 class CubeDemosaicer(object):
     def __init__(self):
@@ -25,6 +31,59 @@ class CubeDemosaicer(object):
         self.pub = rospy.Publisher(f'cube_pub/{self.model}', DataCube, queue_size=10)
         # Subscribe to the raw data image
         self.sub = rospy.Subscriber(f'raw_pub/{self.model}', Image, self.cube_callback)
+
+    def setup_context(self) -> None:
+        '''
+        Load HSI Context files and prepare to run demosaicing pipeline
+        '''
+        dn_context = '/home/river/catkin_ws/src/imec_driver/config/imec/context'
+        #####################################################################
+
+        formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-6s :: %(message)s',
+                                    datefmt='%Y-%m-%d %H:%M:%S')
+        logger = logging.getLogger()
+        for h in logger.handlers: h.setFormatter(formatter)
+        logger.setLevel(logging.DEBUG)
+
+        logging.info ('START MAIN.')
+
+        version = HSI_MOSAIC.GetAPIVersion()
+        logging.info (f'VERSION :: {version}')
+
+        logging.info ("Starting Logger.")
+        HSI_COMMON.InitializeLogger('logs', HSI_COMMON.LoggerVerbosity.LV_DEBUG)
+
+        logging.info ("Loading Context ...")
+        logging.info(Path(dn_context).absolute())
+        assert Path(dn_context).exists()
+        self.context = HSI_MOSAIC.LoadContext(dn_context)
+        logging.info (f'Context = {self.context}')
+        status = HSI_MOSAIC.ContextGetStatus(self.context)
+        logging.info(status)
+
+
+        #####################################################################
+        ### Creating the first pipeline
+        #####################################################################
+        self.pipeline = HSI_MOSAIC.Create(self.context)
+        logging.info(self.pipeline)
+
+        self.params = HSI_MOSAIC.GetConfigurationParameters(self.pipeline)
+        # params.spatial_resampling_width = 2045
+        # params.spatial_resampling_height = 1085
+        self.params.spatial_median_filter_enable = False
+        logging.info(f'Configuration Params : {self.params}')
+        HSI_MOSAIC.SetConfigurationParameters(self.pipeline, self.params)
+        logging.info('Initializing Pipeline')
+        HSI_MOSAIC.Initialize(self.pipeline)
+
+        outputdataformat = HSI_MOSAIC.GetOutputDataFormat(self.pipeline)
+        logging.info(f'Output Data Format = {outputdataformat}')
+
+        self.cube = HSI_COMMON.AllocateCube(outputdataformat)
+
+        logging.info('Starting Pipeline')
+        HSI_MOSAIC.Start(self.pipeline)
 
     def parse_parameters(self) -> None:
         '''
@@ -58,232 +117,9 @@ class CubeDemosaicer(object):
         '''
         # Mark that we've received a new cube
         cube = ros_numpy.numpify(msg)
-        if self.model == 'ximea':
-            big_cube = self.im2cube_sinc(cube, 5, cube.shape[0], cube.shape[1])
-            np.save('/home/river/test_cube.npy', big_cube)
-            cube = self.minimize_cube(big_cube, big_cube.shape[0], big_cube.shape[1], 5)
-        elif self.model == 'imec':
-            big_cube = self.im2cube_sinc(cube, 3, cube.shape[0], cube.shape[1])
-            cube = self.minimize_cube(big_cube, big_cube.shape[0], big_cube.shape[1], 3)
-        else:
-            rospy.loginfo('Unknown camera model')
-        self.publish_cube(cube)
-
-    #reduces size of cube
-    def minimize_cube(self, big_cube: np.ndarray, height: int, width: int, pattern: int) -> np.ndarray:
-        #creates shell for reduced cube
-        cube_sinc_out = np.zeros((height//pattern, width//pattern, pattern**2))
-        
-        #resizing of cube data
-        for channel_num in range(big_cube.shape[2]):
-            cube_sinc_out[:,:,channel_num] = cv.resize(big_cube[:,:,channel_num], (big_cube.shape[1]//pattern, big_cube.shape[0]//pattern), interpolation = cv.INTER_LANCZOS4)
-        return cube_sinc_out
-
-    def parse_parameters(self) -> None:
-        '''
-        Load parameter for camera from manufacturer provided XML file
-        for publication in datacube messages
-        '''
-        # Get an instance of RosPack with the default search paths
-        rospack = rospkg.RosPack()
-        param_path = os.path.join(rospack.get_path('imec_driver'),'config',f'{self.model}.xml')
-        with open(param_path, 'r') as f:
-            data = f.read()
-            Bs_data = BeautifulSoup(data, "xml")
-            self.central_wave = []
-            self.fwhm = []
-            self.QE = []
-            for band in Bs_data.find_all("wavelength_nm"):
-                self.central_wave.append(float(band.getText()))
-            for band in Bs_data.find_all("fwhm_nm"):
-                self.fwhm.append(float(band.getText()))
-            for band in Bs_data.find_all("QE"):
-                self.QE.append(float(band.getText()))
-            # Get calibration coefficients
-            coefficients = []
-            for coefficient in Bs_data.find_all("coefficients"):
-                coefficients.append(np.array([float(z) for z in coefficient['values'].split()]))
-            self.coefficients = np.array(coefficients)
-
-    @staticmethod
-    @jit(nopython=True)
-    def demosaic_cube(im, radius):
-        """
-        Box filter with running average O(1)
-        :param im: input image
-        :param radius: radius of box kernel
-        :return: box-filtered image
-        """
-        (rows, cols) = im.shape[:2]
-        z = np.zeros_like(im)
-
-        tile = [1] * im.ndim
-        tile[0] = radius
-        t = np.cumsum(im, 0)
-        z[0:radius + 1, :, ...] = t[radius:2 * radius + 1, :, ...]
-        z[radius + 1:rows - radius, :, ...] = t[2 * radius + 1:rows, :, ...] - t[0:rows - 2 * radius - 1, :, ...]
-        z[rows - radius:rows, :, ...] = np.tile(t[rows - 1:rows, :, ...], tile) - t[rows - 2 * radius - 1:rows - radius - 1, :, ...]
-
-        tile = [1] * im.ndim
-        tile[1] = radius
-        t = np.cumsum(z, 1)
-        z[:, 0:radius + 1, ...] = t[:, radius:2 * radius + 1, ...]
-        z[:, radius + 1:cols - radius, ...] = t[:, 2 * radius + 1: cols, ...] - t[:, 0: cols - 2 * radius - 1, ...]
-        z[:, cols - radius: cols, ...] = np.tile(t[:, cols - 1:cols, ...], tile) - t[:, cols - 2 * radius - 1: cols - radius - 1, ...]
-        return z
-    
-    def filter_guided_gray(self,im,guide,radius,smooth):
-        """
-        Guided filter for grayscale images
-        :param im: input image
-        :param guide: guidance image
-        :param radius: window radius parameter
-        :param smooth: regularization or smooth parameter
-        :return: guided-filtered image
-        """
-
-        (rows, cols) = guide.shape
-        N = self.demosaic_cube(np.ones([rows, cols]), radius)
-
-        meanI = self.demosaic_cube(guide, radius) / N
-        meanP = self.demosaic_cube(im, radius) / N
-        corrI = self.demosaic_cube(guide * guide, radius) / N
-        corrIp = self.demosaic_cube(guide * im, radius) / N
-        varI = corrI - meanI * meanI
-        covIp = corrIp - meanI * meanP
-
-        a = covIp / (varI + smooth)
-        b = meanP - a * meanI
-
-        meanA = self.demosaic_cube(a, radius) / N
-        meanB = self.demosaic_cube(b, radius) / N
-
-        z = meanA * guide + meanB
-
-        return z
-
-    def im2cube_sinc_guided(self, im_raw, pattern, height, width):
-        """
-        Interpolated demosaicking with guided filter
-        :param im_raw: raw input image
-        :param pattern: integer dimension of the mosaic pattern (e.g. 4 or 5)
-        :param height: height of valid image region
-        :param width: width of valid image region
-        :return:
-        """
-        cube = self.im2cube_sinc(im_raw, pattern, height, width)
-        im_guide = cube[:, :, 0]
-        cube = self.filter_guided_gray(cube, im_guide, 3, 0.01)
-
-        return cube
-
-    def im2cube_sinc(self, im_raw, pattern, height, width):
-        """
-        Interpolated demosaicking (Lanczos windowed sinc)
-        :param im_raw: raw input image
-        :param pattern: integer dimension of the mosaic pattern (e.g. 4 or 5)
-        :param height: height of valid image region
-        :param width: width of valid image region
-        :return:
-        """
-        cube = np.zeros([height, width, pattern ** 2])
-
-        band = 0
-        for i in range(0, pattern):
-            for j in range(0, pattern):
-                im_sub = im_raw[i:(height + 1):pattern, j:(width + 1):pattern]
-                im_sub = cv.resize(im_sub, (width, height), interpolation = cv.INTER_LANCZOS4)
-
-                offset = [i / pattern, j / pattern]
-                im_sub = self.filter_shift(im_sub, offset)
-
-                cube[:, :, band] = im_sub[:height, :width]
-                band += 1
-
-        im_guide = cube[:, :, 0]
-
-        return cube
-
-    def filter_shift(sefl,im,offset):
-        """
-        Shift image with offset
-        :param im: input image
-        :param offset: translation shift
-        :return: shifted image
-        """
-
-        rows, cols = im.shape
-        M = np.float32([[1, 0, offset[1]], [0, 1, offset[0]]])
-        z = cv.warpAffine(im, M, (cols, rows), cv.INTER_LANCZOS4)
-
-        return z
-
-    @staticmethod
-    @jit(nopython=True)
-    def perform_corrective_factors(data: np.ndarray) -> np.ndarray:
-        '''
-        Using the factors provided in the XML file calculate the final bands
-
-        This operation should be optimized with numpy for simplicity
-        '''
-        # TODO
-        return data
-
-    def publish_cube(self, cube: np.ndarray) -> None:
-        '''
-        Create a data cube message and publish to topic
-        '''
-        print(f'CUBE SHAPE: {self.model}')
-
-        if self.model == 'ximea':
-            values = [["-0.0870111 -0.0797373 -0.0516343 0.0228433 -0.0434904 0.00188421 -0.0180086 -0.00180196 -0.0035571 0.00762132 -0.00192729 -0.0269716 -0.00267334 -0.00188096 -0.00355713 -0.0463655 -0.142786 -0.0296149 -0.00297669 0.00437106 0 1.62659 -0.113809 0.00685329 -0.0123591"],
-            ["-0.00640826 -0.0231203 -0.0828399 -0.0284085 -0.0164755 0.00130988 -0.000259826 -0.00621806 -0.00446879 0.000878751 -0.00149024 -0.00233908 -0.0190474 -0.000765457 -0.00230613 0.00894476 -0.025628 -0.0953716 -0.0214167 0.00234876 0 -0.0831558 1.42672 -0.00146256 -0.0190242"],
-            ["-0.00171508 -0.00194242 -0.0276622 -0.0796324 -0.0499271 -0.000936207 0.000384042 0.00209444 -0.00864609 -0.00118338 -0.00297327 -0.00343256 -0.00107147 -0.0172835 -0.00184215 0.0124785 -0.00110149 -0.0217123 -0.0907514 -0.0165816 0 0.0013707 -0.143579 1.62258 -0.166931"],
-            ["-0.023137 0.00712731 -0.00709689 -0.00342218 -0.0828304 -0.00224962 0.000512481 0.000780517 -0.00215545 0.000189601 -0.00515615 -0.00159582 -0.000508293 8.84575e-05 -0.0104717 0.0598981 -0.00286399 0.00440791 -0.00985091 -0.0687412 0 -0.018463 0.00119182 -0.0403227 1.20467"],
-            ["-0.0246332 0.011417 -0.00718253 0.0141335 -0.0228154 -0.0141469 0.000625065 -0.00148689 -0.00166011 0.00673268 -0.080954 -0.0141323 0.0029408 0.00108139 -0.0175558 1.55535 -0.125264 -0.00117102 0.00557531 -0.15538 0 -0.0382738 -0.0107665 -0.00189718 -0.0805378"],
-            ["-0.0048326 0.00167166 -0.00424578 0.00128372 -0.00831566 0.0017465 -0.0104019 -0.000545719 -0.00080037 0.00112145 -0.0103592 -0.0454317 -0.0114294 -0.00158217 4.68961e-05 -0.0326611 1.17108 0.000823045 0.0251436 0.00238478 0 -0.050949 -0.0154776 -0.00421686 -0.00405719"],
-            ["0.00187216 -0.00449102 -0.00247466 -0.000733806 -0.00958267 0.00134316 -0.000192064 -0.0148557 -0.00194595 -0.000528778 0.00671163 -0.01055 -0.0699338 -0.0216831 -0.00131658 0.00818176 -0.235705 1.48223 0.0026433 -0.00547208 0 -0.00963981 -0.0818562 -0.0262711 -0.00575377"],
-            ["-0.00100823 0.000951497 -0.00742305 0.00430391 -0.0169003 -0.000714799 -0.00214692 0.000737697 -0.0191155 -0.000321806 6.11438e-06 0.0103718 -0.0182083 -0.105947 -0.0218467 -0.0130911 -0.0181792 -0.249609 1.75129 -0.117884 0 -5.04896e-05 -0.0173426 -0.127917 -0.0299564"],
-            ["-0.00330288 0.00045908 -0.0021249 0.0013832 -0.0123621 -0.00347899 -0.00288282 -0.00175146 -0.00029748 -0.00998484 0.064182 0.0303663 0.00614099 -0.0114625 -0.0652094 -0.0892624 -0.022957 -0.00513536 -0.112767 1.35339 0 -0.00357073 7.482e-05 -0.0130556 -0.0963865"],
-            ["-0.0138605 -3.95324e-05 -1.83055e-05 -0.000184699 -0.00715478 -0.0769391 -0.0192705 0.000131156 -0.00066591 -0.0161994 1.49611 -0.01292 0.00157088 0.00142284 -0.136356 -0.145994 -0.0384956 -0.00749459 0.00250951 -0.000470912 0 -0.00617487 -0.00631934 -0.00498193 -0.00820462"],
-            ["-0.00434581 -0.0147235 -0.00157749 -0.00329774 -0.0102354 -0.020251 -0.11963 -0.0309873 -0.00101214 0.00642147 -0.298128 1.92097 -0.0968823 -0.0295264 0.0223773 -0.03924 -0.192544 -0.0440124 -0.0143016 2.35312e-05 0 -0.0100958 -0.00642998 -0.00360847 -0.00896218"],
-            ["0.000558221 -0.000709979 -0.012902 -0.00129739 -0.0115787 0.0135928 -0.016957 -0.107482 -0.0244485 -0.000680809 -0.0117658 -0.0958125 1.56837 -0.0901654 0.0293869 -0.00640111 -0.035711 -0.133272 -0.0402132 -0.00435773 0 -0.00414898 -0.00854053 -0.00190988 -0.00355007"],
-            ["0.000196278 0.000315074 -0.00123494 -0.00948433 -0.0150567 0.0223848 0.0127739 -0.0304329 -0.0864583 -0.0249312 -0.0225908 -0.00522887 -0.0647792 1.36753 0.0538627 -0.00342755 -0.00477011 -0.0265905 -0.115475 -0.0314836 0 -0.00417857 -0.00289407 -0.00511879 -0.00292992"],
-            ["-0.0170496 0.0030745 -0.00254006 0.00268181 -0.0447598 0.118598 -0.00159778 -0.0211813 -0.0332744 -0.1421 -0.179982 -0.0449913 -0.0138126 -0.306409 1.97593 -0.0316317 0.0015114 7.2372e-05 -0.0472093 -0.194109 0 -0.00669541 -0.00361458 -0.0027375 -0.00817669"],
-            ["-0.165695 -0.0363216 0.0131448 -0.00489315 -0.0605866 2.15311 -0.111684 -0.0774798 -0.0169155 -0.255984 -0.244584 -0.0695201 0.00149841 -0.034421 -0.0281212 -0.00970254 -0.000989249 -0.00727455 -0.00942917 -0.00711845 0 -0.0144085 -0.00891517 -0.00293885 -0.000768741"],
-            ["-0.0263066 -0.0974247 -0.023618 -0.00597071 -0.00991653 -0.0922836 1.73723 -0.193446 -0.015547 0.02822 -0.034449 -0.173782 -0.0305912 -0.00851514 0.00657091 -0.00477303 -0.00127591 -0.00374936 -0.0108258 -0.00373796 0 -0.0261535 -0.00358008 -0.00235644 -0.00371666"],
-            ["0.03077 -0.0199777 -0.0737805 -0.0389822 -0.0176551 -0.00763591 -0.0254389 1.36155 -0.0419674 0.0656858 -0.0032189 -0.0382079 -0.106215 -0.0333992 0.000126651 -0.00384756 -6.47949e-05 -0.00407082 -0.00664065 -0.00376108 0 -0.00500773 -0.0216243 -0.00234657 -0.00429433"],
-            ["0.0758406 -0.00205562 -0.0250843 -0.12379 -0.0684154 -0.0305808 0.00845006 -0.0773214 1.46467 0.0842631 -0.00326876 -0.0109605 -0.0354131 -0.145173 -0.0465943 -0.0069418 -0.00183821 -0.00156057 -0.0110689 -0.00052847 0 -0.00744164 -0.00392181 -0.0260771 -0.00518357"],
-            ["0.185949 -0.028745 0.00721736 -0.0714243 -0.201642 -0.210066 -0.0206209 -0.0848964 -0.0469976 1.81555 -0.010761 -0.00792746 0.000985998 -0.0460296 -0.202154 -0.0109765 -0.00110217 -0.00380194 -0.00424559 -0.00272114 0 -0.0088026 -0.00242021 -0.00607114 -0.0382964"],
-            ["1.92752 0.122277 -0.10809 -0.0371345 -0.339352 -0.251127 -0.083313 -0.0111632 -0.0717842 0.0846594 -0.00512554 -0.00933618 -0.00748278 8.0894e-05 -0.0184493 -0.0637893 -0.00566925 -0.0033703 -0.00905319 -0.000347534 0 -0.0699001 0.00191901 0.00961094 -0.0515768"],
-            ["0.102425 1.6905 0.0389442 -0.213407 -0.00912554 -0.077178 -0.197166 -0.0694146 -0.0208389 0.00893121 0.000345507 -0.0182018 -0.00617176 -0.00496099 -0.0100779 -0.0153502 -0.0414885 -0.00734189 -0.00697312 -0.00300393 0 -0.119869 -0.0317969 0.0124575 -0.00124064"],
-            ["0.042406 0.102944 1.5033 -0.00441375 -0.0735558 -0.0216037 -0.0537746 -0.175326 -0.0710089 0.00187459 -0.00204769 -0.00872714 -0.0103046 -0.00355772 -0.00407068 -0.00794777 -0.00714803 -0.0333638 -0.00882133 -0.00126631 0 -0.0382123 -0.104108 -0.0273952 0.00612878"],
-            ["-0.0139254 0.0229062 0.138812 1.2963 0.117764 -0.00933331 -0.0115507 -0.0472659 -0.16392 -0.0682551 -0.00200637 -0.00700835 -0.00379523 -0.00168341 -0.00439197 -0.00768255 -0.00476704 -0.00743789 -0.0317416 -0.00433318 0 -0.0174472 -0.0408097 -0.0933671 -0.0350615"],
-            ["-0.17027 -0.0140712 0.0131364 0.0895526 1.63598 -0.0195949 0.00282474 -0.00442651 -0.0590773 -0.18719 0.000525542 -0.00659809 -0.00255743 0.000200812 -0.0106862 -0.00805829 -0.00184906 -0.00460846 -0.00941471 -0.0325482 0 -0.0273852 -0.00959795 -0.0424129 -0.131876"]]
-
-        elif self.model == 'imec':
-            values = [["-0.0104603 -0.0011669 -0.00172989 0.16087 0.00711459 -0.0293091 -0.00449294 -0.00060095 -0.00113117"],
-            ["-0.000956892 -0.0114393 -0.00205378 -0.0428224 0.179392 0.00857657 -0.000385928 -0.00538833 -0.000962117"],
-            ["-0.00127986 -0.000596364 -0.0137547 -0.00149089 -0.0423064 0.191897 0.00138469 -0.000389815 -0.00618386"],
-            ["-0.00430976 -0.000731634 -0.00206573 -0.0237278 -0.00406502 -0.00384652 0.216508 0.00459802 -0.0334615"],
-            ["-0.00126218 -0.00308923 -0.00124138 -0.000571045 -0.0191549 -0.00339503 -0.0413979 0.185398 0.00447262"],
-            ["-0.00117702 -0.00134749 -0.00546335 -0.00174254 -0.00145622 -0.0215481 -0.00149957 -0.0356785 0.215175"],
-            ["0.269534 -0.000633232 -0.0377378 -0.00893285 -0.00244059 -0.00347368 -0.0212981 -0.00286588 -0.00303588"],
-            ["-0.0308124 0.177643 0.000670678 -0.00207592 -0.00526423 -0.00147391 -0.00219105 -0.0132735 -0.00140742"],
-            ["-0.00217547 -0.0210804 0.145958 -0.00257511 -0.00204766 -0.00459222 -0.00126997 -0.00153807 -0.0098308"]]
-
-        values = [[float(x) for x in z[0].split()] for z in values]
-        values = np.array(values)
-
-        noiseless_channel = np.zeros((cube.shape[0], cube.shape[1], len(values)))
-
-        for band_num in (range(values.shape[0])):
-            vals = values[band_num, :]
-            for lam in range(cube.shape[2]):
-                noiseless_channel[:, :, band_num] += cube[:, :, lam]*vals[lam]
-
-        print(noiseless_channel.shape)
-
+        HSI_MOSAIC.PushFrame(self.pipeline, self.frame)
+        HSI_MOSAIC.GetCube(self.pipeline, cube, timeout_ms=1000)
+        py_cube = HSI_COMMON.CubeAsArray(cube)
         ros_cube = DataCube()
         ros_cube.data = noiseless_channel.flatten()
         ros_cube.width, ros_cube.height, ros_cube.lam = tuple(noiseless_channel.shape)
@@ -297,7 +133,13 @@ class CubeDemosaicer(object):
         '''
         Custom shutdown behavior
         '''
-        return 
+        HSI_MOSAIC.Pause(self.pipeline)
+        HSI_MOSAIC.Stop(self.pipeline)
+        HSI_COMMON.DeallocateCube(self.cube)
+        logging.info("Cleanup ...")
+        HSI_COMMON.DeallocateFrame(self.frame)
+        HSI_COMMON.DeallocateCube(self.cube)
+        HSI_MOSAIC.DeallocateContext(self.context)
 
 if __name__ == '__main__':
     rospy.init_node('CubeProcessor', anonymous=True)

@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include <imec_driver/hsi_camera_api.h>
+#include <hsi_camera_api.h>
 // #include <hsi_camera_api.h>
 
 #include <string>

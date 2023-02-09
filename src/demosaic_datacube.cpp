@@ -1,7 +1,7 @@
 #include <ros/ros.h>
-#include <ros/package.h>
-#include <imec_driver/hsi_camera_api.h>
-#include <imec_driver/hsi_mosaic_api.h>
+// #include <ros/package.h>
+#include <hsi_camera_api.h>
+#include <hsi_mosaic_api.h>
 // #include <hsi_camera_api.h>
 
 #include <string>
@@ -23,24 +23,28 @@ public:
     ImageDemosaicer(ros::NodeHandle *nh)
     {
         // Load the package path
-        this->package_path = ros::package::getPath("imec_driver");
-        this->raw_sub = nh->subscribe("spectral_data", 10, &ImageDemosaicer::cube_call_back, this);
+        this->package_path = "/home/river/catkin_ws/src/imec_driver"; // ros::package::getPath("imec_driver");
+        ros::param::get("~camera_model", this->model);
+        this->raw_sub = nh->subscribe("cube_grabber/spectral_data", 10, &ImageDemosaicer::cube_call_back, this);
         this->cube_pub = nh->advertise<imec_driver::DataCube>("corrected_cube", 1);
 
-        ros::param::get("~camera_model", this->model);
         if (this->model.compare("imec") == 0)
         {
             // Set acquisition context for IMEC
             this->context_path = this->package_path + "/config/imec/context";
-            this->output_width = 639;
+            // this->blank_cube_path = this->package_path + "/config/empty_cubes/blank_ximea.raw.xml";
+            this->output_width = 640;
             this->output_height = 510;
+            this->DisplayResult("LoadFrame()", commonLoadFrame(&data_frame, this->blank_cube_path.c_str()));
         }
         else if (this->model.compare("ximea") == 0)
         {
             // Set acquisition context for XIMEA
             this->context_path = this->package_path + "/config/ximea/context";
+            // this->blank_cube_path = this->package_path + "/config/empty_cubes/blank_imec.raw.xml";
             this->output_width = 2045;
             this->output_height = 1085;
+            //this->DisplayResult("LoadFrame()", commonLoadFrame(&data_frame, this->blank_cube_path.c_str()));
         }
 
         this->ret_val = HSI_OK;
@@ -85,7 +89,7 @@ public:
         // shutdown
         mosaicPause(pipeline);
         mosaicStop(pipeline);
-        commonDeallocateFrame(&frame);
+        commonDeallocateFrame(&data_frame);
         commonDeallocateFrameDataFormat(&data_format);
         mosaicDeallocateContext(&context);
         mosaicDestroy(&pipeline);
@@ -100,11 +104,12 @@ private:
     std::string model;
     std::string package_path;
     std::string context_path;
+    std::string blank_cube_path;
     HSI_RETURN ret_val;
     FrameDataFormat data_format;
     CubeDataFormat output_data_format = {};
     CubeFloat data_cube = {};
-    FrameFloat frame;
+    FrameFloat data_frame = {};
     HANDLE context = nullptr;
     HANDLE pipeline = 0x0;
 
@@ -112,11 +117,21 @@ private:
 
     void cube_call_back(const sensor_msgs::Image::ConstPtr& msg)
     {
-        ROS_INFO("CUBE RECEIVED!");
+        cv_bridge::CvImagePtr cv_ptr;
+        try
+        {
+            cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+        }
+        catch (cv_bridge::Exception& e)
+        {
+            ROS_ERROR("cv_bridge exception: %s", e.what());
+            return;
+        }
+        ROS_INFO("CUBE RECEIVED! %d, %d", cv_ptr->image.rows, cv_ptr->image.cols);
         // TODO: DECONSTRUCT IMAGE INTO A CV::MAT, using the frame variable
         // TODO: Populate the frame from the CV::MAT
         // TODO: Verify that the PushFrame() Routine actually works here
-        this->DisplayResult("PushFrame()", mosaicPushFrame (pipeline, frame));
+        this->DisplayResult("PushFrame()", mosaicPushFrame (pipeline, data_frame));
         // TODO: Verify that the GetCube() Routine populates a 3D cube
         this->DisplayResult("GetCube()", mosaicGetCube (pipeline, &data_cube, 1000000));
         // TODO: Write method the takes datacube and turns it into an imec_driver::DataCube message
@@ -215,6 +230,7 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "cube_demosaic", ros::init_options::AnonymousName);
     ros::NodeHandle nh("~");
+    ROS_INFO("STARTING NODE");
     ImageDemosaicer nc = ImageDemosaicer(&nh);
     ros::spin();
     return 0;

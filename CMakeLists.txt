@@ -44,10 +44,7 @@ generate_messages(
 
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES imec_driver
-#  CATKIN_DEPENDS cv2 cv_bridge numpy os rospy sensor_msgs.msg
-#  DEPENDS system_lib
-   CATKIN_DEPENDS message_runtime
+   CATKIN_DEPENDS message_runtime std_msgs sensor_msgs roscpp cv_bridge image_transport
 )
 
 if(rviz_QT_VERSION VERSION_LESS "5")
@@ -55,46 +52,6 @@ if(rviz_QT_VERSION VERSION_LESS "5")
 else()
   qt5_wrap_cpp(${PROJECT_NAME}_MOCS ${HEADER_FILES})
 endif()
-
-include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}
-)
-
-# include_directories(/opt/imec/hsi-mosiac/include)
-# link_directories(/opt/imec/hsi-mosiac/bin)
-
-# find_library(HSI_CAMERA_API imec REQUIRED)
-# if (NOT HSI_CAMERA_API)
-#     message(FATAL_ERROR "hsi_camera_api library not found")
-# endif()
-
-# if(HSI_CAMERA_API) 
-#   message(FATAL_ERROR "Found ya boi")
-# endif()
-
-# set(hsi_camera_api "/opt/imec/hsi-mosiac/bin/libhsi_camera_api.so")  # the full path. if postfix is `.so`, change it
-
-add_executable(grab_datacube src/grab_datacube.cpp)
-add_executable(demosaic_datacube src/demosaic_datacube.cpp)
-# add_executable(gui src/gui.cpp)
-
-# target_link_libraries(gui ${QT_LIBRARIES} ${catkin_LIBRARIES})
-
-
-# target_include_directories(grab_datacube PUBLIC "/opt/imec/hsi-mosiac/include/hsi_camera_api.h")
-# target_link_directories(grab_datacube PUBLIC "/opt/imec/hsi-mosiac/bin/libhsi_camera_api.so")
-
-file(GLOB SO_FILES "${PROJECT_SOURCE_DIR}/lib/*.so")
-
-target_link_libraries(grab_datacube ${catkin_LIBRARIES} ${SO_FILES})
-target_link_libraries(demosaic_datacube ${catkin_LIBRARIES} ${SO_FILES})
-# target_link_libraries(grab_datacube 
-#    ${catkin_LIBRARIES} /opt/imec/hsi-mosiac/bin/libhsi_camera_api.so
-# )
-# target_include_directories(grab_datacube PUBLIC
-#   "/opt/imec/hsi-mosiac/include"
-# )
 
 install(FILES
   plugin_description.xml
