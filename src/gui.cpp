@@ -13,10 +13,12 @@ GUI::GUI( QWidget* parent )
   : rviz::Panel( parent )
 {
   QGridLayout *layout = new QGridLayout;
-
-  QLabel *title = new QLabel("<P><b><FONT SIZE = 5>Hyper Spectral Image</b></P></br>");
+  // Create the header here
+  QLabel *title = new QLabel("<P><b><FONT SIZE = 5>Hyperspectral Band Viewer</b></P></br>");
+  // Create a horizontal layout with the two image views
   layout->addWidget(title, 0, 0, 1, -1, Qt::AlignCenter);
-
+  layout->addWidget(title, 0, 0, 1, -1, Qt::AlignCenter);
+  // Creat the bottom row with the slider and drop box
   setLayout(layout);
 
 }

@@ -73,7 +73,6 @@ class Widget(QtWidgets.QWidget):
         # Mark that we've received a new cube
         self.new_cube = True
         self.cube = np.reshape(msg.data, (msg.width, msg.height, msg.lam))
-        #self.cube = self.cube.astype(np.int)
 
     def rescale_image(self, arr):
         '''
@@ -197,5 +196,5 @@ if __name__ == "__main__":
     try:
         my_node = Widget()
         my_node.run()
-    except rospy.ROSInterruptExcetion:
+    except rospy.ROSInterruptException:
         my_node.shutdown()
