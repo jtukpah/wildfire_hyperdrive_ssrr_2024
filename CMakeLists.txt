@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(imec_driver)
 
+
+set(CMAKE_CXX_FLAGS "-std=c++11")
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   message_generation
+  pluginlib
   rospy
   roscpp
   rviz
@@ -43,15 +46,32 @@ generate_messages(
  )
 
 catkin_package(
-#  INCLUDE_DIRS include
-   CATKIN_DEPENDS message_runtime std_msgs sensor_msgs roscpp cv_bridge image_transport
+  INCLUDE_DIRS include
+   CATKIN_DEPENDS pluginlib message_runtime std_msgs sensor_msgs roscpp cv_bridge image_transport
 )
+
+set(HEADER_FILES
+    include/imec_driver/GUI.h
+  )
+
+set(SRC_FILES
+    src/gui.cpp
+  )  
 
 if(rviz_QT_VERSION VERSION_LESS "5")
   qt4_wrap_cpp(${PROJECT_NAME}_MOCS ${HEADER_FILES})
 else()
   qt5_wrap_cpp(${PROJECT_NAME}_MOCS ${HEADER_FILES})
 endif()
+
+
+include_directories(include ${catkin_INCLUDE_DIRS})
+
+add_library(${PROJECT_NAME} ${SRC_FILES} ${${PROJECT_NAME}_MOCS})
+
+add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${catkin_LIBRARIES})
 
 ## An rviz plugin is just a shared library, so here we declare the
 ## library to be called ``${PROJECT_NAME}`` (which is
@@ -69,6 +89,14 @@ endif()
 # add_library(${PROJECT_NAME} ${SOURCE_FILES})
 
 # target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${catkin_LIBRARIES})
+
+install( TARGETS
+  ${PROJECT_NAME}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 
 install(FILES
   plugin_description.xml

@@ -1,4 +1,4 @@
-<library path="lib/libGUI">
+<library path="lib/libimec_driver">
   <class name="imec_driver/GUI"
          type="imec_driver::GUI"
          base_class_type="rviz::Panel">

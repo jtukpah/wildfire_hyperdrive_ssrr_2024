@@ -52,22 +52,22 @@
   <build_depend>cv2</build_depend>
   <build_depend>cv_bridge</build_depend>
   <build_depend>numpy</build_depend>
-  <build_depend>std_msgs</build_depend>
-
   <build_depend>os</build_depend>
+  <build_depend>pluginlib</build_depend>
   <build_depend>qtbase5-dev</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>rospy</build_depend>
   <build_depend>rviz</build_depend>
-  <build_depend>s</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>image_transport</build_depend>
 
-  <build_depend>sensor_msgs</build_depend>
   <build_export_depend>cv2</build_export_depend>
   <build_export_depend>cv_bridge</build_export_depend>
   <build_export_depend>numpy</build_export_depend>
   <build_export_depend>os</build_export_depend>
+  <build_export_depend>pluginlib</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
   <build_export_depend>sensor_msgs</build_export_depend>
   <exec_depend>cv2</exec_depend>
@@ -77,6 +77,7 @@
   <exec_depend>libqt5-widgets</exec_depend>
   <exec_depend>numpy</exec_depend>
   <exec_depend>os</exec_depend>
+  <exec_depend>pluginlib</exec_depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>rviz</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>

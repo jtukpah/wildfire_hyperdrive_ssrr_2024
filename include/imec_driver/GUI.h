@@ -13,13 +13,10 @@
 #include <QObject>
 #include <QPushButton>
 #include <QRadioButton>
+#include <QSlider>
 
 #include <string>
 #include <thread>
-
-
-
-
 
 namespace imec_driver
 {
