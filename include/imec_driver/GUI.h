@@ -6,6 +6,7 @@
   #include <rviz/panel.h>
 #endif
 
+#include <Qt>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QHBoxLayout>
@@ -14,7 +15,11 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSlider>
-
+#include <QComboBox>
+#include <QHBoxLayout>
+#include <QPixmap>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsScene>
 #include <string>
 #include <thread>
 
