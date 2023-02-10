@@ -6,6 +6,8 @@
   #include <rviz/panel.h>
 #endif
 
+#include <sensor_msgs/Image.h>
+#include <std_msgs/Int8.h>
 #include <Qt>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -20,8 +22,10 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
+#include <QDebug>
 #include <string>
 #include <thread>
+#include <QTimer>
 
 namespace imec_driver
 {
@@ -34,14 +38,40 @@ public:
 
   virtual void load( const rviz::Config& config );
   virtual void save( rviz::Config config ) const;
+  QGridLayout *layout;
+  QLabel *title;
+  QLabel *label_channel;
+  QLabel *label_hist;
+  QLabel *currentCube;
+  QLabel *currentChannelValue;
+  QHBoxLayout *image_layout;
+  QHBoxLayout *controls_layout;
+  QWidget* images;
+  QWidget *controls;
+  QComboBox *topicSelector;
+  QSlider *channel_slider;
+  QTimer* timer_;
+  ros::Publisher channel_publisher;
+  ros::Publisher camera_publisher;
+  ros::Subscriber channel_listener;
+  ros::Subscriber histogram_listener;
+  void updateChannel(sensor_msgs::Image);
+  void updateHistogram(sensor_msgs::Image);
+
 
 public Q_SLOTS:
+  void handleSliderEvent(int);
+  void handleTopicChange(int);
+  void test(std_msgs::Int8);
+  void timerCallback();
+
+
 
 Q_SIGNALS:
 
 
 protected:
-  ros::NodeHandle nh_;
+  ros::NodeHandle nh;
 
   ros::AsyncSpinner* spinner_ptr;
 
