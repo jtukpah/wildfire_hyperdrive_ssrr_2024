@@ -26,6 +26,8 @@
 #include <string>
 #include <thread>
 #include <QTimer>
+#include <QToolTip>
+#include <QCoreApplication>
 
 namespace imec_driver
 {
@@ -42,6 +44,7 @@ public:
   QLabel *title;
   QLabel *label_channel;
   QLabel *label_hist;
+  QLabel *current_lambda;
   QLabel *currentCube;
   QLabel *currentChannelValue;
   QHBoxLayout *image_layout;
@@ -51,10 +54,9 @@ public:
   QComboBox *topicSelector;
   QSlider *channel_slider;
   QTimer* timer_;
-  ros::Publisher channel_publisher;
-  ros::Publisher camera_publisher;
-  ros::Subscriber channel_listener;
-  ros::Subscriber histogram_listener;
+  std::vector<double> ximea_lambda;
+  std::vector<double> imec_lambda;
+  std::vector<double> combined_lambda;
   void updateChannel(sensor_msgs::Image);
   void updateHistogram(sensor_msgs::Image);
 
@@ -69,14 +71,16 @@ public Q_SLOTS:
 
 Q_SIGNALS:
 
+protected:
+  ros::Publisher channel_publisher_;
+  ros::Publisher camera_publisher_;
+  ros::Subscriber channel_listener_;
+  ros::Subscriber histogram_listener_;
+
 
 protected:
-  ros::NodeHandle nh;
-
+  ros::NodeHandle nh_;
   ros::AsyncSpinner* spinner_ptr;
-
-
-  
   // Text to inform the user the status of the planner
   QLabel* status_update_;
 

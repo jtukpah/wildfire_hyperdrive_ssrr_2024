@@ -7,17 +7,15 @@
         <node pkg="imec_driver" type="cube_data.py" name="cube_processor_imec" output="screen">
             <param name="camera_model" value="imec"/>
         </node>
-        <node pkg="imec_driver" type="hsi_hist.py" name="hsi_hist" output="screen">
-            <param name="camera_model" value="imec"/>
-        </node>
     </group>
     <group ns="ximea" if="$(arg use_ximea)">
         <!-- Grab raw data from the camera -->
         <node pkg="imec_driver" type="cube_data.py" name="cube_processor_ximea" output="screen">
             <param name="camera_model" value="ximea"/>
         </node>
-        <node pkg="imec_driver" type="hsi_hist.py" name="hsi_hist" output="screen">
-            <param name="camera_model" value="ximea"/>
-        </node>
     </group>
+    <node pkg="imec_driver" type="hsi_hist.py" name="hsi_hist" output="screen">
+        <param name="camera_model" value="ximea"/>
+    </node>
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find imec_driver)/rviz_configs/hsi_default.rviz"/>
   </launch>

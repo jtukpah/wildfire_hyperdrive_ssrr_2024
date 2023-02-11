@@ -2,6 +2,8 @@
 #include <time.h>
 #include <chrono>
 #include <thread>
+#include <string>
+#include <string.h>
 #include <std_msgs/Int8.h>
 #include <std_msgs/String.h>
 #include <image_transport/image_transport.h>
@@ -16,8 +18,32 @@ namespace imec_driver
 GUI::GUI( QWidget* parent )
   : rviz::Panel( parent )
 {
-  channel_listener = nh.subscribe("/hsi_gui/channel_img", 1000, &GUI::updateChannel, this);
-  histogram_listener = nh.subscribe("/hsi_gui/hist_img", 1000, &GUI::updateHistogram, this);
+  // CONSTANT VALUES
+  ximea_lambda = {662.74414484, 678.44427179, 691.47995842, 702.79743883,
+       718.98022991, 730.09886825, 743.11429966, 757.61797177,
+       770.56671122, 779.24140246, 794.57439591, 805.38484958,
+       817.52315993, 831.92643985, 842.41924582, 853.91129525,
+       867.76937301, 878.09883114, 887.16460955, 901.40985581,
+       909.37019374, 919.05507754, 928.17011884, 932.90958447};
+  imec_lambda = {1122.48954896, 1140.51012341, 1162.45096103, 1192.69076274,
+       1210.67247958, 1298.52642212, 1382.2788887 , 1465.39984657,
+       1654.60278798};
+  combined_lambda = {662.74414484, 678.44427179, 691.47995842, 702.79743883,
+       718.98022991, 730.09886825, 743.11429966, 757.61797177,
+       770.56671122, 779.24140246, 794.57439591, 805.38484958,
+       817.52315993, 831.92643985, 842.41924582, 853.91129525,
+       867.76937301, 878.09883114, 887.16460955, 901.40985581,
+       909.37019374, 919.05507754, 928.17011884, 932.90958447,
+       1122.48954896, 1140.51012341, 1162.45096103, 1192.69076274,
+       1210.67247958, 1298.52642212, 1382.2788887 , 1465.39984657,
+       1654.60278798};
+  spinner_ptr = new ros::AsyncSpinner(2);
+  spinner_ptr->start();
+  channel_listener_ = nh_.subscribe("/hsi_gui/channel_img", 1000, &GUI::updateChannel, this);
+  histogram_listener_ = nh_.subscribe("/hsi_gui/hist_img", 1000, &GUI::updateHistogram, this);
+  // Initiate publishers
+  channel_publisher_ = nh_.advertise<std_msgs::Int8>("/hsi_gui/channel", 10);
+  camera_publisher_ = nh_.advertise<std_msgs::String>("/hsi_gui/camera", 10);
   timer_ = new QTimer(this);
   connect(timer_, &QTimer::timeout, this, &GUI::timerCallback);
   timer_->start(10); // 1 second interval
@@ -55,6 +81,7 @@ GUI::GUI( QWidget* parent )
   QStringList topics;
   topics << "[Camera]" << "ximea" << "imec" << "combined";
   topicSelector->addItems(topics);
+  topicSelector->setCurrentIndex(1);
   currentCube = new QLabel(tr("Current Cube:"));
   controls_layout->addWidget(currentCube);
   controls_layout->addWidget(topicSelector);
@@ -68,41 +95,65 @@ GUI::GUI( QWidget* parent )
   channel_slider->setMaximum(24);
   channel_slider->setTickInterval(1);
   // Add Handler for Slider Change
-  currentChannelValue = new QLabel(tr("Current \u039B:"));
+  currentChannelValue = new QLabel(tr("Current \u03BB:"));
   controls_layout->addWidget(currentChannelValue);
   controls_layout->addWidget(channel_slider);
   // Add the horizontal box
+  std::string initial_label = "Current Lambda: " + std::to_string(ximea_lambda[0]);
+  current_lambda = new QLabel(QString(initial_label.c_str()));
   layout->addWidget(controls);
+  layout->addWidget(current_lambda);
   setLayout(layout);
-  // Initiate publishers
-  channel_publisher = nh.advertise<std_msgs::Int8>("/hsi_gui/channel", 10);
-  camera_publisher = nh.advertise<std_msgs::String>("/hsi_gui/camera", 10);
   // Initiate event listeners
-  QObject::connect(channel_slider, &QSlider::valueChanged, this, &GUI::handleSliderEvent);
+  QObject::connect(channel_slider, &QSlider::sliderMoved, this, &GUI::handleSliderEvent);
   QObject::connect(topicSelector, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
                     this, &GUI::handleTopicChange);
 }
 
 void GUI::handleSliderEvent(int value) {
-  qDebug() << "Slider value changed to " << value;
   // Publish the numeric index to ROS
-  if( ros::ok() && channel_publisher)
-  {
-    std_msgs::Int8 msg;
-    msg.data = value;
-    channel_publisher.publish(msg);
+  std::string camera = topicSelector->currentText().toStdString();
+  std::string current_label;
+  if (camera == "imec") {
+      channel_slider->setToolTip(QString(std::to_string(imec_lambda[value]).c_str()));
+      current_label = "Current Lambda: " + std::to_string(imec_lambda[value]);
+      current_lambda->setText(QString(current_label.c_str()));
+      current_lambda->repaint();
+      QCoreApplication::processEvents();
+  } else if (camera == "ximea") {
+      channel_slider->setToolTip(QString(std::to_string(ximea_lambda[value]).c_str()));
+      current_label = "Current Lambda: " + std::to_string(ximea_lambda[value]);
+      current_lambda->setText(QString(current_label.c_str()));
+      QCoreApplication::processEvents();
+  } else if (camera == "combined") {
+      channel_slider->setToolTip(QString(std::to_string(combined_lambda[value]).c_str()));
+      current_label = "Current Lambda: " + std::to_string(combined_lambda[value]);
+      current_lambda->setText(QString(current_label.c_str()));
+      QCoreApplication::processEvents();
   }
+  std_msgs::Int8 msg;
+  msg.data = value;
+  channel_publisher_.publish(msg);
 }
 
 void GUI::handleTopicChange(int index) {
-  qDebug() << "Topic Index Change To" << index;
   // Publish the name of the currently selected camera to ROS
-  if( ros::ok() && camera_publisher)
-  {
-    std_msgs::String msg;
-    msg.data = topicSelector->currentText().toStdString();
-    camera_publisher.publish(msg);
+  std_msgs::String msg;
+  // TODO make these values not hardcoded
+  std::string camera = topicSelector->currentText().toStdString();
+  // Always reset the slider to 0
+  channel_slider->setValue(0);
+  channel_slider->setMaximum(0);
+  std::string current_label;
+  if (camera == "imec") {
+      channel_slider->setMaximum(8);
+  } else if (camera == "ximea") {
+      channel_slider->setMaximum(23);
+  } else if (camera == "combined") {
+      channel_slider->setMaximum(32);
   }
+  msg.data = topicSelector->currentText().toStdString();
+  camera_publisher_.publish(msg);
 }
 
 void GUI::timerCallback()
@@ -112,11 +163,10 @@ void GUI::timerCallback()
 
 void GUI::updateHistogram(sensor_msgs::Image msg)
 {
-  qDebug() << "Histogram CALLBACK RECEIVED: ";
   cv_bridge::CvImagePtr cv_ptr;
   try
   {
-    cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+    cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::TYPE_8UC4);
   }
   catch (cv_bridge::Exception& e)
   {
@@ -124,16 +174,15 @@ void GUI::updateHistogram(sensor_msgs::Image msg)
     return;
   }
   // Update the image in the UI
-  label_hist->setPixmap(QPixmap::fromImage(QImage(cv_ptr->image.data, cv_ptr->image.cols, cv_ptr->image.rows, cv_ptr->image.step, QImage::Format_RGB888)));
+  label_hist->setPixmap(QPixmap::fromImage(QImage(cv_ptr->image.data, cv_ptr->image.cols, cv_ptr->image.rows, cv_ptr->image.step, QImage::Format_RGBA8888)));
 }
 
 void GUI::updateChannel(sensor_msgs::Image msg)
 {
-  qDebug() << "Channel CALLBACK RECEIVED: ";
   cv_bridge::CvImagePtr cv_ptr;
   try
   {
-    cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+    cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::TYPE_8UC3);
   }
   catch (cv_bridge::Exception& e)
   {
