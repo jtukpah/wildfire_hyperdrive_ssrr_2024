@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<sensor_calibration created="2021-04-30T14:45:33" modified="2022-11-21T15:17:24" sensor_id="12.12.10.8" software="imec HSI Matlab" software_version="V1.31.0.0" version="3">
+<sensor_calibration created="2021-04-30T14:45:33" modified="2023-02-13T13:52:20" sensor_id="12.12.10.8" software="imec HSI Matlab" software_version="V1.35.0.0" version="3">
    <sensor_info sensor_type="CDL640" version="2">
       <width_px>640</width_px>
       <height_px>512</height_px>
@@ -157,7 +157,62 @@
       </optical_components>
       <spectral_correction_info version="0">
          <correction_matrices>
-            <correction_matrix created="2022-11-21T15:17:24" version="6">
+            <correction_matrix created="2023-02-13T13:52:19" version="6">
+               <name>hsi_reflectance</name>
+               <algorithm>m0</algorithm>
+               <algorithm_version>2.3</algorithm_version>
+               <type>reflectance</type>
+               <minimum_band_energy>7.36439247</minimum_band_energy>
+               <optical_components/>
+               <virtual_bands>
+                  <virtual_band version="3">
+                     <wavelength_nm>1122.48957</wavelength_nm>
+                     <fwhm_nm>8.82231405</fwhm_nm>
+                     <coefficients nr_elements="9" values="-0.0695737799 -0.00986442208 -0.0172216482 1.31783388 0.0600240862 -0.236357707 -0.0311517623 -0.00489175311 -0.00879689217"/>
+                  </virtual_band>
+                  <virtual_band version="3">
+                     <wavelength_nm>1141.37298</wavelength_nm>
+                     <fwhm_nm>7.14876033</fwhm_nm>
+                     <coefficients nr_elements="9" values="-0.00661981457 -0.0940532399 -0.0201909538 -0.345117583 1.44669224 0.0707134439 -0.00318961908 -0.0411017852 -0.00713268934"/>
+                  </virtual_band>
+                  <virtual_band version="3">
+                     <wavelength_nm>1163.33042</wavelength_nm>
+                     <fwhm_nm>6.7768595</fwhm_nm>
+                     <coefficients nr_elements="9" values="-0.00857690441 -0.00516733857 -0.132420013 -0.0110054443 -0.336426725 1.5313683 0.0100677432 -0.00321441898 -0.0446251954"/>
+                  </virtual_band>
+                  <virtual_band version="3">
+                     <wavelength_nm>1193.5931</wavelength_nm>
+                     <fwhm_nm>6.40495868</fwhm_nm>
+                     <coefficients nr_elements="9" values="-0.0273942488 -0.00594322487 -0.0201196931 -0.188459526 -0.0327367944 -0.0305444211 1.51136064 0.0375492916 -0.243712022"/>
+                  </virtual_band>
+                  <virtual_band version="3">
+                     <wavelength_nm>1211.58842</wavelength_nm>
+                     <fwhm_nm>6.7768595</fwhm_nm>
+                     <coefficients nr_elements="9" values="-0.00894336323 -0.0260708942 -0.0126081334 -0.00557377855 -0.160063077 -0.0286936454 -0.303878851 1.51018211 0.0356496292"/>
+                  </virtual_band>
+                  <virtual_band version="3">
+                     <wavelength_nm>1299.50883</wavelength_nm>
+                     <fwhm_nm>6.03305785</fwhm_nm>
+                     <coefficients nr_elements="9" values="-0.00744906858 -0.0108124681 -0.0504454982 -0.0138202774 -0.0116852006 -0.164879926 -0.00910930093 -0.265674492 1.53387623"/>
+                  </virtual_band>
+                  <virtual_band version="3">
+                     <wavelength_nm>1383.32466</wavelength_nm>
+                     <fwhm_nm>5.66115702</fwhm_nm>
+                     <coefficients nr_elements="9" values="1.61919359 -0.00368170439 -0.330709944 -0.0648667688 -0.0178876402 -0.0255041737 -0.135533602 -0.0204188022 -0.0205909531"/>
+                  </virtual_band>
+                  <virtual_band version="3">
+                     <wavelength_nm>1466.5085</wavelength_nm>
+                     <fwhm_nm>7.14876033</fwhm_nm>
+                     <coefficients nr_elements="9" values="-0.189737244 1.36930581 0.00699188629 -0.0159556027 -0.0389583136 -0.0111100249 -0.014723019 -0.0959833617 -0.00983013105"/>
+                  </virtual_band>
+                  <virtual_band version="3">
+                     <wavelength_nm>1657.10824</wavelength_nm>
+                     <fwhm_nm>10.4958678</fwhm_nm>
+                     <coefficients nr_elements="9" values="-0.0116972776 -0.161630474 1.32958795 -0.0194687302 -0.0156108296 -0.0336772217 -0.00857310875 -0.011309196 -0.0676211139"/>
+                  </virtual_band>
+               </virtual_bands>
+            </correction_matrix>
+            <correction_matrix created="2023-02-13T13:52:20" version="6">
                <name>hsi_irradiance</name>
                <algorithm>m0</algorithm>
                <algorithm_version>2.3</algorithm_version>
