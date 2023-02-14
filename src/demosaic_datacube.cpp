@@ -9,10 +9,10 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <sensor_msgs/Image.h>
-#include "imec_driver/DataCube.h"
+#include "hsi_driver/DataCube.h"
 
 #include <cv_bridge/cv_bridge.h>
-#include "imec_driver/adjust_param.h"
+#include "hsi_driver/adjust_param.h"
 
 // Modified main.cpp from hsi-mosiac/hsi_camera_api/example_C_api
 // Authored by Nathaniel Hanson
@@ -23,10 +23,10 @@ public:
     ImageDemosaicer(ros::NodeHandle *nh)
     {
         // Load the package path
-        this->package_path = "/home/river/catkin_ws/src/imec_driver"; // ros::package::getPath("imec_driver");
+        this->package_path = "/home/river/catkin_ws/src/hsi_driver"; // ros::package::getPath("hsi_driver");
         ros::param::get("~camera_model", this->model);
         this->raw_sub = nh->subscribe("cube_grabber/spectral_data", 10, &ImageDemosaicer::cube_call_back, this);
-        this->cube_pub = nh->advertise<imec_driver::DataCube>("corrected_cube", 1);
+        this->cube_pub = nh->advertise<hsi_driver::DataCube>("corrected_cube", 1);
 
         if (this->model.compare("imec") == 0)
         {
@@ -134,7 +134,7 @@ private:
         this->DisplayResult("PushFrame()", mosaicPushFrame (pipeline, data_frame));
         // TODO: Verify that the GetCube() Routine populates a 3D cube
         this->DisplayResult("GetCube()", mosaicGetCube (pipeline, &data_cube, 1000000));
-        // TODO: Write method the takes datacube and turns it into an imec_driver::DataCube message
+        // TODO: Write method the takes datacube and turns it into an hsi_driver::DataCube message
         this->generate_datacube_msg();
     }
 
@@ -145,7 +145,7 @@ private:
         int lambda = this->data_cube.format.nr_bands;
         std::vector<float> waves;
         std::vector<float> data_out;
-        imec_driver::DataCube msg;
+        hsi_driver::DataCube msg;
         for (int curr_lam = 0; curr_lam < lambda; curr_lam++) {
             for(int row = 0; row < height; row++) {
                 for(int col = 0; col < width; col++) {

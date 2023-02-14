@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(imec_driver)
+project(hsi_driver)
 
 
 set(CMAKE_CXX_FLAGS "-std=c++11")
@@ -51,7 +51,7 @@ catkin_package(
 )
 
 set(HEADER_FILES
-    include/imec_driver/GUI.h
+    include/hsi_driver/GUI.h
   )
 
 set(SRC_FILES

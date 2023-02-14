@@ -19,7 +19,7 @@ The camera model can be changed by calling upon a parameter called /cube_process
 These can be changed to a string of either "imec" or "ximea" based off which camera you want the code to extract data from. 
 This srv can be started by first running:
 
-> roslaunch imec_driver camera.launch 
+> roslaunch hsi_driver camera.launch 
 
 This starts the launch file where the user_in input can then be adjusted.
 You can check to see if the params are now visible by running:
@@ -39,4 +39,4 @@ And the value of the parameter can be set by running
 ### Chain-running code
 There are options to also run multiple programs at the same time through the use of two launch files, master.launch (code written in python), and master_opt.launch (code written using C++). The first will run cube_data.py which produces a raw image that feeds into demosaic_cube.py which then produces the final data cube, which is then passed to a PyQt GUI that allows the user to parse through the data cube by slicing the images by light channel value. master_opt.cpp does the same but using C++ code, and opens a custom Rviz config to allow viewing of the collected images. GUI will be implemented for master_opt.cpp later. These launch files can be run by:
 
-> roslaunch imec_driver (master or master_opt).launch
+> roslaunch hsi_driver (master or master_opt).launch

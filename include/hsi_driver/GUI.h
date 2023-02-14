@@ -29,7 +29,7 @@
 #include <QToolTip>
 #include <QCoreApplication>
 
-namespace imec_driver
+namespace hsi_driver
 {
 
 class GUI: public rviz::Panel
@@ -86,6 +86,6 @@ protected:
 
 };
 
-} // end namespace imec_driver
+} // end namespace hsi_driver
 
 #endif // GUI_H

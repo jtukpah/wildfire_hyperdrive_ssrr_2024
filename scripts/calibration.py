@@ -7,7 +7,7 @@ import PySimpleGUI as sg
 from os import mkdir, chdir, scandir, environ
 import copy
 
-environ['PATH'] += "/home/river/catkin_ws/src/imec_driver/scripts/"
+environ['PATH'] += "/home/river/catkin_ws/src/hsi_driver/scripts/"
 from get_calibration_images import CalibrationImages
 
 # Authored by Gary Lvov

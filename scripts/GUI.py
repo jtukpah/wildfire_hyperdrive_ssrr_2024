@@ -9,7 +9,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 import matplotlib.pyplot as plt
-from imec_driver.msg import DataCube
+from hsi_driver.msg import DataCube
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 

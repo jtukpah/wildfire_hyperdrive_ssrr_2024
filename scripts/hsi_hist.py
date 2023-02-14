@@ -8,7 +8,7 @@ import numpy as np
 import ros_numpy
 import matplotlib.pyplot as plt
 import seaborn as sns
-from imec_driver.msg import DataCube
+from hsi_driver.msg import DataCube
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from sensor_msgs.msg import *

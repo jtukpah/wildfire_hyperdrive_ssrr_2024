@@ -10,10 +10,10 @@
 #include <cv_bridge/cv_bridge.h>
 // #include <opencv2/core.hpp>
 // #include <opencv2/imgcodes.hpp>
-#include "imec_driver/GUI.h"
+#include "hsi_driver/GUI.h"
 
 
-namespace imec_driver
+namespace hsi_driver
 {
 GUI::GUI( QWidget* parent )
   : rviz::Panel( parent )
@@ -204,7 +204,7 @@ void GUI::load( const rviz::Config& config )
 }
 
 
-} // end namespace imec_driver
+} // end namespace hsi_driver
 
 #include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(imec_driver::GUI, rviz::Panel)
+PLUGINLIB_EXPORT_CLASS(hsi_driver::GUI, rviz::Panel)

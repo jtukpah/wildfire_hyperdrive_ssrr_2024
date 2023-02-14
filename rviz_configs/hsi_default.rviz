@@ -28,7 +28,7 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: Image
-  - Class: imec_driver/GUI
+  - Class: hsi_driver/GUI
     Name: GUI
 Preferences:
   PromptSaveOnExit: true

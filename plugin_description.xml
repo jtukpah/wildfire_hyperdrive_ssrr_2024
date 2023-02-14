@@ -1,9 +1,9 @@
-<library path="lib/libimec_driver">
-  <class name="imec_driver/GUI"
-         type="imec_driver::GUI"
+<library path="lib/libhsi_driver">
+  <class name="hsi_driver/GUI"
+         type="hsi_driver::GUI"
          base_class_type="rviz::Panel">
     <description>
-      A panel widget that allows for the vizuialization of the Imec camera information, along with an histogram
+      A panel widget that allows for the vizuialization of the HSI camera information, along with an histogram
       for comparison of items.
     </description>
   </class>

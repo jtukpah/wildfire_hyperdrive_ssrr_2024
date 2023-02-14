@@ -13,8 +13,9 @@ from bs4 import BeautifulSoup
 from numba import jit, prange
 from pathlib import Path
 import matplotlib.pyplot as plt
-from imec_driver.msg import DataCube
-from imec_driver.srv import adjust_param
+from hsi_driver.msg import DataCube
+from hsi_driver.srv import adjust_param
+from std_msgs.msg import Header
 from sensor_msgs.msg import Image
 import logging
 
@@ -93,7 +94,7 @@ class DataCubeGenerator(object):
         '''
         Load HSI Context files and prepare to run demosaicing pipeline
         '''
-        dn_context = os.path.join(self.ros_pack.get_path('imec_driver'),'config',self.model, 'context')
+        dn_context = os.path.join(self.ros_pack.get_path('hsi_driver'),'config',self.model, 'context')
         #####################################################################
         version = HSI_MOSAIC.GetAPIVersion()
         print(f'VERSION :: {version}')
@@ -128,7 +129,7 @@ class DataCubeGenerator(object):
         for publication in datacube messages
         '''
         # Get an instance of RosPack with the default search paths
-        param_path = os.path.join(self.ros_pack.get_path('imec_driver'),'config',f'{self.model}.xml')
+        param_path = os.path.join(self.ros_pack.get_path('hsi_driver'),'config',f'{self.model}.xml')
         with open(param_path, 'r') as f:
             data = f.read()
             Bs_data = BeautifulSoup(data, "xml")
@@ -183,6 +184,10 @@ class DataCubeGenerator(object):
         '''
         # Mark that we've received a new cube
         ros_cube = DataCube()
+        # Create header
+        h = Header()
+        h.stamp = rospy.Time.now() # Note you need to call rospy.init_node() before this will work
+        ros_cube.header = h
         ros_cube.data = cube.flatten()
         ros_cube.width, ros_cube.height, ros_cube.lam = tuple(cube.shape)
         ros_cube.qe = self.QE

@@ -6,7 +6,7 @@ import os
 import numpy as np
 import sys
 import logging
-from imec_driver.msg import DataCube
+from hsi_driver.msg import DataCube
 
 os.environ['PATH'] += os.pathsep + r'/home/river/Downloads/HSI Suite/bin'
 
