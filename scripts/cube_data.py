@@ -30,18 +30,18 @@ import hsi_mosaic as HSI_MOSAIC
 
 class DataCubeGenerator(object):
     def __init__(self):
-        #logging
-        log_path = '/home/river/.ros/log'
-        
-        HSI_COMMON.InitializeLogger('logs', HSI_COMMON.LoggerVerbosity.LV_DEBUG)
+        # Setup logging to roslog location
+        log_dir = rospkg.get_log_dir()
+        rospy.loginfo(f"Logging camera info to {log_dir}")
+        HSI_COMMON.InitializeLogger(log_dir, HSI_COMMON.LoggerVerbosity.LV_INFO)
+        rospy.loginfo("Loading Context ...")
 
-        logging.info ("Loading Context ...")
-        logging.info(Path(log_path).absolute())
-        assert Path(log_path).exists()
         
         # Setup callback for data
         self.ros_pack = rospkg.RosPack()
         self.model = rospy.get_param('~camera_model')
+        self.frame_rate = rospy.get_param('~frame_rate', 60)
+        self.integration_time = rospy.get_param('~integration_time', 10)
         self.param_server = rospy.Service('adjust_param', adjust_param, self.handle_adjust_param)
         # Rate at which to generate composite data cubes
         # Look for connected cameras an choose appropriate model (assumes we only have 1 IMEC and 1 XIMEA)
@@ -58,7 +58,6 @@ class DataCubeGenerator(object):
         rospy.loginfo('Found number of devices = {}'.format(len(self.dev_list)))
        
         # Create publisher to send datacubes on
-        # self.pub = rospy.Publisher(f'cube_pub/{self.model}', DataCube, queue_size=10)
         self.pub_raw = rospy.Publisher(f'raw_data', Image, queue_size=10)
         self.pub_cube = rospy.Publisher(f'cube_data', DataCube, queue_size=10)
         # Load camera parameters
@@ -67,24 +66,27 @@ class DataCubeGenerator(object):
         rospy.loginfo('looking for device:: {}'.format(self.dev_list[0]))
         self.device = HSI_CAMERA.OpenDevice(self.dev_list[0])
         HSI_CAMERA.SetRegionOfInterestArray(self.device, self.roi)
-        print(f"Region-of-Intereset Set to: {self.roi}")
+        rospy.loginfo(f"Region-of-Intereset Set to: {self.roi}")
         rospy.loginfo('Initializing Camera...')
         HSI_CAMERA.Initialize(self.device)
         # Get/Set Camera Configuration Parameters (example)
         self.c_params = HSI_CAMERA.GetConfigurationParameters(self.device)
-        print("C PARAMS>")
-        print(self.c_params)
+        rospy.loginfo("C PARAMS>")
+        rospy.loginfo(self.c_params)
         self.r_params = HSI_CAMERA.GetRuntimeParameters(self.device)
-        print(self.r_params)
-        # self.r_params.frame_rate_hz = 60
-        # self.r_params['trigger_mode'] = 1
+        rospy.loginfo(self.r_params)
+        # Set the frame rate and exposure time before the camera starts
+        # These values can be adjusted later through a callback
+        self.r_params.frame_rate_hz = self.frame_rate
+        self.r_params.exposure_time_ms = self.integration_time
+        # Flip the frame of the IMEC camera to match housing pattern
         if self.model == 'imec':
-            # self.r_params['exposure_time_ms'] = 60
             self.r_params['flip_vertical'] = False
-
+        # Set these parameters on the device
         HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)
-        print("R PARAMS>")
-        print(self.r_params)        # Explicit Allocate based on Output-Data-Format
+        rospy.loginfo("R PARAMS>")
+        rospy.loginfo(self.r_params)
+        # Explicit Allocate based on Output-Data-Format
         dataformat = HSI_CAMERA.GetOutputFrameDataFormat (self.device)
         self.frame = HSI_COMMON.AllocateFrame(dataformat)
         rospy.loginfo("Camera Output Data Format: {}".format(dataformat))
@@ -97,29 +99,29 @@ class DataCubeGenerator(object):
         dn_context = os.path.join(self.ros_pack.get_path('hsi_driver'),'config',self.model, 'context')
         #####################################################################
         version = HSI_MOSAIC.GetAPIVersion()
-        print(f'VERSION :: {version}')
-        print(Path(dn_context).absolute())
+        rospy.loginfo(f'VERSION :: {version}')
+        rospy.loginfo(Path(dn_context).absolute())
         assert Path(dn_context).exists()
         self.context = HSI_MOSAIC.LoadContext(dn_context)
-        print(f'Context = {self.context}')
+        rospy.loginfo(f'Context = {self.context}')
         status = HSI_MOSAIC.ContextGetStatus(self.context)
-        print(status)
+        rospy.loginfo(status)
         self.pipeline = HSI_MOSAIC.Create(self.context)
-        print(self.pipeline)
+        rospy.loginfo(self.pipeline)
 
         self.params = HSI_MOSAIC.GetConfigurationParameters(self.pipeline)
         self.params.spatial_median_filter_enable = False
-        print(f'Configuration Params : {self.params}')
+        rospy.loginfo(f'Configuration Params : {self.params}')
         HSI_MOSAIC.SetConfigurationParameters(self.pipeline, self.params)
-        print('Initializing Pipeline')
+        rospy.loginfo('Initializing Pipeline')
         HSI_MOSAIC.Initialize(self.pipeline)
 
         outputdataformat = HSI_MOSAIC.GetOutputDataFormat(self.pipeline)
-        print(f'Output Data Format = {outputdataformat}')
+        rospy.loginfo(f'Output Data Format = {outputdataformat}')
 
         self.cube = HSI_COMMON.AllocateCube(outputdataformat)
 
-        print('Starting Pipeline')
+        rospy.loginfo('Starting Pipeline')
         HSI_MOSAIC.Start(self.pipeline)
 
 
@@ -152,7 +154,6 @@ class DataCubeGenerator(object):
         '''
         Listen to user parameter requests
         '''
-
         frame_time = 1/(req.frame_rate) * 1000
 
         try:
@@ -161,7 +162,7 @@ class DataCubeGenerator(object):
                 HSI_CAMERA.Pause(self.device)
                 self.r_params.exposure_time_ms = req.integration_time
                 self.r_params.frame_rate_hz = frame_time
-                print(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)}')       
+                rospy.loginfo(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)}')       
                 HSI_CAMERA.Start(self.device)
                 return True
             else:
@@ -175,6 +176,9 @@ class DataCubeGenerator(object):
     
 
     def publish_raw(self, raw: np.ndarray) -> None:
+        '''
+        Publish the raw image pulled from the camera photodetector
+        '''
         ros_image = ros_numpy.msgify(Image, raw, encoding="32FC1")
         self.pub_raw.publish(ros_image)
 
@@ -221,7 +225,6 @@ class DataCubeGenerator(object):
         Custom shutdown behavior
         '''
         rospy.loginfo(f"Cleaning up node for the {self.model.upper()} camera...")
-        # HSI_COMMON.DeallocateFrame(self.frame)
         HSI_CAMERA.Pause(self.device)
         HSI_CAMERA.Stop(self.device)
         HSI_CAMERA.CloseDevice(self.device)
