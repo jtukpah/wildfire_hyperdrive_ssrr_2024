@@ -1,4 +1,0 @@
-<launch>
-    <node pkg="hsi_driver" type="hsi_driver.py" name="profile_node" launch-prefix="valgrind --tool=callgrind --callgrind-out-file=/home/river/test.log">
-    </node>
-</launch>
