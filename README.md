@@ -1,7 +1,11 @@
 # hyper_drive
 ### Introduction to hsi_driver.py and cube_data.py
-The main three code files in this repository are hsi_driver.py, demosaic.py, and cube_data.py, along with their C++ counter parts grab_datacube.cpp and demosaic_datacube.cpp. hsi_driver.py is responsible for publishing images taken by the imec and ximea cameras,
+The main two code files in this repository are hsi_driver.py, and cube_data.py, along with their C++ counter parts grab_datacube.cpp and demosaic_datacube.cpp. hsi_driver.py is responsible for publishing images taken by the imec and ximea cameras,
 and as well as for subscribing to these published images. cube_data.py also contains a publisher, and a subscriber, but instead of images, for data cubes from imec and ximea cameras.
+
+### Launch Files
+The main launch file for this repository is called master.launch which can be found in the launch folder. master.launch calls upon cube_data.py with the variables of imec or ximea, and based off the arguments, run their respective version of cube_data.py which results in a rviz live image of either the ximea or imec camera, or both. This launch file can be called by writing:
+> roslaunch hsi_driver master.launch
 
 ### Camera parameter adjustments
 The camera parameters can be adjusted through use of a rosservice called /adjust_param. Currently the only supported parameter adjustment is exposure time in milliseconds
