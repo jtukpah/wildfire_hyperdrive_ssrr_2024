@@ -7,16 +7,16 @@
         <!-- Grab raw data from the camera -->
         <node pkg="hsi_driver" type="cube_data.py" name="cube_processor_imec" output="screen">
             <param name="camera_model" value="imec"/>
-            <param name="frame_rate" value="60"/>
-            <param name="integration_time" value="10"/>
+            <param name="frame_rate" value="10"/>
+            <param name="integration_time" value="70"/>
         </node>
     </group>
     <group ns="ximea" if="$(arg use_ximea)">
         <!-- Grab raw data from the camera -->
         <node pkg="hsi_driver" type="cube_data.py" name="cube_processor_ximea" output="screen">
             <param name="camera_model" value="ximea"/>
-            <param name="frame_rate" value="60"/>
-            <param name="integration_time" value="10"/>
+            <param name="frame_rate" value="30"/>
+            <param name="integration_time" value="30"/>
         </node>
     </group>
     <node pkg="hsi_driver" type="hsi_hist.py" name="hsi_hist" output="screen">

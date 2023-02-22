@@ -155,15 +155,17 @@ class DataCubeGenerator(object):
         Listen to user parameter requests
         '''
         frame_time = 1/(req.frame_rate) * 1000
-
+        rospy.loginfo(f'Incoming message: {adjust_param}')
         try:
             # Pause the camera
             if (self.integration_range[0] < req.integration_time < self.integration_range[1]) & (req.integration_time < frame_time):
                 HSI_CAMERA.Pause(self.device)
                 self.r_params.exposure_time_ms = req.integration_time
-                self.r_params.frame_rate_hz = frame_time
+                self.r_params.frame_rate_hz = req.frame_rate
+                rospy.loginfo(self.r_params)
                 rospy.loginfo(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)}')       
                 HSI_CAMERA.Start(self.device)
+                rospy.sleep(1)
                 return True
             else:
                 rospy.logerr('INVALID INTEGRATION TIME REQUESTED!')

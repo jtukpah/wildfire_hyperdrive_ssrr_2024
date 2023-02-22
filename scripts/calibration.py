@@ -22,8 +22,8 @@ class Calibration():
         self.frame3 = []
 
         self.ximea_sub = rospy.Subscriber('/ximea/cube_data', DataCube, self.callback_ximea)
-        self.imec_sub = rospy.Subscriber('/imec/cube_data', DataCube, self.callback_imec)
-        self.alvium_sub = rospy.Subscriber('/camera/image_raw', Image, self.callback_alvium)
+        #self.imec_sub = rospy.Subscriber('/imec/cube_data', DataCube, self.callback_imec)
+        #self.alvium_sub = rospy.Subscriber('/camera/image_raw', Image, self.callback_alvium)
 
         self.create_folders()
         self.create_gui()
@@ -39,8 +39,8 @@ class Calibration():
         self.frame2 = imec_cube[:, :, 0]
 
     def callback_alvium(self, msg):
-        self.frame3 = ros_numpy.numpify(msg)
-        print(self.frame3.shape)
+        frame = ros_numpy.numpify(msg)
+        self.frame3 = cv.resize(frame, (2464//5, 2056//5), interpolation=cv.INTER_AREA)
 
     def create_folders(self):
         try:
@@ -73,7 +73,7 @@ class Calibration():
         sg.theme("DarkPurple")
 
         layout = [[sg.Text("Gary and Ben's Sick Stereo Calibration Helper Tool", size=(40, 1), justification='center', font='Helvetica 20')],
-              [sg.Image(filename='', key='cam1'), sg.Image(filename='', key='cam2'), sg.Image(filename='', key='cam3')],
+              [sg.Image(filename='', key='cam1')],
               [sg.Button('Save Image', size=(10, 1), font='Helvetica 14'),]]
 
         window = sg.Window("Gary and Ben's Camera Calibration Helper Tool",
@@ -87,7 +87,7 @@ class Calibration():
             event, values = window.read(timeout=20)
 
             if event == 'Save Image':
-                cv.imwrite(self.next_name + "/cam1/" + str(saved_count) + ".png", frame1)
+                cv.imwrite(self.next_name + "/cam1/" + str(saved_count) + ".png", self.frame1)
                 cv.imwrite(self.next_name + "/cam2/" + str(saved_count) + ".png", self.frame2)
                 cv.imwrite(self.next_name + "/cam2/" + str(saved_count) + ".png", self.frame3)
             
