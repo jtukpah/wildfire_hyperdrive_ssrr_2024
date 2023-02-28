@@ -3,24 +3,29 @@
     <arg name="use_imec" default="false"/>
     <arg name="use_ximea" default="false"/>
     <arg name="gui" default="false"/>
+    <arg name="use_bag" default="false"/>
     <group ns="imec" if="$(arg use_imec)">
         <!-- Grab raw data from the camera -->
-        <node pkg="hsi_driver" type="cube_data.py" name="cube_processor_imec" output="screen">
+        <node pkg="hyper_drive" type="cube_data.py" name="cube_processor_imec" output="screen" unless="$(arg use_bag)">
             <param name="camera_model" value="imec"/>
             <param name="frame_rate" value="10"/>
             <param name="integration_time" value="70"/>
         </node>
+        <node pkg="hyper_drive" type="undistort_hypercubes.py" name="cube_correct_imec" output="screen">
+            <param name="camera_model" value="imec"/>
+        </node>
     </group>
     <group ns="ximea" if="$(arg use_ximea)">
         <!-- Grab raw data from the camera -->
-        <node pkg="hsi_driver" type="cube_data.py" name="cube_processor_ximea" output="screen">
+        <node pkg="hyper_drive" type="cube_data.py" name="cube_processor_ximea" output="screen" unless="$(arg use_bag)">
             <param name="camera_model" value="ximea"/>
             <param name="frame_rate" value="30"/>
             <param name="integration_time" value="30"/>
         </node>
+        <node pkg="hyper_drive" type="undistort_hypercubes.py" name="cube_correct_ximea" output="screen">
+            <param name="camera_model" value="ximea"/>
+        </node>
     </group>
-    <node pkg="hsi_driver" type="hsi_hist.py" name="hsi_hist" output="screen">
-        <param name="camera_model" value="ximea"/>
-    </node>
-    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find hsi_driver)/rviz_configs/hsi_default.rviz" if="$(arg gui)"/>
+    <node pkg="hyper_drive" type="hsi_hist.py" name="GUI_renderer" output="screen" if="$(arg gui)"/>
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find hyper_drive)/rviz_configs/hsi_default.rviz" if="$(arg gui)"/>
   </launch>

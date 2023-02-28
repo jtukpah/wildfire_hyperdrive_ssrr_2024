@@ -30,7 +30,7 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: Image
-  - Class: hsi_driver/GUI
+  - Class: hyper_drive/GUI
     Name: GUI
 Preferences:
   PromptSaveOnExit: true

@@ -13,8 +13,8 @@ from bs4 import BeautifulSoup
 from numba import jit, prange
 from pathlib import Path
 import matplotlib.pyplot as plt
-from hsi_driver.msg import DataCube
-from hsi_driver.srv import adjust_param
+from hyper_drive.msg import DataCube
+from hyper_drive.srv import adjust_param
 from std_msgs.msg import Header
 from sensor_msgs.msg import Image
 import logging
@@ -96,7 +96,7 @@ class DataCubeGenerator(object):
         '''
         Load HSI Context files and prepare to run demosaicing pipeline
         '''
-        dn_context = os.path.join(self.ros_pack.get_path('hsi_driver'),'config',self.model, 'context')
+        dn_context = os.path.join(self.ros_pack.get_path('hyper_drive'),'config',self.model, 'context')
         #####################################################################
         version = HSI_MOSAIC.GetAPIVersion()
         rospy.loginfo(f'VERSION :: {version}')
@@ -131,7 +131,7 @@ class DataCubeGenerator(object):
         for publication in datacube messages
         '''
         # Get an instance of RosPack with the default search paths
-        param_path = os.path.join(self.ros_pack.get_path('hsi_driver'),'config',f'{self.model}.xml')
+        param_path = os.path.join(self.ros_pack.get_path('hyper_drive'),'config',f'{self.model}.xml')
         with open(param_path, 'r') as f:
             data = f.read()
             Bs_data = BeautifulSoup(data, "xml")

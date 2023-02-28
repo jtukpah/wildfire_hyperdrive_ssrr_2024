@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(hsi_driver)
+project(hyper_drive)
 
 
 set(CMAKE_CXX_FLAGS "-std=c++11")
@@ -51,7 +51,7 @@ catkin_package(
 )
 
 set(HEADER_FILES
-    include/hsi_driver/GUI.h
+    include/hyper_drive/GUI.h
   )
 
 set(SRC_FILES

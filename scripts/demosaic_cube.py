@@ -14,8 +14,8 @@ import numpy as np
 from pathlib import Path
 from bs4 import BeautifulSoup
 from numba import jit, prange
-from hsi_driver.msg import DataCube
-from hsi_driver.srv import adjust_param
+from hyper_drive.msg import DataCube
+from hyper_drive.srv import adjust_param
 from sensor_msgs.msg import Image
 import hsi_common as HSI_COMMON
 import hsi_mosaic as HSI_MOSAIC
@@ -36,7 +36,7 @@ class CubeDemosaicer(object):
         '''
         Load HSI Context files and prepare to run demosaicing pipeline
         '''
-        dn_context = '/home/river/catkin_ws/src/hsi_driver/config/imec/context'
+        dn_context = '/home/river/catkin_ws/src/hyper_drive/config/imec/context'
         #####################################################################
 
         formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-6s :: %(message)s',
@@ -92,7 +92,7 @@ class CubeDemosaicer(object):
         '''
         # Get an instance of RosPack with the default search paths
         rospack = rospkg.RosPack()
-        param_path = os.path.join(rospack.get_path('hsi_driver'),'config',f'{self.model}.xml')
+        param_path = os.path.join(rospack.get_path('hyper_drive'),'config',f'{self.model}.xml')
         with open(param_path, 'r') as f:
             data = f.read()
             Bs_data = BeautifulSoup(data, "xml")

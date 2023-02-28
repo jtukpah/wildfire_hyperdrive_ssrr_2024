@@ -8,7 +8,7 @@ import numpy as np
 import ros_numpy
 import matplotlib.pyplot as plt
 import seaborn as sns
-from hsi_driver.msg import DataCube
+from hyper_drive.msg import DataCube
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from sensor_msgs.msg import *
@@ -27,7 +27,7 @@ class HSI_HIST():
         # Placeholder ofr single channel grayscale image
         self.img = np.array([])
         
-        self.cam_model = rospy.get_param('~camera_model', default='XIMEA')
+        self.cam_model = rospy.get_param('~camera_model', default='ximea')
 
         #get cam model
         self.model_sub = rospy.Subscriber('/hsi_gui/camera', String, self.callback_model)
@@ -36,9 +36,9 @@ class HSI_HIST():
         self.slider_num = rospy.Subscriber('/hsi_gui/channel', Int8, self.callback_slider)
 
         #get cube data
-        self.imec_data_sub = rospy.Subscriber('/imec/cube_data', DataCube, self.imec_callback)
-        self.ximea_data_sub = rospy.Subscriber('/ximea/cube_data', DataCube, self.ximea_callback)
-        self.combined_data_sub = rospy.Subscriber('/combined/cube_data', DataCube, self.combined_callback)
+        self.imec_data_sub = rospy.Subscriber('/imec/undistort_data', DataCube, self.imec_callback)
+        self.ximea_data_sub = rospy.Subscriber('/ximea/undistort_data', DataCube, self.ximea_callback)
+        self.combined_data_sub = rospy.Subscriber('/combined/undistort_data', DataCube, self.combined_callback)
 
         #publish image
         self.pub_img = rospy.Publisher('/hsi_gui/channel_img', Image, queue_size=10)

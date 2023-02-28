@@ -1,5 +1,3 @@
 <launch>
-    <node pkg="hsi_driver" type="cube_data.py" name="profile_node" launch-prefix="valgrind --tool=callgrind --callgrind-out-file=/home/river/test.log">
-        <param name="camera_model" value="imec"/>
-    </node>
+  <node pkg="hyper_drive" type="correct_hypercube" name="example1" launch-prefix="xterm -e gdb --args"/> 
 </launch>

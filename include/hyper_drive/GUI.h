@@ -29,7 +29,7 @@
 #include <QToolTip>
 #include <QCoreApplication>
 
-namespace hsi_driver
+namespace hyper_drive
 {
 
 class GUI: public rviz::Panel
@@ -86,6 +86,6 @@ protected:
 
 };
 
-} // end namespace hsi_driver
+} // end namespace hyper_drive
 
 #endif // GUI_H

@@ -7,7 +7,8 @@ import rospy
 import typing
 import rospkg
 import numpy as np
-from hsi_driver.msg import DataCube
+import scipy.io as sio
+from hyper_drive.msg import DataCube
 from std_msgs.msg import String, Header
 
 class CubeCorrecter(object):
@@ -15,11 +16,11 @@ class CubeCorrecter(object):
         # Setup callback for data
         self.model = rospy.get_param('~camera_model')
         # Load camera distortion parameters
-        self.new_camera_matrix = None
+        self.new_camera_matrix = np.array([])
         self.load_distortion_parameters()
-        self.pub = rospy.Publisher(f'{self.model}/correct_data', DataCube, queue_size=10)
+        self.pub = rospy.Publisher(f'/{self.model}/undistort_data', DataCube, queue_size=10)
         # Subscribe to the raw data image
-        self.sub = rospy.Subscriber(f'{self.model}/cube_data', DataCube, queue_size=10)
+        self.sub = rospy.Subscriber(f'/{self.model}/cube_data', DataCube, self.cube_callback)
 
     def load_distortion_parameters(self) -> None:
         '''
@@ -27,8 +28,9 @@ class CubeCorrecter(object):
         '''
         # Get an instance of RosPack with the default search paths
         rospack = rospkg.RosPack()
-        self.camera_matrix = os.path.join(rospack.get_path('hsi_driver'),'calibration',f'{self.model}_matrix.npy')
-        self.dist_coffs = os.path.join(rospack.get_path('hsi_driver'),'calibration',f'{self.model}_distortion.npy')
+        self.mat_data = sio.loadmat(os.path.join(rospack.get_path('hyper_drive'),'config','distortion',f'{self.model}_params.mat'))
+        self.camera_matrix = self.mat_data['intrinsicMatrix']
+        self.dist_coeffs = self.mat_data['distortionCoefficients']
         
     def cube_callback(self, msg: DataCube) -> None:
         '''
@@ -43,7 +45,7 @@ class CubeCorrecter(object):
         corrected_cube = np.zeros_like(cube, dtype=np.float32)
         # Apply corrective function along the channels
         for i in range(msg.lam):
-            corrected_cube[:,:,i] = cv.undistort(cube[:,:,i], self.camera_matrix,self.dist_coffs,None,self.new_camera_matrix)
+            corrected_cube[:,:,i] = cv.undistort(cube[:,:,i], self.camera_matrix,self.dist_coeffs,None,self.new_camera_matrix)
         # Send out the new datacube
         toSend = DataCube()
         # Create header

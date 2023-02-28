@@ -10,10 +10,10 @@
 #include <cv_bridge/cv_bridge.h>
 // #include <opencv2/core.hpp>
 // #include <opencv2/imgcodes.hpp>
-#include "hsi_driver/GUI.h"
+#include "hyper_drive/GUI.h"
 
 
-namespace hsi_driver
+namespace hyper_drive
 {
 GUI::GUI( QWidget* parent )
   : rviz::Panel( parent )
@@ -204,7 +204,7 @@ void GUI::load( const rviz::Config& config )
 }
 
 
-} // end namespace hsi_driver
+} // end namespace hyper_drive
 
 #include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(hsi_driver::GUI, rviz::Panel)
+PLUGINLIB_EXPORT_CLASS(hyper_drive::GUI, rviz::Panel)

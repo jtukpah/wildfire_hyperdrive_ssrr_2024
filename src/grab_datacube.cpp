@@ -7,10 +7,10 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <sensor_msgs/Image.h>
-#include "hsi_driver/DataCube.h"
+#include "hyper_drive/DataCube.h"
 
 #include <cv_bridge/cv_bridge.h>
-#include "hsi_driver/adjust_param.h"
+#include "hyper_drive/adjust_param.h"
 
 // Modified main.cpp from hsi-mosiac/hsi_camera_api/example_C_api
 // Authored by Gary Lvov and Nathaniel Hanson
@@ -124,8 +124,8 @@ private:
         }
     }
 
-    bool adjust_cam_param(hsi_driver::adjust_param::Request &req,
-                          hsi_driver::adjust_param::Response &res)
+    bool adjust_cam_param(hyper_drive::adjust_param::Request &req,
+                          hyper_drive::adjust_param::Response &res)
     {
         res.success = true;
         if (req.integration_time > this->integration_range.first && req.integration_time < this->integration_range.second)
@@ -282,7 +282,7 @@ private:
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "hsi_driver", ros::init_options::AnonymousName);
+    ros::init(argc, argv, "hyper_drive", ros::init_options::AnonymousName);
     ros::NodeHandle nh("~");
     DatacubeGrabber nc = DatacubeGrabber(&nh);
 }

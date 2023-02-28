@@ -1,6 +1,6 @@
-<library path="lib/libhsi_driver">
-  <class name="hsi_driver/GUI"
-         type="hsi_driver::GUI"
+<library path="lib/libhyper_drive">
+  <class name="hyper_drive/GUI"
+         type="hyper_drive::GUI"
          base_class_type="rviz::Panel">
     <description>
       A panel widget that allows for the vizuialization of the HSI camera information, along with an histogram

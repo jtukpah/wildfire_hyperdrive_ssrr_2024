@@ -7,7 +7,7 @@ import rospy
 import ros_numpy
 
 import PySimpleGUI as sg
-from hsi_driver.msg import DataCube
+from hyper_drive.msg import DataCube
 from sensor_msgs.msg import Image
 
 from os import mkdir, chdir, scandir, environ
