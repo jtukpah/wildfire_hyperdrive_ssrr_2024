@@ -27,5 +27,6 @@
         </node>
     </group>
     <node pkg="hyper_drive" type="hsi_hist.py" name="GUI_renderer" output="screen" if="$(arg gui)"/>
+    <node pkg="hyper_drive" type="combined_cube_data.py" name="cube_combiner" output="screen"/>
     <node type="rviz" name="rviz" pkg="rviz" args="-d $(find hyper_drive)/rviz_configs/hsi_default.rviz" if="$(arg gui)"/>
   </launch>

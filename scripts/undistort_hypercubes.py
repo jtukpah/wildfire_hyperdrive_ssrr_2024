@@ -32,6 +32,7 @@ class CubeCorrecter(object):
         self.camera_matrix = self.mat_data['intrinsicMatrix']
         self.dist_coeffs = self.mat_data['distortionCoefficients']
         
+        
     def cube_callback(self, msg: DataCube) -> None:
         '''
         Callback function for hypercube data

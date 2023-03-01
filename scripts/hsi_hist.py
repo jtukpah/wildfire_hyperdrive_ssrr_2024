@@ -96,6 +96,13 @@ class HSI_HIST():
             height = int(arr.shape[0] * scale_percent / 100)
             dim = (width, height)
             arr = cv.resize(arr,  dim, interpolation = cv.INTER_AREA)
+        if self.cam_model == 'combined':
+             # resize image
+            scale_percent = 25 # percent of original size
+            width = int(arr.shape[1] * scale_percent / 100)
+            height = int(arr.shape[0] * scale_percent / 100)
+            dim = (width, height)
+            arr = cv.resize(arr,  dim, interpolation = cv.INTER_AREA)
         return ((arr) * (1/((arr.max())) * 255)).astype('uint8')
 
     def update_histogram(self):
