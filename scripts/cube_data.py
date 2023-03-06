@@ -32,7 +32,7 @@ class DataCubeGenerator(object):
     def __init__(self):
         # Setup logging to roslog location
         log_dir = rospkg.get_log_dir()
-        rospy.loginfo(f"Logging camera info to {log_dir}")
+        rospy.loginfo("Logging camera info to {}".format(log_dir))
         HSI_COMMON.InitializeLogger(log_dir, HSI_COMMON.LoggerVerbosity.LV_INFO)
         rospy.loginfo("Loading Context ...")
 
@@ -43,6 +43,21 @@ class DataCubeGenerator(object):
         self.frame_rate = rospy.get_param('~frame_rate', 60)
         self.integration_time = rospy.get_param('~integration_time', 10)
         self.param_server = rospy.Service('adjust_param', adjust_param, self.handle_adjust_param)
+
+        # Create publisher to send datacubes on
+        self.pub_raw = rospy.Publisher('raw_data', Image, queue_size=10)
+        self.pub_cube = rospy.Publisher('cube_data', DataCube, queue_size=10)
+        # Load camera parameters
+        self.parse_parameters()
+        # Initialize the camera
+        self.initialize_camera()
+        # Explicit Allocate based on Output-Data-Format
+        dataformat = HSI_CAMERA.GetOutputFrameDataFormat (self.device)
+        self.frame = HSI_COMMON.AllocateFrame(dataformat)
+        rospy.loginfo("Camera Output Data Format: {}".format(dataformat))
+        self.setup_context()
+
+    def initialize_camera(self) -> None:
         # Rate at which to generate composite data cubes
         # Look for connected cameras an choose appropriate model (assumes we only have 1 IMEC and 1 XIMEA)
         if self.model == 'ximea':
@@ -56,17 +71,12 @@ class DataCubeGenerator(object):
             self.roi = [HSI_COMMON.RegionOfInterest(x=1, y=1, width=639, height=510)]
 
         rospy.loginfo('Found number of devices = {}'.format(len(self.dev_list)))
-       
-        # Create publisher to send datacubes on
-        self.pub_raw = rospy.Publisher(f'raw_data', Image, queue_size=10)
-        self.pub_cube = rospy.Publisher(f'cube_data', DataCube, queue_size=10)
-        # Load camera parameters
-        self.parse_parameters()
+
         # Connect to the first available camera of the specified model type
         rospy.loginfo('looking for device:: {}'.format(self.dev_list[0]))
         self.device = HSI_CAMERA.OpenDevice(self.dev_list[0])
         HSI_CAMERA.SetRegionOfInterestArray(self.device, self.roi)
-        rospy.loginfo(f"Region-of-Intereset Set to: {self.roi}")
+        rospy.loginfo("Region-of-Intereset Set to: {}".format(self.roi))
         rospy.loginfo('Initializing Camera...')
         HSI_CAMERA.Initialize(self.device)
         # Get/Set Camera Configuration Parameters (example)
@@ -82,15 +92,25 @@ class DataCubeGenerator(object):
         # Flip the frame of the IMEC camera to match housing pattern
         if self.model == 'imec':
             self.r_params['flip_vertical'] = False
+            self.r_params['flip_horizontal'] = True
         # Set these parameters on the device
         HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)
         rospy.loginfo("R PARAMS>")
         rospy.loginfo(self.r_params)
-        # Explicit Allocate based on Output-Data-Format
-        dataformat = HSI_CAMERA.GetOutputFrameDataFormat (self.device)
-        self.frame = HSI_COMMON.AllocateFrame(dataformat)
-        rospy.loginfo("Camera Output Data Format: {}".format(dataformat))
-        self.setup_context()
+
+    def restart_camera(self) -> None:
+        '''
+        Restart camera in the event there is an error setting the runtime parameters
+        '''
+        rospy.logerr('ERROR IN CAMERA MAIN LOOP! Waiting 5 seconds and reinitializing the camera')
+        HSI_CAMERA.Pause(self.device)
+        HSI_CAMERA.Stop(self.device)
+        HSI_CAMERA.CloseDevice(self.device)
+        # Sleep 5 seconds
+        rospy.sleep(5)
+        # Restart the camera
+        self.initialize_camera()
+
 
     def setup_context(self) -> None:
         '''
@@ -184,10 +204,47 @@ class DataCubeGenerator(object):
         ros_image = ros_numpy.msgify(Image, raw, encoding="32FC1")
         self.pub_raw.publish(ros_image)
 
+    def undistort(self, cube):
+        #criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 100, 1)
+
+        imec_K = [[571.0648167, 0, 96.21785],
+                  [0, 572.4372833, 77.75815],
+                  [0, 0, 1]]
+        imec_distort = [-0.715016666666667, 18.2009666666667, -0.003883333333333, -0.002716666666667, -234.22125]
+
+        vimba_K = [[917.8051167, 0, 244.883],
+                   [0, 918.8520833, 205.2639333],
+                   [0, 0, 1]]
+        vimba_distort = [-0.212233333333333, 1.44273333333333, 0.001516666666667, -0.041533333333333, -10.8958666666667]
+
+        ximea_K = [[929.0870667, 0, 193.47025],
+                   [0, 928.9873333, 114.0106],
+                   [0, 0, 1]]
+        ximea_distort = [0.12115, -5.45603333333333, 0.0021, -0.004283333333333, 100.424166666667]
+    
+        if self.model == 'imec':
+            for lam in range(cube.shape[2]):
+                undistorted_img = cv2.undistort(cube[:, :, lam], np.matrix(imec_K), np.array(imec_distort))
+                cube[:, :, lam] = undistorted_img
+
+        elif self.model == 'ximea':
+            for lam in range(cube.shape[2]):
+                undistorted_img = cv2.undistort(cube[:, :, lam], np.matrix(ximea_K), np.array(ximea_distort))
+                cube[:, :, lam] = undistorted_img
+
+        elif self.model == 'vimba':
+            for lam in range(cube.shape[:2]):
+                undistorted_img = cv2.undistort(cube[:, :, lam], np.matrix(vimba_K), np.array(vimba_distort))
+                cube[:, :, lam] = undistorted_img
+        print(f'CUBE SHAPE: {cube.shape}')
+
     def publish_cube(self, cube: np.ndarray):
         '''
         Publish hyperspectral datacubes
         '''
+
+        self.undistort(cube)
+
         # Mark that we've received a new cube
         ros_cube = DataCube()
         # Create header
@@ -208,16 +265,21 @@ class DataCubeGenerator(object):
         '''
         HSI_CAMERA.Start(self.device)
         while not rospy.is_shutdown():
-            # Send a Software Trigger to the camera and grab the Frame
-            HSI_CAMERA.Trigger(self.device)
-            HSI_CAMERA.AcquireFrame(self.device, frame=self.frame)
-            tmp = HSI_COMMON.FrameAsArray(self.frame) # internally convert frame to numpy array
-            # Publish the raw image
-            self.publish_raw(tmp)
-            HSI_MOSAIC.PushFrame(self.pipeline, self.frame)
-            HSI_MOSAIC.GetCube(self.pipeline, self.cube, timeout_ms=1000)
-            py_cube = HSI_COMMON.CubeAsArray(self.cube, BSQ=False)
-            self.publish_cube(py_cube)
+            try:
+                # Send a Software Trigger to the camera and grab the Frame
+                HSI_CAMERA.Trigger(self.device)
+                HSI_CAMERA.AcquireFrame(self.device, frame=self.frame)
+                tmp = HSI_COMMON.FrameAsArray(self.frame) # internally convert frame to numpy array
+                                
+                # Publish the raw image
+                self.publish_raw(tmp)
+                HSI_MOSAIC.PushFrame(self.pipeline, self.frame)
+                HSI_MOSAIC.GetCube(self.pipeline, self.cube, timeout_ms=1000)
+                py_cube = HSI_COMMON.CubeAsArray(self.cube, BSQ=False)
+                self.publish_cube(py_cube)
+            except Exception as e:
+                rospy.logerr('Exception in main capture loop!')
+                self.restart_camera()
             rospy.sleep(0.001)
         # End of loop behavior        
         self.shutdown()
@@ -226,7 +288,7 @@ class DataCubeGenerator(object):
         '''
         Custom shutdown behavior
         '''
-        rospy.loginfo(f"Cleaning up node for the {self.model.upper()} camera...")
+        rospy.loginfo("Cleaning up node for the {} camera...".format(self.mode.upper()))
         HSI_CAMERA.Pause(self.device)
         HSI_CAMERA.Stop(self.device)
         HSI_CAMERA.CloseDevice(self.device)

@@ -6,7 +6,7 @@
     <arg name="use_bag" default="false"/>
     <group ns="imec" if="$(arg use_imec)">
         <!-- Grab raw data from the camera -->
-        <node pkg="hyper_drive" type="cube_data.py" name="cube_processor_imec" output="screen" unless="$(arg use_bag)">
+        <node pkg="hyper_drive" type="cube_data.py" name="cube_processor_imec" output="screen">
             <param name="camera_model" value="imec"/>
             <param name="frame_rate" value="10"/>
             <param name="integration_time" value="70"/>
@@ -17,10 +17,10 @@
     </group>
     <group ns="ximea" if="$(arg use_ximea)">
         <!-- Grab raw data from the camera -->
-        <node pkg="hyper_drive" type="cube_data.py" name="cube_processor_ximea" output="screen" unless="$(arg use_bag)">
+        <node pkg="hyper_drive" type="cube_data.py" name="cube_processor_ximea" output="screen">
             <param name="camera_model" value="ximea"/>
             <param name="frame_rate" value="30"/>
-            <param name="integration_time" value="30"/>
+            <param name="integration_time" value="15"/>
         </node>
         <node pkg="hyper_drive" type="undistort_hypercubes.py" name="cube_correct_ximea" output="screen">
             <param name="camera_model" value="ximea"/>

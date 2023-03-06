@@ -31,6 +31,7 @@ add_definitions(-DQT_NO_KEYWORDS)
 add_message_files(
    FILES
    DataCube.msg
+   MultipleDataCubes.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -43,6 +44,7 @@ add_service_files(
 generate_messages(
   DEPENDENCIES
   std_msgs  # Or other packages containing msgs
+  sensor_msgs
  )
 
 catkin_package(

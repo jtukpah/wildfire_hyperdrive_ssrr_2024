@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Hyperspectral Cameras -->
+    <node pkg="hyper_drive" type="syncronousCubes.py" name="cameraProcessors" output="screen">
+        <param name="x_frame_rate" value="30"/>
+        <param name="x_integration_time" value="15"/>
+        <param name="i_frame_rate" value="10"/>
+        <param name="i_integration_time" value="70"/>
+    </node>
+    <!-- RGB HD Camera -->
+</launch>
