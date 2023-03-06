@@ -318,7 +318,9 @@ class DataCubesGenerator(object):
         tcube = ((x_cube[:,:,0]) * (1/((x_cube[:,:,0].max())) * 255)).astype('uint8')
         cv2.imshow('ximea', tcube)
         cv2.waitKey(1)
-
+        tcube = ((i_cube[:,:,0]) * (1/((i_cube[:,:,0].max())) * 255)).astype('uint8')
+        cv2.imshow('imec', tcube)
+        cv2.waitKey(1)
         #Messages
         x_ros_cube = DataCube()
         i_ros_cube = DataCube()
