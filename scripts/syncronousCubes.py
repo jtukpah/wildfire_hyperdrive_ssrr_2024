@@ -38,18 +38,22 @@ class DataCubesGenerator(object):
         rospy.loginfo("Loading Context ...")
         # Setup callback for data
         self.ros_pack = rospkg.RosPack()
+        #sleep time amoutn param
+        self.sleep_time = rospy.get_param('~sleep', 0.001)
         #ximea
         self.x_frame_rate = rospy.get_param('~x_frame_rate', 30)
         self.x_integration_time = rospy.get_param('~x_integration_time', 15)
         #imec
         self.i_frame_rate = rospy.get_param('~i_frame_rate', 10)
         self.i_integration_time = rospy.get_param('~i_integration_time', 70)
+        #frequency of publishing
+        self.time_wait = rospy.get_param('~time_wait', 0) * 60
         #self.param_server = rospy.Service('adjust_param', adjust_param, self.handle_adjust_param)
         # Create publisher to send datacubes on
         self.pub_cube = rospy.Publisher('syncronous_cubes', MultipleDataCubes, queue_size=10)
         #subscribe to Vimba raw image
         self.sub_img = rospy.Subscriber(f'/camera/image_raw', Image, self.image_callback)
-        self.raw_img = Image()
+        self.raw_img = np.zeros((100,100,3),dtype=np.uint8)
         # Load camera parameters
         self.parse_parameters('ximea')
         self.parse_parameters('imec')
@@ -64,20 +68,11 @@ class DataCubesGenerator(object):
         self.i_frame = HSI_COMMON.AllocateFrame(i_dataformat)
         self.setup_context('ximea')
         self.setup_context('imec')
+        self.time_future = rospy.Time.now().to_sec() + self.time_wait
 
     #callback to handle vimba raw image
     def image_callback(self, msg: Image) -> None:
-        image = ros_numpy.numpify(msg)
-        vimba_K = [[917.8051167, 0, 244.883],
-                   [0, 918.8520833, 205.2639333],
-                   [0, 0, 1]]
-        vimba_distort = [-0.212233333333333, 1.44273333333333, 0.001516666666667, -0.041533333333333, -10.8958666666667]
-        for lam in range(image.shape[2]):
-            undistorted_img = cv2.undistort(image[:, :, lam], np.matrix(vimba_K), np.array(vimba_distort))
-            image[:, :, lam] = undistorted_img
-
-        self.raw_img = image
-
+        self.raw_img = ros_numpy.numpify(msg)
 
     def initialize_camera(self, model) -> None:
         # Rate at which to generate composite data cubes
@@ -309,18 +304,14 @@ class DataCubesGenerator(object):
         Publish hyperspectral datacubes
         '''
 
-        # self.undistort(x_cube, 'ximea')
-        # self.undistort(i_cube, 'imec')
+        self.undistort(x_cube, 'ximea')
+        self.undistort(i_cube, 'imec')
 
-        print(f'XIMEA: {x_cube.shape}')
-        print(f'IMEC: {i_cube.shape}')
+        # print(f'XIMEA: {x_cube.shape}')
+        # print(f'IMEC: {i_cube.shape}')
         # print(f'VIMBA: {self.raw_img.shape}')
         tcube = ((x_cube[:,:,0]) * (1/((x_cube[:,:,0].max())) * 255)).astype('uint8')
-        cv2.imshow('ximea', tcube)
-        cv2.waitKey(1)
         tcube = ((i_cube[:,:,0]) * (1/((i_cube[:,:,0].max())) * 255)).astype('uint8')
-        cv2.imshow('imec', tcube)
-        cv2.waitKey(1)
         #Messages
         x_ros_cube = DataCube()
         i_ros_cube = DataCube()
@@ -344,10 +335,13 @@ class DataCubesGenerator(object):
         i_ros_cube.fwhm_nm = self.i_fwhm
         i_ros_cube.central_wavelengths = self.i_central_wave
         
-        ros_cubes.header = h
-        ros_cubes.cubes = [x_ros_cube, i_ros_cube]
-        ros_cubes.im = self.raw_img
+        # new_h = Header()
+        # new_h.stamp = rospy.Time.now()
 
+        # ros_cubes.header = new_h
+        ros_cubes.cubes = [x_ros_cube, i_ros_cube]
+
+        ros_cubes.im = ros_numpy.msgify(Image, self.raw_img, encoding="8UC3")
         self.pub_cube.publish(ros_cubes)
 
 
@@ -358,33 +352,35 @@ class DataCubesGenerator(object):
         HSI_CAMERA.Start(self.x_device)
         HSI_CAMERA.Start(self.i_device)
         while not rospy.is_shutdown():
-            try:
-                # Send a Software Trigger to the camera and grab the Frame
-                HSI_CAMERA.Trigger(self.x_device)
-                HSI_CAMERA.Trigger(self.i_device)
+            if rospy.Time.now().to_sec() > self.time_future:
+                self.time_future = rospy.Time.now().to_sec() + self.time_wait
+                try:
+                    # Send a Software Trigger to the camera and grab the Frame
+                    HSI_CAMERA.Trigger(self.x_device)
+                    HSI_CAMERA.Trigger(self.i_device)
 
-                HSI_CAMERA.AcquireFrame(self.x_device, frame=self.x_frame)
-                HSI_CAMERA.AcquireFrame(self.i_device, frame=self.i_frame)               
+                    HSI_CAMERA.AcquireFrame(self.x_device, frame=self.x_frame)
+                    HSI_CAMERA.AcquireFrame(self.i_device, frame=self.i_frame)               
 
-                HSI_MOSAIC.PushFrame(self.x_pipeline, self.x_frame)
-                HSI_MOSAIC.PushFrame(self.i_pipeline, self.i_frame)
+                    HSI_MOSAIC.PushFrame(self.x_pipeline, self.x_frame)
+                    HSI_MOSAIC.PushFrame(self.i_pipeline, self.i_frame)
 
-                HSI_MOSAIC.GetCube(self.x_pipeline, self.x_cube, timeout_ms=1000)
-                HSI_MOSAIC.GetCube(self.i_pipeline, self.i_cube, timeout_ms=1000)
-                
-                x_py_cube = HSI_COMMON.CubeAsArray(self.x_cube, BSQ=False)
-                i_py_cube = HSI_COMMON.CubeAsArray(self.i_cube, BSQ=False)
+                    HSI_MOSAIC.GetCube(self.x_pipeline, self.x_cube, timeout_ms=1000)
+                    HSI_MOSAIC.GetCube(self.i_pipeline, self.i_cube, timeout_ms=1000)
+                    
+                    x_py_cube = HSI_COMMON.CubeAsArray(self.x_cube, BSQ=False)
+                    i_py_cube = HSI_COMMON.CubeAsArray(self.i_cube, BSQ=False)
 
-                rospy.loginfo(f'Cube shapes XIMEA: {x_py_cube.shape}, IMEC: {i_py_cube.shape}')
+                    rospy.loginfo(f'Cube shapes XIMEA: {x_py_cube.shape}, IMEC: {i_py_cube.shape}, VIMBA: {self.raw_img.shape}')
 
-                self.publish_cubes(x_py_cube, i_py_cube)
+                    self.publish_cubes(x_py_cube, i_py_cube)
 
-            except Exception as e:
-                rospy.logerr(e)
-                rospy.logerr(traceback.print_exc())
-                rospy.logerr('Exception in main capture loop!')
-                self.restart_camera()
-            rospy.sleep(0.001)
+                except Exception as e:
+                    rospy.logerr(e)
+                    rospy.logerr(traceback.print_exc())
+                    rospy.logerr('Exception in main capture loop!')
+                    self.restart_camera()
+                rospy.sleep(self.sleep_time)
         # End of loop behavior        
         self.shutdown()
 

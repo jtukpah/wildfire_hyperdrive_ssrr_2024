@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="hyper_drive" type="bag_reader.py" name="bag_reader" output="screen">
+        <param name="experiment_name" value="15_00_indoor_03_08_23"/>
+    </node>
+</launch>

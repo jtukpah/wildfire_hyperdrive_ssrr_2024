@@ -8,7 +8,7 @@ import numpy as np
 import ros_numpy
 import matplotlib.pyplot as plt
 import seaborn as sns
-from hyper_drive.msg import DataCube
+from hyper_drive.msg import MultipleDataCubes
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from sensor_msgs.msg import *
@@ -36,9 +36,11 @@ class HSI_HIST():
         self.slider_num = rospy.Subscriber('/hsi_gui/channel', Int8, self.callback_slider)
 
         #get cube data
-        self.imec_data_sub = rospy.Subscriber('/imec/undistort_data', DataCube, self.imec_callback)
-        self.ximea_data_sub = rospy.Subscriber('/ximea/undistort_data', DataCube, self.ximea_callback)
-        self.combined_data_sub = rospy.Subscriber('/combined/undistort_data', DataCube, self.combined_callback)
+        self.cubes_sub = rospy.Subscriber('/syncronous_cubes', MultipleDataCubes, self.callback_cubes)
+
+        # self.imec_data_sub = rospy.Subscriber('/imec/undistort_data', DataCube, self.imec_callback)
+        # self.ximea_data_sub = rospy.Subscriber('/ximea/undistort_data', DataCube, self.ximea_callback)
+        # self.combined_data_sub = rospy.Subscriber('/combined/undistort_data', DataCube, self.combined_callback)
 
         #publish image
         self.pub_img = rospy.Publisher('/hsi_gui/channel_img', Image, queue_size=10)
@@ -55,6 +57,11 @@ class HSI_HIST():
     def callback_slider(self, msg):
         self.lam = msg.data
 
+    def callback_cubes(self, msg):
+        self.ximea_callback(msg.cubes[0])
+        self.imec_callback(msg.cubes[1])
+        self.vimba_callback(msg.im)
+
     def imec_callback(self, msg):
         if self.cam_model == 'imec':
             # Mark that we've received a new cube
@@ -69,11 +76,16 @@ class HSI_HIST():
             self.cube = np.reshape(msg.data, (msg.width, msg.height, msg.lam))
             self.do_update()
 
-    def combined_callback(self, msg):
-        if self.cam_model == 'combined':
+    def vimba_callback(self, msg):
+        if self.cam_model == 'vimba':
             # Mark that we've received a new cube
             self.new_cube = True
-            self.cube = np.reshape(msg.data, (msg.width, msg.height, msg.lam))
+            self.cube = ros_numpy.numpify(msg)
+
+            # cv.imshow('vimba', self.cube[:,:,0])
+            # cv.waitKey(1)
+
+            #np.reshape(msg.data, (msg.width, msg.height, msg.lam))
             self.do_update()
 
     def do_update(self):
@@ -96,7 +108,7 @@ class HSI_HIST():
             height = int(arr.shape[0] * scale_percent / 100)
             dim = (width, height)
             arr = cv.resize(arr,  dim, interpolation = cv.INTER_AREA)
-        if self.cam_model == 'combined':
+        if self.cam_model == 'vimba':
              # resize image
             scale_percent = 25 # percent of original size
             width = int(arr.shape[1] * scale_percent / 100)
@@ -143,7 +155,7 @@ class HSI_HIST():
         slice_image = self.cube[:, :, self.lam]
         self.img = slice_image
         img = self.rescale_image(slice_image)
-        self.img = img
+        self.img = img   
         backtorgb = cv.cvtColor(self.img,cv.COLOR_GRAY2RGB)
         ros_image = ros_numpy.msgify(Image, backtorgb, encoding="8UC3")
         self.pub_img.publish(ros_image)

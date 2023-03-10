@@ -28,15 +28,7 @@ GUI::GUI( QWidget* parent )
   imec_lambda = {1122.48954896, 1140.51012341, 1162.45096103, 1192.69076274,
        1210.67247958, 1298.52642212, 1382.2788887 , 1465.39984657,
        1654.60278798};
-  combined_lambda = {662.74414484, 678.44427179, 691.47995842, 702.79743883,
-       718.98022991, 730.09886825, 743.11429966, 757.61797177,
-       770.56671122, 779.24140246, 794.57439591, 805.38484958,
-       817.52315993, 831.92643985, 842.41924582, 853.91129525,
-       867.76937301, 878.09883114, 887.16460955, 901.40985581,
-       909.37019374, 919.05507754, 928.17011884, 932.90958447,
-       1122.48954896, 1140.51012341, 1162.45096103, 1192.69076274,
-       1210.67247958, 1298.52642212, 1382.2788887 , 1465.39984657,
-       1654.60278798};
+  vimba_lambda = {480, 600, 700};
   spinner_ptr = new ros::AsyncSpinner(2);
   spinner_ptr->start();
   channel_listener_ = nh_.subscribe("/hsi_gui/channel_img", 1000, &GUI::updateChannel, this);
@@ -79,7 +71,7 @@ GUI::GUI( QWidget* parent )
   */
   topicSelector = new QComboBox();
   QStringList topics;
-  topics << "[Camera]" << "ximea" << "imec" << "combined";
+  topics << "[Camera]" << "ximea" << "imec" << "vimba";
   topicSelector->addItems(topics);
   topicSelector->setCurrentIndex(1);
   currentCube = new QLabel(tr("Current Cube:"));
@@ -125,9 +117,9 @@ void GUI::handleSliderEvent(int value) {
       current_label = "Current Lambda: " + std::to_string(ximea_lambda[value]);
       current_lambda->setText(QString(current_label.c_str()));
       QCoreApplication::processEvents();
-  } else if (camera == "combined") {
-      channel_slider->setToolTip(QString(std::to_string(combined_lambda[value]).c_str()));
-      current_label = "Current Lambda: " + std::to_string(combined_lambda[value]);
+  } else if (camera == "vimba") {
+      channel_slider->setToolTip(QString(std::to_string(vimba_lambda[value]).c_str()));
+      current_label = "Current Lambda: " + std::to_string(vimba_lambda[value]);
       current_lambda->setText(QString(current_label.c_str()));
       QCoreApplication::processEvents();
   }
@@ -149,8 +141,8 @@ void GUI::handleTopicChange(int index) {
       channel_slider->setMaximum(8);
   } else if (camera == "ximea") {
       channel_slider->setMaximum(23);
-  } else if (camera == "combined") {
-      channel_slider->setMaximum(32);
+  } else if (camera == "vimba") {
+      channel_slider->setMaximum(2);
   }
   msg.data = topicSelector->currentText().toStdString();
   camera_publisher_.publish(msg);

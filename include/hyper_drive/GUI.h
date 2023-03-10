@@ -56,7 +56,7 @@ public:
   QTimer* timer_;
   std::vector<double> ximea_lambda;
   std::vector<double> imec_lambda;
-  std::vector<double> combined_lambda;
+  std::vector<double> vimba_lambda;
   void updateChannel(sensor_msgs::Image);
   void updateHistogram(sensor_msgs::Image);
 

@@ -1,8 +1,8 @@
 <launch>
     <!-- Parameters to define which camera should be used -->
-    <arg name="use_imec" default="false"/>
-    <arg name="use_ximea" default="false"/>
-    <arg name="gui" default="false"/>
+    <arg name="use_imec" default="true"/>
+    <arg name="use_ximea" default="true"/>
+    <arg name="gui" default="true"/>
     <arg name="use_bag" default="false"/>
     <group ns="imec" if="$(arg use_imec)">
         <!-- Grab raw data from the camera -->
