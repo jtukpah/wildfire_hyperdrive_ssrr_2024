@@ -8,6 +8,7 @@ import cv2
 import rospy
 import typing
 import rospkg
+import threading
 import traceback
 import ros_numpy
 import numpy as np
@@ -36,6 +37,8 @@ class DataCubesGenerator(object):
         rospy.loginfo("Logging camera info to {}".format(log_dir))
         HSI_COMMON.InitializeLogger(log_dir, HSI_COMMON.LoggerVerbosity.LV_INFO)
         rospy.loginfo("Loading Context ...")
+        # Lock for camera setting updates
+        self.lock = threading.Lock()
         # Setup callback for data
         self.ros_pack = rospkg.RosPack()
         #sleep time amoutn param
@@ -48,7 +51,7 @@ class DataCubesGenerator(object):
         self.i_integration_time = rospy.get_param('~i_integration_time', 70)
         #frequency of publishing
         self.time_wait = rospy.get_param('~time_wait', 0) * 60
-        #self.param_server = rospy.Service('adjust_param', adjust_param, self.handle_adjust_param)
+        self.param_server = rospy.Service('adjust_param', adjust_param, self.handle_adjust_param)
         # Create publisher to send datacubes on
         self.pub_cube = rospy.Publisher('syncronous_cubes', MultipleDataCubes, queue_size=10)
         #subscribe to Vimba raw image
@@ -249,32 +252,56 @@ class DataCubesGenerator(object):
                 coefficients.append(np.array([float(z) for z in coefficient['values'].split()]))
             self.coefficients = np.array(coefficients)
         
-    # def handle_adjust_param(self, req: adjust_param) -> adjust_param:
-    #     '''
-    #     Listen to user parameter requests
-    #     '''
-    #     frame_time = 1/(req.frame_rate) * 1000
-    #     rospy.loginfo(f'Incoming message: {adjust_param}')
-    #     try:
-    #         # Pause the camera
-    #         if (self.integration_range[0] < req.integration_time < self.integration_range[1]) & (req.integration_time < frame_time):
-    #             HSI_CAMERA.Pause(self.device)
-    #             self.r_params.exposure_time_ms = req.integration_time
-    #             self.r_params.frame_rate_hz = req.frame_rate
-    #             rospy.loginfo(self.r_params)
-    #             rospy.loginfo(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)}')       
-    #             HSI_CAMERA.Start(self.device)
-    #             rospy.sleep(1)
-    #             return True
-    #         else:
-    #             rospy.logerr('INVALID INTEGRATION TIME REQUESTED!')
-    #             HSI_CAMERA.Start(self.device)
-    #     except Exception as e:
-    #         rospy.logerr(traceback.print_exc())
-    #         rospy.logerr(str(e))
-    #         rospy.logerr('Error setting user user parameter!')
-    #         return False
-    
+    def handle_adjust_param(self, req: adjust_param) -> adjust_param:
+        '''    Listen to user parameter requests    '''     
+        frame_time = 1/(req.frame_rate) * 1000    
+        rospy.loginfo(f'Incoming message: {adjust_param}')
+        # Check the time bounds are OK
+        if req.camera_model == 'imec':
+            cam = self.i_device
+            integration_range = (0.010000, 90)
+        if req.camera_model == 'ximea':
+            cam = self.x_device
+            integration_range = (0.021000, 999.995000)
+
+        if (integration_range[0] < req.integration_time < integration_range[1]) & (req.integration_time < frame_time):
+            return self.set_camera_params(cam, req.integration_time, req.frame_rate)
+        else:
+            rospy.logerr('INVALID INTEGRATION TIME REQUESTED!')
+            return False
+
+    def set_camera_params(self, camera, exposure_time: float, frame_rate: float) -> bool:
+        try:
+            # Pause the camera        
+            print(f'Exposure time: {exposure_time} Frame Rate: {frame_rate}')
+            # Proposing to try 3 steps
+            with self.lock:         
+                #Step-1: Set frame rate to a very low value eg. 1 fps            
+                HSI_CAMERA.Pause(camera)
+                # Get r-params
+                r_params = HSI_CAMERA.GetRuntimeParameters(camera)
+                print(r_params)
+                r_params.frame_rate_hz = 1            
+                rospy.loginfo(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(camera, r_params)}')       
+                # #Step-2: Set integration time            
+                r_params = HSI_CAMERA.GetRuntimeParameters(camera)
+                r_params.exposure_time_ms = exposure_time            
+                rospy.loginfo(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(camera, r_params)}')       
+                # #Step-3: Set frame rate            
+                r_params = HSI_CAMERA.GetRuntimeParameters(camera)
+                r_params.frame_rate_hz = frame_rate           
+                rospy.loginfo(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(camera, r_params)}')       
+                HSI_CAMERA.Start(camera)
+                rospy.sleep(0.1)
+                return True        
+
+        except Exception as e:
+            rospy.logerr(traceback.print_exc())
+            rospy.logerr(str(e))
+            rospy.logerr('Error setting user user parameter!')
+            return False
+
+
 
     def undistort(self, cube, model):
         #criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 100, 1)
@@ -304,8 +331,8 @@ class DataCubesGenerator(object):
         Publish hyperspectral datacubes
         '''
 
-        self.undistort(x_cube, 'ximea')
-        self.undistort(i_cube, 'imec')
+        # self.undistort(x_cube, 'ximea')
+        # self.undistort(i_cube, 'imec')
 
         # print(f'XIMEA: {x_cube.shape}')
         # print(f'IMEC: {i_cube.shape}')
@@ -334,11 +361,6 @@ class DataCubesGenerator(object):
         i_ros_cube.qe = self.i_QE
         i_ros_cube.fwhm_nm = self.i_fwhm
         i_ros_cube.central_wavelengths = self.i_central_wave
-        
-        # new_h = Header()
-        # new_h.stamp = rospy.Time.now()
-
-        # ros_cubes.header = new_h
         ros_cubes.cubes = [x_ros_cube, i_ros_cube]
 
         ros_cubes.im = ros_numpy.msgify(Image, self.raw_img, encoding="8UC3")
@@ -355,25 +377,24 @@ class DataCubesGenerator(object):
             if rospy.Time.now().to_sec() > self.time_future:
                 self.time_future = rospy.Time.now().to_sec() + self.time_wait
                 try:
+                    with self.lock:
                     # Send a Software Trigger to the camera and grab the Frame
-                    HSI_CAMERA.Trigger(self.x_device)
-                    HSI_CAMERA.Trigger(self.i_device)
+                        HSI_CAMERA.Trigger(self.x_device)
+                        HSI_CAMERA.Trigger(self.i_device)
 
-                    HSI_CAMERA.AcquireFrame(self.x_device, frame=self.x_frame)
-                    HSI_CAMERA.AcquireFrame(self.i_device, frame=self.i_frame)               
+                        HSI_CAMERA.AcquireFrame(self.x_device, frame=self.x_frame)
+                        HSI_CAMERA.AcquireFrame(self.i_device, frame=self.i_frame)               
 
-                    HSI_MOSAIC.PushFrame(self.x_pipeline, self.x_frame)
-                    HSI_MOSAIC.PushFrame(self.i_pipeline, self.i_frame)
+                        HSI_MOSAIC.PushFrame(self.x_pipeline, self.x_frame)
+                        HSI_MOSAIC.PushFrame(self.i_pipeline, self.i_frame)
 
-                    HSI_MOSAIC.GetCube(self.x_pipeline, self.x_cube, timeout_ms=1000)
-                    HSI_MOSAIC.GetCube(self.i_pipeline, self.i_cube, timeout_ms=1000)
-                    
-                    x_py_cube = HSI_COMMON.CubeAsArray(self.x_cube, BSQ=False)
-                    i_py_cube = HSI_COMMON.CubeAsArray(self.i_cube, BSQ=False)
-
-                    rospy.loginfo(f'Cube shapes XIMEA: {x_py_cube.shape}, IMEC: {i_py_cube.shape}, VIMBA: {self.raw_img.shape}')
-
-                    self.publish_cubes(x_py_cube, i_py_cube)
+                        HSI_MOSAIC.GetCube(self.x_pipeline, self.x_cube, timeout_ms=1000)
+                        HSI_MOSAIC.GetCube(self.i_pipeline, self.i_cube, timeout_ms=1000)
+                        
+                        x_py_cube = HSI_COMMON.CubeAsArray(self.x_cube, BSQ=False)
+                        i_py_cube = HSI_COMMON.CubeAsArray(self.i_cube, BSQ=False)
+                        rospy.loginfo(f'Cube shapes XIMEA: {x_py_cube.shape}, IMEC: {i_py_cube.shape}, VIMBA: {self.raw_img.shape}')
+                        self.publish_cubes(x_py_cube, i_py_cube)
 
                 except Exception as e:
                     rospy.logerr(e)

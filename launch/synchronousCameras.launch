@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <launch>
     <!-- Hyperspectral Cameras -->
-    <node pkg="hyper_drive" type="syncronousCubes.py" name="cameraProcessors" output="screen">
+    <node pkg="hyper_drive" type="synchronousCubes.py" name="cameraProcessors" output="screen">
         <param name="sleep" value="0.001"/>
         <param name="x_frame_rate" value="10"/>
         <param name="x_integration_time" value="0.1"/>
         <param name="i_frame_rate" value="10"/>
         <param name="i_integration_time" value="1.0"/>
-        <param name="time_wait" value="2"/>
+        <param name="time_wait" value="0.01"/>
     </node>
     <!-- RGB HD Camera -->
     <include file="$(find avt_vimba_camera)/launch/mono_camera.launch">

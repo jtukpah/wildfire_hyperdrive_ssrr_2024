@@ -9,6 +9,7 @@ import rospkg
 import traceback
 import ros_numpy
 import numpy as np
+import threading
 from bs4 import BeautifulSoup
 from numba import jit, prange
 from pathlib import Path
@@ -39,6 +40,7 @@ class DataCubeGenerator(object):
         
         # Setup callback for data
         self.ros_pack = rospkg.RosPack()
+        self.lock = threading.Lock()
         self.model = rospy.get_param('~camera_model')
         self.frame_rate = rospy.get_param('~frame_rate', 60)
         self.integration_time = rospy.get_param('~integration_time', 10)
@@ -81,6 +83,7 @@ class DataCubeGenerator(object):
         HSI_CAMERA.Initialize(self.device)
         # Get/Set Camera Configuration Parameters (example)
         self.c_params = HSI_CAMERA.GetConfigurationParameters(self.device)
+
         rospy.loginfo("C PARAMS>")
         rospy.loginfo(self.c_params)
         self.r_params = HSI_CAMERA.GetRuntimeParameters(self.device)
@@ -171,22 +174,33 @@ class DataCubeGenerator(object):
             self.coefficients = np.array(coefficients)
         
     def handle_adjust_param(self, req: adjust_param) -> adjust_param:
-        '''
-        Listen to user parameter requests
-        '''
-        frame_time = 1/(req.frame_rate) * 1000
+        '''    Listen to user parameter requests    '''     
+        frame_time = 1/(req.frame_rate) * 1000    
         rospy.loginfo(f'Incoming message: {adjust_param}')
         try:
-            # Pause the camera
+            # Pause the camera        
             if (self.integration_range[0] < req.integration_time < self.integration_range[1]) & (req.integration_time < frame_time):
-                HSI_CAMERA.Pause(self.device)
-                self.r_params.exposure_time_ms = req.integration_time
-                self.r_params.frame_rate_hz = req.frame_rate
-                rospy.loginfo(self.r_params)
-                rospy.loginfo(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)}')       
-                HSI_CAMERA.Start(self.device)
-                rospy.sleep(1)
-                return True
+                print(f'Exposure time: {req.integration_time} Frame Rate: {req.frame_rate}')
+                # Proposing to try 3 steps
+                with self.lock:         
+                    #Step-1: Set frame rate to a very low value eg. 1 fps            
+                    HSI_CAMERA.Pause(self.device)
+                    # Get r-params
+                    self.r_params = HSI_CAMERA.GetRuntimeParameters(self.device)
+                    print(self.r_params)
+                    self.r_params.frame_rate_hz = 1            
+                    rospy.loginfo(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)}')       
+                    # #Step-2: Set integration time            
+                    self.r_params = HSI_CAMERA.GetRuntimeParameters(self.device)
+                    self.r_params.exposure_time_ms = req.integration_time            
+                    rospy.loginfo(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)}')       
+                    # #Step-3: Set frame rate            
+                    self.r_params = HSI_CAMERA.GetRuntimeParameters(self.device)
+                    self.r_params.frame_rate_hz = req.frame_rate            
+                    rospy.loginfo(f'Update Runtime Params: {HSI_CAMERA.SetRuntimeParameters(self.device, self.r_params)}')       
+                    HSI_CAMERA.Start(self.device)
+                    rospy.sleep(0.1)
+                    return True        
             else:
                 rospy.logerr('INVALID INTEGRATION TIME REQUESTED!')
                 HSI_CAMERA.Start(self.device)
@@ -267,17 +281,19 @@ class DataCubeGenerator(object):
         while not rospy.is_shutdown():
             try:
                 # Send a Software Trigger to the camera and grab the Frame
-                HSI_CAMERA.Trigger(self.device)
-                HSI_CAMERA.AcquireFrame(self.device, frame=self.frame)
-                tmp = HSI_COMMON.FrameAsArray(self.frame) # internally convert frame to numpy array
-                                
-                # Publish the raw image
-                self.publish_raw(tmp)
-                HSI_MOSAIC.PushFrame(self.pipeline, self.frame)
-                HSI_MOSAIC.GetCube(self.pipeline, self.cube, timeout_ms=1000)
-                py_cube = HSI_COMMON.CubeAsArray(self.cube, BSQ=False)
-                self.publish_cube(py_cube)
+                # HSI_CAMERA.Trigger(self.device)
+                with self.lock:
+                    HSI_CAMERA.AcquireFrame(self.device, frame=self.frame)
+                    tmp = HSI_COMMON.FrameAsArray(self.frame) # internally convert frame to numpy array
+                                    
+                    # Publish the raw image
+                    self.publish_raw(tmp)
+                    HSI_MOSAIC.PushFrame(self.pipeline, self.frame)
+                    HSI_MOSAIC.GetCube(self.pipeline, self.cube, timeout_ms=1000)
+                    py_cube = HSI_COMMON.CubeAsArray(self.cube, BSQ=False)
+                    self.publish_cube(py_cube)
             except Exception as e:
+                rospy.logerr(traceback.print_exc())
                 rospy.logerr('Exception in main capture loop!')
                 self.restart_camera()
             rospy.sleep(0.001)
