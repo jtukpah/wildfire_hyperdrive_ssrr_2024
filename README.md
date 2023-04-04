@@ -44,3 +44,6 @@ And the value of the parameter can be set by running
 There are options to also run multiple programs at the same time through the use of two launch files, master.launch (code written in python), and master_opt.launch (code written using C++). The first will run cube_data.py which produces a raw image that feeds into demosaic_cube.py which then produces the final data cube, which is then passed to a PyQt GUI that allows the user to parse through the data cube by slicing the images by light channel value. master_opt.cpp does the same but using C++ code, and opens a custom Rviz config to allow viewing of the collected images. GUI will be implemented for master_opt.cpp later. These launch files can be run by:
 
 > roslaunch hyper_drive (master or master_opt).launch
+
+### Using ros_numpy
+If you wish to write a Python script using ros_numpy, clone and build the following ROS package: https://github.com/eric-wieser/ros_numpy

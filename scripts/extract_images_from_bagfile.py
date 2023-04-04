@@ -3,6 +3,7 @@
 import matplotlib.image
 import numpy as np
 import os
+import ros_numpy
 import rospy
 import sys
 
@@ -34,7 +35,7 @@ def process_datacubes(datacubes, img_dir, num_messages):
 # Save the RGB image to the given directory
 # sensor_msgs/Image -> None
 def process_rgb_img(rgb_msg, img_dir, num_messages):
-    rgb_img = np.reshape(rgb_msg.data, (rgb_msg.width, rgb_msg.height))
+    rgb_img = ros_numpy.numpify(rgb_msg)
     num_messages_digits = len(str(num_messages))
     frame_number_str = str(frame_number).zfill(num_messages_digits)
     image_filename = f'frame{frame_number_str}_rgb.jpg'
@@ -48,10 +49,8 @@ def save_images_from_bagfile(message, img_dir, num_messages):
     datacubes = message.cubes
     rgb_img = message.im
 
-    # rospy.loginfo(rospy.get_caller_id() + "I heard %s", rgb_img)
-
     process_datacubes(datacubes, img_dir, num_messages)
-    # process_rgb_img(rgb_img, img_dir, num_messages)
+    process_rgb_img(rgb_img, img_dir, num_messages)
 
     # this is the only place we update the frame number global variable (after we have finished processing the frame)
     global frame_number
