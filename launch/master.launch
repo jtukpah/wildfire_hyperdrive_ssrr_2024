@@ -10,9 +10,9 @@
             <param name="frame_rate" value="10"/>
             <param name="integration_time" value="70"/>
         </node>
-        <node pkg="hyper_drive" type="undistort_hypercubes.py" name="cube_correct_imec" output="screen">
+        <!-- <node pkg="hyper_drive" type="undistort_hypercubes.py" name="cube_correct_imec" output="screen">
             <param name="camera_model" value="imec"/>
-        </node>
+        </node> -->
     </group>
     <group ns="ximea" if="$(arg use_ximea)">
         <node pkg="hyper_drive" type="cube_data.py" name="cube_processor_ximea" output="screen">
@@ -20,9 +20,9 @@
             <param name="frame_rate" value="30"/>
             <param name="integration_time" value="15"/>
         </node>
-        <node pkg="hyper_drive" type="undistort_hypercubes.py" name="cube_correct_ximea" output="screen">
+        <!-- <node pkg="hyper_drive" type="undistort_hypercubes.py" name="cube_correct_ximea" output="screen">
             <param name="camera_model" value="ximea"/>
-        </node>
+        </node> -->
     </group>
     <node pkg="hyper_drive" type="hsi_hist.py" name="GUI_renderer" output="screen" if="$(arg gui)"/>
     <node pkg="hyper_drive" type="combined_cube_data.py" name="cube_combiner" output="screen"/>

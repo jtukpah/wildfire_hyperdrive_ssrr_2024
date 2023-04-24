@@ -36,6 +36,7 @@ class HSI_HIST():
         self.slider_num = rospy.Subscriber('/hsi_gui/channel', Int8, self.callback_slider)
 
         #get cube data
+        # TODO - make this a rosparam for the topic
         self.cubes_sub = rospy.Subscriber('/syncronous_cubes', MultipleDataCubes, self.callback_cubes)
 
         # self.imec_data_sub = rospy.Subscriber('/imec/undistort_data', DataCube, self.imec_callback)
