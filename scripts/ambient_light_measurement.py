@@ -25,7 +25,7 @@ class LightMeasure(object):
         self.S_white_ximea = 0
         self.S_white_imec = 0
 
-        self.cubes_sub = rospy.Subscriber('/syncronous_cubes', MultipleDataCubes, self.cubes_callback)
+        self.cubes_sub = rospy.Subscriber('/synchronous_cubes', MultipleDataCubes, self.cubes_callback)
         self.spectra_sub = rospy.Subscriber('/combined_spectra', Spectra, self.spectra_callback)
 
         # rospy.sleep(1)

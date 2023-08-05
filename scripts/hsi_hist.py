@@ -37,7 +37,7 @@ class HSI_HIST():
 
         #get cube data
         # TODO - make this a rosparam for the topic
-        self.cubes_sub = rospy.Subscriber('/syncronous_cubes', MultipleDataCubes, self.callback_cubes)
+        self.cubes_sub = rospy.Subscriber('/synchronous_cubes', MultipleDataCubes, self.callback_cubes)
 
         # self.imec_data_sub = rospy.Subscriber('/imec/undistort_data', DataCube, self.imec_callback)
         # self.ximea_data_sub = rospy.Subscriber('/ximea/undistort_data', DataCube, self.ximea_callback)

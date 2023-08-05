@@ -53,7 +53,7 @@ class DataCubesGenerator(object):
         self.time_wait = rospy.get_param('~time_wait', 0) * 60
         self.param_server = rospy.Service('adjust_param', adjust_param, self.handle_adjust_param)
         # Create publisher to send datacubes on
-        self.pub_cube = rospy.Publisher('syncronous_cubes', MultipleDataCubes, queue_size=10)
+        self.pub_cube = rospy.Publisher('synchronous_cubes', MultipleDataCubes, queue_size=10)
         #subscribe to Vimba raw image
         self.sub_img = rospy.Subscriber(f'/camera/image_raw', Image, self.image_callback)
         self.raw_img = np.zeros((100,100,3),dtype=np.uint8)
@@ -343,7 +343,8 @@ class DataCubesGenerator(object):
         x_ros_cube = DataCube()
         i_ros_cube = DataCube()
         ros_cubes = MultipleDataCubes()
-
+        np.save('/home/river/x_cube.npy', x_cube)
+        np.save('/home/river/i_cube.npy', i_cube)
         # Create header
         h = Header()
         h.stamp = rospy.Time.now() # Note you need to call rospy.init_node() before this will work
