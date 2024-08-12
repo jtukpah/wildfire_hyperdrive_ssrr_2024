@@ -89,8 +89,8 @@ target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${catkin_LIBRARIES})
 # )
 # include_directories(include ${catkin_INCLUDE_DIRS})
 # add_library(${PROJECT_NAME} ${SOURCE_FILES})
-
-# target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${catkin_LIBRARIES})
+add_executable(register_hsi_node src/register_hsi_node.cpp)
+target_link_libraries(register_hsi_node ${catkin_LIBRARIES})
 
 install( TARGETS
   ${PROJECT_NAME}
