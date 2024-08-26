@@ -49,7 +49,11 @@ generate_messages(
 
 catkin_package(
   INCLUDE_DIRS include
-   CATKIN_DEPENDS pluginlib message_runtime std_msgs sensor_msgs roscpp cv_bridge image_transport
+  CATKIN_DEPENDS pluginlib message_runtime std_msgs sensor_msgs roscpp cv_bridge image_transport rospy
+)
+
+catkin_install_python(PROGRAMS scripts/lidar_to_img.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 set(HEADER_FILES
