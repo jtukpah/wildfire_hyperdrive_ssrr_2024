@@ -1,0 +1,65 @@
+{
+        "name": "outdoor data task",
+        "labels": [
+            {
+                "name": "dirt"
+            },
+            {
+                "name": "sand"
+            },
+            {
+                "name": "grass"
+            },
+            {
+                "name": "tree"
+            },
+            {
+                "name": "light"
+            },
+            {
+                "name": "water"
+            },
+            {
+                "name": "sky"
+            },
+            {
+                "name": "clouds"
+            },
+            {
+                "name": "vehicle"
+            },
+            {
+                "name": "gravel"
+            },
+            {
+                "name": "mulch"
+            },
+            {
+                "name": "person"
+            },
+            {
+                "name": "sign"
+            },
+            {
+                "name": "rock"
+            },
+            {
+                "name": "building"
+            },
+            {
+                "name": "road marking"
+            },
+            {
+                "name": "asphalt/pavement"
+            },
+            {
+                "name": "concrete"
+            },
+            {
+                "name": "vegetation"
+            },
+            {
+                "name": "metal"
+            }
+        ]
+    }

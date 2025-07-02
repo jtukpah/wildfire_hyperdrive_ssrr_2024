@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3.9
 
 from hyper_drive.msg import MultipleDataCubes
 from hyper_drive.msg import DataCube
@@ -46,7 +46,9 @@ class DataCubesGenerator(object):
         #ximea
         self.x_frame_rate = rospy.get_param('~x_frame_rate', 30)
         self.x_integration_time = rospy.get_param('~x_integration_time', 15)
+        self.x_central_wave = None
         #imec
+        self.i_central_wave = None
         self.i_frame_rate = rospy.get_param('~i_frame_rate', 10)
         self.i_integration_time = rospy.get_param('~i_integration_time', 70)
         #frequency of publishing
@@ -225,12 +227,14 @@ class DataCubesGenerator(object):
         with open(param_path, 'r') as f:
             data = f.read()
             Bs_data = BeautifulSoup(data, "xml")
-            self.x_central_wave = []
-            self.i_central_wave = []
-            self.x_fwhm = []
-            self.i_fwhm = []
-            self.x_QE = []
-            self.i_QE = []
+            if not self.x_central_wave:
+                self.x_central_wave = []
+                self.x_fwhm = []
+                self.x_QE = []
+            if not self.i_central_wave: 
+                self.i_central_wave = []
+                self.i_fwhm = []
+                self.i_QE = []
             for band in Bs_data.find_all("wavelength_nm"):
                 if model == 'ximea':
                     self.x_central_wave.append(float(band.getText()))
@@ -330,42 +334,44 @@ class DataCubesGenerator(object):
         '''
         Publish hyperspectral datacubes
         '''
-
-        # self.undistort(x_cube, 'ximea')
-        # self.undistort(i_cube, 'imec')
-
-        # print(f'XIMEA: {x_cube.shape}')
-        # print(f'IMEC: {i_cube.shape}')
-        # print(f'VIMBA: {self.raw_img.shape}')
-        tcube = ((x_cube[:,:,0]) * (1/((x_cube[:,:,0].max())) * 255)).astype('uint8')
-        tcube = ((i_cube[:,:,0]) * (1/((i_cube[:,:,0].max())) * 255)).astype('uint8')
         #Messages
         x_ros_cube = DataCube()
         i_ros_cube = DataCube()
         ros_cubes = MultipleDataCubes()
-        np.save('/home/river/x_cube.npy', x_cube)
-        np.save('/home/river/i_cube.npy', i_cube)
         # Create header
         h = Header()
         h.stamp = rospy.Time.now() # Note you need to call rospy.init_node() before this will work
         
         x_ros_cube.header = h
-        x_ros_cube.data = x_cube.flatten() 
+        x_ros_cube.data = x_cube.flatten().astype(np.int16)
         x_ros_cube.width, x_ros_cube.height, x_ros_cube.lam = tuple(x_cube.shape)
         x_ros_cube.qe = self.x_QE
         x_ros_cube.fwhm_nm = self.x_fwhm
         x_ros_cube.central_wavelengths = self.x_central_wave
-        
+
         i_ros_cube.header = h
-        i_ros_cube.data = i_cube.flatten() 
+        i_ros_cube.data = i_cube.flatten().astype(np.int16)
         i_ros_cube.width, i_ros_cube.height, i_ros_cube.lam = tuple(i_cube.shape)
         i_ros_cube.qe = self.i_QE
         i_ros_cube.fwhm_nm = self.i_fwhm
         i_ros_cube.central_wavelengths = self.i_central_wave
+
         ros_cubes.cubes = [x_ros_cube, i_ros_cube]
 
         ros_cubes.im = ros_numpy.msgify(Image, self.raw_img, encoding="8UC3")
         self.pub_cube.publish(ros_cubes)
+
+    
+    def x_device_thread(self):
+        HSI_CAMERA.AcquireFrame(self.x_device, frame=self.x_frame)
+        HSI_MOSAIC.PushFrame(self.x_pipeline, self.x_frame)
+        HSI_MOSAIC.GetCube(self.x_pipeline, self.x_cube, timeout_ms=1000)
+
+
+    def i_device_thread(self):
+        HSI_CAMERA.AcquireFrame(self.i_device, frame=self.i_frame)
+        HSI_MOSAIC.PushFrame(self.i_pipeline, self.i_frame)
+        HSI_MOSAIC.GetCube(self.i_pipeline, self.i_cube, timeout_ms=1000)
 
 
     def run(self) -> None:
@@ -382,19 +388,15 @@ class DataCubesGenerator(object):
                     # Send a Software Trigger to the camera and grab the Frame
                         HSI_CAMERA.Trigger(self.x_device)
                         HSI_CAMERA.Trigger(self.i_device)
-
-                        HSI_CAMERA.AcquireFrame(self.x_device, frame=self.x_frame)
-                        HSI_CAMERA.AcquireFrame(self.i_device, frame=self.i_frame)               
-
-                        HSI_MOSAIC.PushFrame(self.x_pipeline, self.x_frame)
-                        HSI_MOSAIC.PushFrame(self.i_pipeline, self.i_frame)
-
-                        HSI_MOSAIC.GetCube(self.x_pipeline, self.x_cube, timeout_ms=1000)
-                        HSI_MOSAIC.GetCube(self.i_pipeline, self.i_cube, timeout_ms=1000)
-                        
+                        x_thread = threading.Thread(target=self.x_device_thread)
+                        i_thread = threading.Thread(target=self.i_device_thread)
+                        x_thread.start()
+                        i_thread.start()
+                        x_thread.join()
+                        i_thread.join()
                         x_py_cube = HSI_COMMON.CubeAsArray(self.x_cube, BSQ=False)
                         i_py_cube = HSI_COMMON.CubeAsArray(self.i_cube, BSQ=False)
-                        rospy.loginfo(f'Cube shapes XIMEA: {x_py_cube.shape}, IMEC: {i_py_cube.shape}, VIMBA: {self.raw_img.shape}')
+                        # rospy.loginfo(f'Cube shapes XIMEA: {x_py_cube.shape}, IMEC: {i_py_cube.shape}, VIMBA: {self.raw_img.shape}')
                         self.publish_cubes(x_py_cube, i_py_cube)
 
                 except Exception as e:

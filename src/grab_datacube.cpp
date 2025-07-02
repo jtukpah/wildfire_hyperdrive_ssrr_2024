@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include <hsi_camera_api.h>
+#include "hyper_drive/hsi_camera_api.h"
 // #include <hsi_camera_api.h>
 
 #include <string>

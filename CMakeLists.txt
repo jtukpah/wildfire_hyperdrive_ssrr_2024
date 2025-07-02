@@ -52,7 +52,7 @@ catkin_package(
   CATKIN_DEPENDS pluginlib message_runtime std_msgs sensor_msgs roscpp cv_bridge image_transport rospy
 )
 
-catkin_install_python(PROGRAMS scripts/lidar_to_img.py
+catkin_install_python(PROGRAMS scripts/lidar_to_img.py scripts/extract_moisture_content.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
@@ -107,4 +107,3 @@ install( TARGETS
 install(FILES
   plugin_description.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
-

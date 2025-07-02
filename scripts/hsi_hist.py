@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import rospy
 import io
@@ -108,7 +108,7 @@ class HSI_HIST():
             width = int(arr.shape[1] * scale_percent / 100)
             height = int(arr.shape[0] * scale_percent / 100)
             dim = (width, height)
-            arr = cv.resize(arr,  dim, interpolation = cv.INTER_AREA)
+            arr = cv.resize(arr.astype(np.float32),  dim, interpolation = cv.INTER_AREA)
         if self.cam_model == 'vimba':
              # resize image
             scale_percent = 25 # percent of original size

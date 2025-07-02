@@ -1,7 +1,7 @@
 #include <ros/ros.h>
 // #include <ros/package.h>
-#include <hsi_camera_api.h>
-#include <hsi_mosaic_api.h>
+#include "hyper_drive/hsi_camera_api.h"
+#include "hyper_drive/hsi_mosaic_api.h"
 // #include <hsi_camera_api.h>
 
 #include <string>
@@ -14,7 +14,7 @@
 #include <cv_bridge/cv_bridge.h>
 #include "hyper_drive/adjust_param.h"
 
-// Modified main.cpp from hsi-mosiac/hsi_camera_api/example_C_api
+// Modified main.cpp from hsi-mosaic/hsi_camera_api/example_C_api
 // Authored by Nathaniel Hanson
 
 class ImageDemosaicer
@@ -124,7 +124,7 @@ private:
         }
         catch (cv_bridge::Exception& e)
         {
-         Is c++   ROS_ERROR("cv_bridge exception: %s", e.what());
+            ROS_ERROR("cv_bridge exception: %s", e.what());
             return;
         }
         ROS_INFO("CUBE RECEIVED! %d, %d", cv_ptr->image.rows, cv_ptr->image.cols);
@@ -160,7 +160,7 @@ private:
         msg.lam = (int16_t)lambda;
         msg.central_wavelengths = waves;
         // Pass the very long central data array
-        msg.data = data_out;
+        // msg.data = data_out;
         // TODO set the header
         //.header.stamp = ros::Time::now();
         this->cube_pub.publish(msg);
